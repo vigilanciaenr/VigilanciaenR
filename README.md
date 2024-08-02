@@ -21,4 +21,4 @@ Este curso se propone presentar diferntes tareas para la realización de informe
 Install.packages("dplyr")
 ```
 
-[Sintaxis de markdown](http://https://www.markdownguide.org/basic-syntax/ "Sintaxis de markdown")
+[Sintaxis de markdown](https://www.markdownguide.org/basic-syntax/ "Sintaxis de markdown")
