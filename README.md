@@ -1,4 +1,4 @@
-![Mi imagen]([main/logo_1.png))
+![Mi imagen](main/logo_1.png))
 
 
 # Proyecto de informes automatizados en R
