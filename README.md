@@ -1,4 +1,4 @@
-![Logo]([URL_de_la_imagen](https://github.com/vigilanciaenr/VigilanciaenR/blob/main/logo_1.png))
+![Mi imagen]([main/logo_1.png))
 
 
 # Proyecto de informes automatizados en R
