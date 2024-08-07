@@ -20,6 +20,7 @@ General:
  <p>
   Fortalecer las habilidades y competencias para el procesamiento, visualización y elaboración de reportes automáticos en R.
 </p>
+
 Específic.:
 
 <p>
@@ -34,13 +35,15 @@ Elaborar un proyecto de automatización de reportes en R a nivel jurisdiccional
 
 <p>
 Se propone una capacitación en el uso del programa R con un formato de taller práctico que incluya el uso de RMarkdown y Quatro para la creación de informes automatizados y diversos paquetes de R para análisis y visualizaciones. La propuesta es que al finalizar la capacitación el equipo de vigilancia epidemiológica tenga armado un proyecto para la generación automática de reportes con los datos producidos por la vigilancia epidemiológica. 
+</p>
   
 C. 1. Unidad 1:
 
 ¿Qué es R y Rstudio?
 Instalación de R y paquetes de datos
 
-<[The R Project for Statistical Computing]([https://www.r-project.org/])>
+
+[The R Project for Statistical Computing](https://www.r-project.org/]>
 
 Descripción de RMarkdown y Quatro
 ¿Github?
