@@ -16,7 +16,7 @@ Como requerimiento mínimos para poder realizar la capacitación se necesita la 
 
 - **Objetivos**
   
-  *General*:
+*General*:
  <p>
   Fortalecer las habilidades y competencias para el procesamiento, visualización y elaboración de reportes automáticos en R.
 </p>
