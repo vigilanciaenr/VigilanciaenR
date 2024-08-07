@@ -1,7 +1,7 @@
 ![Mi imagen](https://github.com/vigilanciaenr/VigilanciaenR/blob/main/logo_1.png)
 
 
-# Proyecto de informes automatizados en R
+# Programa de Capacitación para la Vigilancia Epidemiológica: Automatización de reportes en R
 
 <p>
 Este curso se propone presentar diferntes tareas para la realización de informes epdemiologicos sobre vigilancia centinela utilizando R y Rstudio
