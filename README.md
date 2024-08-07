@@ -32,7 +32,9 @@ Elaborar un proyecto de automatización de reportes en R a nivel jurisdiccional
 
 - **Contenidos**
 
+<p>
 Se propone una capacitación en el uso del programa R con un formato de taller práctico que incluya el uso de RMarkdown y Quatro para la creación de informes automatizados y diversos paquetes de R para análisis y visualizaciones. La propuesta es que al finalizar la capacitación el equipo de vigilancia epidemiológica tenga armado un proyecto para la generación automática de reportes con los datos producidos por la vigilancia epidemiológica. 
+  
 C. 1. Unidad 1:
 
 ¿Qué es R y Rstudio?
@@ -68,7 +70,7 @@ Documentos de Microsoft Word
 Documentos PDF 
 Archivos HTML
 Aplicaciones web 
-
+</p>
 
 
 - **RMarkdown y Quatro**
