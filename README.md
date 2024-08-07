@@ -39,10 +39,11 @@ C. 1. Unidad 1:
 
 ¿Qué es R y Rstudio?
 Instalación de R y paquetes de datos
-
+[The R Project for Statistical Computing]([https://www.r-project.org/])
 
 Descripción de RMarkdown y Quatro
 ¿Github?
+
 C.2. Unidad 2:
 Construcción del circuito de datos de la vigilancia y
  Transferencia de datos
@@ -50,6 +51,7 @@ Construcción del circuito de datos de la vigilancia y
 Googlesheet
 Transfer excel
 ¿Otra fuente?
+
 C.3. Gestión de datos:
 
 Validar y limpiar los datos 
