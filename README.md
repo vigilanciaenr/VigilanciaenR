@@ -4,7 +4,12 @@
 # Programa de Capacitación para la Vigilancia Epidemiológica: Automatización de reportes en R
 
 <p>
-Este curso se propone presentar diferntes tareas para la realización de informes epdemiologicos sobre vigilancia centinela utilizando R y Rstudio
+La necesidad de formación continua es una de los elementos característicos comunes para el trabajo de los equipos de salud. En específico, en lo relativo a la vigilancia epidemiológica, la necesidad de fortalecer las competencias y capacidades de los equipos de epidemiología locales y jurisdiccionales de la provincias en Argentina está en relación no sólo con la incorporación de nuevas herramientas informáticas para el análisis de datos, visualizaciones y generación de reportes automatizados. A su vez el contexto desafiante que presenta el avance de las enfermedades virales a nivel nacional (ETMa, IRAG, entre otras), en conjunto con la ampliación de la estrategia de vigilancia centinela de IRAG, se presenta con un escenario que resalta la importancia del uso de  herramientas avanzadas y métodos eficientes para la gestión de datos epidemiológicos. 
+
+La presente capacitación está orientada a profesionales de distintas disciplinas o integrantes de los equipos de salud y de gestión de la salud que desempeñen tareas de vigilancia epidemiológica. 
+
+Como requerimiento mínimos para poder realizar la capacitación se necesita la disponibilidad de computadora con la instalación del programa R y RStudio con permisos para instalar paquetes nuevos. Es valorado el conocimiento básico de manejo de bases de datos y la lectocomprensión del idioma inglés.
+
 </p>
 
 
