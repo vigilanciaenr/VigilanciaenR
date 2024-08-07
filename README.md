@@ -20,7 +20,7 @@ General:
  <p>
   Fortalecer las habilidades y competencias para el procesamiento, visualización y elaboración de reportes automáticos en R.
 </p>
-Específicos:
+Específic.:
 
 <p>
 Caracterizar e identificar los circuitos de los datos producidos por la vigilancia epidemiológica a nivel jurisdiccional 
@@ -29,6 +29,47 @@ Incorporar herramientas de procesamiento y visualización de los datos en R
 
 Elaborar un proyecto de automatización de reportes en R a nivel jurisdiccional
 </p>
+
+- **Contenidos**
+
+Se propone una capacitación en el uso del programa R con un formato de taller práctico que incluya el uso de RMarkdown y Quatro para la creación de informes automatizados y diversos paquetes de R para análisis y visualizaciones. La propuesta es que al finalizar la capacitación el equipo de vigilancia epidemiológica tenga armado un proyecto para la generación automática de reportes con los datos producidos por la vigilancia epidemiológica. 
+C. 1. Unidad 1:
+
+¿Qué es R y Rstudio?
+Instalación de R y paquetes de datos
+
+
+Descripción de RMarkdown y Quatro
+¿Github?
+C.2. Unidad 2:
+Construcción del circuito de datos de la vigilancia y
+ Transferencia de datos
+
+Googlesheet
+Transfer excel
+¿Otra fuente?
+C.3. Gestión de datos:
+
+Validar y limpiar los datos 
+Subconjunto de datos 
+Creación de nuevas variables 
+Combinación de marcos de datos 
+
+C.4. Análisis de datos:
+
+Medidas de tendencia central  
+Medidas de dispersión 
+Medidas para describir variables categóricas 
+Descripción de datos mediante gráficos y diagramas 
+
+C.5. Presentación de datos:
+
+Documentos de Microsoft Word 
+Documentos PDF 
+Archivos HTML
+Aplicaciones web 
+
+
 
 - **RMarkdown y Quatro**
 - **Producción de informes:**
