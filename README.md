@@ -43,7 +43,7 @@ C. 1. Unidad 1:
 Instalación de R y paquetes de datos
 
 
-[The R Project for Statistical Computing](https://www.r-project.org/]>
+[The R Project for Statistical Computing](https://www.r-project.org/)
 
 Descripción de RMarkdown y Quatro
 ¿Github?
