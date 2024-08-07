@@ -24,10 +24,9 @@ Específicos:
 
 <p>
 Caracterizar e identificar los circuitos de los datos producidos por la vigilancia epidemiológica a nivel jurisdiccional 
-</p>
+
 Incorporar herramientas de procesamiento y visualización de los datos en R
 
-<p>
 Elaborar un proyecto de automatización de reportes en R a nivel jurisdiccional
 </p>
 
