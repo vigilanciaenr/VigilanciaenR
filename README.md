@@ -14,7 +14,9 @@ Como requerimiento mínimos para poder realizar la capacitación se necesita la 
 
 
 
-- **¿Qué es R y Rstudio?**
+- **Objetivos**
+- ***General***
+- ***Específicos***
 - **RMarkdown y Quatro**
 - **Producción de informes:**
 
