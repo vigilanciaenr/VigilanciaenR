@@ -16,11 +16,11 @@ Como requerimiento mínimos para poder realizar la capacitación se necesita la 
 
 - **Objetivos**
   
-  General:
+General:
  <p>
   Fortalecer las habilidades y competencias para el procesamiento, visualización y elaboración de reportes automáticos en R.
 </p>
-Específ.:
+Específicos:
   <p>
   Caracterizar e identificar los circuitos de los datos producidos por la vigilancia epidemiológica a nivel jurisdiccional 
   </p>
