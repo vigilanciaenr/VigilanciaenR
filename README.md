@@ -39,7 +39,8 @@ C. 1. Unidad 1:
 
 ¿Qué es R y Rstudio?
 Instalación de R y paquetes de datos
-[The R Project for Statistical Computing]([https://www.r-project.org/])
+
+<[The R Project for Statistical Computing]([https://www.r-project.org/])>
 
 Descripción de RMarkdown y Quatro
 ¿Github?
