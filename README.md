@@ -79,17 +79,6 @@ Aplicaciones web
 </p>
 
 
-- **RMarkdown y Quatro**
-- **Producción de informes:**
-
- 1-  Transferencia de datos
- 
- 2- Gestión de datos
- 
- 3- Análisis de datos
- 
- 4- Presentación de datos
-
 
 ### Algunos comandos
 ```
