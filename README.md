@@ -41,43 +41,42 @@ Se propone una capacitación en el uso del programa R con un formato de taller p
 
 Este primer módulo tiene algunos contenidos de carácter de optativo para aquellas personas que ya están familiarizadas con el uso de R y RStudio. Se propone con el objetivo de instalar y familiarizarse con las herramientas básicas y presentar la propuesta general de la capacitación.
 
--Presentación de R y RStudio como software estadístico. Instalación
--[The R Project for Statistical Computing](https://www.r-project.org/)
--¿Cómo funciona R? Introducción al lenguaje R.
--¿Cómo funciona R Studio?
--Paquetes y librerías: instalación y carga.
--Introducción al lenguaje orientado a objetos (POO).
--Presentación de los principales objetos de R
--Descripción de los objetivos de la  propuesta formativa. Presentación de la plataforma GitHub, RMarkdown.
--Uso de IA (Chat GPT) para la programación en R
+- Presentación de R y RStudio como software estadístico. Instalación. [The R Project for Statistical Computing](https://www.r-project.org/)
+- ¿Cómo funciona R? Introducción al lenguaje R.
+- ¿Cómo funciona R Studio?
+- Paquetes: instalación y carga.
+- Introducción al lenguaje orientado a objetos (POO).
+- Presentación de los principales objetos de R
+- Descripción de los objetivos de la  propuesta formativa. Presentación de la plataforma GitHub, RMarkdown.
+- Uso de IA (Chat GPT) para la programación en R
+ 
 
 ###### C.2. Módulo 2: Plan de análisis
 En este módulo se trabajará colaborativamente con la estrategia de vigilancia epidemiológica seleccionada por la jurisdicción. De acuerdo a esta elección se trabajará en el armado de los circuitos de los datos producidos localmente por los diferentes niveles y efectores de salud intervinientes. Se diseñará un plan de análisis de los datos producidos en el marco de las actividades de vigilancia
 
--Construcción del circuito de datos de la vigilancia epidemiológica local. Transferencia de datos. Lectura de dataset. 
--Búsqueda y transferencia de archivos de bases de datos epidemiológicos para su utilización en Rstudio.
--Paquetes de datos y uso de marcos de data frames compartidos
--Diseño colaborativo de un plan de análisis
-
+- Construcción del circuito de datos de la vigilancia epidemiológica local. Transferencia de datos. Lectura de dataset. 
+- Búsqueda y transferencia de archivos de bases de datos epidemiológicos para su utilización en Rstudio.
+- Paquetes de datos y uso de marcos de data frames compartidos
+- Diseño colaborativo de un plan de análisis
 
 ###### C.3. Módulo 3: Procesamiento y análisis de datos
 
 Se propone como tercer paso presentar las principales herramientas para el procesamiento de datos en R en el marco del plan de análisis propuesto. Se presentarán herramientas básicas de la visualización de los datos seleccionados.
 
--Interfases: RStudio: Cuatro ventanas/Rmarkdown
--Validación, subconjunto de datos, creacion de variables
--Combinación de marcos de datos. Funciones de joint.
--Estadística descriptiva en R. Medidas de resumen: tendencia central y dispersión, frecuencias relativas y absolutas.
--Elaboración de gráficos para variables categóricas y numéricas. Librería ggplot2
+- Interfases: RStudio: Cuatro ventanas/Rmarkdown
+- Validación, subconjunto de datos, creacion de variables
+- Combinación de marcos de datos. Funciones de joint.
+- Estadística descriptiva en R. Medidas de resumen: tendencia central y dispersión, frecuencias relativas y absolutas.
+- Elaboración de gráficos para variables categóricas y numéricas. Librería ggplot2
 
 
 ###### C.4. Módulo 4: Cartografía temática
 Se seleccionarán los indicadores para la representación cartográfica de los mismos utilizando R. Se producirán mapas temáticos que permitan describir y analizar la distribución espacial del evento en la jurisdicción.
 
--Instalación de paquetes y librerias necesarias
--Elaboración de datos georeferenciados
--Utilización de filtros, incorporación de nuevos datos
--Utilización de shape files y creación de capas.
+- Instalación de paquetes y librerias necesarias
+- Elaboración de datos georeferenciados
+- Utilización de filtros, incorporación de nuevos datos
+- Utilización de shape files y creación de capas.
 
 
 ###### C.5. Módulo 5:  Elaboración automatizada de reportes
@@ -99,4 +98,4 @@ La evaluación será una instancia continua que permita presentar y resumir los 
 
 
 
-[Sintaxis de markdown](https://www.markdownguide.org/basic-syntax/ "Sintaxis de markdown")
+  
