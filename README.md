@@ -18,7 +18,7 @@ Como requerimiento mínimos para poder realizar la capacitación se necesita la 
 
 
 
-- **Objetivos**
+## Objetivos
   
 *General*:
  <p>
@@ -35,7 +35,7 @@ Incorporar herramientas de procesamiento y visualización de los datos en R
 Elaborar un proyecto de automatización de reportes en R a nivel jurisdiccional
 </p>
 
-- **Contenidos**
+## Contenidos
 
 <p>
 Se propone una capacitación en el uso del programa R con un formato de taller práctico que incluya el uso de RMarkdown y Quatro para la creación de informes automatizados y diversos paquetes de R para análisis y visualizaciones. La propuesta es que al finalizar la capacitación el equipo de vigilancia epidemiológica tenga armado un proyecto para la generación automática de reportes con los datos producidos por la vigilancia epidemiológica. 
@@ -91,7 +91,7 @@ Elaboración del modelo y esquema de reporte a elaborar de manera automatizada. 
 
 Se realizará seguimiento de la implementación del proyecto y relevamiento de obstáculos en la puesta en práctica en el marco de las actividades de vigilancia epidemiológica a nivel jurisdiccional.
 
-- **Estrategia de evaluación**
+## Estrategia de evaluación
 
 La evaluación será una instancia continua que permita presentar y resumir los resultados alcanzados con las actividades propuestas en cada módulo. El resultado principal a alcanzar con la capacitación es un resultado colectivo, que permita el fortalecimiento de los equipos de vigilancia epidemiológica a nivel jurisdiccional. En este sentido si bien habrá actividades realizadas de forma individual y que serán resultados de las actividades desarrolladas en los distintos módulos, el acento está colocado en el proyecto grupal de elaboración de reportes automatizados. Se propone también como parte de la estrategia de evaluación de esta capacitación el monitoreo y seguimiento en el proceso de implementación del proyecto en la jurisdicción.
 
