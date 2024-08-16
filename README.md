@@ -7,6 +7,8 @@
 
 **Año:** 2024
 
+## A- Introducción y fundamentación de la propuesta formativa:
+
 <p>
 La necesidad de formación continua es una de los elementos característicos comunes para el trabajo de los equipos de salud. En específico, en lo relativo a la vigilancia epidemiológica, la necesidad de fortalecer las competencias y capacidades de los equipos de epidemiología locales y jurisdiccionales de la provincias en Argentina está en relación no sólo con la incorporación de nuevas herramientas informáticas para el análisis de datos, visualizaciones y generación de reportes automatizados. A su vez el contexto desafiante que presenta el avance de las enfermedades virales a nivel nacional (ETMa, IRAG, entre otras), en conjunto con la ampliación de la estrategia de vigilancia centinela de IRAG, se presenta con un escenario que resalta la importancia del uso de  herramientas avanzadas y métodos eficientes para la gestión de datos epidemiológicos. 
 
@@ -18,7 +20,7 @@ Como requerimiento mínimos para poder realizar la capacitación se necesita la 
 
 
 
-## Objetivos
+## B- Objetivos
   
 *General*:
  <p>
@@ -38,7 +40,7 @@ Desarrollar autonomía en el uso de R aplicado al análisis de datos epidemiolog
 
 </p>
 
-## Contenidos
+## C- Contenidos
 
 <p>
 Se propone una capacitación en el uso del programa R con un formato de taller práctico que incluya el uso de RMarkdown y Quarto para la creación de informes automatizados y diversos paquetes de R para análisis y visualizaciones. La propuesta es que al finalizar la capacitación el equipo de vigilancia epidemiológica tenga armado un proyecto para la generación automática de reportes con los datos producidos por la vigilancia epidemiológica. 
