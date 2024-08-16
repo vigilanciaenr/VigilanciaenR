@@ -3,6 +3,9 @@
 
 # Programa de Capacitación para la Vigilancia Epidemiológica: Automatización de reportes en R
 
+**Docente:** Andrés Martín Pereira
+**Año:** 2024
+
 <p>
 La necesidad de formación continua es una de los elementos característicos comunes para el trabajo de los equipos de salud. En específico, en lo relativo a la vigilancia epidemiológica, la necesidad de fortalecer las competencias y capacidades de los equipos de epidemiología locales y jurisdiccionales de la provincias en Argentina está en relación no sólo con la incorporación de nuevas herramientas informáticas para el análisis de datos, visualizaciones y generación de reportes automatizados. A su vez el contexto desafiante que presenta el avance de las enfermedades virales a nivel nacional (ETMa, IRAG, entre otras), en conjunto con la ampliación de la estrategia de vigilancia centinela de IRAG, se presenta con un escenario que resalta la importancia del uso de  herramientas avanzadas y métodos eficientes para la gestión de datos epidemiológicos. 
 
