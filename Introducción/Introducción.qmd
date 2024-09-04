@@ -1,0 +1,643 @@
+---
+title: "Introducción"
+format: html
+toc: true
+toc-depth: 3       # Nivel de profundidad (hasta h3 en este caso)
+toc-location: left 
+editor: visual
+---
+
+# Introducción a R y Rstudio
+
+R es un lenguaje de programación estadístico de código abierto que se creó en la década de 1990 específicamente para el análisis de datos. R es un lenguaje y entorno de software para estadísticas y gráficos. R Studio proporciona una interfaz amigable para trabajar con R, facilitando la escritura, depuración y ejecución de código, además de ofrecer herramientas adicionales para la visualización de datos y la generación de informes.
+
+### Beneficios de R Studio:
+
+Interfaz gráfica amigable: R Studio tiene una interfaz de usuario intuitiva que facilita la escritura y ejecución de código R.
+
+Herramientas integradas: Ofrece herramientas integradas para la visualización de datos, depuración de código, y la creación de informes reproducibles.
+
+Soporte para Shiny: Permite desarrollar aplicaciones interactivas basadas en R con Shiny. Integración con Git: Facilita el control de versiones y colaboración en proyectos. Amplia comunidad y documentación: R Studio es respaldado por una comunidad activa y cuenta con una amplia documentación.
+
+## Rutas de archivos en R
+
+Antes de empezar a trabajar siempre es conveneinte observar cual es el directorio (espacio físico en el disco rígido) que R tiene definido. Para conocer este directorio podemo ejecutar la siguiente linea de comando:
+
+```{r}
+# Con esta línea de código se visualiza el lugar donde se encuentran el directorio donde R trabaja en tu computadora
+
+getwd()
+```
+
+Esta carpeta es el lugar donde R va a leer y escribir datos por defecto, salvo que le indiquemos lo contrario. Osea que si le damos una orden de escribir algún objeto R lo va a realizar en este lugar.
+
+Para definir de acuerdo nuestra comodidad el espacio donde queremos que lea y guarde los objetos que vamos creando y guardando podemos emplear la funcion setwd() y entre los paréntesis indicar la ruta completa del directorio que preferimos.
+
+```{r}
+
+# setwd("C:/Users/Desktop/Vigilancia en R/Ejercicios") 
+```
+
+Observar que las barras que delimitan subdirectorios son / o \\. Nunca usar solo la . Ya que en R en Window es necesario esto.
+
+Una vez definido este directorio R va a escribir y leer por defecto en este lugar.
+
+# Operaciones básicas en R
+
+#### 
+
+Operadores Matemáticos en R Se puede usar R como una calculadora
+
+-   Suma: +
+-   Resta: -
+-   Multiplicación: \*
+-   División: /
+-   Módulo (Residuo): %%
+
+```{r}
+
+suma <-3+5  #Sumamos
+3-2   #restamos
+3/2   #dividimos
+3*2   #multiplicamos
+3^2   #elevamos al cuadrado
+3**2  #elevamos al cuadrado
+9%%4  #operador resto
+
+```
+
+### Precedencia de los opeadores
+
+Como toda operación matemática, existe una precedencia de los operadores, esto quiere decir que en una ecuación que involucra muchos operadores unos tienen prioridad de resolución.
+
+El orden de resolución esta definido por
+
+-   () primero se resuelven los paréntesis
+-   \*\* luego se resuelven la potencias
+-   (\* o /) después las multiplicaciones o divisiones
+-   (+ o -) por último las sumas y restas
+
+```{r}
+#Precedencia de los operadores
+#Paréntesis
+#potencias
+#multiplicación
+#suma
+
+3+2*5
+
+(3+2)*5
+
+2/8**2
+```
+
+### Operadores de Comparación en R
+
+Igualdad: ==
+
+Desigualdad: !=
+
+Mayor que: \>
+
+Menor que: \<
+
+Mayor o igual que: \>=
+
+Menor o igual que: \<=
+
+### Operadores Lógicos en R
+
+AND Lógico: & o &&
+
+OR Lógico: \| o \|\|
+
+NOT Lógico: !
+
+# Objetos en R
+
+Todos los lenguajes de programación necesitan almacenar información para poder luego usarla. En R toda información se guarda en objetos y disponemos de varios tipos, los más empleados son:
+
+-   Variables
+-   Vectores
+-   Listas
+-   Factores
+-   Matrices
+-   Data frames
+
+Veremos sobre todo algunos de ellos para pasar a ver como se utilizan en las funciones.
+
+## Variables
+
+Una variable en programación es un espacio de almacenamiento con un nombre simbólico (un identificador) que se refiere o está asociado a un valor o información almacenada.
+
+Se pueden pensar como cajas que tiene una etiqueta que es el nombre de la variable. Dentro de la caja podemos guardar diferentes tipos de datos, como números, texto, booleanos, entre otros.
+
+```{r}
+# Ejercicio 1: Crear una variable llamada 'edad' y asignarle el valor 25
+edad <- 25
+
+# Imprimir el valor de la variable 'edad'
+print(edad)
+
+```
+
+También si queremos acceder al valor de esa variable podemos hacerlo simplemente escribiendo el nombre de esa variable.
+
+```{r}
+edad
+```
+
+Tipos de variables que se pueden generar
+
+-   Numeric: incluyen números
+-   Character: son variables que almacenan cadena de texto
+-   Logical: almacenan un valor Verdadero (TRUE) o falso (FALSE). Es a menudo el resultado de operaciones lógicas
+-   Date: guardan una cadena de texto que R interpreta como una fecha
+
+```{r}
+# Generamos distintos tipos de variables
+
+a <- 10 #creamos una variable numérica
+A <- "meses" #Creamos una variable de caracteres
+b <- TRUE #Creamos una variable lógica (FALSE)
+c <- Sys.Date() #Creamos una variable Fecha (tomamos la fecha del ordenador con la función Sys.Date())
+
+ls() #Observamos todas las variables que se encuentran en la memoria de R
+```
+
+```{r}
+#Investigamos la estructura de los objetos creados con la función str()
+
+str(a)
+str(A)
+str(b)
+str(c)
+
+#Investigamos el tipo de variable los objetos creados con la función class()
+class(a)
+class(A)
+```
+
+Las variables pueden utilizarse en operaciones matemáticas y lógicas en R.
+
+```{r}
+
+# Ejercicio 4: Calcular el área de un rectángulo
+longitud <- 5
+ancho <- 3
+
+# Calcular el área utilizando las variables
+area <- longitud * ancho
+
+# Imprimir el resultado
+print(paste("El área del rectángulo es:", area))
+
+```
+
+Aquí arriba el "paste" concatena la linea de caracteres "El área del rectángulo es:" con el valor del cálculo del área. Y "print" lo impirme para que podamos verlo.
+
+## Vectores
+
+Un vector es un grupo elementos ordenados, todos deben ser del mismo tipo (todos números o todos caracteres por ejemplo). La forma más simple de crear un vector es usando la función c() y separando por comas a los elementos que lo forman:
+
+```{r}
+
+#El objeto vector
+
+a <- c(1,2,3,4) #creamos un vector de 4 elementos
+
+c <- c(a, 7,8,9)#creamos un vector uniendo uno que ya existe (esto paso cuando asignamos variables en las lineas de arriba) con un número nuevo
+
+a
+c
+```
+
+Tambien se pueden pegar vectores
+
+```{r}
+
+#Concatenar dos vectores
+
+a<-c(1,2,6) #creamos un vector
+b<-c(4,5) #creamos otro vector
+c <- c(a,b)#concatenamos ambos vectores
+
+a
+b
+c
+```
+
+```{r}
+#El objeto vector
+
+a <- c(1,2,3,4) #creamos un vector de 4 elementos
+
+b <- seq(from=1,to=100, by=2) #generamos una secuencia (ayuda de la función con ?seq)
+
+c <- c(b, 7,8,9) #creamos un vector uniendo uno que ya existe con un número nuevo
+
+a
+b
+c
+```
+
+Lo que hicimos arriba con el vector b es generar una secuencia a partir de una funcion (m{as adelante nos detendremos en las funciones. Existen muchas funciones que crean vectores automáticamente. Por ejemplo la función seq() que genera una secuencia.
+
+-   from: le indicamos a R desde que valor iniciar la secuencia
+-   to: es el valor máximo que puede tomar la secuncia
+-   by: indica la longitud del intervalo entre los elementos
+
+Tambien se puede armar un vector de la siguiente manera:
+
+```{r}
+
+a<-c(1:4) #Es lo mismo que escribir c(1,2,3,4)
+
+```
+
+Se pueden crear vectores de carcateres. Debería notar que los nombres vector aparecen en su entorno global. También puede notar que el panel del entorno global le brinda información adicional sobre este vector a la derecha de su nombre. Específicamente, debería ver chr \[1:4\] "Carlos","Luisa","Bruno","Ana"
+
+```{r}
+# Ejemplo de vector con nombres
+nombres <- c("Carlos","Luisa","Bruno","Ana")
+
+# Imprimir resultado
+nombres
+```
+
+### Operaciones básicas con vectores
+
+Dado un vector podemos estar interesados en obtener datos sobre su contenido y que de algún modo lo resuma. Si queremos conocer medidas estadísticas de los elementos del vector tenemos las siguientes funciones:
+
+-   length: nos retorna un valor que indica la longitud (cantidad de elementos) del vector
+-   sum: nos devuelve un valor con la suma de los elementos
+-   mean: nos dice la media de los elementos del vector
+-   sd: no retorna un valor indicando el desvío estandar
+-   median: no devuelve la mediana
+
+```{r}
+a<-c(1:5)   #creamos un vector para analizar estadísticas
+
+length(a)   #Nos dice la longitud (cantidad de elementos) de un vector
+sum(a)      #suma todos los elementos del vector
+mean(a)     #nos dice la media de los elementos del vector
+sd(a)       #nos dice el desvío
+median(a)   #...la mediana
+```
+
+### Tipos de vectores
+
+Existen varios tipos de vectores diferentes , pero cada vector puede tener solo un tipo. El tipo del vector anterior era carácter. Podemos validarlo con la typeof()función de la siguiente manera:
+
+```{r}
+typeof(nombres)
+```
+
+-   Vectores de caracter
+
+-   vectores dobles contienen números reales
+
+-   vectores enteros contienen números enteros
+
+-   vectores numéricos
+
+-   vectores lógicos (Verdaddero y Falso)
+
+## Factores
+
+Los factores son más útiles en el contexto de trabajar con datos categóricos: datos que se agrupan en categorías discretas. Algunos ejemplos de variables categóricas que se ven comúnmente en los datos de salud pública son el sexo y el nivel de logro educativo.
+
+Se verá con un ejemplo:
+
+En R, podemos representar una variable categórica de varias maneras diferentes. Por ejemplo, supongamos que nos interesa registrar el nivel más alto de educación formal que han completado las personas en nuestros datos. Las categorías discretas que nos interesan son:
+
+1 = Menos que la secundaria
+
+2 = Graduado de secundaria
+
+3 = Un poco de universidad
+
+4 = Graduado universitario
+
+Normalmente, no creamos factores desde cero. En su lugar, normalmente convertimos (o "forzamos") un vector numérico o de caracteres existente en un factor. Por ejemplo, podemos forzar education_numun factor de la siguiente manera:
+
+```{r}
+
+# Creo un vestor con los numeros correspondientes a las categorias de educación
+educacion_num <- c(3, 1, 4, 1)
+educacion_num
+
+# Convierto el vector en factor
+educacion_num_f <- factor(
+  x      = educacion_num,
+  levels = 1:4,
+  labels = c(
+    "Menos que la secundaria", "Graduado de secundaria", "Un poco de universidad", 
+    "Graduado universitario"
+  )
+)
+educacion_num_f
+```
+
+El primer argumento de la factor() función es el x argumento. El valor que se pasa al xargumento debe ser un vector de datos. Pasamos el education_numvector al xargumento.
+
+El segundo argumento de la factor() función es el levels argumento. Este argumento le indica a R los valores únicos que puede tomar la nueva variable factorial. Usamos la abreviatura 1:4para indicarle a R que education_num_fpuede tomar los valores únicos 1, 2, 3 o 4.
+
+El tercer argumento de la factor() función es el labels argumento. El valor que se pasa al labels argumento debe ser un vector de caracteres de etiquetas (es decir, texto descriptivo) para cada valor del level sargumento. El orden de las etiquetas en el vector de caracteres que pasamos al labels argumento debe coincidir con el orden de los valores que se pasan al levels argumento. Por ejemplo, el orden de levels y labels superior indica a R que 1 debe etiquetarse con “Menor que la escuela secundaria”, 2 debe etiquetarse con “Graduado de la escuela secundaria”, etc.
+
+**Características de los Factores**
+
+-   *Categorías o Niveles*: Los factores representan datos categóricos y tienen un conjunto de niveles únicos. Por ejemplo, un factor que representa el género puede tener los niveles "Masculino" y "Femenino".
+
+-   *Codificación Interna*: Internamente, R almacena los factores como enteros, donde cada nivel se asocia con un número entero. Por ejemplo, en un factor con niveles "Rojo", "Verde", "Azul", R puede almacenar "Rojo" como 1, "Verde" como 2, y "Azul" como 3.
+
+-   *Ordenamiento*: Los factores pueden ser ordenados o no ordenados. Un factor ordenado tiene un orden específico en sus niveles (por ejemplo, "Bajo", "Medio", "Alto"), mientras que un factor no ordenado no tiene un orden inherente en sus niveles.
+
+## Data Frames o Marco de datos
+
+Un Data Frame es un objeto similar a las matrices ya que almacena los datos en formato de filas y columnas y puede almacenar diferentes clases de valores. Por ejemplo, en una columna podemos almacenar números, en otra caracteres, en otra fechas y en otras valores lógicos.
+
+Para crear un data frame podemos emplear la función data.frame().
+
+```{r}
+#crear un DF a partir de vectores
+x <- c(1,2,3,4,5)#creamos un vector de números
+y <- c("A", "B", "C", "D", "E")#generamos un vector de letras
+df <- data.frame(numeros = x, letras = y) #Generamos un DF con ambos vectores
+
+df
+```
+
+Datos que puedo tomar de mi data frame
+
+```{r}
+nrow(df)#nos dice el numero de filas del DF
+
+ncol(df)#nos dice la cantidad de columnas de DF
+
+dim(df)# nos devuelve un vector con los valores filas y columnas de DF
+
+colnames(df)#nos dice los nombres de las columnas del DF
+
+rownames(df)#nos dice los nombres de las columnas de DF
+
+names(df)
+```
+
+## Funciones
+
+Una función en R es un bloque de código reutilizable que realiza una tarea específica. Las funciones en R son fundamentales porque permiten organizar el código en partes manejables, evitando la repetición y facilitando su mantenimiento.
+
+#### componentes de una Función en R:
+
+-   Nombre de la función: Es cómo llamas a la función.
+
+-   Argumentos: Son los valores de entrada que la función toma. Estos pueden ser opcionales o requeridos.
+
+-   Cuerpo de la función: Es el código que define lo que la función hace.
+
+-   Valor de retorno: Es el resultado que la función devuelve después de ejecutar su código.
+
+```{r}
+
+secuencia <-  seq(from = 2, to = 100, by = 2)
+
+secuencia
+```
+
+seq(): es la función from, toy by: son los argumentos 2, 100, 2: son valores que se pasan a los argumentos secuencia: es el resultado
+
+**Argumentos**
+
+-   from: le indicamos a R desde que valor iniciar la secuencia
+-   to: es el valor máximo que puede tomar la secuncia
+-   by: indica la longitud del intervalo entre los elementos
+
+Como acotación al margen, podemos ver la documentación de cualquier función escribiendo ?function en la consola R y luego presionando la tecla Enter/Return. Por ejemplo, podemos escribir ?seq para ver la documentación de la seq()función.
+
+```{r}
+
+?seq
+
+```
+
+# Instalación de paquetes
+
+Un paquete en R es una colección de funciones, datos, y documentación que extiende las capacidades básicas de R. Para utilizar un paquete en R, primero debes instalarlo y luego cargarlo en tu sesión de R.
+
+Puedes instalar un paquete desde CRAN (Comprehensive R Archive Network) usando la función install.packages()
+
+"dplyr" es un paquete conocido para la gestión de datos:
+
+```{r}
+# Para probar el código quitar el hashtag
+
+#install.packages("dplyr")
+
+```
+
+Paquetes que usaremos para los informes:
+
+### Tidyverse
+
+Descripción: Una colección de paquetes que comparten una filosofía de diseño, gramática de datos y estructuras de datos subyacentes. Incluye paquetes como ggplot2, dplyr, tidyr, readr, purrr, y tibble.
+
+Funcionalidades: Manipulación de datos (dplyr), visualización (ggplot2), limpieza de datos (tidyr), importación de datos (readr), entre otros.
+
+Instalación: install.packages("tidyverse")
+
+### data.table
+
+Descripción: Un paquete para la manipulación rápida y eficiente de grandes conjuntos de datos.
+
+Funcionalidades: Operaciones de filtrado, agrupamiento, y agregación de datos. Es especialmente útil para grandes volúmenes de datos por su velocidad.
+
+Instalación: install.packages("data.table")
+
+### lubridate
+
+Descripción: Facilita la manipulación y operación de datos de tipo fecha y hora. Funcionalidades: Parsing de fechas, ajuste de zonas horarias, operaciones aritméticas con fechas.
+
+Instalación: install.packages("lubridate")
+
+### stringr
+
+Descripción: Parte del tidyverse, facilita la manipulación y análisis de cadenas de caracteres (strings).
+
+Funcionalidades: Operaciones como concatenar, separar, buscar y reemplazar dentro de strings.
+
+Instalación: install.packages("stringr")
+
+### readxl y writexl
+
+Descripción: Paquetes para leer y escribir archivos Excel.
+
+Funcionalidades: readxl permite leer datos de hojas de cálculo de Excel (.xls y .xlsx), y writexl permite escribir data frames de R a archivos Excel.
+
+Instalación: install.packages("readxl") install.packages("writexl")
+
+### googlesheets4
+
+Este paquete en R es una herramienta que facilita la interacción con Google Sheets desde R. Está diseñado para leer, escribir y modificar hojas de cálculo almacenadas en Google Drive, usando la API de Google Sheets.
+
+### ggplot2
+
+Descripción: Paquete de visualización de datos parte del tidyverse.
+
+Funcionalidades: Creación de gráficos de alta calidad basados en una gramática de gráficos.
+
+Instalación: install.packages("ggplot2") (aunque ya viene incluido con tidyverse).
+
+## Librerias
+
+Cada vez que abra RStudio, tendrá que indicarle explícitamente a R qué paquetes desea utilizar. Por lo tanto, cuando cierre RStudio y lo vuelva a abrir, las únicas funciones que podrá utilizar son las funciones de Base R. Si desea utilizar funciones de cualquier otro paquete (por ejemplo, dplyr), deberá indicarle a R que desea hacerlo utilizando la library()función.
+
+```{r}
+library(dplyr)
+```
+
+# Data Frame y Tibble
+
+Cuando queremos crear relaciones entre nuestros vectores, podemos utilizarlos para construir un marco de datos. Por ejemplo para almacernar vercotres de distintas caracterististicas (numericos y de carcateres por ejemplo)
+
+```{r}
+ # Creo el vector de nombres 
+ nombres   = c("Carlos", "Luisa", "Bruno", "Ana")
+
+ # Creo el vector de peso
+ peso = c(68, 63, 71, 72)
+ 
+ # Combino ambos en un data frame
+ clase <-  data.frame (nombres, peso)
+ 
+ #Imprimo el data frame
+ clase
+```
+
+Cuando corremos este código el marco de datos aparece en su entorno global. Aquí le brinda información adicional sobre este marco de datos a la derecha de su nombre. Específicamente, debería ver "4 obs. of 2 variables". Esto es R diciéndonos que clase tiene cuatro filas u observaciones (4 obs.) y dos columnas o variables ( 2 variables). Si hace clic en la pequeña flecha azul a la izquierda del nombre del marco de datos, verá información sobre los vectores individuales que componen el marco de datos.
+
+#### Advertencia
+
+todas las columnas de un marco de datos deben tener la misma longitud (es decir, la misma cantidad de filas). Eso significa que cada vector que crees al crear tu marco de datos debe tener la misma cantidad de valores.
+
+Podemos realizar un data frame con el siguiente código sintetizado y obtenemos el mismo resultado
+
+```{r}
+
+clase <- data.frame(
+  nombres   = c("Carlos", "Luisa", "Bruno", "Ana"),
+  peso = c(68, 63, 71, 72)
+)
+
+clase
+```
+
+Para retomar las funciones anteriores podemos tomar medidas de nuestro nuevo data frame. Por ejemplo la media.
+
+```{r}
+mean(clase$peso)
+```
+
+Además podemos obtener información de este data frame
+
+```{r}
+nrow(clase)#nos dice el numero de filas del DF
+ncol(clase)#nos dice la cantidad de columnas de DF
+
+dim(clase)# nos devuelve un vector con los valores filas y columnas de DF
+
+colnames(clase)#nos dice los nombres de las columnas del DF
+rownames(clase)#nos dice los nombres de las columnas de DF
+
+```
+
+## tibbles
+
+Los tibbles son una estructura de datos que proviene de otro paquete de tidyverse "tibble": el paquete. Los tibbles son marcos de datos y cumplen la misma función en R que los marcos de datos; sin embargo, es una versión mejorada y puede encotrarse en algunos marcos de datos.
+
+Para ello primero debe instalarse (si aun no se realizó) el paquete "dplyr". Podemos entonces crear tibbles utilizando una de estas tres funciones: as_tibble(), tibble(), o tribble().
+
+```{r}
+# Para usar la libreria quitar el hashtag
+
+#library(dplyr)
+```
+
+#### La función as_tibble
+
+Usamos la as_tibble() función para convertir un marco de datos básico ya existente en un tibble.
+
+```{r}
+
+clase <- as_tibble(clase)
+
+clase
+
+```
+
+#### La función tibble
+
+Podemos utilizar la tibble()función en lugar de la data.frame()función cuando queremos crear un tibble desde cero. Tambien se puede usar tribble (ver en su documentación ?tribble)
+
+```{r}
+
+clase_2 <- tibble(
+   nombres   = c("Esteban", "Maria", "Rosa", "Fran"),
+  peso = c(45, 67, 80, 55)
+)
+  
+clase_2
+
+```
+
+## Datos faltantes
+
+En R, representamos los datos faltantes con un NA. Se utiliza mayúsculas NA y no se utiliza espacios ni comillas. Es recomendable no utilizar "perdido" o "faltante".
+
+```{r}
+# Crear un data frame
+
+df <- data.frame(
+  nombres   = c("Juan", "Susana", "Monica", "Lucas"),
+  peso = c(68, 63, 71, NA) # No tenemos el peso de Lucas
+)
+
+df
+
+```
+
+# Uso de tuberías
+
+\|\> o %\>% Este operador hace que el código R sea más fácil de leer y comprender al permitirte ver tus funciones anidadas en el orden en que quieres que se ejecuten, en lugar de verlas literalmente anidadas una dentro de otra.
+
+Las funciones devuelven valores y el lenguaje R nos permite pasar directamente esos valores devueltos a otras funciones para realizar cálculos posteriores, esto es "anidar funciones". El código R puede volverse muy difícil de leer cuando empezamos a anidar muchas funciones unas dentro de otras.
+
+Las tuberías nos permiten conservar los beneficios de anidar funciones sin hacer que nuestro código sea realmente difícil de leer.
+
+```{r}
+# Para utilizar la libreria quitar el hashtag
+# library(dplyr)
+
+# Usar una tubería para filtrar, mutar, y ordenar los datos
+
+df_limpio <- df |>
+  filter(!is.na(peso)) |>      # Filtrar filas donde 'peso' no es NA
+  mutate(peso_kg = peso / 2.205) |>  # Agregar una nueva columna que convierte 'peso' a kilogramos
+  arrange(desc(peso_kg))        # Ordenar los datos por 'peso_kg' en orden descendente
+
+# Imprimir el resultado
+print(df_limpio)
+
+```
+
+**Recomendaciones para la escritutura con tuberias:**
+
+-   utilizar tuberías de tal manera que cada línea de código hace una, y sólo una, cosa.
+
+-   Si una línea de código contiene un operador de tubería, este generalmente debe ser lo último que se escriba en la línea.
+
+-   El operador de la tubería siempre debe tener un espacio delante de la misma.
+
+-   Si el operador de tubería no es lo último que se escribe en la línea, entonces también debería tener un espacio después.
+
+-   Si la función a la que estás accediendo tiene argumentos con nombre (como mutate()o summarize()), coloca cada argumento en una nueva línea. Si la función no tiene argumentos con nombre (como select()o filter()), mantén todo en una línea a menos que no quepa, en cuyo caso debes colocar cada argumento en su propia línea.
