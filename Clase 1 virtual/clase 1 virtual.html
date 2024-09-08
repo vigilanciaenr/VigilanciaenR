@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.56">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Clase 1 virtual</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="clase 1 virtual_files/libs/clipboard/clipboard.min.js"></script>
+<script src="clase 1 virtual_files/libs/quarto-html/quarto.js"></script>
+<script src="clase 1 virtual_files/libs/quarto-html/popper.min.js"></script>
+<script src="clase 1 virtual_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="clase 1 virtual_files/libs/quarto-html/anchor.min.js"></script>
+<link href="clase 1 virtual_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="clase 1 virtual_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="clase 1 virtual_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="clase 1 virtual_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="clase 1 virtual_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article toc-left">
+<div id="quarto-sidebar-toc-left" class="sidebar toc-left">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Índice de Contenidos</h2>
+   
+  <ul>
+  <li><a href="#paquetes-y-librerías-instalación-y-carga" id="toc-paquetes-y-librerías-instalación-y-carga" class="nav-link active" data-scroll-target="#paquetes-y-librerías-instalación-y-carga">Paquetes y librerías: instalación y carga</a></li>
+  <li><a href="#ejercicio-n1" id="toc-ejercicio-n1" class="nav-link" data-scroll-target="#ejercicio-n1"><strong>Ejercicio n°1</strong></a>
+  <ul class="collapse">
+  <li><a href="#creación-de-marco-de-datos-r" id="toc-creación-de-marco-de-datos-r" class="nav-link" data-scroll-target="#creación-de-marco-de-datos-r">Creación de marco de datos R</a></li>
+  <li><a href="#modificar-el-tipo-de-objeto" id="toc-modificar-el-tipo-de-objeto" class="nav-link" data-scroll-target="#modificar-el-tipo-de-objeto">Modificar el tipo de objeto</a></li>
+  <li><a href="#seleccionar-columnas" id="toc-seleccionar-columnas" class="nav-link" data-scroll-target="#seleccionar-columnas">Seleccionar columnas</a></li>
+  <li><a href="#seleccionar-filas" id="toc-seleccionar-filas" class="nav-link" data-scroll-target="#seleccionar-filas">Seleccionar filas</a></li>
+  </ul></li>
+  <li><a href="#ejercicio-n2" id="toc-ejercicio-n2" class="nav-link" data-scroll-target="#ejercicio-n2"><strong>Ejercicio n°2</strong></a>
+  <ul class="collapse">
+  <li><a href="#datos-faltantes" id="toc-datos-faltantes" class="nav-link" data-scroll-target="#datos-faltantes">Datos faltantes</a></li>
+  </ul></li>
+  <li><a href="#ejercicio-n3" id="toc-ejercicio-n3" class="nav-link" data-scroll-target="#ejercicio-n3"><strong>Ejercicio n°3</strong></a>
+  <ul class="collapse">
+  <li><a href="#tuberías" id="toc-tuberías" class="nav-link" data-scroll-target="#tuberías">Tuberías</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</div>
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Clase 1 virtual</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="paquetes-y-librerías-instalación-y-carga" class="level2">
+<h2 class="anchored" data-anchor-id="paquetes-y-librerías-instalación-y-carga">Paquetes y librerías: instalación y carga</h2>
+<p>Para realizar algunos ejercicios primero tendremos que instalar los paquetes. Un <strong>paquete en R</strong> es una colección organizada de funciones, datos y documentación que extiende las capacidades básicas del lenguaje. Los pasos para ello consisten primero en instalarlos y luego cargar las librerías.</p>
+<p>Cargar las librerías en R significa hacer que las funciones y herramientas de un paquete estén disponibles para que puedas usarlas en tu sesión de R. Cuando instalas un paquete con <code>install.packages()</code>, se descarga y guarda en tu computadora, pero no se activa automáticamente. Para empezar a usarlo, necesitas “cargar” la librería en la sesión de R con la función <code>library()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("tidyverse")  #  manipulación y visualización de datos</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("data.table") # manipulación de grandes datasets</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("lubridate") # creación, manipulación y extracción de información temporal en R</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("readxl") #  lectura de archivos Exce</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("googlesheets4") # Permite leer, escribir y manipular hojas de cálculo alojadas en Google Drive</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("httpuv") #  es utilizado en segundo plano para manejar la autenticación OAuth cuando accedes a Google Sheets.</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("rmarkdown") #  crear documentos combinando texto, código y resultados de análisis en un solo archivo. </span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("tinytex") #  generar documentos en formato PDF con rmarkdown </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="ejercicio-n1" class="level2">
+<h2 class="anchored" data-anchor-id="ejercicio-n1"><strong>Ejercicio n°1</strong></h2>
+<section id="creación-de-marco-de-datos-r" class="level3">
+<h3 class="anchored" data-anchor-id="creación-de-marco-de-datos-r">Creación de marco de datos R</h3>
+<p>En primer lugar vamos a generar un marco de datos o data frame, desde donde vamos a contener y manipular datos. Para ello en primer lugar debemos crear los vectores (contenedor de datos) que conformaran el data frame.</p>
+<p>Simplifica mucho para la escritura y nomenclatura de variables el uso de minúsculas y evitar espacios entre palabras.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># creación de vector simple</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>casos_dengue <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"confirmado"</span>, <span class="st">"sospechoso"</span>, <span class="st">"confirmado"</span>, <span class="st">"descartado"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># imprime el vector</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>casos_dengue</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "confirmado" "sospechoso" "confirmado" "descartado"</code></pre>
+</div>
+</div>
+<p><strong>Esto es lo que hicimos arriba:</strong></p>
+<ul>
+<li><p>Creamos <em>un</em> vector de nombres con la <code>c()</code>función (abreviatura de combinar).</p>
+<ul>
+<li><p>El vector contiene cuatro valores: “confirmado”, “sospechoso”, “confirmado”, “descartado”</p></li>
+<li><p>Todos los valores son cadenas de caracteres (es decir, palabras). Lo sabemos porque todos los valores están entre comillas.</p></li>
+<li><p>Aquí hemos utilizado comillas dobles, pero también podríamos haber utilizado comillas simples. Sin embargo, no podemos mezclar comillas dobles y simples para cada cadena de caracteres. Por ejemplo, <code>c("confirmado', ...)</code>no funcionará.</p></li>
+<li><p>R ahora lo reconoce&nbsp;<code>names</code>como un&nbsp;<strong>objeto</strong>&nbsp;con el que podemos hacer cosas. Además aparece ahora en la pestaña de “Entorno global”</p></li>
+</ul></li>
+</ul>
+<p>Ahora generaremos otro vector y los combinaremos en un data frame:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>id_caso <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"1"</span>,<span class="st">"2"</span>,<span class="st">"3"</span>,<span class="st">"4"</span>) </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>id_caso</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "1" "2" "3" "4"</code></pre>
+</div>
+</div>
+<p>Combinación de vectores para crear un data frame o marco de datos:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creamos un data frame</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>   <span class="at">caso_dengue =</span> <span class="fu">c</span>(<span class="st">"confirmado"</span>, <span class="st">"sospechoso"</span>, <span class="st">"confirmado"</span>, <span class="st">"descartado"</span>),</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>   <span class="at">id_caso =</span> <span class="fu">c</span>(<span class="st">"1"</span>,<span class="st">"2"</span>,<span class="st">"3"</span>,<span class="st">"4"</span>))</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  caso_dengue id_caso
+1  confirmado       1
+2  sospechoso       2
+3  confirmado       3
+4  descartado       4</code></pre>
+</div>
+</div>
+<p>Es lo mismo que:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(casos_dengue,id_caso)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  casos_dengue id_caso
+1   confirmado       1
+2   sospechoso       2
+3   confirmado       3
+4   descartado       4</code></pre>
+</div>
+</div>
+<p>Se puede luego agregar una tercera columna con edades por ejemplo:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>edad <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"34"</span>,<span class="st">"65"</span>,<span class="st">"13"</span>,<span class="st">"25"</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>df_2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(casos_dengue,id_caso,edad)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>df_2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  casos_dengue id_caso edad
+1   confirmado       1   34
+2   sospechoso       2   65
+3   confirmado       3   13
+4   descartado       4   25</code></pre>
+</div>
+</div>
+<p>Esto es lo que hicimos arriba:</p>
+<ul>
+<li><p>Creamos un marco <em>de</em> datos con la <code>data.frame()</code>función.</p>
+<ul>
+<li><p>El primer argumento que pasamos a la <code>data.frame()</code>función fue un vector de casos dengue</p></li>
+<li><p>El segundo argumento que pasamos a la <code>data.frame()</code>función fue un vector de id de casos</p></li>
+<li><p>El tercer argumento que pasamos fue un vector con edades</p></li>
+</ul></li>
+<li><p>Asignamos ese marco <em>de</em> datos a la palabra <code>df_2</code>usando la <code>&lt;-</code>función.</p>
+<ul>
+<li><p>R ahora lo reconoce <code>df_2</code>como un <strong>objeto</strong> con el que podemos hacer cosas.</p></li>
+<li><p>Si hubieramos usado el <code>df</code> que teniamos anteriormente nuestro marco de datos hubiera sido reemplazado por el marco de datos que contiene edad. Como le asignamos un nuevo nombre ahora tendremos nuestros dos data frame en nuestro entorno global de manera independiente.</p></li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(df_2)<span class="co">#nos dice el numero de filas del DF</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ncol</span>(df_2)<span class="co">#nos dice la cantidad de columnas de DF</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(df_2)<span class="co"># nos devuelve un vector con los valores filas y columnas de DF</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4 3</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(df_2)<span class="co">#nos dice los nombres de las columnas del DF</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "casos_dengue" "id_caso"      "edad"        </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df_2)<span class="co">#Nos retorna información de cada variable que forma el df</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> casos_dengue         id_caso              edad          
+ Length:4           Length:4           Length:4          
+ Class :character   Class :character   Class :character  
+ Mode  :character   Mode  :character   Mode  :character  </code></pre>
+</div>
+</div>
+</section>
+<section id="modificar-el-tipo-de-objeto" class="level3">
+<h3 class="anchored" data-anchor-id="modificar-el-tipo-de-objeto">Modificar el tipo de objeto</h3>
+<p>Por ejemplo algunas variables que R puede tomar como carcateres las queremos pasar a numéricas para poder manipularlas.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Adjuntando el paquete: 'dplyr'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:stats':
+
+    filter, lag</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:base':
+
+    intersect, setdiff, setequal, union</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>df_num <span class="ot">&lt;-</span> df_2 <span class="sc">%&gt;%</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(<span class="at">edad =</span> <span class="fu">as.numeric</span>(edad))</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>df_num</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  casos_dengue id_caso edad
+1   confirmado       1   34
+2   sospechoso       2   65
+3   confirmado       3   13
+4   descartado       4   25</code></pre>
+</div>
+</div>
+<p>La función <code>mutate()</code>del paquete <code>dplyr</code> en R se utiliza para agregar nuevas columnas a un data frame o modificar las columnas existentes.</p>
+</section>
+<section id="seleccionar-columnas" class="level3">
+<h3 class="anchored" data-anchor-id="seleccionar-columnas">Seleccionar columnas</h3>
+<p><strong>Usando la sintaxis base de R</strong></p>
+<p>Seleccionar una columna (como <code>id_caso</code>):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>df_num<span class="sc">$</span>id_caso</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "1" "2" "3" "4"</code></pre>
+</div>
+</div>
+<p>Seleccionar múltiples columnas (como <code>id_caso</code> y <code>edad</code>):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>df_num[<span class="fu">c</span>(<span class="st">"id_caso"</span>, <span class="st">"edad"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  id_caso edad
+1       1   34
+2       2   65
+3       3   13
+4       4   25</code></pre>
+</div>
+</div>
+<p><strong>Usando la función <code>select()</code> de <code>library(dplyr)</code></strong></p>
+<p>Seleccionar datos del data frame:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Selecciono del marco de datos df_2 la columna de id_caso</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(df_num,id_caso)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  id_caso
+1       1
+2       2
+3       3
+4       4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Selecciono del marco de datos df_2 mas de una columna</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(df_num, id_caso, edad)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  id_caso edad
+1       1   34
+2       2   65
+3       3   13
+4       4   25</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Esto no se guardará en un nuevo data frame si no le asignamos un nombre a una nueva variable</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="seleccionar-filas" class="level3">
+<h3 class="anchored" data-anchor-id="seleccionar-filas">Seleccionar filas</h3>
+<p><strong>Usando la sintaxis base de R:</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Si el campo de columna lo dejamos en blanco, R interpreta que queremos seleccionar toda una fila.</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>df_num[<span class="dv">1</span>, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  casos_dengue id_caso edad
+1   confirmado       1   34</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Seleccionar múltiples filas, por ejemplo, las primeras dos filas:</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>df_num[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  casos_dengue id_caso edad
+1   confirmado       1   34
+2   sospechoso       2   65</code></pre>
+</div>
+</div>
+<p><strong>Usando la función <code>filter()</code> de <code>library(dplyr)</code></strong></p>
+<p>Para que funcione, la&nbsp;<code>filter()</code>función requiere que le pasemos dos valores. El primer valor es el nombre del objeto del marco de datos con las filas que queremos subdividir. El segundo es la condición que se utiliza para subdividir las filas. Supongamos que queremos hacer un análisis de subgrupos utilizando solo los casos confirmados.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Elegimos solo casos confirmados</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(df_2, casos_dengue <span class="sc">==</span> <span class="st">"confirmado"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  casos_dengue id_caso edad
+1   confirmado       1   34
+2   confirmado       3   13</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Seleccionamos solo cuando tengan más de 30 años</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(df_num, edad <span class="sc">&gt;</span> <span class="dv">30</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  casos_dengue id_caso edad
+1   confirmado       1   34
+2   sospechoso       2   65</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="ejercicio-n2" class="level2">
+<h2 class="anchored" data-anchor-id="ejercicio-n2"><strong>Ejercicio n°2</strong></h2>
+<section id="datos-faltantes" class="level3">
+<h3 class="anchored" data-anchor-id="datos-faltantes">Datos faltantes</h3>
+<p>En R, representamos los datos faltantes con un&nbsp;<code>NA</code>. Este valor R lo lee como un valor de tipo lógico a diferencia de numéricos o de caracter.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="cn">NA</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "logical"</code></pre>
+</div>
+</div>
+<p>Hay que tener en cuenta que cuando se agrega un&nbsp;<code>NA</code>(lógico por defecto) a un vector con valores numéricos como por ejemplo:&nbsp;<code>c(68, 63, 71, NA)</code>), eso haría que tuvieras tres valores numéricos y un valor lógico en el mismo vector, lo cual no está permitido. Por lo tanto, R convertirá automáticamente el&nbsp;<code>NA</code>a&nbsp;<code>NA_real_</code>.</p>
+<p>A nuestro marco de datos le agregaremos una columna y le indicaremos los datos faltantes</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>df_na <span class="ot">&lt;-</span> df_num <span class="sc">%&gt;%</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">region =</span> <span class="fu">c</span>(<span class="st">"norte"</span>, <span class="cn">NA</span>, <span class="st">"sur"</span>, <span class="cn">NA</span>))</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>df_na</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  casos_dengue id_caso edad region
+1   confirmado       1   34  norte
+2   sospechoso       2   65   &lt;NA&gt;
+3   confirmado       3   13    sur
+4   descartado       4   25   &lt;NA&gt;</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="ejercicio-n3" class="level2">
+<h2 class="anchored" data-anchor-id="ejercicio-n3"><strong>Ejercicio n°3</strong></h2>
+<section id="tuberías" class="level3">
+<h3 class="anchored" data-anchor-id="tuberías">Tuberías</h3>
+<p>Las tuberías permiten encadenar una secuencia de operaciones sobre datos de manera más legible y fluida, evitando la creación de variables intermedias y mejorando la claridad del código.</p>
+<p>Este&nbsp;<code>|&gt;</code>es el operador de tubería. A partir de la versión 4.1, el operador de tubería es parte de la base de R. Antes de la versión 4.1, el operador de tubería solo estaba disponible en&nbsp;<a href="https://magrittr.tidyverse.org/">magrittr</a>&nbsp; y se utilizan ampliamente en el <strong>tidyverse</strong> (particularmente en paquetes como <code>dplyr</code>). La tubería importada del&nbsp;<code>magrittr</code>paquete se veía así&nbsp;<code>%&gt;%</code>.</p>
+<p>La idea principal de una tubería es que el resultado de una operación se pasa como entrada (primer argumento) a la siguiente función. Esto permite que múltiples operaciones se apliquen en secuencia de manera más legible que anidar funciones.</p>
+<p>En el tipo de Windows<code>shift + control + m</code></p>
+<p><strong>Sintaxis básica:</strong></p>
+<p><code>objeto %&gt;% funcion1() %&gt;% funcion2() %&gt;% funcion3()</code></p>
+<p>Esto se traduce a que <code>objeto</code> es pasado primero a <code>funcion1()</code>, luego el resultado es pasado a <code>funcion2()</code>, y finalmente el resultado es usado en <code>funcion3()</code>.</p>
+<p>Partiendo de nuestro data frame anterior podemos utilizar las tuberias para filtrar, ordenar y seleccionar columnas.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>df_tuberia <span class="ot">&lt;-</span> df_na <span class="sc">%&gt;%</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(edad <span class="sc">&gt;</span> <span class="dv">20</span>) <span class="sc">%&gt;%</span>         <span class="co"># Filtrar casos con edad mayor a 20</span></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(edad)) <span class="sc">%&gt;%</span>       <span class="co"># Ordenar por edad en orden descendente</span></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(casos_dengue, edad)     <span class="co"># Seleccionar solo las columnas 'casos_dengue' y 'edad'</span></span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Mostrar el resultado</span></span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df_tuberia)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  casos_dengue edad
+1   sospechoso   65
+2   confirmado   34
+3   descartado   25</code></pre>
+</div>
+</div>
+<p>Se puede ordenar los valores de una columna en un data frame de manera creciente o decreciente usando la función <code>arrange()</code> del paquete <code>dplyr</code>.</p>
+<ul>
+<li><p><code>arrange(edad)</code> Ordena de manera creciente</p></li>
+<li><p><code>arrange(desc(edad)</code> ordena de manera decreciente</p></li>
+</ul>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
