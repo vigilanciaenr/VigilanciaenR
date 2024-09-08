@@ -1,0 +1,303 @@
+---
+title: "Clase 1 virtual"
+format: 
+  html:
+    toc: true
+    toc-title: "Índice de Contenidos"
+editor: visual
+code-copy: true
+toc: true
+toc-depth: 3       # Nivel de profundidad (hasta h3 en este caso)
+toc-location: left 
+---
+
+## Paquetes y librerías: instalación y carga
+
+Para realizar algunos ejercicios primero tendremos que instalar los paquetes. Un **paquete en R** es una colección organizada de funciones, datos y documentación que extiende las capacidades básicas del lenguaje. Los pasos para ello consisten primero en instalarlos y luego cargar las librerías.
+
+Cargar las librerías en R significa hacer que las funciones y herramientas de un paquete estén disponibles para que puedas usarlas en tu sesión de R. Cuando instalas un paquete con `install.packages()`, se descarga y guarda en tu computadora, pero no se activa automáticamente. Para empezar a usarlo, necesitas "cargar" la librería en la sesión de R con la función `library()`.
+
+```{r}
+
+# install.packages("tidyverse")  #  manipulación y visualización de datos
+# install.packages("data.table") # manipulación de grandes datasets
+# install.packages("lubridate") # creación, manipulación y extracción de información temporal en R
+# install.packages("readxl") #  lectura de archivos Exce
+# install.packages("googlesheets4") # Permite leer, escribir y manipular hojas de cálculo alojadas en Google Drive
+# install.packages("httpuv") #  es utilizado en segundo plano para manejar la autenticación OAuth cuando accedes a Google Sheets.
+# install.packages("rmarkdown") #  crear documentos combinando texto, código y resultados de análisis en un solo archivo. 
+# install.packages("tinytex") #  generar documentos en formato PDF con rmarkdown 
+
+```
+
+## **Ejercicio n°1**
+
+### Creación de marco de datos R
+
+En primer lugar vamos a generar un marco de datos o data frame, desde donde vamos a contener y manipular datos. Para ello en primer lugar debemos crear los vectores (contenedor de datos) que conformaran el data frame.
+
+Simplifica mucho para la escritura y nomenclatura de variables el uso de minúsculas y evitar espacios entre palabras.
+
+```{r}
+
+
+# creación de vector simple
+
+casos_dengue <- c("confirmado", "sospechoso", "confirmado", "descartado")
+
+# imprime el vector
+
+casos_dengue
+
+```
+
+**Esto es lo que hicimos arriba:**
+
+-   Creamos *un* vector de nombres con la `c()`función (abreviatura de combinar).
+
+    -   El vector contiene cuatro valores: "confirmado", "sospechoso", "confirmado", "descartado"
+
+    -   Todos los valores son cadenas de caracteres (es decir, palabras). Lo sabemos porque todos los valores están entre comillas.
+
+    -   Aquí hemos utilizado comillas dobles, pero también podríamos haber utilizado comillas simples. Sin embargo, no podemos mezclar comillas dobles y simples para cada cadena de caracteres. Por ejemplo, `c("confirmado', ...)`no funcionará.
+
+    -   R ahora lo reconoce `names`como un **objeto** con el que podemos hacer cosas. Además aparece ahora en la pestaña de "Entorno global"
+
+Ahora generaremos otro vector y los combinaremos en un data frame:
+
+```{r}
+
+id_caso <- c("1","2","3","4") 
+
+id_caso
+
+```
+
+Combinación de vectores para crear un data frame o marco de datos:
+
+```{r}
+
+# Creamos un data frame
+
+df <- data.frame(
+   caso_dengue = c("confirmado", "sospechoso", "confirmado", "descartado"),
+   id_caso = c("1","2","3","4"))
+  
+df
+
+```
+
+Es lo mismo que:
+
+```{r}
+
+df <- data.frame(casos_dengue,id_caso)
+
+df
+```
+
+Se puede luego agregar una tercera columna con edades por ejemplo:
+
+```{r}
+
+edad <- c("34","65","13","25")
+
+df_2 <- data.frame(casos_dengue,id_caso,edad)
+
+df_2
+
+```
+
+Esto es lo que hicimos arriba:
+
+-   Creamos un marco *de* datos con la `data.frame()`función.
+
+    -   El primer argumento que pasamos a la `data.frame()`función fue un vector de casos dengue
+
+    -   El segundo argumento que pasamos a la `data.frame()`función fue un vector de id de casos
+
+    -   El tercer argumento que pasamos fue un vector con edades
+
+-   Asignamos ese marco *de* datos a la palabra `df_2`usando la `<-`función.
+
+    -   R ahora lo reconoce `df_2`como un **objeto** con el que podemos hacer cosas.
+
+    -   Si hubieramos usado el `df` que teniamos anteriormente nuestro marco de datos hubiera sido reemplazado por el marco de datos que contiene edad. Como le asignamos un nuevo nombre ahora tendremos nuestros dos data frame en nuestro entorno global de manera independiente.
+
+```{r}
+  
+nrow(df_2)#nos dice el numero de filas del DF
+
+ncol(df_2)#nos dice la cantidad de columnas de DF
+
+dim(df_2)# nos devuelve un vector con los valores filas y columnas de DF
+
+```
+
+```{r}
+
+colnames(df_2)#nos dice los nombres de las columnas del DF
+
+```
+
+```{r}
+
+summary(df_2)#Nos retorna información de cada variable que forma el df
+```
+
+### Modificar el tipo de objeto
+
+Por ejemplo algunas variables que R puede tomar como carcateres las queremos pasar a numéricas para poder manipularlas.
+
+```{r}
+
+library(dplyr)
+
+df_num <- df_2 %>%
+mutate(edad = as.numeric(edad))
+
+df_num
+
+```
+
+La función `mutate()`del paquete `dplyr` en R se utiliza para agregar nuevas columnas a un data frame o modificar las columnas existentes.
+
+### Seleccionar columnas
+
+**Usando la sintaxis base de R**
+
+Seleccionar una columna (como `id_caso`):
+
+```{r}
+
+df_num$id_caso
+```
+
+Seleccionar múltiples columnas (como `id_caso` y `edad`):
+
+```{r}
+
+df_num[c("id_caso", "edad")]
+
+```
+
+**Usando la función `select()` de `library(dplyr)`**
+
+Seleccionar datos del data frame:
+
+```{r}
+
+library(dplyr)
+
+# Selecciono del marco de datos df_2 la columna de id_caso
+
+select(df_num,id_caso)
+
+# Selecciono del marco de datos df_2 mas de una columna
+
+select(df_num, id_caso, edad)
+
+# Esto no se guardará en un nuevo data frame si no le asignamos un nombre a una nueva variable
+
+```
+
+### Seleccionar filas
+
+**Usando la sintaxis base de R:**
+
+```{r}
+
+# Si el campo de columna lo dejamos en blanco, R interpreta que queremos seleccionar toda una fila.
+
+df_num[1, ]
+
+# Seleccionar múltiples filas, por ejemplo, las primeras dos filas:
+
+df_num[1:2, ]
+
+```
+
+**Usando la función `filter()` de `library(dplyr)`**
+
+Para que funcione, la `filter()`función requiere que le pasemos dos valores. El primer valor es el nombre del objeto del marco de datos con las filas que queremos subdividir. El segundo es la condición que se utiliza para subdividir las filas. Supongamos que queremos hacer un análisis de subgrupos utilizando solo los casos confirmados.
+
+```{r}
+
+# Elegimos solo casos confirmados
+
+filter(df_2, casos_dengue == "confirmado")
+
+```
+
+```{r}
+
+# Seleccionamos solo cuando tengan más de 30 años
+
+filter(df_num, edad > 30)
+
+
+```
+
+## **Ejercicio n°2**
+
+### Datos faltantes
+
+En R, representamos los datos faltantes con un `NA`. Este valor R lo lee como un valor de tipo lógico a diferencia de numéricos o de caracter.
+
+```{r}
+
+typeof(NA)
+```
+
+Hay que tener en cuenta que cuando se agrega un `NA`(lógico por defecto) a un vector con valores numéricos como por ejemplo: `c(68, 63, 71, NA)`), eso haría que tuvieras tres valores numéricos y un valor lógico en el mismo vector, lo cual no está permitido. Por lo tanto, R convertirá automáticamente el `NA`a `NA_real_`.
+
+A nuestro marco de datos le agregaremos una columna y le indicaremos los datos faltantes
+
+```{r}
+
+df_na <- df_num %>%
+  mutate(region = c("norte", NA, "sur", NA))
+
+df_na
+
+```
+
+## **Ejercicio n°3**
+
+### Tuberías
+
+Las tuberías permiten encadenar una secuencia de operaciones sobre datos de manera más legible y fluida, evitando la creación de variables intermedias y mejorando la claridad del código.
+
+Este `|>`es el operador de tubería. A partir de la versión 4.1, el operador de tubería es parte de la base de R. Antes de la versión 4.1, el operador de tubería solo estaba disponible en [magrittr](https://magrittr.tidyverse.org/)  y se utilizan ampliamente en el **tidyverse** (particularmente en paquetes como `dplyr`). La tubería importada del `magrittr`paquete se veía así `%>%`.
+
+La idea principal de una tubería es que el resultado de una operación se pasa como entrada (primer argumento) a la siguiente función. Esto permite que múltiples operaciones se apliquen en secuencia de manera más legible que anidar funciones.
+
+En el tipo de Windows`shift + control + m`
+
+**Sintaxis básica:**
+
+`objeto %>% funcion1() %>% funcion2() %>% funcion3()`
+
+Esto se traduce a que `objeto` es pasado primero a `funcion1()`, luego el resultado es pasado a `funcion2()`, y finalmente el resultado es usado en `funcion3()`.
+
+Partiendo de nuestro data frame anterior podemos utilizar las tuberias para filtrar, ordenar y seleccionar columnas.
+
+```{r}
+
+
+df_tuberia <- df_na %>%
+  filter(edad > 20) %>%         # Filtrar casos con edad mayor a 20
+  arrange(desc(edad)) %>%       # Ordenar por edad en orden descendente
+  select(casos_dengue, edad)     # Seleccionar solo las columnas 'casos_dengue' y 'edad'
+
+# Mostrar el resultado
+print(df_tuberia)
+
+
+```
+
+Se puede ordenar los valores de una columna en un data frame de manera creciente o decreciente usando la función `arrange()` del paquete `dplyr`.
+
+-   `arrange(edad)` Ordena de manera creciente
+
+-   `arrange(desc(edad)` ordena de manera decreciente
