@@ -9,7 +9,7 @@
 
 # Programa de Capacitación para la Vigilancia Epidemiológica: Automatización de reportes en R
 
-**Docente:** Andrés Martín Pereira
+**Docente:** Andrés Martín Pereira y María Florencia Mena
 
 **Año:** 2024
 
