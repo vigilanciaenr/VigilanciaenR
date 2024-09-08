@@ -121,9 +121,9 @@ Para el primer encuentro virtual tendremos dos materiales de clases:
 - En primer lugar el archivo "Clase virtual 1" que desarrollaremos en nuestro primer encuentro sincrónico con ejercicios e introducción básica a R y Rstudio.
 - El segundo archivo "Materiales clase 1" está pensado como material de consulta para quienes sientan la necesidad de familiarizarse con el lenguaje de R y ejercitar por su cuenta antes de los encuentros presenciales. Ambos archivos se encuentran en el repositorio en la "carpeta clase 1", desde donde se lo podrán descargar o acceder desde los siguientes links:
 
-[Clase 1 virtual](http://https://vigilanciaenr.github.io/VigilanciaenR/Clase%201%20virtual/clase%201%20virtual.html "Clase 1 virtual") 
+[Clase 1 virtual](https://vigilanciaenr.github.io/VigilanciaenR/Clase%201%20virtual/clase%201%20virtual.html)
 
-[Materiales clase 1](http://https://vigilanciaenr.github.io/VigilanciaenR/Clase%201%20virtual/Material%20clase%201.html "´Materiales clase 1")
+[Materiales clase 1](https://vigilanciaenr.github.io/VigilanciaenR/Clase%201%20virtual/Material%20clase%201.html)
 
 
 
