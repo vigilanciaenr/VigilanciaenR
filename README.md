@@ -1,5 +1,11 @@
 ![Mi imagen](https://github.com/vigilanciaenr/VigilanciaenR/blob/main/logo_1.png)
 
+# Indice
+- [Programa](#programa)
+- [Clase 1 virtual](#clase-1-virtual)
+- [Enlaces de utilidad](#enlaces-de-utilidad)
+
+------------
 
 # Programa de Capacitación para la Vigilancia Epidemiológica: Automatización de reportes en R
 
@@ -22,21 +28,22 @@ Como requerimiento mínimos para poder realizar la capacitación se necesita la 
 
 ## B- Objetivos
   
-*General*:
+**General**:
  <p>
   Fortalecer las habilidades y competencias para el procesamiento, visualización y elaboración de reportes automáticos en R.
 </p>
 
-*Específic.*:
+*Específicos*:
 
 <p>
-Caracterizar e identificar los circuitos de los datos producidos por la vigilancia epidemiológica a nivel jurisdiccional 
 
-Incorporar herramientas de procesamiento y visualización de los datos en R
+- Caracterizar e identificar los circuitos de los datos producidos por la vigilancia epidemiológica a nivel jurisdiccional 
 
-Elaborar un proyecto de automatización de reportes en R a nivel jurisdiccional
+- Incorporar herramientas de procesamiento y visualización de los datos en R
 
-Desarrollar autonomía en el uso de R aplicado al análisis de datos epidemiologicos
+- Elaborar un proyecto de automatización de reportes en R a nivel jurisdiccional
+
+- Desarrollar autonomía en el uso de R aplicado al análisis de datos epidemiologicos
 
 </p>
 
@@ -46,7 +53,7 @@ Desarrollar autonomía en el uso de R aplicado al análisis de datos epidemiolog
 Se propone una capacitación en el uso del programa R con un formato de taller práctico que incluya el uso de RMarkdown y Quarto para la creación de informes automatizados y diversos paquetes de R para análisis y visualizaciones. La propuesta es que al finalizar la capacitación el equipo de vigilancia epidemiológica tenga armado un proyecto para la generación automática de reportes con los datos producidos por la vigilancia epidemiológica. 
 </p>
   
-###### C. 1. Módulo 1: Presentación de las herramientas de trabajo
+#### C. 1. Módulo 1: Presentación de las herramientas de trabajo
 
 Este primer módulo tiene algunos contenidos de carácter de optativo para aquellas personas que ya están familiarizadas con el uso de R y RStudio. Se propone con el objetivo de instalar y familiarizarse con las herramientas básicas y presentar la propuesta general de la capacitación.
 
@@ -60,7 +67,7 @@ Este primer módulo tiene algunos contenidos de carácter de optativo para aquel
 - Uso de IA (Chat GPT) para la programación en R
  
 
-###### C.2. Módulo 2: Plan de análisis
+#### C.2. Módulo 2: Plan de análisis
 En este módulo se trabajará colaborativamente con la estrategia de vigilancia epidemiológica seleccionada por la jurisdicción. De acuerdo a esta elección se trabajará en el armado de los circuitos de los datos producidos localmente por los diferentes niveles y efectores de salud intervinientes. Se diseñará un plan de análisis de los datos producidos en el marco de las actividades de vigilancia
 
 - Construcción del circuito de datos de la vigilancia epidemiológica local. Transferencia de datos. Lectura de dataset. 
@@ -68,7 +75,7 @@ En este módulo se trabajará colaborativamente con la estrategia de vigilancia 
 - Paquetes de datos y uso de marcos de data frames compartidos
 - Diseño colaborativo de un plan de análisis
 
-###### C.3. Módulo 3: Procesamiento y análisis de datos
+#### C.3. Módulo 3: Procesamiento y análisis de datos
 
 Se propone como tercer paso presentar las principales herramientas para el procesamiento de datos en R en el marco del plan de análisis propuesto. Se presentarán herramientas básicas de la visualización de los datos seleccionados.
 
@@ -79,7 +86,7 @@ Se propone como tercer paso presentar las principales herramientas para el proce
 - Elaboración de gráficos para variables categóricas y numéricas. Librería ggplot2
 
 
-###### C.4. Módulo 4: Cartografía temática
+#### C.4. Módulo 4: Cartografía temática
 Se seleccionarán los indicadores para la representación cartográfica de los mismos utilizando R. Se producirán mapas temáticos que permitan describir y analizar la distribución espacial del evento en la jurisdicción.
 
 - Instalación de paquetes y librerias necesarias
@@ -101,10 +108,33 @@ Se realizará seguimiento de la implementación del proyecto y relevamiento de o
 La evaluación será una instancia continua que permita presentar y resumir los resultados alcanzados con las actividades propuestas en cada módulo. El resultado principal a alcanzar con la capacitación es un resultado colectivo, que permita el fortalecimiento de los equipos de vigilancia epidemiológica a nivel jurisdiccional. En este sentido si bien habrá actividades realizadas de forma individual y que serán resultados de las actividades desarrolladas en los distintos módulos, el acento está colocado en el proyecto grupal de elaboración de reportes automatizados. Se propone también como parte de la estrategia de evaluación de esta capacitación el monitoreo y seguimiento en el proceso de implementación del proyecto en la jurisdicción.
 
 
-
 ## E- Productos esperados:
 
 Se espera que los/as alumnos/as elaboren un plan de análisis para sus datos y con el mismo puedan diseñar y programar un reporte automatizado en R y Quarto. Se espera que estos reportes sean un importante insumo para los equipos que trabajan en vigilancia a nivel provincial.
+
+------------
+
+# Clase 1 virtual
+
+Para el primer encuentro virtual tendremos dos materiales de clases. En primer lugar el archivo "Clase virtual 1" que desarrollaremos en nuestro primer encuentro sincrónico con ejercicios e introducción básica a R y Rstudio. El segundo archivo "Materiales clase 1" está pensado como material de consulta para quienes sientan la necesidad de familiarizarse con el lenguaje de R y ejercitar por su cuenta antes de los encuentros presenciales. Ambos archivos se encuentran en el repositorio en la "carpeta clase 1", desde donde se lo podrán descargar o acceder desde los siguientes links:
+
+[Clase 1 virtual](http://https://vigilanciaenr.github.io/VigilanciaenR/Clase%201%20virtual/clase%201%20virtual.html "Clase 1 virtual") 
+
+[Materiales clase 1](http://https://vigilanciaenr.github.io/VigilanciaenR/Clase%201%20virtual/Material%20clase%201.html "´Materiales clase 1")
+
+
+
+# Enlaces de utilidad
+
+[Video de instalación de R y Rstudio](http://https://www.youtube.com/watch?v=hbgzW3Cvda4&ab_channel=HerbertLizama "Video de instalaciónn de R y Rstudio")
+
+[Quarto](http://https://quarto.org/docs/get-started/ "Descarga de Quarto")
+
+[Video instalación de Quarto](http://https://www.youtube.com/watch?v=uHaDmPtO-YQ&ab_channel=Estad%C3%ADstica%C3%BAtil "Video instalación de Quarto")
+
+
+
+
 
 </p>
 
