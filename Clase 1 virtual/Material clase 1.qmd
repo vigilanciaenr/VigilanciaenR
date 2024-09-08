@@ -26,7 +26,7 @@ Soporte para Shiny: Permite desarrollar aplicaciones interactivas basadas en R c
 
 Antes de empezar a trabajar siempre es conveneinte observar cual es el directorio (espacio físico en el disco rígido) que R tiene definido. Para conocer este directorio podemo ejecutar la siguiente linea de comando:
 
-`{r} # Con esta línea de código se visualiza el lugar donde se encuentran el directorio donde R trabaja en tu computadora  getwd()}`
+```{r} # Con esta línea de código se visualiza el lugar donde se encuentran el directorio donde R trabaja en tu computadora  getwd()}```
 
 Esta carpeta es el lugar donde R va a leer y escribir datos por defecto, salvo que le indiquemos lo contrario. Osea que si le damos una orden de escribir algún objeto R lo va a realizar en este lugar.
 
