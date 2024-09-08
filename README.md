@@ -129,6 +129,8 @@ Para el primer encuentro virtual tendremos dos materiales de clases:
 
 # Enlaces de utilidad
 
+[Rstudio](http://https://posit.co/downloads/ "Rstudio")
+
 [Video de instalación de R y Rstudio](http://https://www.youtube.com/watch?v=hbgzW3Cvda4&ab_channel=HerbertLizama "Video de instalaciónn de R y Rstudio")
 
 [Quarto](http://https://quarto.org/docs/get-started/ "Descarga de Quarto")
