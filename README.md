@@ -9,7 +9,7 @@
 
 # Programa de Capacitación para la Vigilancia Epidemiológica: Automatización de reportes en R
 
-**Docente:** Andrés Martín Pereira, Velen y María Florencia Mena
+**Docente:** Andrés Martín Pereira, Velén Pennini y María Florencia Mena
 
 **Año:** 2024
 
@@ -95,11 +95,11 @@ Se seleccionarán los indicadores para la representación cartográfica de los m
 - Utilización de shape files y creación de capas.
 
 
-###### C.5. Módulo 5:  Elaboración automatizada de reportes
+#### C.5. Módulo 5:  Elaboración automatizada de reportes
 
 Elaboración del modelo y esquema de reporte a elaborar de manera automatizada.  R Markdown. Integración de código R, texto y gráficos en un solo documento. Exportación en Documentos de Microsoft Word, PDF  y Archivos HTML.
 
-###### C.6. Módulo 6: Seguimiento y Monitoreo
+#### C.6. Módulo 6: Seguimiento y Monitoreo
 
 Se realizará seguimiento de la implementación del proyecto y relevamiento de obstáculos en la puesta en práctica en el marco de las actividades de vigilancia epidemiológica a nivel jurisdiccional.
 
