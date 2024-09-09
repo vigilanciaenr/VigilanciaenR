@@ -129,19 +129,19 @@ Para el primer encuentro virtual tendremos dos materiales de clases:
 
 # Enlaces de utilidad
 
-[Rstudio](http://https://posit.co/downloads/ "Rstudio")
+[Rstudio](https://posit.co/downloads/ "Rstudio")
 
-[Video de instalación de R y Rstudio](http://https://www.youtube.com/watch?v=hbgzW3Cvda4&ab_channel=HerbertLizama "Video de instalaciónn de R y Rstudio")
+[Video de instalación de R y Rstudio](http://www.youtube.com/watch?v=hbgzW3Cvda4&ab_channel=HerbertLizama "Video de instalaciónn de R y Rstudio")
 
-[Quarto](http://https://quarto.org/docs/get-started/ "Descarga de Quarto")
+[Quarto](https://quarto.org/docs/get-started/ "Descarga de Quarto")
 
-[Video instalación de Quarto](http://https://www.youtube.com/watch?v=uHaDmPtO-YQ&ab_channel=Estad%C3%ADstica%C3%BAtil "Video instalación de Quarto")
-
-
+[Video instalación de Quarto](https://www.youtube.com/watch?v=uHaDmPtO-YQ&ab_channel=Estad%C3%ADstica%C3%BAtil "Video instalación de Quarto")
 
 
 
-</p>
+
+
+
 
 
 
