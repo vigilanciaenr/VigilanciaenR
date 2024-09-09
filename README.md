@@ -1,4 +1,4 @@
-![Mi imagen](https://github.com/vigilanciaenr/VigilanciaenR/blob/main/logo_vigilancia.png)
+![Mi imagen](/logo_vigilancia.png)
 
 # Indice
 - [Programa](#programa)
