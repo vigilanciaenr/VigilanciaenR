@@ -1,4 +1,4 @@
-![Mi imagen](https://github.com/vigilanciaenr/VigilanciaenR/blob/main/logo_1.png)
+![Mi imagen](/logo_vigilancia.png)
 
 # Indice
 - [Programa](#programa)
@@ -9,7 +9,7 @@
 
 # Programa de Capacitación para la Vigilancia Epidemiológica: Automatización de reportes en R
 
-**Docente:** Andrés Martín Pereira y María Florencia Mena
+**Docente:** Andrés Martín Pereira, Velén Pennini y María Florencia Mena
 
 **Año:** 2024
 
@@ -95,11 +95,11 @@ Se seleccionarán los indicadores para la representación cartográfica de los m
 - Utilización de shape files y creación de capas.
 
 
-###### C.5. Módulo 5:  Elaboración automatizada de reportes
+#### C.5. Módulo 5:  Elaboración automatizada de reportes
 
 Elaboración del modelo y esquema de reporte a elaborar de manera automatizada.  R Markdown. Integración de código R, texto y gráficos en un solo documento. Exportación en Documentos de Microsoft Word, PDF  y Archivos HTML.
 
-###### C.6. Módulo 6: Seguimiento y Monitoreo
+#### C.6. Módulo 6: Seguimiento y Monitoreo
 
 Se realizará seguimiento de la implementación del proyecto y relevamiento de obstáculos en la puesta en práctica en el marco de las actividades de vigilancia epidemiológica a nivel jurisdiccional.
 
@@ -119,7 +119,7 @@ Se espera que los/as alumnos/as elaboren un plan de análisis para sus datos y c
 Para el primer encuentro virtual tendremos dos materiales de clases:
 
 - En primer lugar el archivo "Clase virtual 1" que desarrollaremos en nuestro primer encuentro sincrónico con ejercicios e introducción básica a R y Rstudio.
-- El segundo archivo "Materiales clase 1" está pensado como material de consulta y ejercitacion para familiarizarse con el lenguaje de R.  De esta forma se proponen actividades para ejercitar por su cuenta antes de los encuentros presenciales. Ambos archivos se encuentran en el repositorio en la "carpeta clase 1", desde donde se lo podrán descargar o acceder desde los siguientes links:
+- El segundo archivo "Materiales clase 1" está pensado como material de consulta y ejercitación para familiarizarse con el lenguaje de R.  De esta forma se proponen actividades para ejercitar por su cuenta antes de los encuentros presenciales. Ambos archivos se encuentran en el repositorio en la "carpeta clase 1", desde donde se lo podrán descargar o acceder desde los siguientes links:
 
 [Clase 1 virtual](https://vigilanciaenr.github.io/VigilanciaenR/Clase%201%20virtual/clase%201%20virtual.html)
 
@@ -129,19 +129,19 @@ Para el primer encuentro virtual tendremos dos materiales de clases:
 
 # Enlaces de utilidad
 
-[Rstudio](http://https://posit.co/downloads/ "Rstudio")
+[Rstudio](https://posit.co/downloads/ "Rstudio")
 
-[Video de instalación de R y Rstudio](http://https://www.youtube.com/watch?v=hbgzW3Cvda4&ab_channel=HerbertLizama "Video de instalaciónn de R y Rstudio")
+[Video de instalación de R y Rstudio](http://www.youtube.com/watch?v=hbgzW3Cvda4&ab_channel=HerbertLizama "Video de instalaciónn de R y Rstudio")
 
-[Quarto](http://https://quarto.org/docs/get-started/ "Descarga de Quarto")
+[Quarto](https://quarto.org/docs/get-started/ "Descarga de Quarto")
 
-[Video instalación de Quarto](http://https://www.youtube.com/watch?v=uHaDmPtO-YQ&ab_channel=Estad%C3%ADstica%C3%BAtil "Video instalación de Quarto")
-
-
+[Video instalación de Quarto](https://www.youtube.com/watch?v=uHaDmPtO-YQ&ab_channel=Estad%C3%ADstica%C3%BAtil "Video instalación de Quarto")
 
 
 
-</p>
+
+
+
 
 
 
