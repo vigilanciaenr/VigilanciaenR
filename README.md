@@ -1,4 +1,4 @@
-![Mi imagen](https://github.com/vigilanciaenr/VigilanciaenR/blob/main/logo_1.jpg)
+![Mi imagen](https://github.com/vigilanciaenr/VigilanciaenR/blob/main/logo_vigilancia.png)
 
 # Indice
 - [Programa](#programa)
@@ -9,7 +9,7 @@
 
 # Programa de Capacitación para la Vigilancia Epidemiológica: Automatización de reportes en R
 
-**Docente:** Andrés Martín Pereira y María Florencia Mena
+**Docente:** Andrés Martín Pereira, Velen y María Florencia Mena
 
 **Año:** 2024
 
