@@ -1,0 +1,674 @@
+---
+title: "Clase 2"
+format: 
+  html:
+    toc: true                # Habilita la tabla de contenidos
+    toc-title: "Índice de Contenidos"  # Título del índice
+    toc-depth: 3             # Nivel de profundidad del índice (hasta h3)
+    toc-location: left       # Ubicación del índice (izquierda)
+footnotes-hover: true # muestra notas al pie
+smooth-scroll: true # suaviza el scroll
+editor: visual
+code-copy: true            # Permite copiar el código desde el documento
+---
+
+## **1.Importación datos**
+
+### 1.1. Datos .xlsx
+
+Primero veremos como importar datos de Excel. Esto se puede realizar de varias maneras pero aquí veremos la librería "readxl" para ello.
+
+```{r, echo=TRUE, results='hide'}
+
+ # Cargamos la librerías (si aún no las instalamos este es el momento de hacerlo)}
+
+ library(readr) 
+ library (readxl) 
+```
+
+Lo que tenemos que hacer para importar esta hoja de cálculo a R como un marco de datos es pasar la ruta al archivo Excel al argumento de la `read_excel()` función.
+
+Es impotante tambien poner el "`.xlsx`" que indica el formato del archivo en la ruta de acceso. Esta ruta se puede tomar como atajo apretando **Shift + click** derecho en el archivo deseado y seleccionar la opción "copiar como ruta de acceso".
+
+::: {#my-div style="background-color:  #FFFFCC; padding: 20px; border: 1px solid #ccc; border-radius: 5px"}
+Mac y Linux usan barras diagonales en las rutas de archivo ( `/`) de forma predeterminada. Windows usa barras diagonales inversas ( `\`) en las rutas de archivo de forma predeterminada. Sin embargo, sin importar qué sistema operativo estemos usando, R solo toma las barras diagonales de esta manera /. Si estas **usando Windows** **modificá por barra diagonal** **/ o en su defecto por doble barra diagonal**  **`\\`** **.**
+:::
+
+Es importante poner la ruta relativa y no la ruta del archivo completa si se va a compartir el código de R, y que la ruta relativa este en la carpeta del proyecto de R.
+
+```{r}
+
+# Ruta de archivo relativa  
+
+excel_dengue <- read_excel("Reporte dengue & chiku marzo 2024.xlsx")
+
+```
+
+Cuando los datos en las tablas de excel no se encuentran ordenados y limpios, es necesario además de importarlos utilizar las herramientas de la libreria `"readxl"` para poder editarlos según nuestra necesidad. Lo veremos a continuación
+
+**En estos link que se dirigen al repositorio de Github se encuentran los dataset con los que trabajaremos**
+
+[Excel_dengue y chiku](https://github.com/vigilanciaenr/VigilanciaenR/blob/main/Reporte%20dengue%20%26%20chiku%20marzo%202024.xlsx)
+
+[Excel IRA](https://github.com/vigilanciaenr/VigilanciaenR/blob/main/Reporte%20infecciones%20respiratorias%20marzo%202024.xlsx)
+
+Si queremos importar solo una hoja de nuestro data set tendríamos que escribir de esta manera. En el ejemplo solo tenemos la hoja de "Reporte" asi es que no lo utilizaremos. Este código es solo un ejemplo, no correrá ya que no es adecuado el nombre de ruta
+
+```{r}
+
+# Importar la primera hoja
+# data <- read_excel("ruta/a/tu/archivo.xlsx", sheet = 1)
+
+# Importar la segunda hoja
+# data <- read_excel("ruta/a/tu/archivo.xlsx", sheet = 2)
+```
+
+Si no estamos seguros de que nombre tienen las hojas podemos comporbarlo de esta manera.
+
+```{r}
+# Listar todos los nombres de las hojas en el archivo
+
+hojas <- excel_sheets("Reporte dengue & chiku marzo 2024.xlsx")
+
+hojas
+```
+
+Existen varias formas de controlar qué celdas se leen. Incluso se puede especificar la hoja, si se proporciona un rango de celdas al estilo de Excel.
+
+```{r}
+
+
+# se utiliza para limitar el número de filas que se importan del archivo Excel. En este caso, se importan solo las primeras 3 filas de la hoja activa del archivo.
+
+read_excel("Reporte dengue & chiku marzo 2024.xlsx", n_max = 3) 
+
+```
+
+```{r}
+
+# Especifica un rango de celdas en formato de referencia de Excel. En este caso, importará los datos del rango que va desde la celda C1 hasta la celda E4.
+
+read_excel("Reporte dengue & chiku marzo 2024.xlsx", range = "C1:E4")
+
+```
+
+```{r}
+
+# Especifica un rango basado en las filas que deseas importar. En este caso, se importarán las filas 1 a 4 de la hoja activa.
+
+read_excel("Reporte dengue & chiku marzo 2024.xlsx", range = cell_rows(1:4))
+
+```
+
+```{r}
+
+# Rango basado en las columnas que deseas importar. En este caso, se importarán todas las filas de las columnas B a D
+
+datos <- read_excel("Reporte dengue & chiku marzo 2024.xlsx", range = cell_cols("B:E"))
+
+```
+
+```{r}
+
+# Especifica un rango de celdas en una hoja específica dentro de un archivo Excel que contiene varias hojas. En este caso, se importarán las celdas desde B1 hasta D5 de la hoja llamada "mtcars".
+
+read_excel("Reporte dengue & chiku marzo 2024.xlsx", range = "Reporte!B1:D5")
+
+```
+
+#### Visualización de caracteristicas del dataset
+
+Aplicando algunas funciones tendremos un detalle de los dataset cargados
+
+```{r}
+
+# Estructura del Dataset
+
+ dim(excel_dengue) # Número de Filas y Columnas
+ head(excel_dengue) #Resumen de las Primeras Filas
+
+```
+
+```{r}
+
+# Resumen Estadístico Básico
+
+summary(excel_dengue)
+```
+
+```{r}
+
+# Estructura de Datos
+
+str(excel_dengue)
+
+```
+
+```{r}
+
+# Datos Faltantes y No Disponibles
+
+colSums(is.na(excel_dengue)) # Número de Datos Faltantes por Columna
+
+sum(is.na(excel_dengue)) # Número Total de Datos Faltantes
+```
+
+```{r}
+
+# Nombres de columnas 
+
+colnames(excel_dengue)
+```
+
+Tambien podemos seleccionar columnas especificas y en este caso creamos una variable que contenga esta seleccion de columnas
+
+```{r, echo=TRUE, results='hide'}
+
+# Si antes no cargamos esta libreria lo hacemos ahora para poder utilizar las tuberias
+
+library(dplyr)
+```
+
+```{r}
+
+
+# Ahora seleccionamos las dos columnas que queremos observar
+
+
+excel_resumido <- excel_dengue %>%
+select(`Clasificación manual del caso`,`Apellido Ciudadano`)
+
+excel_resumido
+
+```
+
+### 1.2. Datos .cvs
+
+Importación de archivos con valores separados por comas o **.cvs (comma separated value).**
+
+Para ello usamos la función `readr`de `read_csv(),`esta es para importar un conjunto de datos con valores delimitados por comas. Esos valores se importaron como un marco de datos y asignamos ese marco de datos al objeto R llamado `csv`.
+
+```{r}
+
+csv <- read_csv("Reporte dengue & chiku copia.csv")
+
+csv
+```
+
+### 1.3. Google sheet
+
+Para cargar una tabla que tenemos en google drive debemos importarla desde el paquete `googlesheet4`
+
+<https://googlesheets4.tidyverse.org/>
+
+Para ello primero instalamos el paquete necesario. Además necesitaremos utilizar para la autenticación el paquete `httpuv`, ya que es necesario que la cuenta que utlicemos de google se concete con R para realizar la transferencia de datos.
+
+```{r}
+
+# El segundo paquete es necesario para uno de los pasos de la autenticación
+
+# install.packages("googlesheets4")
+# install.packages("httpuv")
+
+```
+
+```{r, echo=TRUE, results='hide'}
+
+library(googlesheets4)
+library(httpuv)
+```
+
+El `"gs4_auth()"` abrira una ventana emergente que nos pedirá permiso para conectarse a nuestra cuenta google. Una vez aceptado esto se procede a importar los datos del drive.
+
+```{r}
+
+gs4_auth()
+
+```
+
+Luego de esto obtenemos el link de nuestro archivo. Usamos la función `read_sheet()` para leer los datos de una hoja de cálculo.
+
+```{r, echo=TRUE, results='hide'}
+
+# Leer el archivo de Google Sheets usando su ID
+# Reemplaza 'FILE_ID' con el ID del archivo real
+# sheet_url <- "https://docs.google.com/spreadsheets/d/FILE_ID/edit"
+
+dengue_sheet <- read_sheet("https://docs.google.com/spreadsheets/d/10tk_qJ3yinCGwLhrdSpZYi9UromLl21edS4mxcnCQno/edit")
+  
+```
+
+```{r}
+
+# Leer una hoja específica por nombre 
+# En este ejemplo tendriamos que modificar el contido del código con uno real
+
+# datos <- read_sheet(sheet_url, sheet = "NombreDeLaHoja")
+
+# Leer una hoja específica por índice
+# datos <- read_sheet(sheet_url, sheet = 1)
+
+```
+
+### 1.4. Herramienta de importación de datos de RStudio
+
+Para abrir la herramienta de importación de datos de RStudio, haga clic en el Import Dataset \>menú desplegable cerca de la parte superior del panel del entorno. Se elige el tipo de archivo que se quiere importar.
+
+# **2. Limpieza de Datos**
+
+ 
+
+## 2.1. Identificación de datos faltantes
+
+### 2.1.1. Archivo .xlsx
+
+Para comenzar la limpieza de datos en primer lugar debemos ver si existen datos faltantes, y en este caso escribir un código que permita reemplazar la nomenclatura que trae por `NA` que es como R lee los datos faltantes.
+
+Esto puede realizarse cuando importamos el dataset o podemos hacerlo una vez que lo tenemos importado. Vemos las dos formas.
+
+**Primera forma (es mucho más simple)**
+
+```{r, echo=TRUE, results='hide'}
+
+library(readxl)
+library(dplyr)
+
+
+```
+
+```{r}
+
+# Establecer el na argumento para datos faltantes
+
+dengue_na <- read_excel("Reporte dengue & chiku marzo 2024.xlsx", na = c(".", "perdido", "*sin dato*"))
+
+```
+
+**Segunda forma (lleva más cantidad de pasos)**
+
+Otra forma de realizarlo es una vez que tenemos el dataset incorporado realizarlo con la funcion `mutate()` del paquete `dplyr`
+
+::: {style="background-color:  #FFFFCC; padding: 20px; border: 1px solid #ccc; border-radius: 5px"}
+**Importante:** Hay que tener en cuenta que para modificar la estructura de datos faltantes a `NA` va a depender de la estructura de datos que tengamos, por ejemplo si es son de caracter, numérica o de fecha. Como los datos con los que contamos tienen fechas y la inscripción "*sin datos*" en la misma columna, R lee esta estructura como carcater (ya que **no pueden contener estructuras de datos distintas**). Por lo que en este caso nos conviene pirmero modificar los datos a `NA` y luego modificar la estructura de datos a fechas.
+:::
+
+En este ejemplo veremos de cambiar en primer lugar todas las columnas de caracter con el NA, y para ello tendremos que modificar la estructura de los datos.
+
+```{r}
+
+# Paso 1: Reemplazar valores específicos con NA en columnas de carácter
+
+dengue_na2 <- excel_dengue %>%
+  mutate(across(where(is.character), ~ na_if(.x, "*sin dato*"))) %>%  
+  mutate(across(where(is.character), ~ na_if(.x, ""))) %>%
+  mutate(across(c("Fecha de toma de muestra", "Fecha de inicio de síntomas", "Fecha Apertura", "Fecha Nacimiento"),
+                ~ as.Date(as.numeric(.), origin = "1899-12-30")))
+
+
+```
+
+**Esto es lo que hicimos arriba:**
+
+El símbolo `~` en R es utilizado en varias funciones para representar **"una fórmula"** o **"una función"**. En el caso del código anterior, el símbolo `~` se usa para definir una **función** dentro de `mutate()` y `across()`.
+
+Cuando usamos `across()` con `mutate()`, estamos diciendo que queremos aplicar una función a todas las columnas del dataset. En lugar de escribir una función con nombre por separado, se usa el símbolo `~` para definir una **función** de manera rápida.
+
+Aquí, `~` indica que lo que sigue es una función, donde `.x` es un carcater que representa los valores de cada columna a los que se va a aplicar la función `na_if()`. En este caso, estamos diciendo:
+
+*"Para cada valor en las columnas, reemplaza `sin datos` por `NA`."*
+
+Es una forma abreviada de escribir una función que podríamos definir así:
+
+`function(x) na_if(x, "sin datos")`
+
+**Reemplazo en Columnas de Carácter** **\*sin dato\* a na:**
+
+-   **`na_if(.x, "sin dato")`**: Reemplaza `"sin dato"` con `NA` en columnas de carácter.
+
+-   **`na_if(.x, "")`**: Reemplaza espacios en blanco con `NA` en columnas de carácter.
+
+-   **`.x`** Es un marcador de posición para la columna actual que está siendo manipulada por across().
+
+-   **`across(c(...), ~ as.Date(...))`**: Después de limpiar los datos, convierte las columnas de fecha que se especifican a formato `Date`.
+
+-   **`as.numeric(.)`**: Convierte el carácter a número (en caso de que los valores sean importados como texto).
+
+-   **`as.Date(as.numeric(.), origin = "1899-12-30")`**: Convierte los números de serie de Excel a fechas reales.
+
+### 2.1.2. Archivo sheet
+
+Cuando intentamos realizar lo mismo con el dataset de google sheet es necesario primero ver que estructura de datos tengo en este data frame.
+
+```{r, echo=TRUE, results='hide'}
+
+sapply(dengue_sheet, class)
+```
+
+Aquí, `sapply` está aplicando la función `class` a cada columna del dataframe `dengue_na2`. El resultado es un vector que contiene la clase de cada columna en el dataframe. Esto te permite ver rápidamente qué tipo de datos hay en cada columna.
+
+Como vemos las fechas de "Fecha de toma de muestra" y "Fecha de inicio de síntomas" se importaron como "list", por lo tanto no me convertira los datos si no los transformo a "carcater". Entonces antes que nada realizamos esta tarea:
+
+```{r}
+
+library(dplyr)
+library(purrr)
+
+```
+
+```{r}
+
+
+dengue_sheet_paso <- dengue_sheet %>%
+     mutate(across(where(is.list), ~ map_chr(.x, ~ paste(as.character(.), collapse = ", "))))
+
+```
+
+**Esto hicimos arriba:**
+
+*La biblioteca `purrr` es parte del "tidyverse" en R y proporciona una serie de funciones para trabajar con listas*
+
+-   **`mutate()`**:
+
+    -   Esta función de `dplyr` se utiliza para modificar o añadir columnas en un dataframe.
+
+    -   En este caso, estamos modificando las columnas existentes.
+
+-   **`across(where(is.list), ...)`**:
+
+    -   **`across()`**: Permite aplicar una función a un conjunto de columnas seleccionadas en el dataframe.
+
+    -   **`where(is.list)`**: Especifica las columnas en las que queremos aplicar la función. En este caso, selecciona solo las columnas que son listas (`is.list`).
+
+-   **`~ map_chr(.x, ~ paste(as.character(.), collapse = ", "))`**:
+
+    -   **`~`**: Introduce una fórmula anónima (lambda) para aplicar a cada columna seleccionada.
+
+    -   **`.x`**: Representa la columna actual en la que estamos trabajando dentro de `across()`.
+
+    -   **`map_chr(.x, ...)`**: Usa la función `map_chr` del paquete `purrr` para aplicar una función a cada elemento de la columna. `map_chr` convierte el resultado en un vector de caracteres.
+
+        -   **`map_chr(.x, ~ paste(as.character(.), collapse = ", "))`**: Aplica una función a cada elemento en la columna de listas.
+
+            -   **`as.character(.)`**: Convierte cada elemento de la lista en un carácter.
+
+            -   **`paste(..., collapse = ", ")`**: Une los elementos convertidos a caracteres en una sola cadena de texto, separada por comas. Aquí, `paste()` combina todos los elementos en un solo string, y `collapse = ", "` especifica que los elementos deben estar separados por comas y espacios.
+
+Verificamos que se realizó:
+
+```{r, echo=TRUE, results='hide'}
+
+sapply(dengue_sheet_paso, class)
+```
+
+Y ahora pasamos al reemplazo por `NA`
+
+```{r}
+
+
+sheet_na <- dengue_sheet_paso %>%
+  mutate(across(where(is.character), ~ na_if(.x, "*sin dato*"))) %>%  # Reemplaza "sin dato" con NA
+  mutate(across(where(is.character), ~ na_if(.x, "")))  # Reemplaza espacios en blanco con NA
+
+
+```
+
+### 2.1.3. Desde consola de Rstudio
+
+```{r}
+
+library(readxl)
+
+ira_r <- read_excel("Reporte infecciones respiratorias marzo 2024.xlsx", 
+    na = c("*sin dato*","."))
+
+```
+
+## 2.2. Convertir variables a tipos correctos
+
+Como vimos anteriormente comprender la estructura de datos que tienen nuestros dataset es muy importante para poder manipularlos y administarlos. Por ello vamos a ver como trabajar específicamente con fechas y factores.
+
+### 2.2.1. Fechas
+
+En R, hay dos tipos de vectores diferentes que podemos usar para almacenar y trabajar con fechas:
+
+-   `date`vectores para trabajar con valores de fecha, ejemplo: `2009-01-08`.
+
+-   Vectores `POSIXct`para trabajar con valores de fecha y hora, ejemplo: `2009-01-08 20:00:00`.
+
+**En general, es recomendable trabajar con valores de fecha**, en lugar de valores de fecha y hora, siempre que sea posible.
+
+**Revisión de datos**
+
+Si vieron en los dataset importados las columnas de "Fecha de toma de muestra" y "Fecha de inicio de síntoma" se importaron con una estructura de caracter (ya que la información "sin dato" conviertio hizo que R leyera como caracter toda la columna).
+
+-   **Como Excel guarda las fechas**: Cuando importamos datos de Excel a R y las fechas están en formato de texto con valores como "sin datos", R puede interpretar esas fechas como números, especialmente si Excel las guarda como números seriales (que es un formato común para fechas en Excel). El número que aperece con este corresponde a la cantidad de días transcurridos desde el 1 de enero de 1900 (formato predeterminado de Excel para las fechas).
+
+    Para convertir estos números de serie de Excel a fechas en R, se puede utilizar `as.Date()` con la opción `origin = "1899-12-30".` Este "origen" se debe a que Excel considera el día 1 como el 1 de enero de 1900, pero hay un ajuste de 1 día debido a un error histórico en Excel.
+
+-   **Como R guarda las fechas**: R almacena las fechas como números. En concreto, la cantidad de días antes o después del 1 de enero de 1970 a las 00:00:00 UTC.
+
+Esto es simplemente por si aparecen números que no comprendemos de donde vienen en las columnas fechas. Pero los vamos a trabajar de la misma manera:
+
+Utilizar la funcion `mutate()` para modificar las columnas necesarias a fechas con `as.Date`
+
+```{r}
+
+dengue_limpio <- dengue_na %>%
+  mutate(across(c("Fecha de toma de muestra", "Fecha de inicio de síntomas", "Fecha Apertura", "Fecha Nacimiento"), as.Date))
+
+
+
+```
+
+**"Tambien podemos usar este código con mutate() en caso que tengamos los numeros coidficados por excel, debemos poner la fecha de inicio de excel"**
+
+`fecha = as.Date(Fecha de toma de muestra, origin = "1899-12-30"), # Convertir las fechas de Excel/ depende si ya lo hicimos antes`
+
+Comprobamos que se realizó la modificación
+
+```{r, echo=TRUE, results='hide'}
+
+sapply(dengue_na, class)
+```
+
+#### Opcional
+
+Tambien puedo querer **cambiar el formato de fecha** con el que aparece alguna columna (a modo de ejemplo):
+
+```{r}
+
+dengue_date <- dengue_na %>%
+  mutate(`Fecha de toma de muestra` = format(`Fecha de toma de muestra`, "%d %b %y"))
+ 
+```
+
+**Algunas fechas incorporadas en R**
+
+Fecha de hoy y meses
+
+```{r}
+
+Sys.Date()
+
+month.name
+
+
+```
+
+### 2.2.1.1 Crear semanas epidemiológicas
+
+Para ello vamos a utilizar el paquete lubridate. Este paquete entre otras cosas permite:
+
+-   **Conversión de fechas:** Convierte cadenas de texto en objetos de fecha y hora de manera fácil y flexible, adaptándose a diferentes formatos.
+
+-   **Extracción de componentes:** Permite extraer partes específicas de una fecha y hora, como el año, mes, día, hora, minuto, segundo, etc.
+
+-   **Cálculos con fechas:** Realiza operaciones aritméticas con fechas, como calcular la diferencia entre dos fechas, sumar o restar días, meses o años.
+
+-   **Manipulación de zonas horarias:** Te ayuda a trabajar con diferentes zonas horarias y realizar conversiones entre ellas.
+
+-   **Creación de intervalos de tiempo:** Define y manipula intervalos de tiempo, como períodos de un día, una semana o un mes.
+
+#### Crear semanas epidemiológicas anual
+
+```{r}
+
+library(lubridate)
+library(dplyr)
+
+
+```
+
+```{r}
+
+# Definir el año epidemiológico que no cambiará
+
+anio_epidemiologico <- 2024  # Año fijo para los reportes
+
+# Definir el inicio del año y calcular el primer lunes del año epidemiológico
+
+inicio_anual <- as.Date(paste0(anio_epidemiologico, "-01-01"))
+
+primer_lunes <- floor_date(inicio_anual, unit = "week", week_start = 1)
+
+# Crear una nueva columna 'semana_epi' calculando la semana epidemiológica
+
+dengue_limpio <- dengue_limpio %>%
+  filter(`Fecha de toma de muestra` >= primer_lunes) %>%
+  mutate(
+    semana_epi = as.integer((as.numeric(`Fecha de toma de muestra` - primer_lunes) / 7)) + 1  # Calcular la semana epidemiológica
+  )
+
+```
+
+**Esto hicimos arriba:**
+
+-   **`anio_epidemiologico <- 2024`**: Define el año para el cual se están calculando las semanas epidemiológicas. En este caso, es el año 2024.
+
+-   **`paste0(anio_epidemiologico, "-01-01")`**: Crea una cadena de texto que representa el primer día del año en formato `"YYYY-MM-DD"`. Por ejemplo, `"2024-01-01"`.
+
+<!-- -->
+
+-   **`as.Date(...)`**: Convierte esa cadena en un objeto de tipo `Date` en R.
+
+-   **`floor_date(inicio_anual, unit = "week", week_start = 1)`**: Calcula el primer lunes del año. La función `floor_date()` ajusta la fecha hacia abajo al inicio de la unidad de tiempo especificada. Aquí se especifica `unit = "week"` y `week_start = 1` para encontrar el lunes de la semana que contiene el primer día del año (`inicio_anual`).
+
+    **Parámetros de `floor_date`**:
+
+    -   **`unit = "week"`**: Especifica que queremos redondear al inicio de la semana. `unit` puede ser `"second"`, `"minute"`, `"hour"`, `"day"`, `"week"`, `"month"`, `"quarter"`, o `"year"`. En este caso, estamos redondeando a la semana.
+
+    -   **`week_start = 1`**: Define que la semana comienza en el lunes. En el sistema ISO, la semana generalmente empieza en lunes (`week_start = 1`). Puedes ajustar este valor a `0` para que la semana comience en domingo.
+
+-   **`mutate(...)`**: Agrega o modifica columnas en el dataframe `dengue_na`.
+
+-   **`fecha = as.Date(`***Fecha de toma de muestra***`, origin = "1899-12-30")`**:
+
+    -   Convierte la columna `Fecha de toma de muestra` de Excel a un objeto `Date` en R. Excel usa `1899-12-30` como origen para fechas numéricas, por lo que esta línea convierte la fecha numérica a formato de fecha.
+
+-   **`semana_epi = as.integer((as.numeric(fecha - primer_lunes) / 7)) + 1`**:
+
+    -   **`fecha - primer_lunes`**: Calcula la diferencia en días entre la fecha de muestra y el primer lunes del año.
+
+    -   
+
+    -   **`as.numeric(...)`**: Convierte la diferencia de fechas en un número de días. Esto es necesario porque la diferencia entre fechas en R se calcula como un objeto de tipo `difftime`, y necesitamos convertirlo a un número para realizar cálculos matemáticos.
+
+    -   **`/ 7`**: Convierte los días en semanas (dividiendo por 7).
+
+    -   **`as.integer(...)`**: Convierte el resultado en un número entero, ya que las semanas deben ser enteros.
+
+    -   **`+ 1`**: Ajusta el cálculo para que la semana epidemiológica comience en 1 en lugar de 0.
+
+-   **`` filter(`Fecha de toma de muestra` >= primer_lunes) %>% ``** Filtrar fechas anteriores, Si no necesitas los datos con fechas anteriores al primer lunes del año epidemiológico
+
+Ahora con esto listo podríamos contar la cantidad de casos por semana epidemiológica por ejemplo:
+
+```{r}
+
+# Contar casos por semana epidemiológica
+
+casos_por_semana <- dengue_limpio %>%
+  group_by(semana_epi) %>%
+  summarise(casos = n(), .groups = 'drop')
+
+casos_por_semana
+
+```
+
+**Esto hicimos arriba:**
+
+-   **`group_by(semana_epi)`**:
+
+    -   Agrupa los datos del `dataframe` por la columna `semana_epi` (la columna que representa las semanas epidemiológicas).
+
+    -   Esto crea subconjuntos de los datos que corresponden a cada semana epidemiológica, lo cual permite calcular estadísticas dentro de cada grupo (en este caso, contar el número de casos).
+
+-   **`summarise(casos = n())`**:
+
+    -   `summarise()` se usa para calcular resúmenes dentro de cada grupo.
+
+    -   En este caso, `casos = n()` cuenta el número de filas (observaciones) dentro de cada grupo de `semana_epi`. Este número de filas representa el número de casos de dengue en cada semana epidemiológica.
+
+-   **`.groups = 'drop'`**:
+
+    -   Este argumento controla cómo se manejan los grupos después de que se aplica el `summarise()`.
+
+    -   En este caso, `.groups = 'drop'` indica que, después de hacer la agrupación y el resumen, se "descarten" (eliminen) los grupos.+
+
+    -   En otras palabras, se quita la información de agrupamiento después del cálculo. Si no se especificara `drop`, el dataframe resultante seguiría teniendo la agrupación por `semana_epi`, lo que podría afectar operaciones futuras.
+
+    -   Usar `drop` es útil para asegurarse de que el resultado es un dataframe simple, sin rastros de la agrupación.
+
+::: {style="background-color:  #F4A4A4; padding: 20px; border: 1px solid #ccc; border-radius: 5px"}
+Antes de guardar y cerrar nuestro archivo es necesario que guardemos nuestro nuevo marcos de datos con el que estuvimos trabajando para que no se pierdan los procesos anteriores con la función `write_xlsx()`
+:::
+
+## Guardar el DataFrame
+
+Guardar los datos en formato `.xlsx` es una buena opción si lo que se busca es preservar la estructura de datos después de la limpieza y no además no queremos que repetir el proceso en un nuevo proyecto. Se puede guardar un dataframe en un archivo `.xlsx` usando el paquete `writexl.`
+
+```{r}
+
+# install.packages("writexl")
+```
+
+```{r, echo=TRUE, results='hide'}
+
+library(writexl)
+
+```
+
+```{r}
+
+# Guardar y especificar el nuevo nombre de archivo
+
+write_xlsx(dengue_limpio, path = "dengue_limpio.xlsx")
+
+```
+
+Ahora podemos comprobar en que directorio estamos trabajando con este comando:
+
+```{r}
+
+# Quitar el numeral para correr el código
+
+# getwd()
+```
+
+Si queremos establecer un nuevo directorio:
+
+```{r}
+
+# Establecer un nuevo directorio de trabajo
+# setwd("ruta/al/nuevo/directorio")
+```
+
+Tambien se puede guardar directamente en una ruta específica:
+
+```{r}
+
+
+# Guardar en una ruta específica
+#write_xlsx(dengue_sheet, path = "C:/Users/flor/Desktop/cursor_2024/VigilanciaenR/dengue_limpio.xlsx")
+
+```

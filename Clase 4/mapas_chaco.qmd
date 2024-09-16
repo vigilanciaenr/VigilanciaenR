@@ -115,7 +115,9 @@ casos_por_departamento_mapa <- chaco %>% left_join(casos_por_departamento, by= c
 DT::datatable(casos_por_departamento_mapa)
 
 ```
+
 ## Elaboración de mapa en ggplot2
+
 ```{r}
 # Calcular los cortes utilizando Jenks Natural Breaks
 breaks <- classInt::classIntervals(casos_por_departamento_mapa$casos_confirmados, n = 5, style = "jenks",cutlabels=F)$brks
@@ -158,8 +160,6 @@ ggplot() +
   theme_minimal()
 ```
 
-
-
 ## Uso del paquete **Leaflet**
 
 Ahora vamos a hacer el mismo mapa con el paquete **Leaflet**
@@ -174,15 +174,13 @@ El paquete **Leaflet** es una herramienta poderosa y fácil de usar para crear m
 
 2.  **Capas de datos**: Puedes agregar datos vectoriales como polígonos (`addPolygons()`), puntos (`addMarkers()`), o líneas (`addPolylines()`) sobre el mapa. Los datos deben estar en formato `sf` o `sp`.
 
-3.  **Paletas de colores**:
-    Para visualizar variables numéricas en mapas, se usan funciones como `colorNumeric()`, `colorBin()`, o `colorQuantile()` para asignar colores a los valores de las variables.
+3.  **Paletas de colores**: Para visualizar variables numéricas en mapas, se usan funciones como `colorNumeric()`, `colorBin()`, o `colorQuantile()` para asignar colores a los valores de las variables.
 
     ```{r eval = FALSE }
     pal <- colorBin(palette = "YlOrRd", domain = datos$variable, bins = 5)
     ```
 
-4.  **Interactividad**:
-    Leaflet permite agregar etiquetas o popups interactivos que muestran información cuando el usuario hace clic o pasa el ratón sobre los elementos. Puedes personalizarlos con HTML y las funciones `label` o `popup`.
+4.  **Interactividad**: Leaflet permite agregar etiquetas o popups interactivos que muestran información cuando el usuario hace clic o pasa el ratón sobre los elementos. Puedes personalizarlos con HTML y las funciones `label` o `popup`.
 
 ```{r}
 
