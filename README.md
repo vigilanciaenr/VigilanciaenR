@@ -4,7 +4,7 @@
 - [Programa](#programa)
 - [Clase 1 virtual](#clase-1-virtual)
 - [Enlaces de utilidad](#enlaces-de-utilidad)
-
+-  [Clase 2 presencial: Importación de datos](#enlaces-de-utilidad)
 ------------
 
 # Programa de Capacitación para la Vigilancia Epidemiológica: Automatización de reportes en R
