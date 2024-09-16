@@ -125,7 +125,15 @@ Para el primer encuentro virtual tendremos dos materiales de clases:
 
 [Materiales clase 1](https://vigilanciaenr.github.io/VigilanciaenR/Clase%201%20virtual/Material%20clase%201.html)
 
+# Clase 2 presencial: Importación de datos
 
+Para el primer encuentro presencial trabajaremos sobre el armado de grupos para el diseño de proyectos, el armado de los circuitos de datos locales de vigilancia y los dataframe de trabajo (ETM e IRA). Estos archivos en formato excel estan subidos al repositorio.
+
+- En el archivo "Clase 2" se proponen una serie de ejercicios para la importanción de datos en distintos formatos y procesos de normalización de bases de datos
+
+[Clase 2 presencial](https://vigilanciaenr.github.io/VigilanciaenR/Clase%202/Clase_2.html)
+
+[Repositorio](https://github.com/vigilanciaenr/VigilanciaenR)
 
 # Enlaces de utilidad
 
