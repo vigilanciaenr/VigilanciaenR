@@ -1,0 +1,988 @@
+---
+title: "Clase_3"
+format: 
+  html:
+    toc: true                # Habilita la tabla de contenidos
+    toc-title: "Índice de Contenidos"  # Título del índice
+    toc-depth: 3             # Nivel de profundidad del índice (hasta h3)
+    toc-location: left       # Ubicación del índice (izquierda)
+footnotes-hover: true # muestra notas al pie
+smooth-scroll: true # suaviza el scroll
+editor: visual
+code-copy: true            # Permite copiar el código desde el documento
+---
+
+## 3. Gestión de datos
+
+En primer lugar para comenzar nuevamente nuestro proceso de manipulación de datos vamos a traer nuestro data frame que ya trabajamos anteriormente.
+
+```{r, echo=TRUE, results='hide'}
+
+library(readxl) 
+library(dplyr) 
+```
+
+```{r}
+
+dengue_limpio <- read_excel("dengue_lim2.xlsx")  
+
+```
+
+Corrobormaos con **`str()`** que los datos que necesito los lea de forma adecuada:
+
+```{r}
+
+str(dengue_limpio)
+```
+
+Es necesario pasar las fechas a formato "date"
+
+```{r}
+
+
+dengue_limpio <- dengue_limpio %>%
+  mutate(across(c("Fecha de toma de muestra", "Fecha de inicio de síntomas", "Fecha Apertura", "Fecha Nacimiento"), as.Date))
+
+
+```
+
+```{r}
+
+# Verificamos la columna que nos interesa
+
+class(dengue_limpio$`Fecha de toma de muestra`)
+```
+
+### 3.1 Generación de ID
+
+Vamos a generar un Id de los datos a partir de la fecha de toma de muestra y dni
+
+Para crear un **ID único de caso** basado en las **fechas de toma de muestra de laboratorio** y el **DNI** (o número de identificación), puedes concatenar estos valores en una nueva columna para asegurarte de que cada combinación sea única. A continuación te muestro cómo puedes hacerlo en R utilizando `mutate()` de `dplyr`.
+
+```{r}
+
+# Primero voy a seleccionar solo los casos de Dengue y de Chaco y año 2024
+
+library(dplyr)
+library(lubridate)
+
+dengue_limpio <- dengue_limpio %>%
+  filter(Evento == "Dengue" &
+           `Provincia Residencia` == "Chaco" &
+           year(`Fecha de toma de muestra`) == 2024)  # Cambia 2024 por el año que quieras filtrar
+
+
+```
+
+```{r}
+
+
+
+# Crear un ID único de caso
+
+dengue_id <- dengue_limpio %>%
+  mutate(id_caso = paste(`Nro Doc`, `Fecha de toma de muestra`, sep = "_")) %>% 
+  mutate(across(where(is.character), ~ na_if(., "*SIN DATO* (*SIN DATO*)")))
+
+dengue_id
+```
+
+Si prefieres un ID numérico secuencial para cada fila (dentro de cada combinación de DNI y fecha), también puedes hacerlo con `row_number()`:
+
+```{r}
+
+dengue_id <- dengue_id %>%
+  mutate(id_caso = row_number())
+
+# Ver el resultado
+print(dengue_id)
+
+```
+
+Vamos a ver los duplicados según dni:
+
+```{r}
+
+duplicados <- dengue_id %>%
+  group_by(`Nro Doc`) %>%
+  filter(n() > 1) %>% 
+  ungroup()
+
+
+
+```
+
+Ahora vamos a ver los valores que no estan duplicados:
+
+```{r}
+
+# Filtrar los datos que no son duplicados
+
+no_duplicados <- dengue_id %>%
+  group_by(`Nro Doc`) %>%
+  filter(n() == 1) %>%
+  ungroup()
+
+
+```
+
+Y ahora seleccionaremos de los duplicados solo aquellos que dan como resultado confirmado:
+
+```{r}
+
+duplicados <- duplicados %>% 
+  filter(clasificación_2 == "confirmado")
+
+
+```
+
+```{r}
+
+no_duplicados <- no_duplicados %>% 
+  filter(clasificación_2 == "confirmado")
+
+```
+
+Uniremos entonces los dos marcos de datos para tener completo:
+
+```{r}
+
+
+# Unir los data frames duplicados y no_duplicados
+datos_unidos <- bind_rows(duplicados, no_duplicados)
+
+# Mostrar el resultado
+print(datos_unidos)
+
+```
+
+Y vamos a seleccionar solo la columnas con las que vamos a trabajar:
+
+```{r}
+
+dengue_casos <- datos_unidos %>% 
+  select(`Fecha de toma de muestra`,`Departamento Residencia`,`Localidad Residencia`,semana_epi, id_caso, `Edad Actual`) 
+  
+
+
+
+```
+
+## **4. TABLAS: Preparar datos para Tablas**
+
+```{r}
+
+valores_unicos_dep <- unique(dengue_casos$`Departamento Residencia`)
+print(valores_unicos_dep)
+```
+
+```{r}
+
+valores_unicos_loc <- unique(dengue_casos$`Localidad Residencia`)
+print(valores_unicos_loc)
+
+```
+
+#### **Crear un Mapeo de Departamentos por Regiones Sanitarias**
+
+```{r}
+
+
+dengue_regiones <- dengue_casos %>% 
+  mutate(
+    region_sanitaria = case_when(
+      `Departamento Residencia` %in% c("Fray Justo Santa María de Oro","O'Higgins","Mayor Luis J. Fontana", "San Lorenzo") ~ 1,
+      `Departamento Residencia` %in% c("Quitilipi","25 de Mayo",  "Presidencia de la Plaza","Sargento Cabral") ~ 2,
+      `Departamento Residencia` %in% c("San Fernando","General Donovan",  "Bermejo","Libertad","Tapenagá","1º de Mayo") ~ 3,
+      `Departamento Residencia` %in% c("9 de Julio","12 de Octubre","2 de Abril","Chacabuco","General Belgrano") ~ 4,
+      `Departamento Residencia` %in% c("General Güemes","Maipú") ~ 5,
+      `Departamento Residencia` %in% c("Libertador General San Martín") ~ 6,
+      `Departamento Residencia` %in% c("Almirante Brown","Independencia","Comandante Fernández") ~ 7,
+      `Departamento Residencia` %in% c("San Fernando","Independencia","Comandante Fernández") ~ 8,
+      
+    )
+  )
+```
+
+Ordenar según fecha:
+
+```{r}
+
+dengue_regiones <- dengue_regiones %>% 
+  arrange(`Fecha de toma de muestra`)
+
+```
+
+**Vamos a necesitar primero tener una tabla que contenga las localidades por departamento:**
+
+```{r}
+
+# Crear nuevo data frame sin repeticiones de localidades
+dengue_localidad_unicas <- dengue_regiones %>%
+  distinct(`Localidad Residencia`, .keep_all = TRUE) %>%
+  select(region_sanitaria,`Departamento Residencia`, `Localidad Residencia`)
+
+
+```
+
+```{r}
+
+library(stringr)
+
+depto_acum <- dengue_regiones %>% 
+  group_by(`Departamento Residencia`) %>% 
+  count() %>% 
+  ungroup() %>% 
+   mutate(`Departamento Residencia` = str_replace(`Departamento Residencia`, "1º de Mayo", "Primero de mayo"))
+
+depto_acum
+
+
+```
+
+**Paso 2 - contar casos por Localidad anivel anual**
+
+```{r}
+
+
+dengue_acumulados <- dengue_regiones %>%
+  group_by(region_sanitaria,`Departamento Residencia`, `Localidad Residencia`) %>%
+  count() %>%
+  rename(Acumulados = n) %>%
+  ungroup()
+
+```
+
+```{r}
+
+dengue_acumulados <- dengue_acumulados %>%
+  mutate(across(where(is.character), ~ na_if(., "*SIN DATO* (*SIN DATO*)")))  
+
+```
+
+**Compruebo si tengo todas las observaciones:**
+
+```{r}
+
+# Calcular el total de frecuencias
+
+# total_acumulados <- sum(dengue_localidad$Acumulados, na.rm = TRUE)
+# 
+# total_acumulados
+
+```
+
+**Ahora saco frecuencia de la ultima semana:**
+
+```{r}
+
+# No ejecuto este, solo si lo saco desde hoy...
+
+# dengue_acumulados_semana <- dengue_regiones %>%
+#   filter(`Fecha de toma de muestra` >= today() - weeks(1)) %>%  # Filtra datos de la última semana
+#   count(`Fecha de toma de muestra`) %>%
+#   rename(Frecuencia_2 = n)
+#   
+
+
+```
+
+**Ahora saco frecuencia de la ultima semana (contemplando que la tabla que nos dieron es de marzo:**
+
+```{r}
+
+# En caso que sea marzo
+
+
+library(dplyr)
+library(lubridate)
+
+ultima_semana_marzo <- interval(ymd("2024-03-10"), ymd("2024-03-16"))
+
+# Filtrar los datos por el intervalo de fechas y mantener las columnas necesarias
+
+dengue_sem <- dengue_regiones %>%
+  filter(`Fecha de toma de muestra` %within% ultima_semana_marzo) %>%
+  group_by(region_sanitaria, `Departamento Residencia`, `Localidad Residencia`) %>%
+  count() %>%
+  rename(Acumulados_sem = n) %>%
+  ungroup()
+
+  
+```
+
+```{r}
+
+dengue_sem <- dengue_sem %>%
+  mutate(across(where(is.character), ~ na_if(., "*SIN DATO* (*SIN DATO*)")))  
+
+
+
+```
+
+```{r}
+
+
+# Total_frecuencia_2 <- sum(dengue_fecha$Acumulados_sem)
+# 
+# Total_frecuencia_2
+
+```
+
+**O por semana epidemiológica:**
+
+```{r}
+
+# Este tampoco se ejecuta, solo si lo queiro hacer por semana:
+
+
+# dengue_semana-epi <- dengue_regiones %>%
+#   filter(semana_epi == max(semana_epi, na.rm = TRUE)) %>%  # Filtra la última semana
+#   count(`Localidad Residencia`) %>%
+#   rename(Frecuencia_2 = n) 
+
+```
+
+**Contar por semana epidemiologica**
+
+```{r}
+
+
+
+df_semana <- dengue_regiones %>%
+  group_by(semana_epi) %>%
+  summarise(cantidad_casos = n(), .groups = 'drop')
+
+# Ver el resultado
+print(df_semana)
+```
+
+-   `group_by(semana_epi)`: Agrupa los datos por la columna `semana_epi` (semana epidemiológica).
+
+-   `summarise(cantidad_casos = n())`: Cuenta cuántas filas hay en cada grupo, lo que representa el número de casos por cada semana.
+
+-   `.groups = 'drop'`: Desagrupar después de hacer la sumarización.
+
+Este código te devolverá un resumen con la cantidad de casos por cada semana epidemiológica.
+
+### PASO3
+
+**Union de los data frame que tengo, de dengue_localidades unicas, dengue acumulados y dengue sem, donde colocaremos 0 en caso que no haya datos:**
+
+Primero comprobamos que no haya duplicados por la columna que vamos a unir:
+
+```{r}
+
+# Asegúrate de que "Localidad" sea única en data_frame1 y data_frame2 antes de unirlos
+dengue_acumulados <- dengue_acumulados %>%
+  distinct(`Localidad Residencia`, .keep_all = TRUE)
+
+dengue_sem <- dengue_sem %>%
+  distinct(`Localidad Residencia`, .keep_all = TRUE)
+
+
+
+```
+
+```{r}
+
+
+library(dplyr)
+
+# Asegúrate de que las columnas clave sean únicas en data_frame1 y data_frame2
+dengue_sem <- dengue_sem %>%
+  group_by(`Localidad Residencia`, `Departamento Residencia`) %>%
+  summarize(Acumulados_sem = sum(Acumulados_sem, na.rm = TRUE), .groups = "drop")
+
+
+
+
+
+
+```
+
+```{r}
+
+# #dengue_acumulados <- dengue_acumulados %>%
+#   group_by(`Localidad Residencia`, `Departamento Residencia`) %>%
+#   summarize(Acumulados = sum(Acumulados, na.rm = TRUE), .groups = "drop")
+
+
+
+```
+
+```{r}
+
+
+# Luego realiza los joins como de costumbre usando las dos columnas clave
+
+dengue_localidad_unicas <- dengue_localidad_unicas %>%
+  left_join(dengue_sem, by = c("Localidad Residencia", "Departamento Residencia")) %>%
+  left_join(dengue_acumulados, by = c("Localidad Residencia", "Departamento Residencia")) %>%
+  mutate(Acumulados_sem = coalesce(Acumulados_sem, 0),
+         Acumulados = coalesce(Acumulados, 0))
+
+```
+
+-   **`group_by(Localidad, Departamento)`**: Agrupa los datos por las dos columnas clave. Esto asegura que los valores duplicados se manejen correctamente.
+
+-   **`summarize()`**: Resume los datos duplicados (por ejemplo, sumando valores numéricos). Puedes usar `paste()` en lugar de `sum()` si estás trabajando con texto.
+
+-   **`left_join(by = c("Localidad", "Departamento"))`**: Realiza la unión de `data_frame3` con los otros data frames usando ambas columnas como claves.
+
+**Corrijo "1°" de mayo por "Primero de Mayo"**
+
+```{r}
+
+library(stringr)
+
+dengue_final <- dengue_localidad_unicas %>%
+  mutate(`Departamento Residencia` = str_replace(`Departamento Residencia`, "1º de Mayo", "Primero de mayo"))
+                                           
+
+```
+
+Renombrar columnas
+
+```{r}
+
+
+dengue_final <-  dengue_final %>% 
+  rename(
+    `Region Sanitaria` = region_sanitaria,
+    `Confirmados última semana` = Acumulados_sem,
+     Localidad = `Localidad Residencia`,
+     Departamento = `Departamento Residencia`)
+    
+    
+dengue_final
+    
+    
+
+
+```
+
+## 4. Tablas
+
+Para crear tablas en informes RMarkdown, puedes usar `kable()`,Si estás generando documentos Word, flextable es útil. Para tablas elegantes en informes, gt es una buena opción.
+
+### 3.1 Función gt()
+
+```{r}
+
+library(gt)
+
+```
+
+```{r}
+
+dengue_final
+```
+
+**Vamos a comenzar a realizar un atabla con (gt):**
+
+```{r}
+
+
+
+dengue_final %>%
+   group_by(Departamento) %>% 
+  gt(rowname_col = "Deparatmento") %>% 
+  tab_header(
+    title = md("**Casos Dengue**"),
+    subtitle = md("Casos *confirmados* de dengue según lugar de residencia, provincia del Chaco, año 2024")
+  ) %>%
+  cols_label(
+    `Region Sanitaria` = md("Región <br>Sanitaria"), # Los nombes largos los ubico en lineas distintas
+    `Confirmados última semana` = md("Confirmados última<br>semana")
+    ) %>% 
+  opt_align_table_header(align = "left") %>% 
+  cols_width(   # ancho de columnas
+    `Region Sanitaria`~ px(200),
+    Departamento ~ px(200),
+    Localidad ~ px(200),
+    `Confirmados última semana` ~ px(150),
+      Acumulados ~ px(150)
+  ) %>% 
+  tab_source_note(  # Colocar notas de origen de datos
+    source_note = md("Fuente de datos: Sistema de Información Sanitaria Argentino **(SISA)**.")) %>% 
+  tab_footnote(   # Agregar nota al pie de nombre de columna
+    footnote = "Acumulados anuales",
+    locations = cells_column_labels(columns = Acumulados)
+  ) %>% 
+tab_footnote(   # segunda nota
+    footnote = "año 2024",
+    locations = cells_column_labels(columns = Acumulados)
+  ) %>% 
+  tab_footnote(   # nota en celdas de columna
+    footnote = "ver registro localidades",
+    locations = list(
+      cells_column_labels(columns = Localidad),
+      cells_body(columns = "Localidad"
+                 )
+      )
+    ) %>% 
+  #  tab_style(
+  #   style = list(
+  #     cell_fill(color = "#3a83e6"),
+  #     cell_text(color="white")
+  #   ),
+  #   locations = cells_body(
+  #     columns = everything(),  # Aplica el estilo a todas las columnas
+  #     rows = Departamento == "Fray Justo Santa María de Oro"  # Reemplaza "NombreEspecifico" con el nombre real que deseas resaltar
+  #   )
+  # ) %>% 
+  data_color(
+    columns = Acumulados,
+    colors = scales::col_numeric(
+    palette = c("#47e886","#f7616c"),
+    domain = c(0,3000)
+    )
+  ) %>% 
+  opt_table_font( font = google_font("montserrat"), 
+                  weight = 600
+  )
+    
+
+```
+
+Otra opcion para gt() funcion:
+
+```{r}
+
+
+
+denge_tabla_gt <- gt(dengue_final) %>%
+  tab_header(
+    title = md("**Casos Dengue**"),
+    subtitle = md("Casos *confirmados* de dengue según lugar de residencia, provincia del Chaco, año 2024")
+  ) %>% 
+  # Puedes añadir más personalización de la tabla aquí, si lo deseas.
+  cols_label(
+    `Region Sanitaria` = md("Región Sanitaria"), # Los nombes largos los ubico en lineas distintas
+    `Confirmados última semana` = md("Confirmados última semana")
+    )
+  
+
+denge_tabla_gt %>% 
+  tab_options(
+    data_row.padding = px(6),
+    heading.align = "left",
+    column_labels.background.color = "dodgerblue",
+    heading.title.font.size = px(26),
+    heading.subtitle.font.size = px(14),
+    table_body.hlines.width = px(1)
+     ) %>% 
+  cols_align(align = "left", columns = c(1,2)) %>% 
+  cols_align(align = "center", columns = c(1,4,5)
+  ) %>% 
+ tab_style(
+   style = cell_text(
+     color = "dodgerblue",
+     weight = "bold",
+     font = google_font("helvetica")
+       ),
+   location = cells_title(groups = "title")
+   ) %>% 
+  tab_style(
+    style = cell_fill(color = "grey90"),
+    locations = cells_body(rows = seq(1, nrow(dengue_final), 2))
+    )
+
+
+```
+
+```{r}
+library(gt)
+
+# Para hacer la función
+
+mi_tema <- function(gt_tbl){
+  
+  n_rows <- nrow(gt_tbl$`_data`)
+  gt_tbl %>% 
+  tab_options(
+    data_row.padding = px(6),
+    heading.align = "left",
+    column_labels.background.color = "dodgerblue",
+    heading.title.font.size = px(26),
+    heading.subtitle.font.size = px(14),
+    table_body.hlines.width = px(1)
+     ) %>% 
+ tab_style(
+   style = cell_text(
+     color = "dodgerblue",
+     weight = "bold",
+     font = google_font("helvetica")
+       ),
+   location = cells_title(groups = "title")
+   ) %>% 
+  tab_style(
+    style = cell_fill(color = "grey90"),
+    locations = cells_body(rows = seq(1, n_rows, 2))
+  )
+  }
+
+```
+
+```{r}
+
+denge_tabla_gt %>% 
+  mi_tema()
+
+```
+
+```{r}
+
+nueva_tabla <- towny %>% 
+  select(name,status,land_area_km2) %>% 
+  slice(1:10) %>% 
+  gt() %>% 
+  cols_label(
+    name = "nombre",
+    status = "estatus",
+    land_area_km2 = "area"
+  ) %>% 
+  tab_header(
+    title = "seleccion",
+    subtitle = "data de paquetes abiertos"
+    )
+
+nueva_tabla %>% 
+  mi_tema()
+
+
+
+```
+
+```{r}
+
+
+
+denge_tabla_gt <- gt(dengue_final) %>%
+  tab_header(
+    title = md("**Casos Dengue**"),
+    subtitle = md("Casos *confirmados* de dengue según lugar de residencia, provincia del Chaco, año 2024")
+  ) %>% 
+  # Puedes añadir más personalización de la tabla aquí, si lo deseas.
+  cols_label(
+    `Region Sanitaria` = md("Región Sanitaria"), # Los nombes largos los ubico en lineas distintas
+    `Confirmados última semana` = md("Confirmados última semana")
+    ) %>% 
+  tab_options(
+    data_row.padding = px(6),
+    heading.align = "left",
+    column_labels.background.color = "dodgerblue",
+    heading.title.font.size = px(26),
+    heading.subtitle.font.size = px(14),
+    table_body.hlines.width = px(1)
+     ) %>% 
+  cols_align(align = "left", columns = c(1,2)) %>% 
+  cols_align(align = "center", columns = c(1,4,5)
+  ) %>% 
+ tab_style(
+   style = cell_text(
+     color = "dodgerblue",
+     weight = "bold",
+     font = google_font("helvetica")
+       ),
+   location = cells_title(groups = "title")
+   ) %>% 
+  tab_style(
+    style = cell_fill(color = "grey90"),
+    locations = cells_body(rows = seq(1, nrow(dengue_final), 2))
+    ) %>% 
+  tab_style(
+    style = cell_text(color = "red"), # Definir el estilo de texto
+    locations = cells_body(
+      columns = c(Acumulados),
+      rows = Acumulados >= 100
+  )
+    ) %>% 
+    tab_style(
+    style = list(cell_fill(color = "red"), cell_text(color = "#f6f6f6")), # Definir el estilo de texto
+    locations = cells_body(
+      columns = c(`Confirmados última semana`),
+      rows = Acumulados >= 100
+    ) 
+ )
+  
+denge_tabla_gt
+```
+
+```{r}
+
+# Ajuste de tamaños
+
+denge_tabla_gt %>% 
+  tab_options(
+    table.font.size = px(10), # Tamaño de la fuente de la tabla
+    column_labels.font.size = px(8), # Tamaño de la fuente de las etiquetas de las columnas
+    heading.title.font.size = px(10), # Tamaño de la fuente del título
+    heading.subtitle.font.size = px(8) # Tamaño de la fuente del subtítulo
+  ) %>% 
+  tab_options(
+    data_row.padding = px(2), # Espaciado de las filas de datos
+    heading.padding = px(2), # Espaciado del encabezado
+    column_labels.padding = px(2) # Espaciado de las etiquetas de las columnas
+  ) %>% 
+  cols_width(
+    Departamento ~ px(150),
+    Localidad ~ px(150),
+    `Confirmados última semana` ~ px(100),
+    Acumulados ~ px(100)
+  ) 
+
+
+
+```
+
+### 4.1 Función flextable()
+
+```{r}
+
+library(flextable)
+
+
+# Crear una tabla flextable
+ft <- flextable(dengue_final)
+ft <- set_table_properties(ft, width = 0.5, layout = "autofit")
+ft <- color(ft, color = "blue", part = "header")
+print(ft)
+
+
+
+
+```
+
+## 5. Grafico de frecuencia
+
+Realizar un gráfico segun la fecuencia por departamento:
+
+```{r}
+
+library(ggplot2)
+# Gráfico de barras horizontales
+
+ggplot(depto_acum, aes(x = reorder( `Departamento Residencia`,n), y = n)) +
+  geom_bar(stat = "identity", fill = "dodgerblue", color = "black") +  # Barras coloreadas
+  coord_flip() +  # Invertir los ejes para hacer las barras horizontales
+  labs(title = "Frecuencia de Casos Confirmados de Dengue por Departamento",
+       x = "Departamento",
+       y = "Frecuencia") +
+  theme_minimal () +
+  scale_fill_manual(values = c("Resistencia" = "red", "Barranqueras" = "blue")
+                    )
+
+
+```
+
+```{r}
+
+ggplot(depto_acum, aes(x = reorder(`Departamento Residencia`, n), y = n, fill = `Departamento Residencia`)) +
+  geom_bar(stat = "identity") +  # Barras con colores según el departamento
+  coord_flip() +  # Invertir los ejes para hacer las barras horizontales
+  labs(title = "Frecuencia de Casos Confirmados de Dengue por Departamento",
+       x = "Departamento",
+       y = "Frecuencia") +
+  theme_minimal() +
+  scale_fill_manual(values = c("San Fernando" = "red", "Libertad" = "blue", "Puerto Vilelas" = "green", "Fontana" = "purple", "Villa Ángela" = "orange"))
+
+
+```
+
+```{r}
+
+
+ggplot(depto_acum, aes(x = reorder(`Departamento Residencia`, n), y = n, fill = `Departamento Residencia`)) +
+  geom_bar(stat = "identity") +  # Barras con colores según el departamento
+  coord_flip() +  # Invertir los ejes para hacer las barras horizontales
+  labs(title = "Frecuencia de Casos Confirmados de Dengue por Departamento",
+       x = "Departamento",
+       y = "Frecuencia") +
+  theme_get()
+  
+
+
+```
+
+```{r}
+
+barra1 <- ggplot(depto_acum, aes(x = reorder(`Departamento Residencia`, n), y = n, fill = `Departamento Residencia`)) +
+  geom_bar(stat = "identity", width = 0.7, fill = "steelblue") +  # Barras con colores según el departamento
+  coord_flip() +  # Invertir los ejes para hacer las barras horizontales
+  scale_y_continuous(breaks = seq(0, 2500, by = 500)) +  # Configura los intervalos del eje Y
+  labs(title = "Frecuencia de Casos Confirmados de Dengue por Departamento",
+        subtitle = "Datos acumulados del año 2024",
+       x = "Departamento",
+       y = "Frecuencia",
+       caption = "Fuente: SISA, 2024") +
+  theme_minimal() +  # Cambiar el tema para uno más limpio
+  theme(
+    plot.title = element_text(size = 14, face = "bold", hjust = 0.5),  # Tamaño y estilo del título
+    plot.subtitle = element_text(size = 10, face = "italic", hjust = 0.5),
+    plot.caption = element_text(size = 8, face = "italic", hjust = 1),
+    axis.title.x = element_text(size = 8, hjust = 0.5, vjust = 0.5),  # Tamaño de la etiqueta del eje X
+    axis.title.y = element_text(size = 8, hjust = 0.5, vjust = 0.5),  # Tamaño de la etiqueta del eje Y
+    axis.text.x = element_text(size = 7),   # Tamaño de los valores en el eje X
+    axis.text.y = element_text(size = 7),   # Tamaño de los valores en el eje Y
+ #   legend.title = element_text(size = 8),  # Tamaño del título de la leyenda
+#   legend.text = element_text(size = 8),   # Tamaño del texto de la leyenda
+    legend.position = "none"  # Posición de la leyenda
+  )
+  
+print(barra1)
+
+```
+
+Vamos a hacer rangos de edad para que podamos trabajar el segundo grafico:
+
+```{r}
+
+str(edad$`Edad Actual`)
+```
+
+```{r}
+
+edades <- dengue_casos %>%
+   mutate(
+    `Edad Actual` = as.character(`Edad Actual`), # Convertir a carácter para manejar valores vacíos
+    `Edad Actual` = na_if(`Edad Actual`, ""),   # Reemplazar cadenas vacías con NA
+    `Edad Actual` = as.numeric(`Edad Actual`)      # Convertir de vuelta a numérico
+  ) %>%
+  select(`Edad Actual`)
+ 
+
+  
+
+```
+
+En este caso, `na_if()` no puede reemplazar valores vacíos en una columna de tipo `double` (numérico) con una cadena vacía.
+
+Si la columna `Edad Actual` es numérica (`double`), no puedes directamente usar `na_if()` para reemplazar cadenas vacías con `NA` porque `na_if()` espera que los dos argumentos tengan el mismo tipo
+
+```{r}
+
+
+
+
+# Crear rangos de edades
+edades$rangos <- cut(edades$`Edad Actual`,
+                 breaks = c(0,5, 10, 20, 30, 40, 50, 60, 70, 100),
+                 labels = c("0-4","5-9", "10-19", "20-29", "30-39", "40-49", "50-59", "6-69", "71+"),
+                 right = FALSE)
+
+edades
+
+
+```
+
+Cuento los rangos
+
+```{r}
+
+
+rangos_edad <- edades %>% 
+  group_by(rangos) %>% 
+  count() %>% 
+  rename(Acumulados_edad = n)
+  
+
+
+```
+
+Ahora puedo realizar el gráfico, para poner colo en una variable nuemrica no categorica es necesario que `rangos` sea un factor
+
+Si `rangos` es una columna numérica o de texto que no es categórica, puede ser útil convertirla a factor para que `ggplot2` la maneje correctamente para los colores.
+
+```{r}
+
+
+rangos_edad$rangos <- as.factor(rangos_edad$rangos)
+
+```
+
+```{r}
+
+
+barras_2 <- ggplot(rangos_edad, aes(x = rangos, y = Acumulados_edad, fill = rangos)) +
+  geom_bar(stat = "identity") +
+  labs(x = "Rango de Edad", y = "Frecuencia", title = "Distribución de Edades por Rango") 
+  
+
+barras_2
+```
+
+```{r}
+
+
+library(ggplot2)
+
+# Crear el gráfico con colores según los valores de Acumulados_edad
+barras_2 <- ggplot(rangos_edad, aes(x = rangos, y = Acumulados_edad, fill = Acumulados_edad)) +
+  geom_bar(stat = "identity", width = 0.7) +  # Barras con colores según Acumulados_edad
+  coord_flip() +  # Invertir los ejes para hacer las barras horizontales
+  scale_y_continuous(breaks = seq(0, 2500, by = 500)) +  # Configura los intervalos del eje Y
+  scale_fill_gradient(low = "lightblue", high = "darkblue") +  # Escala de colores
+  labs(title = "Frecuencia de Casos Confirmados de Dengue por Departamento",
+       subtitle = "Datos acumulados del año 2024",
+       x = "Departamento",
+       y = "Frecuencia",
+       caption = "Fuente: SISA, 2024") +
+  theme_minimal() +  # Cambiar el tema para uno más limpio
+  theme(
+    plot.title = element_text(size = 14, face = "bold", hjust = 0.5),  # Tamaño y estilo del título
+    plot.subtitle = element_text(size = 10, face = "italic", hjust = 0.5),
+    plot.caption = element_text(size = 8, face = "italic", hjust = 1),
+    axis.title.x = element_text(size = 8, hjust = 0.5, vjust = 0.5),  # Tamaño de la etiqueta del eje X
+    axis.title.y = element_text(size = 8, hjust = 0.5, vjust = 0.5),  # Tamaño de la etiqueta del eje Y
+    axis.text.x = element_text(size = 7),   # Tamaño de los valores en el eje X
+    axis.text.y = element_text(size = 7),   # Tamaño de los valores en el eje Y
+    legend.position = "right"  # Mostrar la leyenda a la derecha
+  )
+
+# Mostrar el gráfico
+print(barras_2)
+
+  
+
+barras_2
+```
+
+```{r}
+
+
+# Esto es una funcion para editar los graficos y que quede guardada:
+
+library(ggplot2)
+
+# Función para crear una configuración estándar de gráficos ggplot2
+configurar_grafico <- function(grafico) {
+  grafico +
+    theme_minimal() +  # Configura el tema del gráfico
+    theme(
+      axis.text.x = element_text(angle = 45, hjust = 1),  # Ajuste de texto en el eje x
+      axis.title = element_text(size = 12),  # Tamaño del título de los ejes
+      plot.title = element_text(size = 14, face = "bold")  # Tamaño y estilo del título del gráfico
+    ) +
+    labs(x = "Eje X", y = "Eje Y", title = "Título del Gráfico")
+}
+
+# Crear un gráfico de ejemplo
+grafico <- ggplot(mtcars, aes(x = mpg, y = wt)) +
+  geom_point()
+
+# Aplicar la configuración estándar
+grafico_configurado <- configurar_grafico(grafico)
+
+# Mostrar el gráfico
+print(grafico_configurado)
+```
+
+```{r}
+
+ggplot(edades, aes(x = `Edad Actual`)) +
+  geom_bar() +
+  labs(x = "Rango de Edad", title = "Distribución de Edades por Rango")
+
+```
