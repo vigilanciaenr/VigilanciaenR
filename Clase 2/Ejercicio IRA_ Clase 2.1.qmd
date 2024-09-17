@@ -1,0 +1,222 @@
+---
+title: "IRA"
+format: 
+  html:
+    toc: true                # Habilita la tabla de contenidos
+    toc-title: "Índice de Contenidos"  # Título del índice
+    toc-depth: 3             # Nivel de profundidad del índice (hasta h3)
+    toc-location: left       # Ubicación del índice (izquierda)
+footnotes-hover: true # muestra notas al pie
+smooth-scroll: true # suaviza el scroll
+editor: visual
+code-copy: true            # Permite copiar el código desde el documento
+---
+
+## 1. Importación de datos: IRA
+
+Actualizamos las librerias
+
+```{r}
+library(readxl)
+library(dplyr)
+```
+
+### **1.A. Excel**
+
+Traemos la Reporte infecciones respiratorias marzo 2024 de nuestra base en formato excel descargada en nuestra computadora
+
+Lo que tenemos que hacer para importar esta hoja de cálculo a R como un marco de datos es pasar la ruta al archivo Excel al argumento de la `read_excel()` función.
+
+Es impotante tambien poner el "`.xlsx`" que indica el formato del archivo en la ruta de acceso. Esta ruta se puede tomar como atajo apretando **Shift + click** derecho en el archivo deseado y seleccionar la opción "copiar como ruta de acceso".
+
+::: {#my-div style="background-color:  #FFFFCC; padding: 20px; border: 1px solid #ccc; border-radius: 5px"}
+Mac y Linux usan barras diagonales en las rutas de archivo ( `/`) de forma predeterminada. Windows usa barras diagonales inversas ( `\`) en las rutas de archivo de forma predeterminada. Sin embargo, sin importar qué sistema operativo estemos usando, R solo toma las barras diagonales de esta manera /. Si estas **usando Windows** **modificá por barra diagonal** **/ o en su defecto por doble barra diagonal**  **`\\`** **.**
+:::
+
+```{r}
+# Ruta de archivo relativa   
+
+IRA <- read_excel("C:/Users/Lenovo/Desktop/Vigilancia en R/Chaco materiales/Reporte infecciones respiratorias marzo 2024.xlsx")
+```
+
+### **1.B. Google Sheets**
+
+Para trabajar con la misma tabla pero disponible en una cuenta de google tenemos que instalar las librerías
+
+```{r}
+install.packages("googlesheets4") 
+install.packages("httpuv")
+```
+
+Llamamos a las librerías
+
+```{r}
+
+
+library(googlesheets4)
+library(httpuv)
+```
+
+El `"gs4_auth()"` abrira una ventana emergente que nos pedirá permiso para conectarse a nuestra cuenta google. Una vez aceptado esto se procede a importar los datos del drive.
+
+```{r}
+gs4_auth()
+```
+
+Para automatizar en enlace con la cuenta de google en donde buscaremos nuestra tabla
+
+```{r}
+# Esto abre una ventana en el navegador para autenticar tu cuenta de Google
+
+gs4_auth(cache = ".secrets", email = "vigilanciaenr@gmail.com")
+```
+
+Luego de esto obtenemos el link de nuestro archivo. Usamos la función `read_sheet()` para leer los datos de una hoja de cálculo.
+
+```{r, echo=TRUE, results='hide'}
+
+# Leer el archivo de Google Sheets usando su ID
+# Reemplaza 'FILE_ID' con el ID del archivo real
+# sheet_url <- "https://docs.google.com/spreadsheets/d/1E0JJtQiNvH6RT7a6RkbP3tubb8kRrvLBvpVuSJRPCb8/edit"
+
+IRA_sheet <- read_sheet("https://docs.google.com/spreadsheets/d/1E0JJtQiNvH6RT7a6RkbP3tubb8kRrvLBvpVuSJRPCb8/edit")
+```
+
+## 2. Identificación de datos faltantes
+
+Para comenzar la limpieza de datos en primer lugar debemos ver si existen datos faltantes, y en este caso escribir un código que permita reemplazar la nomenclatura que trae por `NA` que es como R lee los datos faltantes.
+
+Esto puede realizarse cuando importamos el dataset o podemos hacerlo una vez que lo tenemos importado. Vemos las dos formas.
+
+```{r}
+
+# Establecer el na argumento para datos faltantes
+# library(googlesheets4)
+# library(httpuv)
+
+IRA_sheet<- read_sheet ("https://docs.google.com/spreadsheets/d/1E0JJtQiNvH6RT7a6RkbP3tubb8kRrvLBvpVuSJRPCb8/edit", na = c(".", "perdido", "*sin dato*", "; ;"))
+
+```
+
+Para ver la estructura de los datos de nuestra tabla IRA_sheet
+
+```{r}
+
+sapply(IRA_sheet, class)
+```
+
+Aquí, `sapply` está aplicando la función `class` a cada columna del dataframe `IRA_sheet`. El resultado es un vector que contiene la clase de cada columna en el dataframe. Esto te permite ver rápidamente qué tipo de datos hay en cada columna.
+
+Lo importante es que la variable `Feha de toma de muestra` esta en formato fecha.
+
+## 3. Crear semanas epidemiológicas
+
+Para ello vamos a utilizar el paquete `lubridate.`
+
+```{r}
+library(lubridate)
+library(dplyr)
+```
+
+```{r}
+# Calcular semana epidemiologica con la función epiweek
+
+IRA_semana_epi <- IRA_sheet %>%
+  mutate(semana_epi = epiweek(`Fecha de toma de muestra`))
+```
+
+## **4. Creación y modificación de Columnas: Positivos, Negativos y en Estudio**
+
+Para ello vamos a utilizar la función **`mutate()`** del paquete `dplyr.`
+
+Llamamos a la librería
+
+```{r}
+library(dplyr)
+```
+
+Averiguamos que tipo de datos tenemos en la columna `Resultado` de nuestro data frame IRA_semana_epi
+
+```{r}
+class(IRA_semana_epi$Resultado)
+```
+
+Identificamos que valores tenemos en la columna
+
+```{r}
+unique(IRA_sheet$Resultado)
+```
+
+Transformamos estos valores en Positivos y Negativos
+
+```{r}
+IRA_semana_epi <- IRA_semana_epi %>%
+  mutate(
+    Resulta2 = case_when(
+      # Resultado Positivos
+      Resultado %in% c(
+        "Positivo", 
+        "Detectable"
+      ) ~ "Positivo",  
+      
+      # Resultados negativos
+      Resultado %in% c(
+        "Negativo", 
+        "No detectable"
+      ) ~ "Negativo"
+    )
+  )
+      
+      # Para todos los otros casos no definidos anteriormente, devuelve NA
+      # TRUE ~ NA_character_
+    
+
+```
+
+##  5. Generación de ID
+
+Vamos a generar un Id de los datos a partir de la fecha de toma de muestra y dni
+
+Primero vamos a excluir los casos que no sean del año 2024 utilizando la función `filter`
+
+```{r}
+# Primero voy a seleccionar solo los casos  de Chaco y año 2024
+
+library(dplyr)
+library(lubridate)
+
+IRA_casos_chaco2024 <- IRA_semana_epi %>%
+  filter(`Provincia Residencia` == "Chaco" &
+           year(`Fecha de toma de muestra`) == 2024) 
+
+# Cambia 2024 por el año que quieras filtrar
+```
+
+Ahora tenemos una nueva tabla con menos registros `IRA_casos_chaco2024`. En esta tabla vamos a crear nuestro ID combinando dos columnas: `Nro Doc` y `Fecha de toma de muestra.`
+
+Tenemos que hacer esto porque una persona puede aportar mas de 1 caso en el período y por evento a la persona se le pueden tomar mas de una muestra.
+
+```{r}
+# para crear una columna ID y Crear un ID único de caso
+
+IRA_id_chaco2024 <- IRA_casos_chaco2024 %>%
+  mutate(id_caso = paste(`Nro Doc`, `Fecha de toma de muestra`, sep = "_")) %>% 
+  mutate(across(where(is.character), ~ na_if(., "*SIN DATO* (*SIN DATO*)")))
+
+IRA_id_chaco2024
+
+```
+
+### Exportar tabla limpia
+
+Vamos a exportar una tabla para guardar en nuestra computadora
+
+```{r}
+library(writexl)
+
+# Guardar en una ruta específica
+
+write_xlsx(IRA_id_chaco2024, path = "C:/Users/Lenovo/Desktop/Vigilancia en R/Chaco materiales/IRA_id_chaco2024.xlsx")
+
+
+```
