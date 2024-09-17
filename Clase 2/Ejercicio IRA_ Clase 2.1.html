@@ -87,7 +87,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#identificación-de-datos-faltantes" id="toc-identificación-de-datos-faltantes" class="nav-link" data-scroll-target="#identificación-de-datos-faltantes">2. Identificación de datos faltantes</a></li>
   <li><a href="#crear-semanas-epidemiológicas" id="toc-crear-semanas-epidemiológicas" class="nav-link" data-scroll-target="#crear-semanas-epidemiológicas">3. Crear semanas epidemiológicas</a></li>
-  <li><a href="#creación-y-modificación-de-columnas-positivos-negativos-y-en-estudio" id="toc-creación-y-modificación-de-columnas-positivos-negativos-y-en-estudio" class="nav-link" data-scroll-target="#creación-y-modificación-de-columnas-positivos-negativos-y-en-estudio"><strong>4. Creación y modificación de Columnas: Positivos, Negativos y en Estudio</strong></a></li>
+  <li><a href="#creación-y-modificación-de-columnas-positivos-negativos-y-en-estudio" id="toc-creación-y-modificación-de-columnas-positivos-negativos-y-en-estudio" class="nav-link" data-scroll-target="#creación-y-modificación-de-columnas-positivos-negativos-y-en-estudio">4. Creación y modificación de Columnas: Positivos, Negativos y en Estudio</a></li>
   <li><a href="#generación-de-id" id="toc-generación-de-id" class="nav-link" data-scroll-target="#generación-de-id">5. Generación de ID</a>
   <ul class="collapse">
   <li><a href="#exportar-tabla-limpia" id="toc-exportar-tabla-limpia" class="nav-link" data-scroll-target="#exportar-tabla-limpia">Exportar tabla limpia</a></li>
@@ -200,9 +200,6 @@ Adjuntando el paquete: 'dplyr'</code></pre>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>IRA_sheet <span class="ot">&lt;-</span> <span class="fu">read_sheet</span>(<span class="st">"https://docs.google.com/spreadsheets/d/1E0JJtQiNvH6RT7a6RkbP3tubb8kRrvLBvpVuSJRPCb8/edit"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Auto-refreshing stale OAuth token.</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
 <pre><code>✔ Reading from "IRA".</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
@@ -216,11 +213,11 @@ Adjuntando el paquete: 'dplyr'</code></pre>
 <p>Para comenzar la limpieza de datos en primer lugar debemos ver si existen datos faltantes, y en este caso escribir un código que permita reemplazar la nomenclatura que trae por <code>NA</code> que es como R lee los datos faltantes.</p>
 <p>Esto puede realizarse cuando importamos el dataset o podemos hacerlo una vez que lo tenemos importado. Vemos las dos formas.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Establecer el na argumento para datos faltantes</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co"># library(googlesheets4)</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># library(httpuv)</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>IRA_sheet<span class="ot">&lt;-</span> <span class="fu">read_sheet</span> (<span class="st">"https://docs.google.com/spreadsheets/d/1E0JJtQiNvH6RT7a6RkbP3tubb8kRrvLBvpVuSJRPCb8/edit"</span>, <span class="at">na =</span> <span class="fu">c</span>(<span class="st">"."</span>, <span class="st">"perdido"</span>, <span class="st">"*sin dato*"</span>, <span class="st">"; ;"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Establecer el na argumento para datos faltantes</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># library(googlesheets4)</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># library(httpuv)</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>IRA_sheet<span class="ot">&lt;-</span> <span class="fu">read_sheet</span> (<span class="st">"https://docs.google.com/spreadsheets/d/1E0JJtQiNvH6RT7a6RkbP3tubb8kRrvLBvpVuSJRPCb8/edit"</span>, <span class="at">na =</span> <span class="fu">c</span>(<span class="st">"."</span>, <span class="st">"perdido"</span>, <span class="st">"*sin dato*"</span>, <span class="st">"; ;"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>✔ Reading from "IRA".</code></pre>
 </div>
@@ -230,7 +227,7 @@ Adjuntando el paquete: 'dplyr'</code></pre>
 </div>
 <p>Para ver la estructura de los datos de nuestra tabla IRA_sheet</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(IRA_sheet, class)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(IRA_sheet, class)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$`Fecha Apertura`
 [1] "POSIXct" "POSIXt" 
@@ -330,7 +327,7 @@ $`Establecimiento de Carga`
 <h2 class="anchored" data-anchor-id="crear-semanas-epidemiológicas">3. Crear semanas epidemiológicas</h2>
 <p>Para ello vamos a utilizar el paquete <code>lubridate.</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>
 Adjuntando el paquete: 'lubridate'</code></pre>
@@ -340,32 +337,32 @@ Adjuntando el paquete: 'lubridate'</code></pre>
 
     date, intersect, setdiff, union</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcular semana epidemiologica con la función epiweek</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>IRA_semana_epi <span class="ot">&lt;-</span> IRA_sheet <span class="sc">%&gt;%</span></span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">semana_epi =</span> <span class="fu">epiweek</span>(<span class="st">`</span><span class="at">Fecha de toma de muestra</span><span class="st">`</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcular semana epidemiologica con la función epiweek</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>IRA_semana_epi <span class="ot">&lt;-</span> IRA_sheet <span class="sc">%&gt;%</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">semana_epi =</span> <span class="fu">epiweek</span>(<span class="st">`</span><span class="at">Fecha de toma de muestra</span><span class="st">`</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="creación-y-modificación-de-columnas-positivos-negativos-y-en-estudio" class="level2">
-<h2 class="anchored" data-anchor-id="creación-y-modificación-de-columnas-positivos-negativos-y-en-estudio"><strong>4. Creación y modificación de Columnas: Positivos, Negativos y en Estudio</strong></h2>
+<h2 class="anchored" data-anchor-id="creación-y-modificación-de-columnas-positivos-negativos-y-en-estudio">4. Creación y modificación de Columnas: Positivos, Negativos y en Estudio</h2>
 <p>Para ello vamos a utilizar la función <strong><code>mutate()</code></strong> del paquete <code>dplyr.</code></p>
 <p>Llamamos a la librería</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Averiguamos que tipo de datos tenemos en la columna <code>Resultado</code> de nuestro data frame IRA_semana_epi</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(IRA_semana_epi<span class="sc">$</span>Resultado)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(IRA_semana_epi<span class="sc">$</span>Resultado)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "character"</code></pre>
 </div>
 </div>
 <p>Identificamos que valores tenemos en la columna</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(IRA_sheet<span class="sc">$</span>Resultado)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(IRA_sheet<span class="sc">$</span>Resultado)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Positivo"      "Negativo"      NA              "No detectable"
 [5] "Detectable"   </code></pre>
@@ -373,25 +370,25 @@ Adjuntando el paquete: 'lubridate'</code></pre>
 </div>
 <p>Transformamos estos valores en Positivos y Negativos</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>IRA_semana_epi <span class="ot">&lt;-</span> IRA_semana_epi <span class="sc">%&gt;%</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Resulta2 =</span> <span class="fu">case_when</span>(</span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Resultado Positivos</span></span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>      Resultado <span class="sc">%in%</span> <span class="fu">c</span>(</span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Positivo"</span>, </span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Detectable"</span></span>
-<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>      ) <span class="sc">~</span> <span class="st">"Positivo"</span>,  </span>
-<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>      </span>
-<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Resultados negativos</span></span>
-<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>      Resultado <span class="sc">%in%</span> <span class="fu">c</span>(</span>
-<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Negativo"</span>, </span>
-<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>        <span class="st">"No detectable"</span></span>
-<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>      ) <span class="sc">~</span> <span class="st">"Negativo"</span></span>
-<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>      </span>
-<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Para todos los otros casos no definidos anteriormente, devuelve NA</span></span>
-<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a>      <span class="co"># TRUE ~ NA_character_</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>IRA_semana_epi <span class="ot">&lt;-</span> IRA_semana_epi <span class="sc">%&gt;%</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Resulta2 =</span> <span class="fu">case_when</span>(</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Resultado Positivos</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>      Resultado <span class="sc">%in%</span> <span class="fu">c</span>(</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Positivo"</span>, </span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Detectable"</span></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>      ) <span class="sc">~</span> <span class="st">"Positivo"</span>,  </span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Resultados negativos</span></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>      Resultado <span class="sc">%in%</span> <span class="fu">c</span>(</span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Negativo"</span>, </span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>        <span class="st">"No detectable"</span></span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>      ) <span class="sc">~</span> <span class="st">"Negativo"</span></span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Para todos los otros casos no definidos anteriormente, devuelve NA</span></span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>      <span class="co"># TRUE ~ NA_character_</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="generación-de-id" class="level2">
@@ -399,27 +396,27 @@ Adjuntando el paquete: 'lubridate'</code></pre>
 <p>Vamos a generar un Id de los datos a partir de la fecha de toma de muestra y dni</p>
 <p>Primero vamos a excluir los casos que no sean del año 2024 utilizando la función <code>filter</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Primero voy a seleccionar solo los casos  de Chaco y año 2024</span></span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>IRA_casos_chaco2024 <span class="ot">&lt;-</span> IRA_semana_epi <span class="sc">%&gt;%</span></span>
-<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Provincia Residencia</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"Chaco"</span> <span class="sc">&amp;</span></span>
-<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>           <span class="fu">year</span>(<span class="st">`</span><span class="at">Fecha de toma de muestra</span><span class="st">`</span>) <span class="sc">==</span> <span class="dv">2024</span>) </span>
-<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Cambia 2024 por el año que quieras filtrar</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Primero voy a seleccionar solo los casos  de Chaco y año 2024</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>IRA_casos_chaco2024 <span class="ot">&lt;-</span> IRA_semana_epi <span class="sc">%&gt;%</span></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Provincia Residencia</span><span class="st">`</span> <span class="sc">==</span> <span class="st">"Chaco"</span> <span class="sc">&amp;</span></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>           <span class="fu">year</span>(<span class="st">`</span><span class="at">Fecha de toma de muestra</span><span class="st">`</span>) <span class="sc">==</span> <span class="dv">2024</span>) </span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Cambia 2024 por el año que quieras filtrar</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Ahora tenemos una nueva tabla con menos registros <code>IRA_casos_chaco2024</code>. En esta tabla vamos a crear nuestro ID combinando dos columnas: <code>Nro Doc</code> y <code>Fecha de toma de muestra.</code></p>
 <p>Tenemos que hacer esto porque una persona puede aportar mas de 1 caso en el período y por evento a la persona se le pueden tomar mas de una muestra.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># para crear una columna ID y Crear un ID único de caso</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>IRA_id_chaco2024 <span class="ot">&lt;-</span> IRA_casos_chaco2024 <span class="sc">%&gt;%</span></span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">id_caso =</span> <span class="fu">paste</span>(<span class="st">`</span><span class="at">Nro Doc</span><span class="st">`</span>, <span class="st">`</span><span class="at">Fecha de toma de muestra</span><span class="st">`</span>, <span class="at">sep =</span> <span class="st">"_"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.character), <span class="sc">~</span> <span class="fu">na_if</span>(., <span class="st">"*SIN DATO* (*SIN DATO*)"</span>)))</span>
-<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>IRA_id_chaco2024</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># para crear una columna ID y Crear un ID único de caso</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>IRA_id_chaco2024 <span class="ot">&lt;-</span> IRA_casos_chaco2024 <span class="sc">%&gt;%</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">id_caso =</span> <span class="fu">paste</span>(<span class="st">`</span><span class="at">Nro Doc</span><span class="st">`</span>, <span class="st">`</span><span class="at">Fecha de toma de muestra</span><span class="st">`</span>, <span class="at">sep =</span> <span class="st">"_"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.character), <span class="sc">~</span> <span class="fu">na_if</span>(., <span class="st">"*SIN DATO* (*SIN DATO*)"</span>)))</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>IRA_id_chaco2024</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 674 × 33
    `Fecha Apertura`    `Nro Doc` `Apellido Ciudadano` `Nombre Ciudadano`        
@@ -447,11 +444,11 @@ Adjuntando el paquete: 'lubridate'</code></pre>
 <h3 class="anchored" data-anchor-id="exportar-tabla-limpia">Exportar tabla limpia</h3>
 <p>Vamos a exportar una tabla para guardar en nuestra computadora</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(writexl)</span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Guardar en una ruta específica</span></span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="fu">write_xlsx</span>(IRA_id_chaco2024, <span class="at">path =</span> <span class="st">"C:/Users/Lenovo/Desktop/Vigilancia en R/Chaco materiales/IRA_id_chaco2024.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(writexl)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Guardar en una ruta específica</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="fu">write_xlsx</span>(IRA_id_chaco2024, <span class="at">path =</span> <span class="st">"C:/Users/Lenovo/Desktop/Vigilancia en R/Chaco materiales/IRA_id_chaco2024.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
