@@ -24,7 +24,7 @@ library(dplyr)
 
 ```{r}
 
-dengue_limpio <- read_excel("dengue_lim2.xlsx")  
+dengue_id <- read_excel("C:/Users/flor/Desktop/cursor_2024/VigilanciaenR/dengue_id.xlsx")  
 
 ```
 
@@ -32,7 +32,7 @@ Corrobormaos con **`str()`** que los datos que necesito los lea de forma adecuad
 
 ```{r}
 
-str(dengue_limpio)
+str(dengue_id)
 ```
 
 Es necesario pasar las fechas a formato "date"
@@ -40,7 +40,7 @@ Es necesario pasar las fechas a formato "date"
 ```{r}
 
 
-dengue_limpio <- dengue_limpio %>%
+dengue_id <- dengue_id %>%
   mutate(across(c("Fecha de toma de muestra", "Fecha de inicio de síntomas", "Fecha Apertura", "Fecha Nacimiento"), as.Date))
 
 
@@ -50,69 +50,126 @@ dengue_limpio <- dengue_limpio %>%
 
 # Verificamos la columna que nos interesa
 
-class(dengue_limpio$`Fecha de toma de muestra`)
+class(dengue_id$`Fecha de toma de muestra`)
 ```
 
-### 3.1 Generación de ID
+### 3.1 Duplicados
 
-Vamos a generar un Id de los datos a partir de la fecha de toma de muestra y dni
+En primer lugar vamos a preprarar nuestros datos para conformar la primer tabla que tenemos, y los gráficos necesarios. Para ello primero tenemos que trabajar solo con los con los datos confirmados.
 
-Para crear un **ID único de caso** basado en las **fechas de toma de muestra de laboratorio** y el **DNI** (o número de identificación), puedes concatenar estos valores en una nueva columna para asegurarte de que cada combinación sea única. A continuación te muestro cómo puedes hacerlo en R utilizando `mutate()` de `dplyr`.
+Los resultados que tenemos en el data frame "id" tienen una identificacion por fila que contiene **dni y fecha de toma de muestra** **concatenados**, esto puede tener más de un dni y fecha repetidos, ya que son resultados de laboratorio.
+
+Para tomar los duplicados tenemos varias formas de hacerlo, veremos algunas de ellas:
+
+**Función del paquete dplyr:**
 
 ```{r}
 
-# Primero voy a seleccionar solo los casos de Dengue y de Chaco y año 2024
-
-library(dplyr)
-library(lubridate)
-
-dengue_limpio <- dengue_limpio %>%
-  filter(Evento == "Dengue" &
-           `Provincia Residencia` == "Chaco" &
-           year(`Fecha de toma de muestra`) == 2024)  # Cambia 2024 por el año que quieras filtrar
-
-
-```
-
-```{r}
-
-
-
-# Crear un ID único de caso
-
-dengue_id <- dengue_limpio %>%
-  mutate(id_caso = paste(`Nro Doc`, `Fecha de toma de muestra`, sep = "_")) %>% 
-  mutate(across(where(is.character), ~ na_if(., "*SIN DATO* (*SIN DATO*)")))
-
-dengue_id
-```
-
-Si prefieres un ID numérico secuencial para cada fila (dentro de cada combinación de DNI y fecha), también puedes hacerlo con `row_number()`:
-
-```{r}
-
-dengue_id <- dengue_id %>%
-  mutate(id_caso = row_number())
-
-# Ver el resultado
-print(dengue_id)
-
-```
-
-Vamos a ver los duplicados según dni:
-
-```{r}
 
 duplicados <- dengue_id %>%
-  group_by(`Nro Doc`) %>%
+  group_by(id_caso) %>%
   filter(n() > 1) %>% 
   ungroup()
 
 
+```
+
+**Esto es lo que hicimos arriba:**
+
+**`duplicados <- dengue_id %>%`:**
+
+-   **`duplicados <-`:** Crea un nuevo objeto llamado `duplicados` que almacenará el resultado de la operación.
+
+-   **`dengue_id %>%`:** Indica que vamos a trabajar con el data frame `dengue_id` y aplicar una serie de operaciones sobre él utilizando la sintaxis de pipes (`%>%`) de la librería `dplyr`.
+
+**`group_by(id_caso)`:**
+
+-   Agrupa las filas del data frame `dengue_id` según los valores únicos de la columna `id_caso`. Esto significa que todas las filas con el mismo valor en `id_caso` se agruparán juntas.
+
+**`filter(n() > 1)`:**
+
+-   Filtra los grupos creados en el paso anterior.
+
+-   `n()` cuenta el número de filas en cada grupo.
+
+-   `filter(n() > 1)` selecciona solo aquellos grupos que tienen más de una fila, es decir, donde el valor de `id_caso` se repite al menos una vez.
+
+**`ungroup()`:**
+
+-   Deshace el agrupamiento creado en el paso 2. Esto es útil si quieres realizar operaciones posteriores en todo el data frame y no quieres que se apliquen solo a cada grupo por separado.
+
+**Paquete `janitor`:**
+
+```{r}
+
+# install.packages("janitor")
 
 ```
 
-Ahora vamos a ver los valores que no estan duplicados:
+```{r}
+
+library(janitor)
+
+# Identificar filas duplicadas en todo el data frame
+
+duplicados_j <- get_dupes(dengue_id, id_caso)
+print(duplicados_j)
+
+```
+
+-   **`duplicados_j <-`:**
+
+    -   Crea un nuevo objeto llamado `duplicados_j` para almacenar el resultado de la operación. Este nuevo objeto será un data frame que contendrá todas las filas duplicadas que se encuentren.
+
+-   **`get_dupes(dengue_id, id_caso)`:**
+
+    -   **`get_dupes`:** Esta función busca específicamente filas duplicadas en un data frame.
+
+    -   **`dengue_id`:** Indica el nombre del data frame que se va a analizar. En este caso, estamos buscando duplicados en un data frame llamado `dengue_id`.
+
+    -   **`id_caso`:** Especifica la columna en la que se buscarán los duplicados. Es decir, la función se centrará en encontrar filas donde el valor en la columna `id_caso` se repita.
+
+#### **3.1.1 Eliminando Duplicados**
+
+Una vez identificados los duplicados, podemos eliminarlos usando la función `unique()` o `distinct()` del paquete `dplyr`.
+
+```{r}
+
+# Eliminar filas duplicadas
+
+datos_sin_duplicados <- distinct(duplicados_j, id_caso, .keep_all = TRUE)
+
+```
+
+-   **`datos_sin_duplicados <-`:**
+
+    -   Crea un nuevo objeto llamado `datos_sin_duplicados` para almacenar el resultado de la operación que se realizará. Este nuevo objeto será un data frame.
+
+-   **`distinct(duplicados_j)`:**
+
+    -   Aplica la función `distinct()` al data frame `duplicados_j`. Esta función se utiliza para identificar y eliminar filas duplicadas en un data frame.
+
+-   **`id_caso, .keep_all = TRUE`:**
+
+    -   **`id_caso`:** Especifica que se buscarán duplicados únicamente en la columna `id_caso`. Es decir, se eliminarán las filas que tengan el mismo valor en la columna `id_caso`.
+
+    -   **`.keep_all = TRUE`:** Esta opción adicional indica que se deben mantener todas las columnas del data frame original, incluso si tienen valores duplicados dentro de un mismo `id_caso`.
+
+**3.1.2 Tambien podemos contar la cantidad de duplicados por caso:**
+
+Para contar el número de duplicados, puedes usar `count()`:
+
+```{r}
+
+sum_duplicados <- duplicados %>%
+  count(id_caso) %>%
+  filter(n > 1)
+
+```
+
+### **3.2 Union de data frame y valores no duplicados**
+
+Ahora para lo que nos interesa en nuestro analisis es conocer los valores no duplicados:
 
 ```{r}
 
@@ -126,41 +183,51 @@ no_duplicados <- dengue_id %>%
 
 ```
 
-Y ahora seleccionaremos de los duplicados solo aquellos que dan como resultado confirmado:
+Y ahora seleccionaremos de los duplicados y los no duplicados solo aquellos que dan como resultado **confirmado**, ya que este dato nos sirve para la construcciond de nuestras tablas y gr{aficos:
 
 ```{r}
 
-duplicados <- duplicados %>% 
-  filter(clasificación_2 == "confirmado")
+duplicados_conf <- duplicados %>% 
+  filter(clasificacion_casos == "confirmado")
 
 
 ```
 
 ```{r}
 
-no_duplicados <- no_duplicados %>% 
-  filter(clasificación_2 == "confirmado")
+no_duplicados_conf <- no_duplicados %>% 
+  filter(clasificacion_casos == "confirmado")
 
 ```
 
-Uniremos entonces los dos marcos de datos para tener completo:
+**Uniremos entonces los dos marcos de datos para tener un data frame completo de datos confirmados:**
 
 ```{r}
 
 
 # Unir los data frames duplicados y no_duplicados
-datos_unidos <- bind_rows(duplicados, no_duplicados)
+datos_unidos <- bind_rows(duplicados_conf, no_duplicados_conf)
 
 # Mostrar el resultado
 print(datos_unidos)
 
 ```
 
-Y vamos a seleccionar solo la columnas con las que vamos a trabajar:
+-   **`datos_unidos <- bind_rows(duplicados, no_duplicados)`:**
+
+    -   **`datos_unidos <-`:** Crea un nuevo data frame llamado `datos_unidos` donde se almacenará el resultado de la unión.
+
+    -   **`bind_rows(duplicados, no_duplicados)`:** Esta parte es la clave. La función `bind_rows()` del paquete `dplyr` toma dos o más data frames y los une verticalmente, es decir, uno debajo del otro.
+
+        -   **`duplicados`:** Es el nombre del primer data frame que quieres unir.
+
+        -   **`no_duplicados`:** Es el nombre del segundo data frame que quieres unir.
+
+Finalmente armaremos un data frame con las columnas que vamos a trabajar para tener los datos resumindos:
 
 ```{r}
 
-dengue_casos <- datos_unidos %>% 
+dengue_resumido <- datos_unidos %>% 
   select(`Fecha de toma de muestra`,`Departamento Residencia`,`Localidad Residencia`,semana_epi, id_caso, `Edad Actual`) 
   
 
@@ -170,9 +237,11 @@ dengue_casos <- datos_unidos %>%
 
 ## **4. TABLAS: Preparar datos para Tablas**
 
+Para ello primero debemos constrir la columna de Regiones sanitaria ya que no existe, y debemos categorizar los departamentos con números. Para ello primero veremos que datos tenemos de la columna: **`` ` ```Departamento Residencia``` ` ```` , `Localidad Residencia` ``**
+
 ```{r}
 
-valores_unicos_dep <- unique(dengue_casos$`Departamento Residencia`)
+valores_unicos_dep <- unique(dengue_resumido$`Departamento Residencia`)
 print(valores_unicos_dep)
 ```
 
@@ -183,28 +252,38 @@ print(valores_unicos_loc)
 
 ```
 
-#### **Crear un Mapeo de Departamentos por Regiones Sanitarias**
+### 4.1 Crear condicional
+
+**Vamos a generar entonces un condicional para la creación de la columna de Región Sanitaria por Departamentos de Residencia**
 
 ```{r}
 
 
-dengue_regiones <- dengue_casos %>% 
+dengue_regiones <- dengue_resumido %>% 
   mutate(
     region_sanitaria = case_when(
-      `Departamento Residencia` %in% c("Fray Justo Santa María de Oro","O'Higgins","Mayor Luis J. Fontana", "San Lorenzo") ~ 1,
-      `Departamento Residencia` %in% c("Quitilipi","25 de Mayo",  "Presidencia de la Plaza","Sargento Cabral") ~ 2,
-      `Departamento Residencia` %in% c("San Fernando","General Donovan",  "Bermejo","Libertad","Tapenagá","1º de Mayo") ~ 3,
-      `Departamento Residencia` %in% c("9 de Julio","12 de Octubre","2 de Abril","Chacabuco","General Belgrano") ~ 4,
-      `Departamento Residencia` %in% c("General Güemes","Maipú") ~ 5,
-      `Departamento Residencia` %in% c("Libertador General San Martín") ~ 6,
-      `Departamento Residencia` %in% c("Almirante Brown","Independencia","Comandante Fernández") ~ 7,
-      `Departamento Residencia` %in% c("San Fernando","Independencia","Comandante Fernández") ~ 8,
+      `Departamento Residencia` %in% c(
+        "Fray Justo Santa María de Oro","O'Higgins","Mayor Luis J. Fontana", "San Lorenzo") ~ 1,
+      `Departamento Residencia` %in% c(
+        "Quitilipi","25 de Mayo",  "Presidencia de la Plaza","Sargento Cabral") ~ 2,
+      `Departamento Residencia` %in% c(
+        "San Fernando","General Donovan",  "Bermejo","Libertad","Tapenagá","1º de Mayo") ~ 3,
+      `Departamento Residencia` %in% c(
+        "9 de Julio","12 de Octubre","2 de Abril","Chacabuco","General Belgrano") ~ 4,
+      `Departamento Residencia` %in% c(
+        "General Güemes","Maipú") ~ 5,
+      `Departamento Residencia` %in% c(
+        "Libertador General San Martín") ~ 6,
+      `Departamento Residencia` %in% c(
+        "Almirante Brown","Independencia","Comandante Fernández") ~ 7,
+      `Departamento Residencia` %in% c(
+        "San Fernando","Independencia","Comandante Fernández") ~ 8,
       
     )
   )
 ```
 
-Ordenar según fecha:
+**Esto es solo para visualizar**: para observar la fecha de toma de muestra podemos ordenarla según fecha:
 
 ```{r}
 
@@ -213,17 +292,53 @@ dengue_regiones <- dengue_regiones %>%
 
 ```
 
-**Vamos a necesitar primero tener una tabla que contenga las localidades por departamento:**
+### 4.2 Identificar acumulados por departamento y por localidad
+
+Vamos a necesitar **primero conocer que Localidades se corresponden con que Deparamentos.** Para ello crearemos un data frame con localidad por departamento que no contenga repetidos de localidad pero si de departamento. Y además seleccionaremos las columnas que necesitamos para ello:
 
 ```{r}
 
 # Crear nuevo data frame sin repeticiones de localidades
+
 dengue_localidad_unicas <- dengue_regiones %>%
+  group_by(`Departamento Residencia`) %>%
   distinct(`Localidad Residencia`, .keep_all = TRUE) %>%
+  ungroup() %>%
   select(region_sanitaria,`Departamento Residencia`, `Localidad Residencia`)
 
-
 ```
+
+-   **`dengue_localidad_unicas <-`:**
+
+    -   Crea un nuevo objeto llamado `dengue_localidad_unicas` que almacenará el resultado de la operación.
+
+-   **`dengue_regiones %>%`:**
+
+    -    Toma el data frame `dengue_regiones` como punto de partida para las siguientes operaciones. El símbolo `%>%` es el operador pipe de dplyr, que permite encadenar operaciones de manera más legible.
+
+-   **agrupación:**
+
+    -   `group_by(`Departamento Residencia`)`: Agrupa los datos por la columna "Departamento Residencia", creando grupos para cada departamento.
+
+-   **`distinct(`Localidad Residencia`, .keep_all = TRUE)`:**
+
+    -   **`distinct()`:** Esta función identifica y elimina filas duplicadas en un data frame.
+
+    -   **`(`Localidad Residencia`)`:** Especifica que se buscarán duplicados únicamente en la columna "Localidad Residencia". Es decir, se eliminarán las filas que tengan la misma localidad de residencia.
+
+    -   **`.keep_all = TRUE`:** Esta opción adicional indica que se deben mantener todas las columnas del data frame original, incluso si tienen valores duplicados dentro de una misma localidad.
+
+    -   `group_by(`Departamento Residencia`)`: Agrupa los datos por la columna "Departamento Residencia", creando grupos para cada departamento.
+
+-   **`select(region_sanitaria,`Departamento Residencia`,`Localidad Residencia`)`:**
+
+    -   **`select()`:** Esta función selecciona las columnas específicas que quieres mantener en el nuevo data frame.
+
+    -   **`region_sanitaria`, `Departamento Residencia`, `Localidad Residencia`:** Indica que solo se quieren conservar estas tres columnas en el nuevo data frame.
+
+**Acumulados por departamento**
+
+Identificamos entonces acumulados por departamento y por localidad:
 
 ```{r}
 
@@ -240,12 +355,40 @@ depto_acum
 
 ```
 
-**Paso 2 - contar casos por Localidad anivel anual**
+-   **`depto_acum <- dengue_regiones %>%`:**
+
+    -   Se crea un nuevo data frame llamado `depto_acum` que almacenará el resultado de las operaciones siguientes.
+
+    -   Se toma el data frame original `dengue_regiones` como punto de partida.
+
+-   **`group_by(`Departamento Residencia`)`:**
+
+    -   Se agrupan los datos del data frame `dengue_regiones` por la columna `Departamento Residencia`. Esto significa que se agruparán todas las filas que tengan el mismo valor en esa columna.
+
+-   **`count()`:**
+
+    -   Se cuenta el número de filas en cada grupo creado en el paso anterior. Es decir, se cuenta cuántos casos de dengue hay en cada departamento. El resultado será una nueva columna que contará el número de casos.
+
+-   **`ungroup()`:**
+
+    -   Se deshace el agrupamiento creado en el paso 2. Esto es necesario para poder aplicar las siguientes operaciones a todo el data frame.
+
+-   **`mutate(`Departamento Residencia`= str_replace(`Departamento Residencia`, "1º de Mayo", "Primero de mayo"))`:**
+
+    -   **`mutate()`:** Se agrega una nueva columna o se modifican valores en columnas existentes.
+
+    -   **`(`Departamento Residencia`= str_replace(`Departamento Residencia`, "1º de Mayo", "Primero de mayo"))`:**
+
+        -   Se reemplaza el texto "1º de Mayo" por "Primero de mayo" en la columna `Departamento Residencia`. Esto es útil si quieres unificar la escritura de los nombres de los departamentos. La función `str_replace()` es de la librería `stringr` y se utiliza para realizar reemplazos de texto.
+
+**Acumulados por Localidad de Residencia:**
+
+Ahora hacemos lo mismo por Localidad de Residencia:
 
 ```{r}
 
 
-dengue_acumulados <- dengue_regiones %>%
+localidad_acumulados <- dengue_regiones %>%
   group_by(region_sanitaria,`Departamento Residencia`, `Localidad Residencia`) %>%
   count() %>%
   rename(Acumulados = n) %>%
@@ -253,26 +396,115 @@ dengue_acumulados <- dengue_regiones %>%
 
 ```
 
+-   **`group_by(region_sanitaria,`Departamento Residencia`,`Localidad Residencia`)`:**
+
+    -   Se agrupan los datos del data frame `dengue_regiones` por tres columnas: `region_sanitaria`, `Departamento Residencia` y `Localidad Residencia`. Esto significa que se agruparán todas las filas que tengan los mismos valores en estas tres columnas.
+
+-   **`count()`:**
+
+    -   Se cuenta el número de filas en cada grupo creado en el paso anterior. Es decir, se cuenta cuántos casos de dengue hay en cada combinación única de región sanitaria, departamento y localidad. El resultado será una nueva columna que contará el número de casos.
+
+-   **`rename(Acumulados = n)`:**
+
+    -   Se cambia el nombre de la columna creada en el paso anterior de `n` a `Acumulados`. Esto hace que el nombre de la columna sea más descriptivo.
+
+-   **`ungroup()`:**
+
+    -   Se deshace el agrupamiento creado en el paso 2. Esto es necesario para poder aplicar las siguientes operaciones a todo el data frame.
+
+### **4.3 Ciclo For para repetir acciones:** 
+
+Ahora supongamos que en nuestra limpieza de datos se nos pasaron algunos datos faltantes con la incripción: *(SIN DATO)*
+
 ```{r}
 
-dengue_acumulados <- dengue_acumulados %>%
+# Suponiendo que "dengue_regiones" es tu DataFrame
+valor_a_buscar <- "*(SIN DATO)*"  # Reemplaza con el valor que buscas
+
+
+
+for (col in names(dengue_regiones)) {
+  if (valor_a_buscar %in% dengue_regiones[[col]]) {
+    print(paste("El valor", valor_a_buscar, "se encontró en la columna", col))
+    # Agregar la columna a la lista de resultados
+    resultados[[col]] <- dengue_regiones[[col]]
+  }
+}
+
+
+```
+
+-   **Asignación del valor a buscar:**
+
+    -   `valor_a_buscar <- "*(SIN DATO)*"`: Se asigna el valor "*SIN DATO*" a una variable llamada `valor_a_buscar`. Este es el valor específico que queremos encontrar en nuestro DataFrame.
+
+-   **Creación de una lista vacía:**
+
+    -   `resultados <- list()`: Se crea una lista vacía llamada `resultados`. Esta lista servirá para almacenar las columnas del DataFrame donde se encuentre el valor buscado.
+
+-   **Ciclo `for` para iterar sobre las columnas:**
+
+    -   `for (col in names(dengue_regiones))`:
+
+        -   **`for`:** Esta palabra clave indica el inicio de un ciclo.
+
+        -   **`col in names(dengue_regiones)`:** Significa que la variable `col` tomará sucesivamente el valor de cada nombre de columna del DataFrame `dengue_regiones`. En cada iteración, `col` representará una columna diferente.
+
+-   **Condición para verificar si el valor está en la columna:**
+
+    -   `if (valor_a_buscar %in% dengue_regiones[[col]])`:
+
+        -   **`if`:** Esta palabra clave introduce una condición.
+
+        -   **`valor_a_buscar %in% dengue_regiones[[col]]`:** Verifica si el `valor_a_buscar` se encuentra dentro de los valores de la columna actual (accedida mediante `dengue_regiones[[col]]`). Si el valor se encuentra al menos una vez en la columna, la condición es verdadera.
+
+-   **Acciones si se encuentra el valor:**
+
+    -   **Imprimir un mensaje:** Si la condición del `if` es verdadera, se imprime un mensaje indicando en qué columna se encontró el valor.
+
+    -   **Agregar la columna a la lista de resultados:** Se agrega la columna completa donde se encontró el valor a la lista `resultados`. Esto permite guardar las columnas relevantes para un análisis posterior.
+
+**Estructura básica del ciclo `for` en R:**
+
+```{r}
+
+for (i in secuencia) {
+  # Código a ejecutar en cada iteración
+}
+
+```
+
+-   **`i`:** Es una variable que tomará el valor de cada elemento de la secuencia en cada iteración.
+
+-   **`secuencia`:** Puede ser un vector, una lista o cualquier otro objeto iterable que defina los valores que tomará `i`.
+
+-   **`# Código a ejecutar en cada iteración`:** Es el bloque de código que se ejecutará repetidamente para cada valor de `i`.
+
+```{r}
+
+# Fragmento de código
+ciudades <- c("Resistencia", "San Fernando", "San Lorenzo")
+for (ciudad in ciudades) {
+  print(paste("Los casos confirmados residen en:", ciudad))
+}
+
+
+```
+
+Si hubieramos encontrado datos faltantes con esos nombres podríamos utilizar esta línea para pasarlos a **`na:`**
+
+```{r}
+
+localidad_acumulados <- localidad_acumulados %>%
   mutate(across(where(is.character), ~ na_if(., "*SIN DATO* (*SIN DATO*)")))  
 
 ```
 
-**Compruebo si tengo todas las observaciones:**
+### 4.4 Identificar acumulados por semana
 
-```{r}
+------------------------------------------------------------------------
 
-# Calcular el total de frecuencias
-
-# total_acumulados <- sum(dengue_localidad$Acumulados, na.rm = TRUE)
-# 
-# total_acumulados
-
-```
-
-**Ahora saco frecuencia de la ultima semana:**
+Este es un ejemplo si estamos contando desde el día de hoy, pero como trabajamos con datos de marzo no lo vamos a correr:
 
 ```{r}
 
@@ -287,7 +519,11 @@ dengue_acumulados <- dengue_acumulados %>%
 
 ```
 
-**Ahora saco frecuencia de la ultima semana (contemplando que la tabla que nos dieron es de marzo:**
+------------------------------------------------------------------------
+
+**Acumulados por semana:**
+
+Ahora tomo los acumulados correspondientes a la última semana de marzo del 2024:
 
 ```{r}
 
@@ -311,25 +547,41 @@ dengue_sem <- dengue_regiones %>%
   
 ```
 
-```{r}
+**Esto es lo que hicimos arriba:**
 
-dengue_sem <- dengue_sem %>%
-  mutate(across(where(is.character), ~ na_if(., "*SIN DATO* (*SIN DATO*)")))  
+-   Se crea un objeto llamado **ultima_semana_marzo** de **tipo intervalo:**
 
+Un **intervalo** en `lubridate` representa un período de tiempo definido por una fecha y hora de inicio y una fecha y hora de fin. Es una manera de especificar un rango temporal para realizar análisis o filtrado de datos.
 
+La función principal para crear intervalos en **`lubridate` es `interval()`.** Toma dos argumentos: la fecha y hora de inicio y la fecha y hora de fin.
 
+**La función** **`%within%`** se utiliza para comprobar si una fecha o un intervalo cae dentro de otro intervalo.
+
+Esta línea de código selecciona todas las filas donde la fecha de toma de muestra se encuentra dentro del intervalo `ultima_semana_marzo`.
+
+-   Este intervalo abarca desde el 10 de marzo de 2024 hasta el 16 de marzo de 2024, inclusive.
+
+-   Se crea un nuevo dataframe llamado `dengue_sem` a partir del dataframe original `dengue_regiones`.
+
+```{=html}
+<!-- -->
 ```
+-   Se utiliza la función `filter` de dplyr para seleccionar solo aquellas filas donde la columna `Fecha de toma de muestra` se encuentra dentro del intervalo definido anteriormente.
 
-```{r}
+-   **`group_by:`** Se agrupan los datos por las columnas `region_sanitaria`, `Departamento Residencia` y `Localidad Residencia`.
 
-
-# Total_frecuencia_2 <- sum(dengue_fecha$Acumulados_sem)
-# 
-# Total_frecuencia_2
-
+```{=html}
+<!-- -->
 ```
+-   **La función `count()`** cuenta la cantidad de observaciones en cada grupo, es decir, el número de casos de dengue en cada combinación de región, departamento y localidad.
 
-**O por semana epidemiológica:**
+-   Se renombra la columna resultante de `count()` (que por defecto se llama `n`) a `Acumulados_sem` para indicar que se trata del acumulado de casos en esa semana.
+
+-   Se elimina el agrupamiento para poder realizar otras operaciones si fuera necesario.
+
+------------------------------------------------------------------------
+
+A modo de ejemplo: También podemos hacerlo por la última semana epidemiológica:
 
 ```{r}
 
@@ -343,18 +595,45 @@ dengue_sem <- dengue_sem %>%
 
 ```
 
-**Contar por semana epidemiologica**
+**Esto es lo que hicimos arriba**
+
+-   **Filtrado por la última semana epidemiológica:**
+
+    -   `filter(semana_epi == max(semana_epi, na.rm = TRUE)) %>%`:
+
+        -   `filter()`: Esta función se utiliza para seleccionar las filas que cumplen una determinada condición.
+
+        -   `semana_epi == max(semana_epi, na.rm = TRUE)`: Aquí se filtra para seleccionar las filas donde la columna `semana_epi` tiene el valor máximo. Esto significa que se están seleccionando los registros correspondientes a la última semana epidemiológica en los datos.
+
+        -   `na.rm = TRUE`: Este argumento indica que se deben omitir los valores NA (Not Available, es decir, valores faltantes) al calcular el máximo.
+
+-   **Conteo de casos por localidad:**
+
+    -   `count(`Localidad Residencia`) %>%`:
+
+        -   `count()`: Esta función cuenta el número de observaciones por grupo. En este caso, se agrupa por la columna `Localidad Residencia` y cuenta cuántos registros hay en cada localidad.
+
+-   **Renombramiento de la columna:**
+
+    -   `rename(Frecuencia_2 = n)`:
+
+        -   `rename()`: Esta función se utiliza para cambiar el nombre de una columna.
+
+        -   Se cambia el nombre de la columna resultante del conteo (`n`, que por defecto contiene el número de observaciones en cada grupo) a `Frecuencia_2`.
+
+**Otro ejemplo:** si queremos contar los acumulados por semana epidemiológica.
 
 ```{r}
 
+# Ejemplo de conteo por semana epidemiológica
 
+# df_semana <- dengue_regiones %>%
+#   group_by(semana_epi) %>%
+#   summarise(cantidad_casos = n(), .groups = 'drop')
+# 
+# 
+# print(df_semana)
 
-df_semana <- dengue_regiones %>%
-  group_by(semana_epi) %>%
-  summarise(cantidad_casos = n(), .groups = 'drop')
-
-# Ver el resultado
-print(df_semana)
 ```
 
 -   `group_by(semana_epi)`: Agrupa los datos por la columna `semana_epi` (semana epidemiológica).
@@ -363,26 +642,17 @@ print(df_semana)
 
 -   `.groups = 'drop'`: Desagrupar después de hacer la sumarización.
 
-Este código te devolverá un resumen con la cantidad de casos por cada semana epidemiológica.
+**Este código te devolverá un resumen con la cantidad de casos por cada semana epidemiológica.**
 
-### PASO3
+------------------------------------------------------------------------
 
-**Union de los data frame que tengo, de dengue_localidades unicas, dengue acumulados y dengue sem, donde colocaremos 0 en caso que no haya datos:**
+### 
 
-Primero comprobamos que no haya duplicados por la columna que vamos a unir:
+### 4.5 Unión de data frame función: left_join()
 
-```{r}
+Ahora necesitaremos para la tabla obtener un sólo data frame con la información de los acumulados por semana y por Localidad. Esto lo obtengo de tres marcos de datos distintos: **localidades_acumulados, dengue_localidades_únicas y dengue_sem**, donde colocaremos **0** en caso que no haya datos:
 
-# Asegúrate de que "Localidad" sea única en data_frame1 y data_frame2 antes de unirlos
-dengue_acumulados <- dengue_acumulados %>%
-  distinct(`Localidad Residencia`, .keep_all = TRUE)
-
-dengue_sem <- dengue_sem %>%
-  distinct(`Localidad Residencia`, .keep_all = TRUE)
-
-
-
-```
+Primero comprobamos que no haya duplicados por la columna clave por la que vamos a unir ya que si no la función nos tirará error:
 
 ```{r}
 
@@ -390,69 +660,144 @@ dengue_sem <- dengue_sem %>%
 library(dplyr)
 
 # Asegúrate de que las columnas clave sean únicas en data_frame1 y data_frame2
+
 dengue_sem <- dengue_sem %>%
   group_by(`Localidad Residencia`, `Departamento Residencia`) %>%
   summarize(Acumulados_sem = sum(Acumulados_sem, na.rm = TRUE), .groups = "drop")
 
 
 
+```
+
+-   **`group_by(`Localidad Residencia`,`Departamento Residencia`)`:**
+
+    -   **Agrupamiento:** Agrupa los datos por dos variables:
+
+        -   `Localidad Residencia`: La localidad donde reside el paciente.
+
+        -   `Departamento Residencia`: El departamento donde reside el paciente.
+
+        -   Esto crea grupos para cada combinación única de localidad y departamento.
+
+-   **`summarize(Acumulados_sem = sum(Acumulados_sem, na.rm = TRUE), .groups = "drop")`:**
+
+    -   **Resumen:** Para cada grupo creado, realiza un cálculo.
+
+        -   `Acumulados_sem = sum(Acumulados_sem, na.rm = TRUE)`:
+
+            -   Calcula la suma de los valores en la columna `Acumulados_sem` (probablemente el número acumulado de casos de dengue) dentro de cada grupo.
+
+            -   `na.rm = TRUE`: Ignora los valores faltantes (NA) al realizar la suma.
+
+        -   `.groups = "drop"`: Elimina el agrupamiento después de realizar el cálculo, resultando en un dataframe plano.
+
+Lo mismo para el data frame 2, y permitirá que no me duplique la columa "region sanitaria"
+
+```{r}
+
+ localidad_acumulados <-  localidad_acumulados %>%
+  group_by(`Localidad Residencia`, `Departamento Residencia`) %>%
+   summarize(Acumulados = sum(Acumulados, na.rm = TRUE), .groups = "drop")
 
 
 
 ```
 
-```{r}
-
-# #dengue_acumulados <- dengue_acumulados %>%
-#   group_by(`Localidad Residencia`, `Departamento Residencia`) %>%
-#   summarize(Acumulados = sum(Acumulados, na.rm = TRUE), .groups = "drop")
-
-
-
-```
+**Ahora sí uno los dos data frame:**
 
 ```{r}
 
 
-# Luego realiza los joins como de costumbre usando las dos columnas clave
+# Luego realiza los joins usando las dos columnas clave
 
-dengue_localidad_unicas <- dengue_localidad_unicas %>%
-  left_join(dengue_sem, by = c("Localidad Residencia", "Departamento Residencia")) %>%
-  left_join(dengue_acumulados, by = c("Localidad Residencia", "Departamento Residencia")) %>%
+dengue_join <- dengue_localidad_unicas %>%
+  left_join(dengue_sem, by = c(
+    "Localidad Residencia", "Departamento Residencia"
+    )
+    ) %>%
+  left_join(localidad_acumulados, by = c(
+    "Localidad Residencia", "Departamento Residencia"
+    )
+    ) %>%
   mutate(Acumulados_sem = coalesce(Acumulados_sem, 0),
-         Acumulados = coalesce(Acumulados, 0))
+         Acumulados = coalesce(Acumulados, 0)
+         )
+
+
 
 ```
 
--   **`group_by(Localidad, Departamento)`**: Agrupa los datos por las dos columnas clave. Esto asegura que los valores duplicados se manejen correctamente.
+-   **`left_join(dengue_sem, by = c("Localidad Residencia", "Departamento Residencia")) %>%`:**
 
--   **`summarize()`**: Resume los datos duplicados (por ejemplo, sumando valores numéricos). Puedes usar `paste()` en lugar de `sum()` si estás trabajando con texto.
+    -   **Unir a la izquierda:** Une el dataframe `dengue_sem` al dataframe `dengue_localidad_unicas` usando un "left join". Esto significa que se mantienen todas las filas de `dengue_localidad_unicas`, y se añaden las columnas de `dengue_sem` cuando haya coincidencias en las columnas `Localidad Residencia` y `Departamento Residencia`.
 
--   **`left_join(by = c("Localidad", "Departamento"))`**: Realiza la unión de `data_frame3` con los otros data frames usando ambas columnas como claves.
+    -   **Claves de unión:** Las columnas `Localidad Residencia` y `Departamento Residencia` se utilizan como claves para unir los dataframes.
+
+-   **`left_join(dengue_acumulados, by = c("Localidad Residencia", "Departamento Residencia")) %>%`:**
+
+    -   **Otro join a la izquierda:** Se une el dataframe `dengue_acumulados` al resultado del join anterior, nuevamente usando las mismas columnas como claves.
+
+-   **`mutate(Acumulados_sem = coalesce(Acumulados_sem, 0), Acumulados = coalesce(Acumulados, 0))`:**
+
+    -   **Crear o reemplazar columnas:**
+
+        -   `coalesce(Acumulados_sem, 0)`: Reemplaza los valores NA (valores faltantes) en la columna `Acumulados_sem` por 0. Esto es útil cuando no hay datos de casos acumulados semanales para una localidad específica.
+
+        -   `coalesce(Acumulados, 0)`: Hace lo mismo para la columna `Acumulados`.
+
+```{r}
+
+# El código de left_join()
+
+# dataframe_combinado <- left_join(dataframe1, dataframe2, by = "columna_comun")
+
+```
+
+**Otros tipos de join:**
+
+-   **inner_join:** Solo mantiene las filas que tienen coincidencias en ambas tablas.
+
+-   **right_join:** Es lo opuesto a left_join, mantiene todas las filas del dataframe de la derecha.
+
+-   **full_join:** Mantiene todas las filas de ambos dataframes.
 
 **Corrijo "1°" de mayo por "Primero de Mayo"**
 
 ```{r}
 
-library(stringr)
-
-dengue_final <- dengue_localidad_unicas %>%
-  mutate(`Departamento Residencia` = str_replace(`Departamento Residencia`, "1º de Mayo", "Primero de mayo"))
-                                           
+ library(stringr)
+ 
+ dengue_final <- dengue_join %>%
+   mutate(`Departamento Residencia` = str_replace(`Departamento Residencia`, "1º de Mayo", "Primero de mayo"))
+                                            
 
 ```
 
-Renombrar columnas
+-   **`str_replace`:** Esta función, de la librería `stringr`, se utiliza para buscar y reemplazar patrones de texto dentro de una cadena de caracteres.
+
+-   **Explicación detallada:**
+
+    -   Se selecciona la columna `Departamento Residencia`.
+
+    -   Se busca la cadena de texto "1º de Mayo" dentro de esa columna.
+
+    -   Si se encuentra, se reemplaza por "Primero de mayo".
+
+Renombrar columnas para mi tabla:
 
 ```{r}
 
 
-dengue_final <-  dengue_final %>% 
+
+dengue_final <-  dengue_join %>% 
   rename(
     `Region Sanitaria` = region_sanitaria,
     `Confirmados última semana` = Acumulados_sem,
      Localidad = `Localidad Residencia`,
-     Departamento = `Departamento Residencia`)
+     Departamento = `Departamento Residencia`) %>% 
+ group_by(Departamento) %>%  # Agrupar por Departamento
+  arrange(Departamento) %>% 
+  ungroup()
     
     
 dengue_final
@@ -462,11 +807,13 @@ dengue_final
 
 ```
 
-## 4. Tablas
+## 5. Tablas
 
-Para crear tablas en informes RMarkdown, puedes usar `kable()`,Si estás generando documentos Word, flextable es útil. Para tablas elegantes en informes, gt es una buena opción.
+Para la creación de tablas es posible construirla de distintas maneras con una variedad de librerias. Aquí veremos la función **`gt() y flextable().`**
 
-### 3.1 Función gt()
+### 5.1 Función gt()
+
+Cargamos la librería:
 
 ```{r}
 
@@ -474,29 +821,39 @@ library(gt)
 
 ```
 
+Como una opcion bien simple podemos visualizar la tabla simplemente llamando a esta librería:
+
 ```{r}
 
-dengue_final
+
+# Crear una tabla básica con gt
+tabla <- dengue_final %>%
+  gt()
+
+# Visualizar la tabla
+tabla
 ```
 
-**Vamos a comenzar a realizar un atabla con (gt):**
+Vamos a comenzar a realizar una tabla con (gt):
 
 ```{r}
 
 
 
 dengue_final %>%
-   group_by(Departamento) %>% 
-  gt(rowname_col = "Deparatmento") %>% 
+#   group_by(Departamento) %>%  # Este código lo usaremos para que departamento solo se vea una vez, lo que provoca que se  vea como fila separada del resto
+  gt(rowname_col = "Departamento") %>% 
   tab_header(
     title = md("**Casos Dengue**"),
     subtitle = md("Casos *confirmados* de dengue según lugar de residencia, provincia del Chaco, año 2024")
   ) %>%
-  cols_label(
+ 
+   cols_label(
     `Region Sanitaria` = md("Región <br>Sanitaria"), # Los nombes largos los ubico en lineas distintas
     `Confirmados última semana` = md("Confirmados última<br>semana")
     ) %>% 
-  opt_align_table_header(align = "left") %>% 
+ 
+   opt_align_table_header(align = "left") %>%  
   cols_width(   # ancho de columnas
     `Region Sanitaria`~ px(200),
     Departamento ~ px(200),
@@ -504,17 +861,20 @@ dengue_final %>%
     `Confirmados última semana` ~ px(150),
       Acumulados ~ px(150)
   ) %>% 
+  
   tab_source_note(  # Colocar notas de origen de datos
     source_note = md("Fuente de datos: Sistema de Información Sanitaria Argentino **(SISA)**.")) %>% 
   tab_footnote(   # Agregar nota al pie de nombre de columna
     footnote = "Acumulados anuales",
     locations = cells_column_labels(columns = Acumulados)
   ) %>% 
-tab_footnote(   # segunda nota
+
+  tab_footnote(   # segunda nota
     footnote = "año 2024",
     locations = cells_column_labels(columns = Acumulados)
   ) %>% 
-  tab_footnote(   # nota en celdas de columna
+
+    tab_footnote(   # nota en celdas de columna
     footnote = "ver registro localidades",
     locations = list(
       cells_column_labels(columns = Localidad),
@@ -532,7 +892,8 @@ tab_footnote(   # segunda nota
   #     rows = Departamento == "Fray Justo Santa María de Oro"  # Reemplaza "NombreEspecifico" con el nombre real que deseas resaltar
   #   )
   # ) %>% 
-  data_color(
+ 
+   data_color(
     columns = Acumulados,
     colors = scales::col_numeric(
     palette = c("#47e886","#f7616c"),
@@ -543,6 +904,54 @@ tab_footnote(   # segunda nota
                   weight = 600
   )
     
+
+```
+
+```{r}
+# Llenar 'Departamento' solo en la primera fila de cada grupo
+dengue_final_grouped <- dengue_final %>%
+  arrange(Departamento) %>% 
+  mutate(Departamento = ifelse(duplicated(Departamento), "", Departamento)) 
+
+```
+
+```{r}
+
+
+
+# Crear la tabla con gt
+dengue_final_grouped %>%
+  gt(rowname_col = "Departamento") %>%
+  tab_header(
+    title = md("**Casos Dengue**"),
+    subtitle = md("Casos *confirmados* de dengue según lugar de residencia, provincia del Chaco, año 2024")
+  ) %>%
+  cols_label(
+    `Region Sanitaria` = md("Región <br>Sanitaria"), 
+    `Confirmados última semana` = md("Confirmados última<br>semana")
+  ) %>%
+  opt_align_table_header(align = "left") %>%
+  cols_width(
+    `Region Sanitaria` ~ px(200),
+    Departamento ~ px(200),
+    Localidad ~ px(200),
+    `Confirmados última semana` ~ px(150),
+    Acumulados ~ px(150)
+  ) %>%
+  tab_source_note(
+    source_note = md("Fuente de datos: Sistema de Información Sanitaria Argentino **(SISA)**.")
+  ) %>%
+  tab_footnote(
+    footnote = "Acumulados anuales",
+    locations = cells_column_labels(columns = Acumulados)
+  ) %>% 
+  
+  tab_stubhead(label = md("Departamentos")
+  )
+   
+
+
+
 
 ```
 
