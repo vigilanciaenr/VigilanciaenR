@@ -5,6 +5,7 @@
 - [Clase 1 virtual](#clase-1-virtual)
 - [Enlaces de utilidad](#enlaces-de-utilidad)
 -  [Clase 2 presencial: Importación de datos](#enlaces-de-utilidad)
+
 ------------
 
 # Programa de Capacitación para la Vigilancia Epidemiológica: Automatización de reportes en R
@@ -137,6 +138,9 @@ Para el primer encuentro presencial trabajaremos sobre el armado de grupos para 
 
 [Repositorio](https://github.com/vigilanciaenr/VigilanciaenR)
 
+# Clase 3 presencial: Gestión de datos. Creación de Tablas y gráficos
+
+[Clase 3 presencial](https://vigilanciaenr.github.io/VigilanciaenR/Clase%203/Clase_3.html) 
 
 
 # Enlaces de utilidad
