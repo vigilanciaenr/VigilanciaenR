@@ -133,7 +133,11 @@ Para el primer encuentro presencial trabajaremos sobre el armado de grupos para 
 
 [Clase 2 presencial](https://vigilanciaenr.github.io/VigilanciaenR/Clase%202/Clase_2.html)
 
+[Clase 2.1 presencial](https://vigilanciaenr.github.io/VigilanciaenR/Clase%202/Clase_2.1.html)
+
 [Repositorio](https://github.com/vigilanciaenr/VigilanciaenR)
+
+
 
 # Enlaces de utilidad
 
