@@ -7,6 +7,7 @@
 -  [Clase 2 presencial: Importación de datos](#enlaces-de-utilidad)
 -  [Clase 2.1 presencial](https://vigilanciaenr.github.io/VigilanciaenR/Clase%202/Clase_2.1.html)
 -  [Clase 2.1 Ejercicio Ira - presencial](https://vigilanciaenr.github.io/VigilanciaenR/Clase%202/Ejercicio%20IRA_%20Clase%202.1.html)
+-  [Clase 3 presencial](https://vigilanciaenr.github.io/VigilanciaenR/Clase%203/Clase_3.html) 
 
 
 ------------
