@@ -148,6 +148,7 @@ Para el primer encuentro presencial trabajaremos sobre el armado de grupos para 
 
 [Clase 3 presencial](https://vigilanciaenr.github.io/VigilanciaenR/Clase%203/Clase_3.html) 
 
+[PPT Visualización de datos](https://vigilanciaenr.github.io/VigilanciaenR/Clase%203/ppt_visualizaciones.html)
 
 # Enlaces de utilidad
 
@@ -160,7 +161,7 @@ Para el primer encuentro presencial trabajaremos sobre el armado de grupos para 
 [Video instalación de Quarto](https://www.youtube.com/watch?v=uHaDmPtO-YQ&ab_channel=Estad%C3%ADstica%C3%BAtil "Video instalación de Quarto")
 
 <!-- 
-[PPT Visualización de datos](https://vigilanciaenr.github.io/VigilanciaenR/Clase%203/ppt_visualizaciones.html)
+
 -->
 
 
