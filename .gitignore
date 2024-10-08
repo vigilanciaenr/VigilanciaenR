@@ -6,3 +6,7 @@
 .Reporte infecciones respiratotias marzo 2024.xlsx
 .secrets
 .secrets/
+.Rdata
+.httr-oauth
+.DS_Store
+.quarto
