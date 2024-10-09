@@ -128,7 +128,7 @@ Para el primer encuentro virtual tendremos dos materiales de clases:
 
 [Clase 1 virtual](https://vigilanciaenr.github.io/VigilanciaenR/Clase%201%20virtual/clase%201%20virtual.html)
 
-[Material de lectura 1](https://vigilanciaenr.github.io/VigilanciaenR/Clase%201/Material_lectura_1.html#objetos-en-r)
+[Material de lectura 1](https://vigilanciaenr.github.io/VigilanciaenR/Clase%201/Material_lectura_1.html)
 
 [Material de lectura 2](https://vigilanciaenr.github.io/VigilanciaenR/Clase%201/Material_lectura_2.html)
 
