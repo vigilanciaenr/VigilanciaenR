@@ -99,7 +99,7 @@ Todos los lenguajes de programación necesitan almacenar información para pod
 
 Veremos sobre todo algunos de ellos para pasar a ver como se utilizan en las funciones.
 
-## Variables
+## **Variables**
 
 Una variable en programación es un espacio de almacenamiento con un nombre simbólico (un identificador) que se refiere o está asociado a un valor o información almacenada.
 
@@ -192,7 +192,7 @@ print(paste("El área del rectángulo es:",area))
 
 Aquí arriba el **`paste()`** concatena la linea de caracteres **`"El área del rectángulo es:"`** con el valor del cálculo del área. Y `print()` lo impirme para que podamos verlo.
 
-## Vectores
+## **Vectores**
 
 ### Vectores numéricos
 
