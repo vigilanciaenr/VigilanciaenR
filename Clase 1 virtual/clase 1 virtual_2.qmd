@@ -1,0 +1,697 @@
+---
+title: "Clase 1.2 virtual"
+format: 
+  html:
+    embed-resources: true
+    toc: true                # Habilita la tabla de contenidos
+    toc-title: "Índice de Contenidos"  # Título del índice
+    toc-depth: 3             # Nivel de profundidad del índice (hasta h3)
+    toc-location: left       # Ubicación del índice (izquierda)
+footnotes-hover: true # muestra notas al pie
+smooth-scroll: true # suaviza el scroll
+editor: visual
+code-copy: true            # Permite copiar el código desde el documento
+---
+
+## **Ejercicio n°1**
+
+### Creación de marco de datos R
+
+En primer lugar vamos a generar un marco de datos o data frame, desde donde vamos a contener y manipular datos.
+
+**Simplifica mucho para la escritura y nomenclatura de variables el uso de minúsculas y evitar espacios entre palabras.**
+
+**Variable** como una **caja**, que tiene una **etiqueta** que es el **nombre de la variable.** Dentro de la caja podemos **guardar un valor**.
+
+```{r}
+
+a <- 1
+
+print(a)
+```
+
+```{r}
+
+b <- 2
+b
+```
+
+```{r}
+
+a +3
+
+```
+
+**Importante el orden de como se corren los códigos**
+
+```{r}
+
+b+3
+```
+
+Variable de caracter
+
+```{r}
+
+c <- "casos"
+
+c
+```
+
+Un **vector es un grupo elementos ordenados**, todos deben ser del **mismo tipo (**todos números o todos caracteres por ejemplo). La forma más simple de crear un vector es usando la **`función c()`** y separando por comas a los elementos que lo forman:
+
+```{r}
+
+
+# creación de vector simple
+
+casos_dengue <- c("confirmado", "sospechoso", "confirmado", "sospechoso")
+
+# imprime el vector
+
+casos_dengue
+
+```
+
+```{r}
+
+class(casos_dengue)
+```
+
+```{r}
+
+edad <- c(23,65,89,45,33,21,42)
+
+edad
+```
+
+```{r}
+
+class(edad)
+
+```
+
+**Podemos concatenar nuestras dos variables con `c()`**
+
+```{r}
+
+casos_2 <- c(casos_dengue,edad)
+
+casos_2
+
+
+```
+
+**\[1\] en el resultado los numeros en corchetes marcan la pocicion que ocupan las vacriables en los vectores.**
+
+Ahora la **edad se muestra como caracter**
+
+```{r}
+
+class(casos_2)
+```
+
+```{r}
+
+ 
+a<-c(1:8) #Es lo mismo que escribir c(1,2,3,4)
+
+a
+
+```
+
+**¿Que hace si operamos vectores de diferentes longitudes?** R aplica una técnica llamada "recycling" o **reciclaje**
+
+```{r}
+
+vector1 <- c(1, 2, 3, 4, 5)  # Longitud 5
+vector2 <- c(10, 20)        # Longitud 2
+
+# Realiza una operación aritmética
+resultado <- vector1 + vector2
+
+resultado
+
+```
+
+-   `vector1` tiene 5 elementos: 1, 2, 3, 4, 5
+
+-   `vector2` tiene 2 elementos: 10, 20
+
+Cuando sumas `vector1` y `vector2`, R recicla `vector2` para que coincida con la longitud de `vector1`. Esto significa que `vector2` se repite para alinear con `vector1`:
+
+-   La operación es equivalente a sumar `vector1` con `vector2` reciclado: `(10, 20)` se repite para igualar la longitud de `vector1`.
+
+-   El reciclaje se realiza así: `vector2` se convierte en `10, 20, 10, 20, 10`
+
+Entonces el cálculo es:
+
+-   (1 + 10) = 11
+
+-   (2 + 20) = 22
+
+-   (3 + 10) = 13
+
+-   (4 + 20) = 24
+
+-   (5 + 10) = 15
+
+Ahora generaremos otro vector y los combinamos:
+
+```{r}
+
+id_caso <- c("1","2","3","4") 
+
+id_caso
+
+```
+
+Combinación de vectores para crear un data frame o marco de datos. Este aparece ahora en el **entorno global**
+
+```{r}
+
+# Creamos un data frame
+
+df <- data.frame(
+   caso_dengue = c("confirmado", "sospechoso", "confirmado", "descartado"),
+   id_caso = c("1","2","3","4"))
+  
+df
+
+```
+
+```{r}
+
+ls()  # Muestra todos los objetos en el entorno global
+
+```
+
+```{r}
+
+rm(df)          # Elimina el objeto 'x' del entorno global
+
+```
+
+```{r}
+
+```
+
+Es lo mismo que:
+
+```{r}
+
+df <- data.frame(casos_dengue,id_caso)
+
+df
+```
+
+Se puede luego agregar una tercera columna con edades por ejemplo. **Es importate tener la misma cantidad de filas y columnas.**
+
+```{r}
+
+edad <- c(34,65,13,25)
+
+df_2 <- data.frame(casos_dengue,id_caso,edad)
+
+```
+
+```{r}
+
+df_2
+```
+
+R ahora lo reconoce `df_2`como un **objeto** con el que podemos hacer cosas y **reemplaza** al anterior porque se llama igual
+
+```{r}
+  
+nrow(df_2)#nos dice el numero de filas del DF
+
+ncol(df_2)#nos dice la cantidad de columnas de DF
+
+dim(df_2)# nos devuelve un vector con los valores filas y columnas de DF
+
+```
+
+```{r}
+
+colnames(df_2)#nos dice los nombres de las columnas del DF
+
+
+```
+
+```{r}
+
+summary(df_2)#Nos retorna información de cada variable que forma el df
+```
+
+-   **Length: 4**: La columna `edad` tiene 4 elementos.
+
+-   **Min. :13.00**: El valor mínimo en la columna `edad` es 13 años.
+
+-   **1st Qu.:22.00**: El primer cuartil (Q1) es 22 años. Esto significa que el 25% de los datos están por debajo de 22 años.
+
+-   **Median :29.50**: La mediana es 29.5 años. La mediana divide los datos en dos mitades; la mitad de los valores son menores o iguales a 29.5 años y la otra mitad son mayores o iguales.
+
+-   **Mean :34.25**: La media o promedio de la columna `edad` es 34.25 años.
+
+-   **3rd Qu.:41.75**: El tercer cuartil (Q3) es 41.75 años. Esto indica que el 75% de los datos están por debajo de 41.75 años.
+
+-   **Max. :65.00**: El valor máximo en la columna `edad` es 65 años.
+
+**Marcadores de posición `[ ]`y funcionalidades de base de R**
+
+Si queremos acceder a una variable en especifico debemos marcar entre corchetes y comas las posiciones que buscamos:
+
+**Primero se coloca la fila y luego la columna**
+
+```{r}
+
+df_2[2,1]
+
+```
+
+Es decir accedemos a la segunda fila y la primera columna
+
+Si dejamos en blanco las filas R interpreta que queremos seleccionar **toda una columna.** Por ejemplo, queremos emplear todos los elementos de la primera columna.
+
+```{r}
+
+df_2[ ,1]
+```
+
+o también podemos seleccionar todos los elementos de una fila
+
+```{r}
+
+df_2[2, ]
+```
+
+Si queremos modificar el valor de una columna tambien usamos corchetes:
+
+```{r}
+
+df_2[2,1] <- "confirmado"
+
+df_2
+```
+
+### Manipulación con dplyr
+
+Sus funciones principales, como **`filter(), select(), mutate(), summarize() y arrange()`**es parte del **`tidyverse`,** que es un conjunto de paquetes en R diseñados para el análisis de datos y la ciencia de datos.
+
+Por ejemplo algunas variables que R puede tomar como carcateres las queremos pasar a numéricas para poder manipularlas.
+
+### Seleccionar columnas
+
+**Usando la sintaxis base de R tambien podemos hacer con \$**
+
+Seleccionar una columna (como `id_caso`):
+
+```{r}
+
+df_2$id_caso
+```
+
+Seleccionar múltiples columnas (como `id_caso` y `edad`):
+
+```{r}
+
+df_2[c("id_caso", "edad")]
+
+```
+
+**Usando la función `select()` de `library(dplyr)`**
+
+Seleccionar datos del data frame:
+
+```{r}
+
+```
+
+```{r}
+
+
+library(dplyr)
+
+
+```
+
+```{r}
+
+
+# Selecciono del marco de datos df_2 la columna de id_caso
+
+select(df_2,id_caso)
+
+
+# Selecciono del marco de datos df_2 mas de una columna
+
+select(df_2, id_caso, edad)
+
+# Esto no se guardará en un nuevo data frame si no le asignamos un nombre a una nueva variable
+
+```
+
+**Siempre se escibre: `Select (.data, columna)`**
+
+```{r}
+
+# Puedo seleccionar columnas por posición
+
+select(df_2,(2:3))
+
+```
+
+**Reordenar columnas por nombre**
+
+```{r}
+# Reordenar columnas por nombre
+
+select(df_2,edad, id_caso, casos_dengue)
+
+```
+
+**Mover una columna al principio**
+
+```{r}
+
+select(df_2, casos_dengue, everything())
+
+```
+
+**Renombrar columnas**
+
+Podemos hacerlo con la función **rename()**
+
+```{r}
+
+
+
+rename(df_2,
+       id_lab = id_caso)
+
+
+```
+
+### Seleccionar filas
+
+**Usando la sintaxis base de R:**
+
+```{r}
+
+
+# Seleccionar múltiples filas, por ejemplo, las primeras dos filas:
+
+df_2[1:2, ]
+
+```
+
+```{r}
+
+# Seleccionar las filas donde la edad de la columna edad es mayor a 30
+
+df_2[df_2$edad > 30, ]
+```
+
+**Usando la función `filter()` de `library(dplyr)`**
+
+Para que funcione, la `filter()`función requiere que le pasemos dos valores.
+
+**El primer valor es el nombre del objeto del marco de datos con las filas que queremos subdividir.** El s**egundo es la condición** que se utiliza para subdividir las filas. Supongamos que queremos hacer un análisis de subgrupos utilizando solo los casos confirmados.
+
+```{r}
+
+# Elegimos solo casos confirmados
+
+filter(df_2, casos_dengue == "confirmado")
+
+```
+
+```{r}
+
+# Seleccionamos solo cuando tengan más de 30 años
+
+filter(df_2, edad > 30)
+
+
+```
+
+```{r}
+
+# ultimas filas del data frame contando desde la última
+
+slice_tail(df_2, n = 3)
+
+```
+
+**Función summarize()**
+
+Esta función permite calcular estadísticas agregadas o resumidas de una o más variables dentro de un grupo.
+
+```{r}
+
+  summarize( df_2,
+    media_valor = mean(edad),
+    suma_valor = sum(edad)
+  )
+  
+```
+
+El sumaize se usa mucho con **`group_by`para calcular resúmenes (sumas, promedios, conteos, etc.) sobre subconjuntos de datos, basados en los grupos que defines.** Sirve para **realizar cálculos agregados sobre grupos de datos, de manera estructurada**
+
+```{r}
+
+# Primero agrupar los datos por la columna 'casos_dengue'
+# Luego sumar la columna 'edad' para cada grupo
+
+# group_by() a una columna, R "agrupa" todas las filas que tienen el mismo valor en esa columna. 
+
+df_resumen <- df_2 %>%
+  group_by(casos_dengue) %>%
+  summarize(suma_edad = sum(edad))
+
+df_resumen
+
+```
+
+**Función mutate() para la creación y modificación de columnas**
+
+La función `mutate()`del paquete `dplyr` en R se utiliza para agregar nuevas columnas a un data frame o modificar las columnas existentes.
+
+```{r}
+
+# library(dplyr)  
+
+df_num <- df_2 %>% 
+  mutate(id = as.numeric(id_caso))  
+df_num 
+
+
+```
+
+```{r}
+
+# Clasificar la edad
+
+mutate(df_num,
+       grupo_edad = if_else(edad < 30, "joven", "adulto"))
+
+
+# if_else(condition, true, false, missing = NULL)
+
+
+```
+
+**Función arrange() para ordenar**
+
+La función `arrange()` en el paquete `dplyr` se utiliza para ordenar las filas de un data frame
+
+**`Sintaxis: arrange(.data, columnas)`**
+
+```{r}
+ 
+# Ordenar segun edad
+
+arrange(df_num, casos_dengue)
+
+```
+
+```{r}
+
+
+# Ordenar segun edad descendente
+
+arrange(df_num, desc(edad))
+
+```
+
+## **Ejercicio n°2**
+
+### Datos faltantes
+
+En R, representamos los datos faltantes con un `NA`. Este valor R lo lee como un valor de tipo lógico a diferencia de numéricos o de caracter.
+
+```{r}
+
+typeof(NA)
+```
+
+Hay que tener en cuenta que cuando se agrega un `NA`(lógico por defecto) a un vector con valores numéricos como por ejemplo: `c(68, 63, 71, NA)`), eso haría que tuvieras tres valores numéricos y un valor lógico en el mismo vector, lo cual no está permitido. Por lo tanto, **R convertirá automáticamente el `NA`a `NA_real_`.**
+
+A nuestro marco de datos le agregaremos una columna y le indicaremos los datos faltantes
+
+```{r}
+
+# Agrego una columna de región que tiene datos faltantes
+
+df_na <- df_num %>%
+  mutate(region = c("norte", "sin dato", "sur", "sin dato"))
+
+df_na
+
+```
+
+```{r}
+
+# paso dato faltante a na (Not Available)
+
+df_limpio <- df_na %>%
+  mutate(region = na_if(region, "sin dato"))
+
+df_limpio
+
+```
+
+**Función `na_if`**
+
+se utiliza para reemplazar valores específicos en un vector o columna con `NA`
+
+**`na_if(x, y)`**
+
+-   **`x`**: El vector o columna en el que deseas hacer la sustitución.
+
+-   **`y`**: El valor que deseas reemplazar con `NA`.
+
+## **Ejercicio n°3**
+
+### Tuberías
+
+Este **`|>`e**s el operador de tubería. A partir de la versión 4.1, el operador de tubería es parte de la base de R. Antes de la versión 4.1, el operador de tubería solo estaba disponible en [magrittr](https://magrittr.tidyverse.org/)  y se utilizan ampliamente en el **tidyverse** (particularmente en paquetes como `dplyr`). La tubería importada del `magrittr`paquete se veía así **`%>%`.**
+
+La idea principal de una tubería es que **el resultado de una operación se pasa como entrada (primer argumento)** **a la siguiente función.**
+
+En el tipo de Windows **`shift + control + m`**
+
+**Sintaxis básica:**
+
+`objeto %>% funcion1() %>% funcion2() %>% funcion3()`
+
+**Esto se traduce a que `objeto` es pasado primero a `funcion1()`, luego el resultado es pasado a `funcion2()`, y finalmente el resultado es usado en `funcion3()`.**
+
+Partiendo de nuestro data frame anterior podemos utilizar las tuberias para filtrar, ordenar y seleccionar columnas.
+
+```{r}
+
+
+df_tuberia <- df_na %>%
+  filter(edad > 20) %>%         # Filtrar casos con edad mayor a 20
+  arrange(desc(edad)) %>%       # Ordenar por edad en orden descendente
+  select(casos_dengue, edad)     # Seleccionar solo las columnas 'casos_dengue' y 'edad'
+
+# Mostrar el resultado
+print(df_tuberia)
+
+
+```
+
+**Estructura de una función:**
+
+```{r}
+
+nombre_funcion <- function(argumento1, argumento2, ...) {
+  # Cuerpo de la función: operaciones y cálculos
+  
+  resultado <- argumento1 + argumento2  # Ejemplo de operación
+  
+  return(resultado)  # Devolver el resultado
+}
+
+```
+
+### Estructura Básica de una Función en R
+
+1.  **Definición de la Función**:
+
+    -   **Nombre de la Función**: Define cómo se llamará la función.
+
+    -   **Argumentos**: Los parámetros que la función aceptará.
+
+    -   **Cuerpo de la Función**: Donde se escriben las instrucciones que realiza la función.
+
+    -   **Valor de Retorno**: El resultado que la función devuelve.
+
+Ejemplo de una función:
+
+```{r}
+
+# Definir la función
+suma <- function(a, b) {
+  resultado <- a + b  # Sumar los dos números
+  return(resultado)   # Devolver el resultado
+}
+
+# Llamar a la función
+resultado <- suma(5, 3)
+
+# Imprimir el resultado
+print(resultado)  # Imprime 8
+
+
+
+```
+
+### ¿Qué es un Tibble?
+
+Un *tibble* es una versión mejorada de un data frame en R. Aunque ambos sirven para almacenar datos en forma de tabla, los tibbles tienen algunas características adicionales que los hacen más fáciles de usar.
+
+-   **Los tibbles muestran solo las primeras 10 filas** y las columnas que se ajustan en la pantalla, facilitando la visualización de datos grandes.
+
+-   Las columnas se muestran con sus nombres completos, sin truncar el contenido, a menos que sea necesario.
+
+Pasar de un data frame a un tibble:
+
+```{r}
+
+# Convertir el data frame a tibble
+
+df_tibble <- as_tibble(df_limpio)
+
+df_tibble
+```
+
+## Paquetes y librerías: instalación y carga
+
+Para realizar algunos ejercicios primero tendremos que instalar los paquetes. Un **paquete en R** es una colección organizada de funciones, datos y documentación que extiende las capacidades básicas del lenguaje. Los pasos para ello consisten primero en instalarlos y luego cargar las librerías.
+
+Cargar las librerías en R significa hacer que las funciones y herramientas de un paquete estén disponibles para que puedas usarlas en tu sesión de R. Cuando instalas un paquete con `install.packages()`, se descarga y guarda en tu computadora, pero no se activa automáticamente. Para empezar a usarlo, necesitas "cargar" la librería en la sesión de R con la función `library()`.
+
+```{r}
+
+# install.packages("tidyverse")  #  manipulación y visualización de datos
+
+# install.packages("data.table") # manipulación de grandes datasets
+
+# install.packages("lubridate") # creación, manipulación y extracción de información temporal en R
+
+# install.packages("readxl") #  lectura de archivos Excel
+
+# install.packages("googlesheets4") # Permite leer, escribir y manipular hojas de cálculo alojadas en Google Drive
+
+# install.packages("httpuv") #  es utilizado en segundo plano para manejar la autenticación OAuth cuando accedes a Google Sheets.
+
+# install.packages("rmarkdown") #  crear documentos combinando texto, código y resultados de análisis en un solo archivo. 
+
+# install.packages("tinytex") #  generar documentos en formato PDF con rmarkdown 
+
+
+```

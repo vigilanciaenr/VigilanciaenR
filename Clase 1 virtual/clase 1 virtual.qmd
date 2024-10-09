@@ -2,10 +2,13 @@
 title: "Clase 1 virtual"
 format: 
   html:
+    embed-resources: true
     toc: true                # Habilita la tabla de contenidos
     toc-title: "Índice de Contenidos"  # Título del índice
     toc-depth: 3             # Nivel de profundidad del índice (hasta h3)
     toc-location: left       # Ubicación del índice (izquierda)
+footnotes-hover: true # muestra notas al pie
+smooth-scroll: true # suaviza el scroll
 editor: visual
 code-copy: true            # Permite copiar el código desde el documento
 ---
@@ -19,12 +22,20 @@ Cargar las librerías en R significa hacer que las funciones y herramientas de u
 ```{r}
 
 # install.packages("tidyverse")  #  manipulación y visualización de datos
+
 # install.packages("data.table") # manipulación de grandes datasets
+
 # install.packages("lubridate") # creación, manipulación y extracción de información temporal en R
-# install.packages("readxl") #  lectura de archivos Exce
+
+# install.packages("readxl") #  lectura de archivos Excel
+
 # install.packages("googlesheets4") # Permite leer, escribir y manipular hojas de cálculo alojadas en Google Drive
+
 # install.packages("httpuv") #  es utilizado en segundo plano para manejar la autenticación OAuth cuando accedes a Google Sheets.
+
 # install.packages("rmarkdown") #  crear documentos combinando texto, código y resultados de análisis en un solo archivo. 
+
+
 # install.packages("tinytex") #  generar documentos en formato PDF con rmarkdown 
 
 ```
