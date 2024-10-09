@@ -1,0 +1,183 @@
+---
+format: 
+  html:
+    embed-resources: true
+    toc: true                # Habilita la tabla de contenidos
+    toc-title: "Índice de Contenidos"  # Título del índice
+    toc-depth: 3             # Nivel de profundidad del índice (hasta h3)
+    toc-location: right       # Ubicación del índice (izquierda)
+footnotes-hover: true # muestra notas al pie
+smooth-scroll: true # suaviza el scroll
+editor: visual
+code-copy: true            # Permite copiar el código desde el documento
+---
+
+## Factores
+
+Los factores son más útiles en el contexto de trabajar con datos categóricos: datos que se agrupan en categorías discretas. Algunos ejemplos de variables categóricas que se ven comúnmente en los datos son el sexo y el nivel de logro educativo.
+
+Se verá con un ejemplo:
+
+En R, podemos representar una variable categórica de varias maneras diferentes. Por ejemplo, supongamos que nos interesa registrar el nivel más alto de educación formal que han completado las personas en nuestros datos. Las categorías discretas que nos interesan son:
+
+1 = Menos que la secundaria
+
+2 = Graduado de secundaria
+
+3 = Un poco de universidad
+
+4 = Graduado universitario
+
+Normalmente, no creamos factores desde cero. En su lugar, normalmente convertimos (o "forzamos") un vector numérico o de caracteres existente en un factor. Por ejemplo, podemos forzar education_numun factor de la siguiente manera:
+
+`{r}   # Creo un vector con los numeros correspondientes a las categorias de educación   educacion_num <- c(3, 1, 4, 1)   educacion_num  # Convierto el vector en factor   educacion_num_f <- factor(x= educacion_num,                             levels = 1:4,                              labels = c(                                  "Menos que la secundaria",                              "Graduado de secundaria",                              "Un poco de universidad",                                   "Graduado universitario"))   educacion_num_f}`
+
+Esto es lo que hicimos arriba:
+
+Esto es lo que hicimos arriba:
+
+-   El primer argumento de la `factor()` función es el `x` argumento. El valor que se pasa al x argumento debe ser un vector de datos. Pasamos el education_num vector al x argumento.
+
+-   El segundo argumento de la `factor()` función es el `levels` argumento, es decir los "niveles". Este argumento le indica a R los valores únicos que puede tomar la nueva variable factorial. Usamos la abreviatura 1:4 para indicarle a R que `education_num_f` puede tomar los valores únicos 1, 2, 3 o 4.
+
+-   El tercer argumento de la `factor()` función es el `labels` argumento. El valor que se pasa al `labels` argumento, es decir "la etiqueta" debe ser un vector de caracteres de esas etiquetas (es decir, texto descriptivo) para cada valor del `levels` argumento.
+
+**Importante**: El orden de las etiquetas en el vector de caracteres que pasamos al `labels` argumento debe coincidir con el orden de los valores que se pasan al levels argumento. Por ejemplo, el orden de `levels y labels` superior indica a R que 1 debe etiquetarse con “Menor que la escuela secundaria”, 2 debe etiquetarse con “Graduado de la escuela secundaria”, etc.
+
+`{r}  # Ejercicio n°5, armar un vector con zonas geográficas y tranformarlo en factor como en el ejemplo de arriba.}`
+
+**Características de los Factores**
+
+-   *Categorías o Niveles*: Los factores representan datos categóricos y tienen un conjunto de niveles únicos. Por ejemplo, un factor que representa el género puede tener los niveles "Masculino" y "Femenino".
+
+-   *Codificación Interna*: Internamente, R almacena los factores como enteros, donde cada nivel se asocia con un número entero. Por ejemplo, en un factor con niveles "Rojo", "Verde", "Azul", R puede almacenar "Rojo" como 1, "Verde" como 2, y "Azul" como 3.
+
+-   *Ordenamiento*: Los factores pueden ser ordenados o no ordenados. Un factor ordenado tiene un orden específico en sus niveles (por ejemplo, "Bajo", "Medio", "Alto"), mientras que un factor no ordenado no tiene un orden inherente en sus niveles.
+
+### Operadores de Comparación en R
+
+Igualdad: ==
+
+Desigualdad: !=
+
+Mayor que: \>
+
+Menor que: \<
+
+Mayor o igual que: \>=
+
+Menor o igual que: \<=
+
+### Operadores Lógicos en R
+
+AND Lógico: & o &&
+
+OR Lógico: \| o \|\|
+
+NOT Lógico: !
+
+# Data Frame y Tibble
+
+Cuando queremos crear relaciones entre nuestros vectores, podemos utilizarlos para construir un marco de datos. Por ejemplo para almacernar vectotes de distintas características, numéricos y de carcateres por ejemplo.
+
+`{r}  # Creo el vector de nombres    nombres   = c("Carlos", "Luisa", "Bruno", "Ana")    # Creo el vector de peso   peso = c(68, 63, 71, 72)      # Combino ambos en un data frame   clase <-  data.frame (nombres, peso)      #Imprimo el data frame   clase}`
+
+Cuando corremos este código el marco de datos aparece en su entorno global. Aqui se brinda información adicional sobre este marco de datos a la derecha de su nombre.
+
+Específicamente, deberísa ver "4 obs. of 2 variables". Esto es R diciéndonos que clase tiene cuatro filas u observaciones (4 obs.) y dos columnas o variables ( 2 variables).
+
+Si hacemos clic en la pequeña flecha azul a la izquierda del nombre del marco de datos, verá información sobre los vectores individuales que componen el marco de datos.
+
+#### Advertencia
+
+todas las columnas de un marco de datos deben tener la misma longitud (es decir, la misma cantidad de filas). Eso significa que cada vector que crees al crear tu marco de datos debe tener la misma cantidad de valores.
+
+Podemos realizar un data frame con el siguiente código sintetizado y obtenemos el mismo resultado
+
+`{r}  clase <- data.frame(   nombres = c("Carlos", "Luisa", "Bruno", "Ana"),      peso = c(68, 63, 71, 72) )    clase}`
+
+Para retomar las funciones anteriores podemos tomar medidas de nuestro nuevo data frame. Por ejemplo la media.
+
+`{r}  mean(clase$peso)}`
+
+En la expresión `mean(clase$peso)`:
+
+-   `clase` es el nombre de un data frame o una lista.
+
+-   `$` es el operador que se utiliza para seleccionar una columna específica de un data frame o un elemento específico de una lista.
+
+-   `peso` es el nombre de una columna dentro del data frame clase, o un elemento dentro de la lista clase.
+
+Entonces, `clase$peso` accede a la columna llamada peso en el data frame clase. La función `mean()` calcula el promedio de los valores en la columna peso.
+
+## tibbles
+
+Los tibbles son una estructura de datos que proviene de otro paquete de tidyverse "tibble": el paquete. Los tibbles son marcos de datos y cumplen la misma función en R que los marcos de datos; sin embargo, es una versión mejorada y puede encotrarse en algunos marcos de datos.
+
+Para ello primero debe instalarse (si aun no se realizó) el paquete "dplyr". Podemos entonces crear tibbles utilizando una de estas tres funciones: `as_tibble(), tibble(), o tribble().`
+
+`{r} # Para usar la libreria quitar el hashtag    #library(dplyr)}`
+
+#### La función as_tibble
+
+Usamos la `as_tibble()` función para convertir un marco de datos básico ya existente en un tibble.
+
+`{r}  clase <- as_tibble(clase)   clase}`
+
+#### La función tibble
+
+Podemos utilizar la `tibble()` función en lugar de la `data.frame ()`función cuando queremos crear un tibble desde cero. Tambien se puede usar tribble (ver en su documentación `?tribble)`
+
+`{r} clase_2 <- tibble(     nombres = c("Esteban", "Maria", "Rosa", "Fran"),     peso = c(45, 67, 80, 55) )     clase_2}`
+
+## Datos faltantes
+
+En R, representamos los datos faltantes con un `NA`. Se utiliza mayúsculas NA y no se utiliza espacios ni comillas. Es recomendable no utilizar "perdido" o "faltante".
+
+`{r}  # Crear un data frame   df <- data.frame(      nombres   = c("Juan", "Susana", "Monica", "Lucas"),      peso = c(68, 63, 71, NA))    df   # No tenemos el peso de Lucas}`
+
+# Uso de tuberías
+
+`|> o %>%` Este operador hace que el código R sea más fácil de leer y comprender al permitirte ver tus funciones anidadas en el orden en que quieres que se ejecuten, en lugar de verlas literalmente anidadas una dentro de otra.
+
+Las funciones devuelven valores y el lenguaje R nos permite pasar directamente esos valores devueltos a otras funciones para realizar cálculos posteriores, esto es "anidar funciones". El código R puede volverse muy difícil de leer cuando empezamos a anidar muchas funciones unas dentro de otras.
+
+Las tuberías nos permiten conservar los beneficios de anidar funciones sin hacer que nuestro código sea realmente difícil de leer.
+
+`{r}  # Para utilizar la libreria quitar el hashtag   # library(dplyr)    # Usar una tubería para filtrar, mutar, y ordenar los datos    df_limpio <- df |>   filter(!is.na(peso)) |>      # Filtrar filas donde 'peso' no es NA   mutate(peso_kg = peso / 2.205) |>  # Agregar una nueva columna que convierte 'peso' a kilogramos      arrange(desc(peso_kg))        # Ordenar los datos por 'peso_kg' en orden descendente    # Imprimir el resultado   print(df_limpio)}`
+
+**Recomendaciones para la escritutura con tuberias:**
+
+-   utilizar tuberías de tal manera que cada línea de código hace una, y sólo una, cosa.
+
+-   Si una línea de código contiene un operador de tubería, este generalmente debe ser lo último que se escriba en la línea.
+
+-   El operador de la tubería siempre debe tener un espacio delante de la misma.
+
+-   Si el operador de tubería no es lo último que se escribe en la línea, entonces también debería tener un espacio después.
+
+# 
+
+## Rutas de archivos en R
+
+Antes de empezar a trabajar siempre es conveneinte observar cual es el directorio (espacio físico en el disco rígido) que R tiene definido. Para conocer este directorio podemo ejecutar la siguiente linea de comando:
+
+`{r}   # Con esta línea de código se visualiza el lugar donde se encuentran el directorio donde R trabaja en tu computadora    getwd()}`
+
+Esta carpeta es el lugar donde R va a leer y escribir datos por defecto, salvo que le indiquemos lo contrario. Osea que si le damos una orden de escribir algún objeto R lo va a realizar en este lugar.
+
+Para definir de acuerdo nuestra comodidad el espacio donde queremos que lea y guarde los objetos que vamos creando y guardando podemos emplear la funcion setwd() y entre los paréntesis indicar la ruta completa del directorio que preferimos.
+
+`{r}   # setwd("C:/Users/Desktop/Vigilancia en R/Ejercicios")}`
+
+Observar que las barras que delimitan subdirectorios son / o \\. Nunca usar solo la . Ya que en R en Window es necesario esto.
+
+Una vez definido este directorio R va a escribir y leer por defecto en este lugar.
+
+`{r}   #Tambien podemos generar secuencias con la función seq()    b <- seq(from=1,to=40, by=2) #generamos una secuencia )     b   #?seq # Si le sacamos el numeral a esta linea con ?seq veremos las caracteristiscas y posibilidades de la función en la ventana de "packages"help"}`
+
+Lo que hicimos arriba con el vector b es generar una secuencia a partir de una funcion (más adelante nos detendremos en las funciones). Existen muchas funciones que crean vectores automáticamente. Por ejemplo la función seq() que genera una secuencia.
+
+-   from: le indicamos a R desde que valor iniciar la secuencia
+-   to: es el valor máximo que puede tomar la secuncia
+-   by: indica la longitud del intervalo entre los elementos
