@@ -124,11 +124,14 @@ Se espera que los/as alumnos/as elaboren un plan de análisis para sus datos y c
 Para el primer encuentro virtual tendremos dos materiales de clases:
 
 - En primer lugar el archivo "Clase virtual 1" que desarrollaremos en nuestro primer encuentro sincrónico con ejercicios e introducción básica a R y Rstudio.
-- El segundo archivo "Materiales clase 1" está pensado como material de consulta y ejercitación para familiarizarse con el lenguaje de R.  De esta forma se proponen actividades para ejercitar por su cuenta antes de los encuentros presenciales. Ambos archivos se encuentran en el repositorio en la "carpeta clase 1", desde donde se lo podrán descargar o acceder desde los siguientes links:
+- Los otros archivos "Materiales de lectura" están pensado como material de consulta y ejercitación para familiarizarse con el lenguaje de R.  De esta forma se presentan los principales objetos y funciones de R con el objetivo que se familiaricen con su sintaxis y estructura. Estos archivos se encuentran en el repositorio en la "carpeta clase 1", desde donde se lo podrán descargar o acceder desde los siguientes links:
 
 [Clase 1 virtual](https://vigilanciaenr.github.io/VigilanciaenR/Clase%201%20virtual/clase%201%20virtual.html)
 
-[Materiales clase 1](https://vigilanciaenr.github.io/VigilanciaenR/Clase%201%20virtual/Material%20clase%201.html)
+[Material de lectura 1](https://vigilanciaenr.github.io/VigilanciaenR/Clase%201/Material_lectura_1.html#objetos-en-r)
+
+[Material de lectura 2](https://vigilanciaenr.github.io/VigilanciaenR/Clase%201/Material_lectura_2.html)
+
 
 # Clase 2 presencial: Importación de datos
 
