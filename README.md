@@ -2,7 +2,7 @@
 
 # Indice
 - [Programa](#programa)
-- [Clase 1 virtual](#clase-1-virtual)
+- [Clase 1](#clase-1-virtual)
 - [Enlaces de utilidad](#enlaces-de-utilidad)
 -  [Clase 2 presencial: Importación de datos](#enlaces-de-utilidad)
 -  [Clase 2.1 presencial](https://vigilanciaenr.github.io/VigilanciaenR/Clase%202/Clase_2.1.html)
