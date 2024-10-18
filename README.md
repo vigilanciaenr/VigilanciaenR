@@ -4,10 +4,8 @@
 - [Programa](#programa)
 - [Clase 1](#clase-1-virtual)
 - [Enlaces de utilidad](#enlaces-de-utilidad)
--  [Clase 2 presencial: Importación de datos](#enlaces-de-utilidad)
--  [Clase 2.1 presencial](https://vigilanciaenr.github.io/VigilanciaenR/Clase%202/Clase_2.1.html)
--  [Clase 2.1 Ejercicio Ira - presencial](https://vigilanciaenr.github.io/VigilanciaenR/Clase%202/Ejercicio%20IRA_%20Clase%202.1.html)
--  [Clase 3 presencial](https://vigilanciaenr.github.io/VigilanciaenR/Clase%203/Clase_3.html) 
+-  [Clase 2: Importación de datos](#Clase-2:-Importación-de-datos)
+-  [Clase 3 presencial](#Clase-3-presencial:-Gestión-de-datos.-Creación-de-Tablas-y-gráficos) 
 
 
 ------------
@@ -132,12 +130,18 @@ Para el primer encuentro virtual tendremos dos materiales de clases:
 
 [Material de lectura 2](https://vigilanciaenr.github.io/VigilanciaenR/Clase%201/Material_lectura_2.html)
 
+[Material de lectura 3](https://vigilanciaenr.github.io/VigilanciaenR/Clase%201/Material_lectura_3.html)
 
-# Clase 2 presencial: Importación de datos
+
+# Clase 2: Importación de datos
 
 Para el primer encuentro presencial trabajaremos sobre el armado de grupos para el diseño de proyectos, el armado de los circuitos de datos locales de vigilancia y los dataframe de trabajo (ETM e IRA). Estos archivos en formato excel estan subidos al repositorio.
 
 - En el archivo "Clase 2" se proponen una serie de ejercicios para la importanción de datos en distintos formatos y procesos de normalización de bases de datos
+
+[Material de lectura 4](https://vigilanciaenr.github.io/VigilanciaenR/Clase%202/Material_de_lectura_4.html)
+
+[Material funciones](https://vigilanciaenr.github.io/VigilanciaenR/Clase%202/Material_funciones.html)
 
 [Clase 2 presencial](https://vigilanciaenr.github.io/VigilanciaenR/Clase%202/Clase_2.html)
 
