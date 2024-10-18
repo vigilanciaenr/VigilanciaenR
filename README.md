@@ -4,8 +4,8 @@
 - [Programa](#programa)
 - [Clase 1](#clase-1-virtual)
 - [Enlaces de utilidad](#enlaces-de-utilidad)
--  [Clase 2: Importación de datos](#Clase-2:-Importación-de-datos)
--  [Clase 3 presencial](#Clase-3-presencial:-Gestión-de-datos.-Creación-de-Tablas-y-gráficos) 
+- [Clase 2: Importación de datos](#Clase-2:-Importación-de-datos)
+- [Clase 3 presencial](#Clase-3-presencial:-Gestión-de-datos.-Creación-de-Tablas-y-gráficos) 
 
 
 ------------
@@ -145,11 +145,6 @@ Para el primer encuentro presencial trabajaremos sobre el armado de grupos para 
 
 [Clase 2 presencial](https://vigilanciaenr.github.io/VigilanciaenR/Clase%202/Clase_2.html)
 
-[Clase 2.1 presencial](https://vigilanciaenr.github.io/VigilanciaenR/Clase%202/Clase_2.1.html)
-
-[Clase 2.1 Ejercicio Ira - presencial](https://vigilanciaenr.github.io/VigilanciaenR/Clase%202/Ejercicio%20IRA_%20Clase%202.1.html)
-
-[Repositorio](https://github.com/vigilanciaenr/VigilanciaenR)
 
 # Clase 3 presencial: Gestión de datos. Creación de Tablas y gráficos
 
