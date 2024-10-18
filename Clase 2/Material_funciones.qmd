@@ -1,0 +1,47 @@
+---
+format: 
+  html:
+    embed-resources: true
+    toc: true                # Habilita la tabla de contenidos
+    toc-title: "Índice de Contenidos"  # Título del índice
+    toc-depth: 3             # Nivel de profundidad del índice (hasta h3)
+    toc-location: left       # Ubicación del índice (izquierda)
+footnotes-hover: true # muestra notas al pie
+smooth-scroll: true # suaviza el scroll
+editor: visual
+code-copy: true            # Permite copiar el código desde el documento
+---
+
+# Ayuda visual de funciones útiles
+
+## Conteo de datos
+
+![](imagenes/síntesis funciones_Mesa de trabajo 1 copia 2.jpg){fig-align="center"}
+
+## Agrupamiento de datos
+
+![](imagenes/síntesis funciones_Mesa de trabajo 1 copia.jpg){fig-align="center"}
+
+## Filtrado de datos
+
+![](imagenes/síntesis funciones_Mesa de trabajo 1.jpg){fig-align="center"}
+
+## Busqueda de duplicados con la función group_by()
+
+![](imagenes/síntesis funciones_Mesa de trabajo 1 copia 7.jpg){fig-align="center"}
+
+## Busqueda de duplicados con duplicated()
+
+![](imagenes/síntesis funciones_Mesa de trabajo 1 copia 6.jpg){fig-align="center"}
+
+## Creación de condicionales con la función case_when()
+
+![](imagenes/síntesis funciones_Mesa de trabajo 1 copia 4.jpg){fig-align="center"}
+
+## Unión de datos
+
+![](imagenes/síntesis funciones_Mesa de trabajo 1 copia 3.jpg){fig-align="center"}
+
+## Operadores de comparación 
+
+![](imagenes/síntesis funciones_Mesa de trabajo 1 copia 8.jpg){fig-align="center"}

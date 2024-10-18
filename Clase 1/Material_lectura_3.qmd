@@ -12,172 +12,214 @@ editor: visual
 code-copy: true            # Permite copiar el código desde el documento
 ---
 
-## Factores
+# **Objetos y estructuras en R**
 
-Los factores son más útiles en el contexto de trabajar con datos categóricos: datos que se agrupan en categorías discretas. Algunos ejemplos de variables categóricas que se ven comúnmente en los datos son el sexo y el nivel de logro educativo.
+## **Factores**
 
-Se verá con un ejemplo:
+En R, un **factor** es un tipo de dato utilizado para representar variables categóricas, como grupos o categorías. Los factores permiten manejar datos categóricos (por ejemplo, "Bajo", "Medio", "Alto") de manera más eficiente en comparación con los caracteres o enteros.
 
-En R, podemos representar una variable categórica de varias maneras diferentes. Por ejemplo, supongamos que nos interesa registrar el nivel más alto de educación formal que han completado las personas en nuestros datos. Las categorías discretas que nos interesan son:
+Los factores tienen niveles (`levels`), que representan los distintos valores o categorías posibles de la variable, y también un atributo de orden (`ordered`) que indica si los niveles tienen un orden lógico. Por ejemplo, si tienes una variable que representa el nivel de educación, podrías tener un factor con los niveles "Primaria", "Secundaria", "Universitaria".
 
-1 = Menos que la secundaria
+### **Características de un factor**
+
+-   Niveles **(Levels):** Los valores únicos que la variable puede tomar. Cada nivel es una categoría.
+
+-   Etiquetas **(Labels):** Los nombres asociados a cada nivel, que pueden ser diferentes a los valores originales.
+
+-   Ordenado o no **(Ordered):** Indica si las categorías tienen un orden lógico.
+
+Por ejemplo, supongamos que nos interesa registrar el nivel más alto de educación formal que han completado las personas en nuestros datos. Las categorías discretas que nos interesan son:
+
+1 = Secundaria incompleta
 
 2 = Graduado de secundaria
 
-3 = Un poco de universidad
+3 = Universitario incompleto
 
 4 = Graduado universitario
 
 Normalmente, no creamos factores desde cero. En su lugar, normalmente convertimos (o "forzamos") un vector numérico o de caracteres existente en un factor. Por ejemplo, podemos forzar education_numun factor de la siguiente manera:
 
-`{r}   # Creo un vector con los numeros correspondientes a las categorias de educación   educacion_num <- c(3, 1, 4, 1)   educacion_num  # Convierto el vector en factor   educacion_num_f <- factor(x= educacion_num,                             levels = 1:4,                              labels = c(                                  "Menos que la secundaria",                              "Graduado de secundaria",                              "Un poco de universidad",                                   "Graduado universitario"))   educacion_num_f}`
+```{r}
 
-Esto es lo que hicimos arriba:
+# Creo un vector con los numeros correspondientes a las categorias de educación
 
-Esto es lo que hicimos arriba:
 
--   El primer argumento de la `factor()` función es el `x` argumento. El valor que se pasa al x argumento debe ser un vector de datos. Pasamos el education_num vector al x argumento.
+educacion_num <- c(3, 1, 4, 1)
 
--   El segundo argumento de la `factor()` función es el `levels` argumento, es decir los "niveles". Este argumento le indica a R los valores únicos que puede tomar la nueva variable factorial. Usamos la abreviatura 1:4 para indicarle a R que `education_num_f` puede tomar los valores únicos 1, 2, 3 o 4.
+educacion_num  # Convierto el vector en factor
 
--   El tercer argumento de la `factor()` función es el `labels` argumento. El valor que se pasa al `labels` argumento, es decir "la etiqueta" debe ser un vector de caracteres de esas etiquetas (es decir, texto descriptivo) para cada valor del `levels` argumento.
+educacion_num_f <- factor(
+  x = educacion_num,
+  levels = 1:4,
+  labels = c(
+    "secundaria incompleta",
+    "Graduado de secundaria",
+    "Universitario incompleto",
+    "Graduado universitario"
+  )
+)   
+
+educacion_num_f
+  
+```
 
 **Importante**: El orden de las etiquetas en el vector de caracteres que pasamos al `labels` argumento debe coincidir con el orden de los valores que se pasan al levels argumento. Por ejemplo, el orden de `levels y labels` superior indica a R que 1 debe etiquetarse con “Menor que la escuela secundaria”, 2 debe etiquetarse con “Graduado de la escuela secundaria”, etc.
 
-`{r}  # Ejercicio n°5, armar un vector con zonas geográficas y tranformarlo en factor como en el ejemplo de arriba.}`
+#### **Tambien podemos convertir los factores a otro tipo de datos:**
 
-**Características de los Factores**
+```{r}
 
--   *Categorías o Niveles*: Los factores representan datos categóricos y tienen un conjunto de niveles únicos. Por ejemplo, un factor que representa el género puede tener los niveles "Masculino" y "Femenino".
+# Convertimos el factor en caracter
 
--   *Codificación Interna*: Internamente, R almacena los factores como enteros, donde cada nivel se asocia con un número entero. Por ejemplo, en un factor con niveles "Rojo", "Verde", "Azul", R puede almacenar "Rojo" como 1, "Verde" como 2, y "Azul" como 3.
+as.character(educacion_num_f)
 
--   *Ordenamiento*: Los factores pueden ser ordenados o no ordenados. Un factor ordenado tiene un orden específico en sus niveles (por ejemplo, "Bajo", "Medio", "Alto"), mientras que un factor no ordenado no tiene un orden inherente en sus niveles.
+```
 
-### Operadores de Comparación en R
+```{r}
 
-Igualdad: ==
+# Convertimos el factor en número (teniendo en cuenta los niveles, no la etiqueta)
 
-Desigualdad: !=
+as.numeric(educacion_num_f)
 
-Mayor que: \>
+```
 
-Menor que: \<
+# **Datos faltantes**
 
-Mayor o igual que: \>=
+En R, los **datos faltantes** se representan con `NA`, que significa **Not Available.** Este valor especial indica que no se tiene información para una determinada observación en el dataset, ya sea porque la información no se recogió, se perdió, o no se aplica.
 
-Menor o igual que: \<=
+### Tipos de valores faltantes en R
 
-### Operadores Lógicos en R
+-   **NA (`Not Available`):** Representa la falta de datos en general, aplicable a cualquier tipo de dato (numérico, carácter, factor, etc.).
 
-AND Lógico: & o &&
+-   **NaN (`Not a Number`):** Indica un valor indefinido, como el resultado de operaciones matemáticas que no tienen sentido, como `0/0`.
 
-OR Lógico: \| o \|\|
+-   **NULL:** Representa la ausencia total de valor o de objeto. Es diferente a `NA`, ya que `NULL` implica que el objeto no existe, mientras que `NA` implica que existe pero no tiene valor.
 
-NOT Lógico: !
+### Identificación de datos faltantes
 
-# Data Frame y Tibble
+En R, puedes usar las siguientes funciones para identificar y trabajar con datos faltantes:
 
-Cuando queremos crear relaciones entre nuestros vectores, podemos utilizarlos para construir un marco de datos. Por ejemplo para almacernar vectotes de distintas características, numéricos y de carcateres por ejemplo.
+-   **`is.na()`**: Identifica si un valor o elemento en un vector, data frame o matriz es `NA`.
 
-`{r}  # Creo el vector de nombres    nombres   = c("Carlos", "Luisa", "Bruno", "Ana")    # Creo el vector de peso   peso = c(68, 63, 71, 72)      # Combino ambos en un data frame   clase <-  data.frame (nombres, peso)      #Imprimo el data frame   clase}`
+-   **`sum(is.na())`**: Cuenta cuántos valores faltantes hay en un vector o data frame.
 
-Cuando corremos este código el marco de datos aparece en su entorno global. Aqui se brinda información adicional sobre este marco de datos a la derecha de su nombre.
+-   **`complete.cases()`**: Devuelve un valor lógico que indica si una fila en un data frame o matriz no contiene ningún valor faltante.
 
-Específicamente, deberísa ver "4 obs. of 2 variables". Esto es R diciéndonos que clase tiene cuatro filas u observaciones (4 obs.) y dos columnas o variables ( 2 variables).
+Veamos un ejemplo de ello:
 
-Si hacemos clic en la pequeña flecha azul a la izquierda del nombre del marco de datos, verá información sobre los vectores individuales que componen el marco de datos.
+```{r}
 
-#### Advertencia
+# Creamos un data frame   
 
-todas las columnas de un marco de datos deben tener la misma longitud (es decir, la misma cantidad de filas). Eso significa que cada vector que crees al crear tu marco de datos debe tener la misma cantidad de valores.
+df <- data.frame(
+  nombres   = c("Juan", "Susana", "Monica", "Lucas"),
+  peso = c(30, NA, 71, NA)
+)    
 
-Podemos realizar un data frame con el siguiente código sintetizado y obtenemos el mismo resultado
+df   # No tenemos el peso de Lucas ni de Susana
 
-`{r}  clase <- data.frame(   nombres = c("Carlos", "Luisa", "Bruno", "Ana"),      peso = c(68, 63, 71, 72) )    clase}`
+```
 
-Para retomar las funciones anteriores podemos tomar medidas de nuestro nuevo data frame. Por ejemplo la media.
+Identificamos si existen NA en nuestro data frame:
 
-`{r}  mean(clase$peso)}`
+```{r}
 
-En la expresión `mean(clase$peso)`:
+is.na(df)
+```
 
--   `clase` es el nombre de un data frame o una lista.
+Contamos cuantos NA tenemos en nuestro data frame
 
--   `$` es el operador que se utiliza para seleccionar una columna específica de un data frame o un elemento específico de una lista.
+```{r}
 
--   `peso` es el nombre de una columna dentro del data frame clase, o un elemento dentro de la lista clase.
+sum(is.na(df))
+```
 
-Entonces, `clase$peso` accede a la columna llamada peso en el data frame clase. La función `mean()` calcula el promedio de los valores en la columna peso.
+Vemos si una columna tiene NA en nuestro data frame
 
-## tibbles
+```{r}
 
-Los tibbles son una estructura de datos que proviene de otro paquete de tidyverse "tibble": el paquete. Los tibbles son marcos de datos y cumplen la misma función en R que los marcos de datos; sin embargo, es una versión mejorada y puede encotrarse en algunos marcos de datos.
+complete.cases(df$peso)
+```
 
-Para ello primero debe instalarse (si aun no se realizó) el paquete "dplyr". Podemos entonces crear tibbles utilizando una de estas tres funciones: `as_tibble(), tibble(), o tribble().`
+# **Uso de tuberías**
 
-`{r} # Para usar la libreria quitar el hashtag    #library(dplyr)}`
+Las **tuberías** (pipes) en R se usan para conectar una secuencia de funciones y operaciones, facilitando la lectura y la escritura del código. En lugar de anidar funciones una dentro de otra, las tuberías permiten escribir código de manera secuencial, como una serie de pasos que se ejecutan en orden.
 
-#### La función as_tibble
+El operador más común para las tuberías es `%>%`, proporcionado por el paquete **`magrittr`** y popularizado por el paquete **`dplyr`** de la familia `tidyverse`.
 
-Usamos la `as_tibble()` función para convertir un marco de datos básico ya existente en un tibble.
+**El operador `%>%` se utiliza para pasar el resultado de una operación como la entrada de la siguiente**. De esta forma, podemos encadenar varias operaciones de forma clara y concisa. Las tuberías nos permiten conservar los beneficios de anidar funciones sin hacer que nuestro código sea realmente difícil de leer.
 
-`{r}  clase <- as_tibble(clase)   clase}`
+Lo vemos con un ejemplo
 
-#### La función tibble
+```{r}
 
-Podemos utilizar la `tibble()` función en lugar de la `data.frame ()`función cuando queremos crear un tibble desde cero. Tambien se puede usar tribble (ver en su documentación `?tribble)`
+ # Para utilizar la libreria quitar el hashtag   
 
-`{r} clase_2 <- tibble(     nombres = c("Esteban", "Maria", "Rosa", "Fran"),     peso = c(45, 67, 80, 55) )     clase_2}`
+library(dplyr)    
 
-## Datos faltantes
+# Usar una tubería para filtrar   
 
-En R, representamos los datos faltantes con un `NA`. Se utiliza mayúsculas NA y no se utiliza espacios ni comillas. Es recomendable no utilizar "perdido" o "faltante".
+df_limpio <- df  %>%    
+  filter(!is.na(peso)) %>%
+  filter(peso > 40 )
 
-`{r}  # Crear un data frame   df <- data.frame(      nombres   = c("Juan", "Susana", "Monica", "Lucas"),      peso = c(68, 63, 71, NA))    df   # No tenemos el peso de Lucas}`
 
-# Uso de tuberías
+print(df_limpio)
+  
+```
 
-`|> o %>%` Este operador hace que el código R sea más fácil de leer y comprender al permitirte ver tus funciones anidadas en el orden en que quieres que se ejecuten, en lugar de verlas literalmente anidadas una dentro de otra.
+::: {style="border: 2px solid #f4e791; /* Grosor y color del borde */   background-color: #f4e791; /* Color de fondo */   padding: 10px; /* Espacio interior */   margin: 20px; /* Espacio exterior */   border-radius: 5px; /* Esquinas redondeadas (opcional) */"}
+**Recomendación de sintaxis con tuberías:**
 
-Las funciones devuelven valores y el lenguaje R nos permite pasar directamente esos valores devueltos a otras funciones para realizar cálculos posteriores, esto es "anidar funciones". El código R puede volverse muy difícil de leer cuando empezamos a anidar muchas funciones unas dentro de otras.
-
-Las tuberías nos permiten conservar los beneficios de anidar funciones sin hacer que nuestro código sea realmente difícil de leer.
-
-`{r}  # Para utilizar la libreria quitar el hashtag   # library(dplyr)    # Usar una tubería para filtrar, mutar, y ordenar los datos    df_limpio <- df |>   filter(!is.na(peso)) |>      # Filtrar filas donde 'peso' no es NA   mutate(peso_kg = peso / 2.205) |>  # Agregar una nueva columna que convierte 'peso' a kilogramos      arrange(desc(peso_kg))        # Ordenar los datos por 'peso_kg' en orden descendente    # Imprimir el resultado   print(df_limpio)}`
-
-**Recomendaciones para la escritutura con tuberias:**
-
--   utilizar tuberías de tal manera que cada línea de código hace una, y sólo una, cosa.
+-   Utilizar tuberías de tal manera que cada línea de código hace una, y sólo una, cosa.
 
 -   Si una línea de código contiene un operador de tubería, este generalmente debe ser lo último que se escriba en la línea.
 
 -   El operador de la tubería siempre debe tener un espacio delante de la misma.
 
 -   Si el operador de tubería no es lo último que se escribe en la línea, entonces también debería tener un espacio después.
+:::
 
-# 
+# **Rutas de archivos en R**
 
-## Rutas de archivos en R
+El **directorio de trabajo** es la ubicación de la carpeta raíz que R utiliza para su trabajo, donde R busca y guarda archivos de manera predeterminada. De manera predeterminada, guardará los archivos y resultados nuevos en esta ubicación y también buscará archivos para importar (por ejemplo, conjuntos de datos) aquí.
 
-Antes de empezar a trabajar siempre es conveneinte observar cual es el directorio (espacio físico en el disco rígido) que R tiene definido. Para conocer este directorio podemo ejecutar la siguiente linea de comando:
+El directorio de trabajo aparece en **texto gris en la parte superior del panel de la consola RStudio**. También puede imprimir el directorio de trabajo actual ejecutando `getwd()`(deje los paréntesis vacíos).
 
-`{r}   # Con esta línea de código se visualiza el lugar donde se encuentran el directorio donde R trabaja en tu computadora    getwd()}`
+```{r}
 
-Esta carpeta es el lugar donde R va a leer y escribir datos por defecto, salvo que le indiquemos lo contrario. Osea que si le damos una orden de escribir algún objeto R lo va a realizar en este lugar.
+# Directorio donde R trabaja en tu computadora    
 
-Para definir de acuerdo nuestra comodidad el espacio donde queremos que lea y guarde los objetos que vamos creando y guardando podemos emplear la funcion setwd() y entre los paréntesis indicar la ruta completa del directorio que preferimos.
+getwd()
+```
 
-`{r}   # setwd("C:/Users/Desktop/Vigilancia en R/Ejercicios")}`
+### **Creación de Proyecto R**
+
+Es recomendable siempre armar en principio un **proyecto R** y desde allí gestionar los archivos con los que trabajaremos. Si utiliza un proyecto R, el directorio de trabajo predeterminado será la carpeta raíz del proyecto R que contiene el archivo **“.rproj”**. Esto se aplicará si abre RStudio haciendo clic en Abrir proyecto R (el archivo con la extensión “.rproj”).
 
 Observar que las barras que delimitan subdirectorios son / o \\. Nunca usar solo la . Ya que en R en Window es necesario esto.
 
-Una vez definido este directorio R va a escribir y leer por defecto en este lugar.
+#### Ruta Absoluta:
 
-`{r}   #Tambien podemos generar secuencias con la función seq()    b <- seq(from=1,to=40, by=2) #generamos una secuencia )     b   #?seq # Si le sacamos el numeral a esta linea con ?seq veremos las caracteristiscas y posibilidades de la función en la ventana de "packages"help"}`
+Una **ruta absoluta** es la dirección completa que especifica la ubicación exacta de un archivo en tu sistema de archivos, empezando desde el directorio raíz (la carpeta principal del sistema). Siempre incluye el disco o la carpeta raíz (por ejemplo, `C:` en Windows o `/` en Linux/Mac).
 
-Lo que hicimos arriba con el vector b es generar una secuencia a partir de una funcion (más adelante nos detendremos en las funciones). Existen muchas funciones que crean vectores automáticamente. Por ejemplo la función seq() que genera una secuencia.
+Aquí, la ruta absoluta indica dónde se encuentra el archivo en todo el sistema, y no importa desde qué proyecto estés trabajando, siempre buscará en esa ruta específica
 
--   from: le indicamos a R desde que valor iniciar la secuencia
--   to: es el valor máximo que puede tomar la secuncia
--   by: indica la longitud del intervalo entre los elementos
+```{r}
+
+# read.csv("C:/Usuarios/TuNombre/Documentos/datos.csv")
+
+```
+
+#### **Ruta de archivos relativa:**
+
+Una **ruta relativa** es la dirección de un archivo basada en la ubicación actual en la que estás trabajando, como el directorio de trabajo de tu proyecto en R. Es más flexible porque cambia dependiendo de dónde estés trabajando. La ruta empieza desde tu ubicación actual, sin necesidad de especificar todo el camino desde el directorio raíz.
+
+En general, es recomandeble proporcionar rutas de archivo "relativas", una ruta de archivo relativa podría verse así:
+
+```{r}
+
+# read.csv("data/datos.csv")
+
+```

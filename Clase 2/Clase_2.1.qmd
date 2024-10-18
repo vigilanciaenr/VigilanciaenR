@@ -146,19 +146,19 @@ table(dengue_lim2$clasificación)
 
 **Operación con variables numéricas de funciones aritméticas:**
 
-![](C:/Users/flor/Desktop/cursor_2024/VigilanciaenR/Clase 2/imagenes/arithmetic.png){width="616"}
+![](C:/Users/flor/Desktop/cursor_2024/VigilanciaenR/Clase%202/imagenes/arithmetic.png){width="616"}
 
 **Operación con variable de carcarcter:**
 
-![](C:/Users/flor/Desktop/cursor_2024/VigilanciaenR/Clase 2/imagenes/comparison-character.png "Variables de caracter"){width="611"}
+![](C:/Users/flor/Desktop/cursor_2024/VigilanciaenR/Clase%202/imagenes/comparison-character.png "Variables de caracter"){width="611"}
 
 **Operaciones de comparación con números:**
 
-![](C:/Users/flor/Desktop/cursor_2024/VigilanciaenR/Clase 2/imagenes/comparison-numeric.png){width="614"}
+![](C:/Users/flor/Desktop/cursor_2024/VigilanciaenR/Clase%202/imagenes/comparison-numeric.png){width="614"}
 
 **Operación con operadores lógicos:**
 
-![](C:/Users/flor/Desktop/cursor_2024/VigilanciaenR/Clase 2/imagenes/logical.png){width="609"}
+![](C:/Users/flor/Desktop/cursor_2024/VigilanciaenR/Clase%202/imagenes/logical.png){width="609"}
 
 ## 2.4 Recodificación de variables
 

@@ -32,7 +32,13 @@ df <- data.frame(numeros = x, letras = y)
 df
 ```
 
-Información que puedo tomar de mi data frame
+Cuando corremos este código el marco de datos aparece en su **entorno global.** Aqui se brinda información adicional sobre este marco de datos a la derecha de su nombre.
+
+Si hacemos clic en la pequeña flecha azul a la izquierda del nombre del marco de datos, verá información sobre los vectores individuales que componen el marco de datos.
+
+**Advertencia:** todas las **columnas de un marco de datos deben tener la misma longitud** (es decir, la misma cantidad de filas). Eso significa que cada vector que crees al crear tu marco de datos debe tener la misma cantidad de valores.
+
+Información que puedo tomar de mi data frame:
 
 ```{r}
 
