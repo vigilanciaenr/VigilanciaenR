@@ -1,0 +1,56 @@
+---
+title: "Material_de_lectura_6"
+format: html
+editor: visual
+---
+
+### 2.2.1.1 Crear semanas epidemiológicas
+
+Para ello vamos a utilizar el paquete lubridate. Este paquete entre otras cosas permite:
+
+-   **Conversión de fechas:** Convierte cadenas de texto en objetos de fecha y hora de manera fácil y flexible, adaptándose a diferentes formatos.
+
+-   **Extracción de componentes:** Permite extraer partes específicas de una fecha y hora, como el año, mes, día, hora, minuto, segundo, etc.
+
+-   **Cálculos con fechas:** Realiza operaciones aritméticas con fechas, como calcular la diferencia entre dos fechas, sumar o restar días, meses o años.
+
+-   **Manipulación de zonas horarias:** Te ayuda a trabajar con diferentes zonas horarias y realizar conversiones entre ellas.
+
+-   **Creación de intervalos de tiempo:** Define y manipula intervalos de tiempo, como períodos de un día, una semana o un mes.
+
+#### Crear semanas epidemiológicas anual
+
+```{r}
+
+library(lubridate)
+library(dplyr)
+
+
+# Ejemplo para ver que puedo consultar por fecha
+
+fecha <- as.Date("2024-01-15")
+epi_week <- epiweek(fecha)
+
+
+# Calcular semana epidemiologica con la función epiweek
+
+dengue_semana_epi <- dengue_limpio %>%
+  mutate(semana_epi = epiweek(`Fecha de toma de muestra`))
+
+
+
+```
+
+Ahora con esto listo podríamos contar la cantidad de casos por semana epidemiológica por ejemplo:
+
+```{r}
+
+# Contar casos por semana epidemiológica
+
+casos_por_semana <- dengue_semana_epi %>%
+  group_by(semana_epi) %>%
+  summarise(casos = n(), .groups = 'drop')
+
+casos_por_semana
+
+```

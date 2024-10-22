@@ -10,6 +10,10 @@ footnotes-hover: true # muestra notas al pie
 smooth-scroll: true # suaviza el scroll
 editor: visual
 code-copy: true            # Permite copiar el código desde el documento
+execute:
+  warning: false
+  message: false
+  echo: true  # Oculta el código en los chunks
 ---
 
 ## **1.Importación datos**
@@ -24,7 +28,7 @@ R incluso tiene sus propios formatos de datos:
 
 -   Se puede utilizar un archivo RData (.Rdata) para almacenar varios objetos o incluso un espacio de trabajo R completo. Esto es útil para guardar los valores y objetos creados en nuestro entorno global.
 
-### 1.1. Datos .xlsx
+### **1.1. Datos .xlsx**
 
 Primero veremos como importar datos de Excel. Esto se puede realizar de varias maneras aquí veremos la librería "readxl" para ello.
 
@@ -104,7 +108,7 @@ Existen varias formas de controlar qué celdas se leen. Incluso se puede especif
 
 ```
 
-### **1.2 Paquete de Río**
+### **1.2 Paquete de Rio**
 
 El nombre “rio” es una abreviatura de “R I/O” (Imput/Output).
 
@@ -126,14 +130,11 @@ Recordar antes instalarlo si aún no lo tenemos instalado.
 
 El paquete **here** y su función `here()`hacen que sea fácil indicarle a R dónde encontrar y guardar sus archivos: es decir crea rutas de archivos.
 
-Es importante para este paquete crear antes un poreycto de R donde estaran contenidos nuestros datos.
+Es importante para este paquete crear antes un proyecto de R donde estaran contenidos nuestros datos.
 
 Así es como `here()`funciona dentro de un proyecto R:
 
 -   `here()` establece la **raíz del proyecto** (normalmente, el directorio principal de tu proyecto) y permite construir rutas relativas a partir de allí.
-
-<!-- -->
-
 -   A partir de la raíz, se pueden localizar archivos dentro de subcarpetas sin preocuparte por la ubicación actual del script.
 
 Por ejemplo, a continuación, `import()`se proporciona a la función una ruta de archivo construida con `here()`.
@@ -160,7 +161,7 @@ Por ejemplo, a continuación, `import()`se proporciona a la función una ruta de
 
 ```
 
-### 1.4 Visualización de caracteristicas del dataset
+### **1.4 Visualización de características del dataset**
 
 Aplicando algunas funciones tendremos un detalle de los dataset cargados
 
@@ -197,11 +198,9 @@ Aplicando algunas funciones tendremos un detalle de los dataset cargados
 
 Tambien podemos seleccionar columnas especificas y en este caso creamos una variable que contenga esta seleccion de columnas
 
-### 2.1. Datos .csv
+### **1.5. Datos .csv**
 
 Importación de archivos con valores separados por comas o **.csv (comma separated value).**
-
-Vamos a crear un archivo **`.csv`** con el archivo **`Reporte dengue & chiku marzo 2024.xlsx`**
 
 Para ello usamos la función `readr`de `read_csv(),`esta es para importar un conjunto de datos con valores delimitados por comas. Esos valores se importaron como un marco de datos y asignamos ese marco de datos al objeto R llamado `csv`.
 
@@ -214,7 +213,7 @@ Para ello usamos la función `readr`de `read_csv(),`esta es para importar un con
 # csv
 ```
 
-### 2.2. Google sheet
+### **1.6 Google sheet**
 
 Para cargar una tabla que tenemos en google drive debemos importarla desde el paquete `googlesheet4`
 
@@ -245,7 +244,7 @@ El `"gs4_auth()"` abrira una ventana emergente que nos pedirá permiso para cone
 
 ```
 
-Podemos vincular nuestra cuenta de mail para que no tengamos que aptar cada vez que corramos nuestro chunk con un **código Token, como una forma de automatizar el proceso.** Luego simplemente corremos el código y activamos nuestro vinculo con google drive.
+Podemos vincular nuestra cuenta de mail para que no tengamos que aceptar cada vez que corramos nuestro chunk con un **código Token, como una forma de automatizar el proceso.** Luego simplemente corremos el código y activamos nuestro vínculo con google drive.
 
 ```{r}
 
@@ -292,15 +291,19 @@ Luego de esto obtenemos el link de nuestro archivo. Usamos la función `read_she
 
 ```
 
-### 2.3. Herramienta de importación de datos de RStudio
+### **1.7. Herramienta de importación de datos de RStudio**
 
-Para abrir la herramienta de importación de datos de RStudio, haga clic en el Import Dataset \>menú desplegable cerca de la parte superior del panel del entorno. Se elige el tipo de archivo que se quiere importar.
+Para abrir la herramienta de importación de datos de RStudio, haga clic en el **Import Dataset** (menú desplegable cerca de la parte superior del panel del entorno). Allí se elige el tipo de archivo que se quiere importar.
+
+Allí tendremos la posibilidad de tomar el código que nos provee R para la importación de datos, dentro de un recuadro que aperece en esta ventana. Un ejemplo de esto:
 
 ```{r}
 
 # library(readxl)
-# Reporte_infecciones_respiratorias_marzo_2024 <- read_excel("reportes/Reporte infecciones respiratorias marzo 2024.xlsx", 
+
+# Reporte <- read_excel("reporte.xlsx", 
 #    na = c("*sin dato*", "SIN DATO", " "))
+
 # View(Reporte_infecciones_respiratorias_marzo_2024)
 
 ```
