@@ -12,36 +12,84 @@ editor: visual
 code-copy: true            # Permite copiar el código desde el documento
 ---
 
-# Ayuda visual de funciones útiles
+# **Ayuda visual de Funciones útiles**
 
 ## Conteo de datos
 
-![](imagenes/síntesis%20funciones_Mesa%20de%20trabajo%201%20copia%202.jpg){fig-align="center"}
+![](imagenes/f2.png){fig-align="center"}
 
 ## Agrupamiento de datos
 
-![](imagenes/síntesis%20funciones_Mesa%20de%20trabajo%201%20copia.jpg){fig-align="center"}
+![](imagenes/f12.png){fig-align="center"}
 
 ## Filtrado de datos
 
-![](imagenes/síntesis%20funciones_Mesa%20de%20trabajo%201.jpg){fig-align="center"}
+![](imagenes/f1.png){fig-align="center"}
 
-## Busqueda de duplicados con la función group_by()
+## Búsqueda de duplicados con la función group_by()
 
-![](imagenes/síntesis%20funciones_Mesa%20de%20trabajo%201%20copia%207.jpg){fig-align="center"}
+![](imagenes/f4.png){fig-align="center"}
 
-## Busqueda de duplicados con duplicated()
+## Búsqueda de duplicados con duplicated()
 
-![](imagenes/síntesis%20funciones_Mesa%20de%20trabajo%201%20copia%206.jpg){fig-align="center"}
+![](imagenes/f6.png){fig-align="center"}
 
-## Creación de condicionales con la función case_when()
+## Ordenar Datos
 
-![](imagenes/síntesis%20funciones_Mesa%20de%20trabajo%201%20copia%204.jpg){fig-align="center"}
+![](imagenes/f9.png){fig-align="center"}
 
-## Unión de datos
+## Seleccionar columnas específicas
 
-![](imagenes/síntesis%20funciones_Mesa%20de%20trabajo%201%20copia%203.jpg){fig-align="center"}
+![](imagenes/f3.png){fig-align="center"}
 
-## Operadores de comparación
+## Renombrar columnas
 
-![](imagenes/síntesis%20funciones_Mesa%20de%20trabajo%201%20copia%208.jpg){fig-align="center"}
+![](imagenes/f5.png)
+
+## Convertir valores a fecha
+
+![](imagenes/f8.png){fig-align="center"}
+
+## Convertir valores a caracter
+
+![](imagenes/f7.png){fig-align="center"}
+
+## Aplicar función de conversión a varias columnas
+
+![](imagenes/f10.png){fig-align="center"}
+
+## Creación de condicionales 
+
+![](imagenes/f9 (2).png){fig-align="center"}
+
+## Creación de condicionales 
+
+![](imagenes/f11.png){fig-align="center"}
+
+## **Operadores de comparación**
+
+![](imagenes/o1.png){fig-align="center"}
+
+# **Unión de marcos de datos**
+
+## ![](imagenes/u_u.png)
+
+## left_join
+
+![](imagenes/u1.png){fig-align="center"}
+
+## right_join
+
+![](imagenes/u2.png)
+
+## full_join
+
+![](imagenes/u3.png){fig-align="center"}
+
+## inner_join
+
+![](imagenes/u4.png)
+
+## anti_join
+
+![](imagenes/u5.png){fig-align="center"}

@@ -1,12 +1,36 @@
 ---
-title: "Material_de_lectura_6"
-format: html
+format: 
+  html:
+    embed-resources: true
+    toc: true                # Habilita la tabla de contenidos
+    toc-title: "Índice de Contenidos"  # Título del índice
+    toc-depth: 3             # Nivel de profundidad del índice (hasta h3)
+    toc-location: left       # Ubicación del índice (izquierda)
+footnotes-hover: true # muestra notas al pie
+smooth-scroll: true # suaviza el scroll
 editor: visual
+code-copy: true            # Permite copiar el código desde el documento
+execute:
+  warning: false
+  message: false
+  echo: true  # Oculta el código en los chunks
 ---
 
-### 2.2.1.1 Crear semanas epidemiológicas
+# 4. Crear y modificar de columnas
 
-Para ello vamos a utilizar el paquete lubridate. Este paquete entre otras cosas permite:
+Para ello vamos a utilizar la función **`mutate()`** del paquete `dplyr.`
+
+Los dos primeros argumentos de `mutate()`son: `.data`y `...`. El valor que se pasa a `.data`siempre debe ser un marco de datos.
+
+El valor que se pasa al `...`argumento debe ser un par nombre-valor o varios pares nombre-valor separados por comas. El `...`argumento es donde se indica si `mutate()`va acrear o modificar columnas en el marco de datos.
+
+**Esto esta especificado en** [Material funciones](https://vigilanciaenr.github.io/VigilanciaenR/Clase%202/Material_funciones.html)
+
+## 4.1 crear semanas epidemiológicas
+
+Vamos a ver un ejemplo concreto de creación de columnas para construir semanas epidemiológicas.
+
+Para ello vamos a utilizar el paquete **`lubridate.`** Este paquete entre otras cosas permite:
 
 -   **Conversión de fechas:** Convierte cadenas de texto en objetos de fecha y hora de manera fácil y flexible, adaptándose a diferentes formatos.
 
@@ -32,25 +56,65 @@ fecha <- as.Date("2024-01-15")
 epi_week <- epiweek(fecha)
 
 
-# Calcular semana epidemiologica con la función epiweek
+# Calcular semana epidemiologica con la función epiweek a una columna de nuestro data frame
 
-dengue_semana_epi <- dengue_limpio %>%
+ira_epi <- ira %>%
   mutate(semana_epi = epiweek(`Fecha de toma de muestra`))
 
 
 
 ```
 
-Ahora con esto listo podríamos contar la cantidad de casos por semana epidemiológica por ejemplo:
+La función **`epiweek()`** calcula el número de la semana epidemiológica de una fecha basada en el estándar ISO 8601, donde las semanas comienzan los lunes. En tu código, al aplicar **`epiweek()`** a la columna **`Fecha de toma de muestra`**, se crea una nueva columna **`semana_epi`** que asigna el número de la semana epidemiológica a cada observación, según este estándar.
+
+En este caso, **`epiweek()`** calculará la semana epidemiológica para cada fecha de la columna **`Fecha de toma de muestra`**, y la semana epidemiológica comenzará automáticamente los lunes.
+
+## 4.2 modificación de columnas
+
+Por ejemplo si quiero modificar una columna, aquella de Resultado, donde en vez que aparezca caso positivo, aparezca "confirmado"
 
 ```{r}
 
-# Contar casos por semana epidemiológica
-
-casos_por_semana <- dengue_semana_epi %>%
-  group_by(semana_epi) %>%
-  summarise(casos = n(), .groups = 'drop')
-
-casos_por_semana
+ira_epi <- ira_epi %>%
+ mutate(Resultado = gsub("positivo", "confirmado", Resultado))
 
 ```
+
+La función **`mutate()`** de **`dplyr`** se utiliza para modificar o crear columnas dentro de un `data frame`. Si deseas modificar una columna existente, simplemente especificas el nombre de la columna que quieres cambiar y defines cómo se debe transformar. El valor de la columna se sobrescribe con el nuevo cálculo o modificación que especifiques. Por ejemplo, si quieres reemplazar un valor específico en una columna, puedes usar **`mutate()`** junto con funciones como **`gsub()`** para buscar y reemplazar texto dentro de la columna. Esto permite aplicar transformaciones directas sobre las columnas sin crear nuevas, ajustando los datos de manera flexible dentro del mismo `data frame`.
+
+# 5. Filtrar datos
+
+Para ello utilizaremos la función filter() del dplyr
+
+```{r}
+
+library(dplyr)
+library(lubridate)
+
+ira_filtrado <- ira_epi %>%
+  filter(`Provincia Carga` == "chaco" &
+           year(`Fecha de toma de muestra`) == 2024) 
+
+
+
+```
+
+Este código usa la función **`filter()`** de **`dplyr`** para seleccionar filas específicas del `data frame` **`ira_epi`** que cumplen con dos condiciones: que la columna **`Provincia Carga`** sea igual a **"chaco"**, y que el año de la columna **`Fecha de toma de muestra`** sea **2024**. La función **`year()`** extrae el año de la fecha en **`Fecha de toma de muestra`**, permitiendo filtrar los registros que corresponden al año 2024.
+
+## 5.1. Observar duplicados
+
+Para ello generaremos antes un ID de caso, ya que las tablas que tenemos provienen de dataset de laboratorios y queremos saber cuantos datos duplicados tenemos teniendo en cuenta que **una persona puede aportar mas de un caso en el período y por evento ya que se le pueden tomar mas de una muestra.**
+
+En esta tabla vamos a crear nuestro ID combinando dos columnas: `Nro Doc` y `Fecha de toma de muestra.`
+
+```{r}
+
+ira_id <- ira_filtrado %>%
+  mutate(id_caso = paste(`Nro Doc`, `Fecha de toma de muestra`, sep = "_"))  
+  
+
+```
+
+Ahora observo si tengo duplicados:
+
+Con esto podemos crear y modificar columnas existentes. Además usaremos la **`case_when()`** para que pueda generar una secuencia de condiciones. **Esta evalúa cada fórmula bilateral secuencialmente hasta que encuentra una condición que se cumple.** Si nunca encuentra una condición que se cumpla, entonces devuelve un `NA`.
