@@ -4,7 +4,7 @@
 - [Programa](#programa)
 - [Clase 1](#clase-1-virtual)
 - [Enlaces de utilidad](#enlaces-de-utilidad)
-- [Clase 2: Importación de datos](#clase-2-importación-de-datos)
+- [Clase 2: Importación y limpieza de datos](#clase-2-importación-de-datos)
 - [Clase 3 presencial](#clase-3-presencial-gestión-de-datos-creación-de-tablas-y-gráficos)
 
 
@@ -140,6 +140,8 @@ Para el primer encuentro presencial trabajaremos sobre el armado de grupos para 
 - En el archivo "Clase 2" se proponen una serie de ejercicios para la importanción de datos en distintos formatos y procesos de normalización de bases de datos
 
 [Material de lectura 4](https://vigilanciaenr.github.io/VigilanciaenR/Clase%202/Material_de_lectura_4.html)
+
+[Material de lectura 5](https://vigilanciaenr.github.io/VigilanciaenR/Clase%202/Material_de_lectura_5.html)
 
 [Material funciones](https://vigilanciaenr.github.io/VigilanciaenR/Clase%202/Material_funciones.html)
 
