@@ -13,7 +13,7 @@ editor: visual
 code-copy: true            # Permite copiar el código desde el documento
 ---
 
-## **Ejercicio n°1**
+## **Ejercicio N°1**
 
 ### Creación de marco de datos R
 
