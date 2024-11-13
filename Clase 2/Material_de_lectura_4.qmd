@@ -28,8 +28,6 @@ R incluso tiene sus propios formatos de datos:
 
 -   Se puede utilizar un archivo RData (.Rdata) para almacenar varios objetos o incluso un espacio de trabajo R completo. Esto es útil para guardar los valores y objetos creados en nuestro entorno global.
 
--   1.2
-
 ### **1.1. Datos .xlsx**
 
 Primero veremos como importar datos de Excel. Esto se puede realizar de varias maneras aquí veremos la librería "readxl" para ello.
