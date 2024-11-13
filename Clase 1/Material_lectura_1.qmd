@@ -32,13 +32,13 @@ R es un lenguaje de programacioﾌ］ estadﾃｭstico de coﾌ‥igo abierto que se creoﾌ
 
 ### Atajos de teclado que pueden ser ﾃｺtiles:
 
-![](atajos.png){fig-align="center" width="743"}
+![](atajos.png){fig-align="center" width="701"}
 
 Para mﾃ｡s atajos se puede acceder a su pﾃ｡gina web:
 
 [Atajos de teclado en Rstudio](https://docs.posit.co/ide/user/ide/reference/shortcuts.html)
 
-# **Operaciones baﾌ《icas en R**
+# **OOperaciones baﾌ《icas en R**
 
 Operadores Matemaﾌ》icos en R Se puede usar R como una calculadora
 
