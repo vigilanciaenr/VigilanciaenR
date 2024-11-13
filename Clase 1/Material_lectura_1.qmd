@@ -38,7 +38,7 @@ Para más atajos se puede acceder a su página web:
 
 [Atajos de teclado en Rstudio](https://docs.posit.co/ide/user/ide/reference/shortcuts.html)
 
-# **OOOperaciones básicas en R**
+# **Operaciones básicas en R**
 
 Operadores Matemáticos en R Se puede usar R como una calculadora
 
