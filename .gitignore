@@ -2,11 +2,10 @@
 .Rhistory
 .RData
 .Ruserdata
-.Reporte dengue & chiku marzo 2024.xlsx
-.Reporte infecciones respiratotias marzo 2024.xlsx
 .secrets
 .secrets/
 .Rdata
 .httr-oauth
 .DS_Store
 .quarto
+VR_NOMINAL.csv

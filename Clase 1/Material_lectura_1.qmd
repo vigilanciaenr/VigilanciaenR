@@ -16,7 +16,7 @@ execute:
   echo: true  # Oculta el código en los chunks
 ---
 
-# **Introducción a R y Rstudio**
+# **Introducción a R y Rstudio** 
 
 R es un lenguaje de programación estadístico de código abierto que se creó en la década de 1990 específicamente para el análisis de datos. R es un lenguaje y entorno de software para estadísticas y gráficos. R Studio proporciona una interfaz amigable para trabajar con R, facilitando la escritura, depuración y ejecución de código, además de ofrecer herramientas adicionales para la visualización de datos y la generación de informes.
 
@@ -49,6 +49,7 @@ Operadores Matemáticos en R Se puede usar R como una calculadora
 -   Módulo (Residuo): %%(En R, el operador de resto o módulo se utiliza para obtener el residuo de una división entre dos números)
 
 ```{r}
+
 
 3+5  #Sumamos 
 
