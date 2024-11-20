@@ -1,4 +1,6 @@
 ---
+title: Material de lectura 5
+title-block-banner: "#92aeea"
 format: 
   html:
     embed-resources: true
@@ -55,7 +57,7 @@ Otra forma de realizarlo es una vez que tenemos el dataset incorporado realizarl
 Por lo cual necesitaremos primero convertir *sin datos* por NA y luego transformar su estructura en fechas y números nuevamente.
 :::
 
-Importamos el dataset sin incorporar en el fragmento de código los `NA:`
+Importamos el dataset sin incorporar en el fragmento de código los `NA`. Supongamos que tenemos un dataset llamado ira2:
 
 ```{r}
 
@@ -165,6 +167,8 @@ Tambien puedo querer **cambiar el formato de fecha**, por ejemplo si tengo un va
 fecha <- as.Date("2024-10-21")
 
 fecha <- format(fecha, format = "%d/%m/%Y")
+
+fecha
  
 ```
 
@@ -182,19 +186,20 @@ ira2_fechas <- ira2_fechas %>%
 
 **Algunas fechas incorporadas en R**
 
-**`Sys.Date()`**: Devuelve la fecha actual en formato **`Date`**.
+**`Sys.Date()`**: Devuelve la fecha actual del sistema en formato **`Date`**.
 
 ```{r}
 
 Sys.Date()
 
+class(Sys.Date())
 ```
 
 ## **2.3. Normalización de caracteres**
 
 ### 2.3.1. Modificación de minúsculas y mayúsculas
 
-```{r}
+```{r, eval=FALSE}
 
 # Pasar todo a mayúsculas
 
@@ -203,7 +208,7 @@ ira <- ira %>%
 
 ```
 
-```{r}
+```{r, eval=FALSE}
 
 # Pasar todo a minúscula
 
@@ -215,23 +220,23 @@ ira <- ira %>%
 
 ### 2.3.2. Quitar espacios en blanco
 
-```{r}
+```{r, eval=FALSE}
 
 # Sacar espacios en blanco
 
-# ira <- ira %>%
-#   mutate(across(where(is.character), str_squish))
+ ira <- ira %>%
+   mutate(across(where(is.character), str_squish))
 
 ```
 
 ### 2.3.3. Quitar acentos
 
-```{r}
+```{r, eval=FALSE}
 
 # Sacar acentos
 
-# ira <- ira %>%
-#   mutate(across(where(is.character), ~ stri_trans_general(., "Latin-ASCII")))
+ ira <- ira %>%
+   mutate(across(where(is.character), ~ stri_trans_general(., "Latin-ASCII")))
 
 ```
 
@@ -261,41 +266,25 @@ Antes de guardar y cerrar nuestro archivo es necesario que guardemos nuestro nue
 
 Guardar los datos en formato `.xlsx` es una buena opción si lo que se busca es preservar la estructura de datos después de la limpieza y además no queremos repetir el proceso en un nuevo proyecto. Se puede guardar un dataframe en un archivo `.xlsx` usando el paquete `writexl.`
 
-```{r}
+```{r, eval=FALSE}
 
-# install.packages("writexl")
+install.packages("writexl")
 ```
 
-```{r, echo=TRUE, results='hide'}
+```{r, eval=FALSE}
 
 library(writexl)
 
 ```
 
-```{r}
+```{r, eval=FALSE}
 
 # Guardar y especificar el nuevo nombre de archivo
 
-write_xlsx(ira, path = "ira.xlsx")
+write_xlsx(ira, path = "IRA.xlsx")
 
 ```
 
-Ahora podemos comprobar en que directorio estamos trabajando con este comando:
+El código guarda los datos del objeto `ira` (es decir el data frame con el que venimos trabajando) en un archivo Excel llamado `ira.xlsx` (aquí podemos colocar el nombre que queramos agregando siempre el tipo de formato en que queremos exportarlo ".xlsx" en este caso).
 
-```{r}
-
-# Quitar el numeral para correr el código
-
-# getwd()
-```
-
-Tambien se puede guardar directamente en una ruta específica:
-
-```{r}
-
-
-# Guardar en una ruta específica
-
-# write_xlsx(ira, path = "C:/cursor_2024/VigilanciaenR/ira.xlsx")
-
-```
+Este archivo se crea en el lugar indicado por la ruta especificada en el argumento `path`. En este caso como estamos trabajando **dentro de un proyecto de R** no es necesario especificar ruta de archivo, ya que con el nombre que queremos ponerle a nuestro documento y agregando el **".xlsx**" es sufuciente para R nos guarde nuestro dataset en el directorio de trabajo donde esta alojado el proyecto.

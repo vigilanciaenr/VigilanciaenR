@@ -1,4 +1,6 @@
 ---
+title: Material de lectura 6
+title-block-banner: "#92aeea"
 format: 
   html:
     embed-resources: true
@@ -6,6 +8,7 @@ format:
     toc-title: "Índice de Contenidos"  # Título del índice
     toc-depth: 3             # Nivel de profundidad del índice (hasta h3)
     toc-location: left       # Ubicación del índice (izquierda)
+    number-sections: true
 footnotes-hover: true # muestra notas al pie
 smooth-scroll: true # suaviza el scroll
 editor: visual
@@ -16,105 +19,224 @@ execute:
   echo: true  # Oculta el código en los chunks
 ---
 
-# 4. Crear y modificar de columnas
+# Procesamiento de datos
 
-Para ello vamos a utilizar la función **`mutate()`** del paquete `dplyr.`
+**Funciones principales**
 
-Los dos primeros argumentos de `mutate()`son: `.data`y `...`. El valor que se pasa a `.data`siempre debe ser un marco de datos.
+Para trabajar con los marcos de datos o data frame (estructura de datos que se organiza en filas y columnas) usaremos muy frecuentemente las funciones de la familia de paquetes R [**tidyverse**](https://www.tidyverse.org/) . Muchas de estas funciones pertenecen al paquete R [**dplyr**](https://dplyr.tidyverse.org/) , que es muy útil a la hora de realizar la manipulación de datos.
 
-El valor que se pasa al `...`argumento debe ser un par nombre-valor o varios pares nombre-valor separados por comas. El `...`argumento es donde se indica si `mutate()`va acrear o modificar columnas en el marco de datos.
+Este paquete "**dplyr"** es parte de la familia "**tidyverse"** de paquetes R (que también incluye **ggplot2** , **tidyr** , **stringr** , **tibble** , **purrr** , **magrittr** y **forcats** entre otros).
 
-**Esto esta especificado en** [Material funciones](https://vigilanciaenr.github.io/VigilanciaenR/Clase%202/Material_funciones.html)
+**Elaboramos un material para tener a mano la sintaxis de las funiones más utilizadas de este paquete, que las pueden encontrar aquí:** [**Material funciones**](https://vigilanciaenr.github.io/VigilanciaenR/Clase%202/Material_funciones.html)**.**
 
-## 4.1 crear semanas epidemiológicas
+A continuación, describiremos las actividades comúnmente empleadas en el procesamiento de datos.
 
-Vamos a ver un ejemplo concreto de creación de columnas para construir semanas epidemiológicas.
+## **Simulación de marco de datos**
 
-Para ello vamos a utilizar el paquete **`lubridate.`** Este paquete entre otras cosas permite:
+Lo primero que haremos será **simular un marco de datos** para poder observar las modificaciones realizadas con los ejemplos. Es importante que, si ya están trabajando con un dataset propio, adapten los códigos a sus variables, como los nombres del marco de datos, las columnas, los valores, etc.
 
--   **Conversión de fechas:** Convierte cadenas de texto en objetos de fecha y hora de manera fácil y flexible, adaptándose a diferentes formatos.
-
--   **Extracción de componentes:** Permite extraer partes específicas de una fecha y hora, como el año, mes, día, hora, minuto, segundo, etc.
-
--   **Cálculos con fechas:** Realiza operaciones aritméticas con fechas, como calcular la diferencia entre dos fechas, sumar o restar días, meses o años.
-
--   **Manipulación de zonas horarias:** Te ayuda a trabajar con diferentes zonas horarias y realizar conversiones entre ellas.
-
--   **Creación de intervalos de tiempo:** Define y manipula intervalos de tiempo, como períodos de un día, una semana o un mes.
-
-#### Crear semanas epidemiológicas anual
+Para ello, crearemos un marco de datos inventado exclusivamente con fines ilustrativos. Utilizaremos un **ID que se repetirá**, simulando un **dataset de laboratorio** donde cada fila representa una muestra y no a una persona.
 
 ```{r}
 
-library(lubridate)
 library(dplyr)
 
 
-# Ejemplo para ver que puedo consultar por fecha
+# Crear un marco de datos con IDs repetidos, fechas distintas y una columna de zona
+ira <- data.frame(
+  Paciente_ID = c(1, 1, 2, 2, 3, 4, 4, 5),
+  Edad = c(3, 3, 15, 15, 32, 70, 70, 45),
+  Diagnostico = c(
+    "IRA leve",
+    "IRA leve",
+    "IRA grave",
+    "IRA grave",
+    "Neumonía",
+    "Neumonía",
+    "Neumonía",
+    "IRA leve"
+  ),
+  Hospitalizado = c("No", "No", "Sí", "Sí", "Sí", "Sí", "Sí", "No"),
+  Fecha_Sintomas = as.Date(
+    c(
+      "2023-10-28",
+      "2024-10-29",
+      "2024-10-30",
+      "2024-10-31",
+      "2024-11-01",
+      "2024-11-02",
+      "2024-11-03",
+      "2024-11-04"
+    )
+  ),
+  Determinacion = c(
+    "PCR",
+    "Cultivo",
+    "PCR",
+    "Cultivo",
+    "PCR",
+    "PCR",
+    "Cultivo",
+    "PCR"
+  ),
+  Resultado = c(
+    "Negativo",
+    "Negativo",
+    "Positivo",
+    "Negativo",
+    "Positivo",
+    "Positivo",
+    "Negativo",
+    "Negativo"
+  ),
+  Zona = c(
+    "Zona Oeste",
+    "Zona Oeste",
+    "Zona Oeste",
+    "Zona Oeste",
+    "Zona Oeste",
+    "Zona Oeste",
+    "Zona Este",
+    "Zona Este"
+  )
+)
 
-fecha <- as.Date("2024-01-15")
-epi_week <- epiweek(fecha)
+```
+
+```{r, echo = FALSE}
+library(DT)
+DT::datatable(ira, options = list(pageLength = 5))
+```
+
+<br><br>
+
+## **Filtrar datos**
+
+Con la función `filter()` del paquete `dplyr`podemos seleccionar de nuestro conjunto de datos un subconjunto con el que queramos trabajar. Esta función permite seleccionar filas de un data frame que cumplen ciertas condiciones. Por ejemplo en este caso si quisieramos filtrar por **Zona** y **Año** (por ejemplo, "Zona Oeste" y el año 2024).
+
+```{r}
+
+library(dplyr)
+library(lubridate)
 
 
-# Calcular semana epidemiologica con la función epiweek a una columna de nuestro data frame
-
-ira_epi <- ira %>%
-  mutate(semana_epi = epiweek(`Fecha de toma de muestra`))
-
+ira_filtrado <- ira %>%
+  filter(Zona == "Zona Oeste",
+           year(Fecha_Sintomas) == 2024) 
 
 
 ```
 
-La función **`epiweek()`** calcula el número de la semana epidemiológica de una fecha basada en el estándar ISO 8601, donde las semanas comienzan los lunes. En tu código, al aplicar **`epiweek()`** a la columna **`Fecha de toma de muestra`**, se crea una nueva columna **`semana_epi`** que asigna el número de la semana epidemiológica a cada observación, según este estándar.
+```{r, echo = FALSE}
+library(DT)
+DT::datatable(ira_filtrado, options = list(pageLength = 5))
+```
 
-En este caso, **`epiweek()`** calculará la semana epidemiológica para cada fecha de la columna **`Fecha de toma de muestra`**, y la semana epidemiológica comenzará automáticamente los lunes.
+<br><br>
 
-## 4.2 modificación de columnas
+Las condiciones dentro de `filter()` separadas por coma correponden a diferentes argumentos, `filter(data, condicion1, condicion2)` pero no conecta condiciones lógicas.
+
+**Filtrado con operadores lógicos**
+
+Si queremos filtrar por condiciones lógicas podemos utilizar los operadores que se encuentran en el [**Material funciones**](https://vigilanciaenr.github.io/VigilanciaenR/Clase%202/Material_funciones.html). Por ejemplo, si para utilizar **OR**, usa el operador `|` (por ejemplo, `Zona == "Zona Oeste" | Zona == "Zona Este"`). En este caso se seleccionará las filas que cumplan cualquiera de las condiciones indicadas. Si en lugar de solo filtrar por año, necesitas comparar fechas exactas o rangos, puedes usar operadores como `<`, `>` o `between()`.
+
+En este caso obtendremos todos los registros excepto aquellos que no se encuentran en el rango de fechas, es decir el único registro del 2023.
+
+```{r}
+
+ira_filtrado <- ira %>%
+  filter(Zona == "Zona Oeste" | Zona == "Zona Este",
+         Fecha_Sintomas >= as.Date("2024-10-01"), Fecha_Sintomas <= as.Date("2024-12-31"))
+
+```
+
+```{r, echo = FALSE}
+library(DT)
+DT::datatable(ira_filtrado, options = list(pageLength = 5))
+```
+
+<br><br>
+
+## **Trabajo con duplicados**
+
+Dado que nuestros datos simulados corresponden a resultados de laboratorios, es necesario verificar **cuántos datos duplicados** existen. Debemos tener en cuenta que **una persona puede aportar más de un caso durante el período y por evento, ya que se le pueden tomar múltiples muestras.**
+
+Para ello existen varias formas de identificar duplicados, eliminarlos o trabajar con ellos depende lo que necesitemos. Veremos algunas de ellas.
+
+### Duplicados con janitor
+
+Para examinar filas duplicadas se puede utilizar la función `get_dupes()` del paquete **`janitor`** **basándose en las columnas que especifiques**. Se puede utilizar para encontrar duplicados en columnas clave (por ejemplo, `Paciente_ID` y `Determinacion`).
+
+```{r}
+
+library(janitor)
+
+ira_duplicados <- ira_filtrado %>%
+  get_dupes(Paciente_ID)
+
+```
+
+```{r, echo = FALSE}
+library(DT)
+DT::datatable(ira_duplicados, options = list(pageLength = 5))
+```
+
+<br><br>
+
+:::: mb-5
+::: {style="background-color:  #edf28a; padding: 10px; border: 1px solid #ccc; border-radius: 5px"}
+Es bueno saber que si a la función **gut_dupes()** no le colocamos como argumento una columna clave, buscará los duplicados que tengan valores iguales en todas las columnas. Es decir las filas devueltas por **la función por defecto son 100 % duplicadas considerando los valores en todas las columnas.**
+:::
+::::
+
+### Duplicados con duplicated()
+
+Teniendo en cuenta las funciones básicas de R, también se pueden ver qué filas son 100% duplicadas en un marco de datos con el comando `duplicated()`.
+
+**Esta función devuelve un vector lógico (`TRUE` o `FALSE`) que indica si cada fila o valor es un duplicado de una fila anterior.** Esto significa que para un conjunto de datos, `duplicated()` marca como `TRUE` todas las ocurrencias duplicadas de una fila, excepto la primera, que siempre será considerada única.
+
+Cuando se usa en data frames, puedes detectar duplicados en todas las columnas o en columnas específicas. Si deseas identificar duplicados exactos (todas las columnas iguales), simplemente aplicas `duplicated(data)`. Para identificar duplicados basados solo en ciertas columnas, puedes usar `duplicated(data[, c("columna1", "columna2")])`.
+
+**Por defecto, `duplicated()` no incluye la primera ocurrencia de un duplicado.** Si necesitas obtener todas las filas duplicadas, incluidas las primeras ocurrencias, puedes combinarlo con `duplicated()` y `duplicated(fromLast = TRUE)`.
+
+```{r}
+
+ira_dupli_2 <- duplicated(ira[, "Paciente_ID"])
+
+ira_dupli_2
+```
+
+### Duplicados con dplyr
+
+Para examinar duplicadostambien se puede utilizar `dplyr`, para ello **se combinan las funciones `group_by()` y `filter()`**. Estas herramientas permiten agrupar filas según una o varias columnas clave y luego filtrar los grupos que tienen más de una fila. Por ejemplo, con el marco de datos `ira`, si queremos identificar duplicados en la columna `Paciente_ID` podriamos realizarlo de la siguiente forma
+
+```{r}
+
+ira_dupli_3 <- ira_filtrado %>%
+  group_by(Paciente_ID) %>%
+  filter(n() > 1)
+
+```
+
+```{r, echo = FALSE}
+library(DT)
+DT::datatable(ira_dupli_3, options = list(pageLength = 5))
+```
+
+<br><br>
+
+El resultado será un subconjunto del marco de datos original que contiene solo las filas duplicadas basadas en `Paciente_ID`. **Este método tiene la ventaja de ser flexible, ya que se puede extender para incluir más columnas en `group_by()`** si se desea buscar duplicados en combinaciones de variables (por ejemplo, `Paciente_ID` y `Determinacion`).
+
+<br><br>
+
+## **Modificación de columnas**
 
 Por ejemplo si quiero modificar una columna, aquella de Resultado, donde en vez que aparezca caso positivo, aparezca "confirmado"
 
 ```{r}
 
-ira_epi <- ira_epi %>%
- mutate(Resultado = gsub("positivo", "confirmado", Resultado))
-
+#ira_epi <- ira_epi %>%
+#mutate(Resultado = gsub("positivo", "confirmado", Resultado))
 ```
 
 La función **`mutate()`** de **`dplyr`** se utiliza para modificar o crear columnas dentro de un `data frame`. Si deseas modificar una columna existente, simplemente especificas el nombre de la columna que quieres cambiar y defines cómo se debe transformar. El valor de la columna se sobrescribe con el nuevo cálculo o modificación que especifiques. Por ejemplo, si quieres reemplazar un valor específico en una columna, puedes usar **`mutate()`** junto con funciones como **`gsub()`** para buscar y reemplazar texto dentro de la columna. Esto permite aplicar transformaciones directas sobre las columnas sin crear nuevas, ajustando los datos de manera flexible dentro del mismo `data frame`.
-
-# 5. Filtrar datos
-
-Para ello utilizaremos la función filter() del dplyr
-
-```{r}
-
-library(dplyr)
-library(lubridate)
-
-ira_filtrado <- ira_epi %>%
-  filter(`Provincia Carga` == "chaco" &
-           year(`Fecha de toma de muestra`) == 2024) 
-
-
-
-```
-
-Este código usa la función **`filter()`** de **`dplyr`** para seleccionar filas específicas del `data frame` **`ira_epi`** que cumplen con dos condiciones: que la columna **`Provincia Carga`** sea igual a **"chaco"**, y que el año de la columna **`Fecha de toma de muestra`** sea **2024**. La función **`year()`** extrae el año de la fecha en **`Fecha de toma de muestra`**, permitiendo filtrar los registros que corresponden al año 2024.
-
-## 5.1. Observar duplicados
-
-Para ello generaremos antes un ID de caso, ya que las tablas que tenemos provienen de dataset de laboratorios y queremos saber cuantos datos duplicados tenemos teniendo en cuenta que **una persona puede aportar mas de un caso en el período y por evento ya que se le pueden tomar mas de una muestra.**
-
-En esta tabla vamos a crear nuestro ID combinando dos columnas: `Nro Doc` y `Fecha de toma de muestra.`
-
-```{r}
-
-ira_id <- ira_filtrado %>%
-  mutate(id_caso = paste(`Nro Doc`, `Fecha de toma de muestra`, sep = "_"))  
-  
-
-```
-
-Ahora observo si tengo duplicados:
-
-Con esto podemos crear y modificar columnas existentes. Además usaremos la **`case_when()`** para que pueda generar una secuencia de condiciones. **Esta evalúa cada fórmula bilateral secuencialmente hasta que encuentra una condición que se cumple.** Si nunca encuentra una condición que se cumpla, entonces devuelve un `NA`.
