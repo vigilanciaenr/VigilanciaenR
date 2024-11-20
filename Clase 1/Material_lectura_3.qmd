@@ -12,7 +12,7 @@ editor: visual
 code-copy: true            # Permite copiar el código desde el documento
 ---
 
-# **Objetos y estructuras en R**
+# **Objetos y estructuras en RR**
 
 ## **Factores**
 
