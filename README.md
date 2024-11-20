@@ -145,6 +145,7 @@ Para el primer encuentro presencial trabajaremos sobre el armado de grupos para 
 
 [Material funciones](https://vigilanciaenr.github.io/VigilanciaenR/Clase%202/Material_funciones.html)
 
+[Material de lectura 6](https://vigilanciaenr.github.io/VigilanciaenR/Clase%202/Material_de_lectura_6.html)
 
 
 # Clase 3 presencial: Gestión de datos. Creación de Tablas y gráficos
