@@ -128,7 +128,7 @@ ira_filtrado <- ira %>%
 ```
 
 ```{r, echo = FALSE}
-library(DT)
+
 DT::datatable(ira_filtrado, options = list(pageLength = 5))
 ```
 
@@ -151,7 +151,7 @@ ira_filtrado <- ira %>%
 ```
 
 ```{r, echo = FALSE}
-library(DT)
+
 DT::datatable(ira_filtrado, options = list(pageLength = 5))
 ```
 
@@ -177,7 +177,7 @@ ira_duplicados <- ira_filtrado %>%
 ```
 
 ```{r, echo = FALSE}
-library(DT)
+
 DT::datatable(ira_duplicados, options = list(pageLength = 5))
 ```
 
@@ -219,7 +219,7 @@ ira_dupli_3 <- ira_filtrado %>%
 ```
 
 ```{r, echo = FALSE}
-library(DT)
+
 DT::datatable(ira_dupli_3, options = list(pageLength = 5))
 ```
 
@@ -229,14 +229,73 @@ El resultado será un subconjunto del marco de datos original que contiene solo 
 
 <br><br>
 
-## **Modificación de columnas**
+### Eliminar duplicados
 
-Por ejemplo si quiero modificar una columna, aquella de Resultado, donde en vez que aparezca caso positivo, aparezca "confirmado"
+Para conservar solo las filas únicas de un marco de datos, se puede utilizar la **función `distinct()`** dedplyr. Con esta función las filas duplicadas se eliminan de modo que solo se conserva la primera de ellas. De **manera predeterminada, “primero” significa la más alta** `rownumber`(orden de filas de arriba a abajo). Solo quedan las filas únicas.
 
 ```{r}
 
-#ira_epi <- ira_epi %>%
-#mutate(Resultado = gsub("positivo", "confirmado", Resultado))
+ira_sin_duplicados <- ira_dupli_3 %>%
+  distinct(Paciente_ID, .keep_all = TRUE)
+
+ira_sin_duplicados
 ```
 
-La función **`mutate()`** de **`dplyr`** se utiliza para modificar o crear columnas dentro de un `data frame`. Si deseas modificar una columna existente, simplemente especificas el nombre de la columna que quieres cambiar y defines cómo se debe transformar. El valor de la columna se sobrescribe con el nuevo cálculo o modificación que especifiques. Por ejemplo, si quieres reemplazar un valor específico en una columna, puedes usar **`mutate()`** junto con funciones como **`gsub()`** para buscar y reemplazar texto dentro de la columna. Esto permite aplicar transformaciones directas sobre las columnas sin crear nuevas, ajustando los datos de manera flexible dentro del mismo `data frame`.
+```{r, echo = FALSE}
+
+DT::datatable(ira_sin_duplicados, options = list(pageLength = 5))
+```
+
+**En este caso `.keep_all = TRUE`**: permite conservar todas las columnas del data frame, no solo las columnas usadas para eliminar duplicados. Si ademas queremos elilminar duplicados teniendo en cuenta combinaciones de columnas, es posibles sumarlas en la función separando los nombres de las columnas con coma:
+
+```{r}
+
+ira_sin_dupli_2 <- ira_dupli_3 %>%
+  distinct(Paciente_ID, Zona, .keep_all = TRUE)
+
+```
+
+```{r, echo = FALSE}
+
+DT::datatable(ira_sin_dupli_2, options = list(pageLength = 5))
+```
+
+### Eliminar duplicados con condicional
+
+Si supongamos queremos eliminar duplicados, pero teniendo en cuenta algún valor en epecífico, es decir, que se priorice una condición frente a otras. En nuestro ejemplo pordríamos tomar el casi de la determinación y presentar un orden de prioridad para el valor que me guarde, en este ejemplo, un PCR positivo, Cultivo positivo, PCR negativo y por útlimo un cultivo negativo.
+
+Para ello podemos usar el paquete `dplyr` de R y ordenar los datos según la prioridad de los valores en la columna `Determinacion`. Luego, podemos usar `distinct()` para eliminar duplicados, manteniendo la fila que cumpla con la condición de prioridad más alta.
+
+```{r}
+
+
+# Definir la jerarquía de la columna "Determinacion" utilizando recode
+ira_priorizado <- ira %>%
+  mutate(Prioridad = recode(Resultado, 
+                            "Positivo" = 1,   # "Positivo" tiene la más alta prioridad
+                            "Negativo" = 2),  # "Negativo" tiene la prioridad más baja
+         Prioridad = case_when(
+           Determinacion == "PCR" & Resultado == "Positivo" ~ 1,   # PCR Positivo
+           Determinacion == "Cultivo" & Resultado == "Positivo" ~ 2,   # Cultivo Positivo
+           Determinacion == "PCR" & Resultado == "Negativo" ~ 3,  # PCR Negativo
+           Determinacion == "Cultivo" & Resultado == "Negativo" ~ 4,  # Cultivo Negativo
+           TRUE ~ 5  # Cualquier otro caso tendrá la menor prioridad
+         )) %>%
+  arrange(Paciente_ID, Prioridad) %>%
+  distinct(Paciente_ID, .keep_all = TRUE) %>%  # Eliminar duplicados manteniendo la prioridad
+  select(-Prioridad)  # Eliminar la columna de prioridad (opcional)
+
+# Ver el resultado
+print(ira_priorizado)
+```
+
+```{r, echo=FALSE}
+
+DT::datatable(ira_priorizado, options = list(pageLength =5))
+
+           
+```
+
+La función **`recode()`** de `dplyr` se utiliza para reemplazar valores específicos en una columna de un dataframe de acuerdo con un mapeo definido por nosotros. Esto es útil cuando deseas modificar datos categóricos, como cambiar nombres de categorías o asignar valores numéricos a textos. Por ejemplo, se puede convertir los valores `"Positivo"` y `"Negativo"` en valores `1` y `0`, respectivamente. **`mutate()`**, también de `dplyr`, permite agregar nuevas columnas a un dataframe o modificar las existentes aplicando una función a las columnas.
+
+## 
