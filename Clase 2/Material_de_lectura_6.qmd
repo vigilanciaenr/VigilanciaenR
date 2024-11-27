@@ -297,5 +297,3 @@ DT::datatable(ira_priorizado, options = list(pageLength =5))
 ```
 
 La función **`recode()`** de `dplyr` se utiliza para reemplazar valores específicos en una columna de un dataframe de acuerdo con un mapeo definido por nosotros. Esto es útil cuando deseas modificar datos categóricos, como cambiar nombres de categorías o asignar valores numéricos a textos. Por ejemplo, se puede convertir los valores `"Positivo"` y `"Negativo"` en valores `1` y `0`, respectivamente. **`mutate()`**, también de `dplyr`, permite agregar nuevas columnas a un dataframe o modificar las existentes aplicando una función a las columnas.
-
-## 
