@@ -238,7 +238,6 @@ Para conservar solo las filas únicas de un marco de datos, se puede utilizar la
 ira_sin_duplicados <- ira_dupli_3 %>%
   distinct(Paciente_ID, .keep_all = TRUE)
 
-ira_sin_duplicados
 ```
 
 ```{r, echo = FALSE}
@@ -285,8 +284,6 @@ ira_priorizado <- ira %>%
   distinct(Paciente_ID, .keep_all = TRUE) %>%  # Eliminar duplicados manteniendo la prioridad
   select(-Prioridad)  # Eliminar la columna de prioridad (opcional)
 
-# Ver el resultado
-print(ira_priorizado)
 ```
 
 ```{r, echo=FALSE}
