@@ -4,7 +4,7 @@
 - [Programa](#programa)
 - [Sesión 1: Introducción a R y Rstudio, Objetos, Funciones y sintaxis básica](#Sesión-1)
 - [Sesión 2: Importación, limpieza de datos y funciones de procesamiento básicas](#Sesión-2)
-- [Sesión 3: Unión de datos, pivoteos de datos, vicualización de tablas](#Sesión-3)
+- [Sesión 3: Unión de datos, pivoteos de datos, vizualización de tablas](#Sesión-3)
 - [Sesión 4: Visualización de datos, mapas y exportación de Quarto presentación](#Sesión-4)
 - [Sesión Git-Github](#Sesión-Git)
 - [Enlaces de utilidad](#enlaces-de-utilidad)
