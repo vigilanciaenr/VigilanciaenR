@@ -124,10 +124,10 @@ Se espera que los/as alumnos/as elaboren un plan de análisis para sus datos y c
 
 Dentro de este directorio encontraremos:
 - "Cápsula 1": Introducción básica a R y Rstudio.
-- "Cápsula 2": Objetos, funciones, principales paquetes ylibrerías.
-- "Cápsula 3": Factores, datos faltantes, Pipe (tuberías). Creación de proyecto en R y rutas de directorios de trabajo. 
+- "Cápsula 2": Objetos, funciones, principales paquetes y librerías.
+- "Cápsula 3": Factores, datos faltantes, Pipe (tuberías), creación de proyecto en R y rutas de directorios de trabajo. 
 
-Estos archivos se encuentran en el repositorio en la "Sesión 1", desde donde se lo podrán descargar o acceder desde los siguientes links:
+Estos archivos se encuentran en el repositorio en la "Sesión 1", desde donde se pueden descargar o acceder a través de los siguientes enlaces:
 
 [Cápsula 1](https://vigilanciaenr.github.io/VigilanciaenR/Sesi%C3%B3n%201/C%C3%A1psula%201.html)
 
@@ -140,11 +140,11 @@ Estos archivos se encuentran en el repositorio en la "Sesión 1", desde donde se
 # Sesión 2
 
 Dentro de este directorio encontraremos:
-- "Cápsula 4": Importación de datos con diferntes paquetes y formatos. 
-- "Cápsula 5": Limpieza y normalización de datos. Datos faltantes, trabajo con caracteres y fechas. Exportación de dataframe.
-- "Cápsula 6": Procesamiento de datos. Filtrado, y trabajo con duplicados.
-- "Cápsula 7": Procesamiento de datos. Modificación de columnas, variables condiconales, creación de rangos, agrupamientos.
-- "Material funciones": Ayuda visual para la sintaxis de principales funciones de porcesamiento de datos. 
+- "Cápsula 4": Importación de datos con diferentes paquetes y formatos.
+- "Cápsula 5": Limpieza y normalización de datos: manejo de datos faltantes, trabajo con caracteres y fechas, y exportación de dataframes.
+- "Cápsula 6": Procesamiento de datos: filtrado y manejo de duplicados.
+- "Cápsula 7": Procesamiento de datos: modificación de columnas, creación de variables condicionales, rangos y agrupamientos.
+- "Material funciones": Guía visual para la sintaxis de las principales funciones de procesamiento de datos.
 
 [Cápsula 4](https://vigilanciaenr.github.io/VigilanciaenR/Sesi%C3%B3n%202/C%C3%A1psula%204.html)
 
@@ -163,7 +163,7 @@ Dentro de este directorio encontraremos:
 
 Dentro de este directorio encontraremos:
 - "Cápsula 8": Unión de datos. 
-- "Cápsula 9": Pivoteo de datos para gráficos. 
+- "Cápsula 9": Pivoteo de datos para la creación de gráficos.
 - "Cápsula tablas": Formatos y visualización de tablas
 
 [Cápsula 8](https://vigilanciaenr.github.io/VigilanciaenR/Sesi%C3%B3n%203/C%C3%A1psula%208.html) 
@@ -178,9 +178,9 @@ Dentro de este directorio encontraremos:
 # Sesión 4:
 
 Dentro de este directorio encontraremos:
-- "Mapas": Armado de mapas 
-- "PPT Visualización de datos": Material visualización de datos para buenas prácticas.
-- "Quarto presentación": Ejemplo para exportar archivo Quarto en formato presentación.
+- "Mapas": Creación y diseño de mapas. 
+- "PPT Visualización de datos": Material sobre visualización de datos enfocado en buenas prácticas.
+- "Quarto Presentación": Ejemplo de exportación de archivos Quarto en formato de presentación.
 
 [Mapas](https://vigilanciaenr.github.io/VigilanciaenR/Sesi%C3%B3n%204/mapas_neuquen.html)
 
