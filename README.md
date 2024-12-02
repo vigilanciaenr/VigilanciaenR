@@ -168,7 +168,7 @@ Dentro de este directorio encontraremos:
 
 [Cápsula 9](https://vigilanciaenr.github.io/VigilanciaenR/Sesi%C3%B3n%203/C%C3%A1psula%209.html) 
 
-[Cápsula tablas](https://vigilanciaenr.github.io/VigilanciaenR/Sesi%C3%B3n%203/C%C3%A1psula%20tablas.html#tablas-con-gt) 
+[Cápsula tablas](https://vigilanciaenr.github.io/VigilanciaenR/Sesi%C3%B3n%203/C%C3%A1psula%20tablas.html) 
 
 
 
