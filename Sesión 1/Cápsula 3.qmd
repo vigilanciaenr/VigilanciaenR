@@ -19,7 +19,7 @@ execute:
   echo: true  # Oculta el código en los chunks
 ---
 
-# **Objetos y estructuras en RR**
+# **Objetos y estructuras en R**
 
 ## **Factores**
 
