@@ -182,7 +182,7 @@ Dentro de este directorio encontraremos:
 
 [Mapas](https://vigilanciaenr.github.io/VigilanciaenR/Sesi%C3%B3n%204/mapas_neuquen.html)
 
-[PPT Visualización de datos](https://vigilanciaenr.github.io/VigilanciaenR/Clase%203/ppt_visualizaciones.html)
+[PPT Visualización de datos](https://vigilanciaenr.github.io/VigilanciaenR/Sesi%C3%B3n%204/ppt_visualizaciones.html)
 
 [Quarto presentación](https://vigilanciaenr.github.io/VigilanciaenR/Sesi%C3%B3n%204/Quarto%20presentaci%C3%B3n.html#/title-slide)
 
