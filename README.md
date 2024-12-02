@@ -3,9 +3,10 @@
 # Indice
 - [Programa](#programa)
 - [Sesión 1: Introducción a R y Rstudio, Objetos, Funciones y sintaxis básica](#Sesión-1)
-- [Sesión 2: Importación, limpieza de datos y funciones de procesamiento básicas](#clase-2-importación-de-datos)
-- [Sesión 3: Unión de datos, pivoteos de datos, vicualización de tablas](#clase-3-presencial-gestión-de-datos-creación-de-tablas-y-gráficos)
-- [Sesión 3: Visualización de datos, mapas y exportación de Quarto presentación](#clase-3-presencial-gestión-de-datos-creación-de-tablas-y-gráficos)
+- [Sesión 2: Importación, limpieza de datos y funciones de procesamiento básicas](#Sesión-2)
+- [Sesión 3: Unión de datos, pivoteos de datos, vicualización de tablas](#Sesión-3)
+- [Sesión 4: Visualización de datos, mapas y exportación de Quarto presentación](#Sesión-4)
+- [Sesión Git-Github](#Sesión-Git)
 - [Enlaces de utilidad](#enlaces-de-utilidad)
 
 ------------
@@ -120,7 +121,7 @@ Se espera que los/as alumnos/as elaboren un plan de análisis para sus datos y c
 # Sesión 1 
 
 Dentro de este directorio encontraremos:
-- "Cápsula 1": ntroducción básica a R y Rstudio.
+- "Cápsula 1": Introducción básica a R y Rstudio.
 - "Cápsula 2": Objetos, funciones, principales paquetes ylibrerías.
 - "Cápsula 3": Factores, datos faltantes, Pipe (tuberías). Creación de proyecto en R y rutas de directorios de trabajo. 
 
@@ -134,26 +135,64 @@ Estos archivos se encuentran en el repositorio en la "Sesión 1", desde donde se
 
 [Material para encuentro sincrónico](https://vigilanciaenr.github.io/VigilanciaenR/Sesi%C3%B3n%201/Material_para_sincr%C3%B3nica.html)
 
-# Clase 2: Importación de datos
+# Sesión 2
 
-Para el primer encuentro presencial trabajaremos sobre el armado de grupos para el diseño de proyectos, el armado de los circuitos de datos locales de vigilancia y los dataframe de trabajo (ETM e IRA). Estos archivos en formato excel estan subidos al repositorio.
+Dentro de este directorio encontraremos:
+- "Cápsula 4": Importación de datos con diferntes paquetes y formatos. 
+- "Cápsula 5": Limpieza y normalización de datos. Datos faltantes, trabajo con caracteres y fechas. Exportación de dataframe.
+- "Cápsula 6": Procesamiento de datos. Filtrado, y trabajo con duplicados.
+- "Cápsula 7": Procesamiento de datos. Modificación de columnas, variables condiconales, creación de rangos, agrupamientos.
+- "Material funciones": Ayuda visual para la sintaxis de principales funciones de porcesamiento de datos. 
 
-- En el archivo "Clase 2" se proponen una serie de ejercicios para la importanción de datos en distintos formatos y procesos de normalización de bases de datos
+[Cápsula 4](https://vigilanciaenr.github.io/VigilanciaenR/Sesi%C3%B3n%202/C%C3%A1psula%204.html)
 
-[Material de lectura 4](https://vigilanciaenr.github.io/VigilanciaenR/Clase%202/Material_de_lectura_4.html)
+[Cápsula 5](https://vigilanciaenr.github.io/VigilanciaenR/Sesi%C3%B3n%202/C%C3%A1psula%205.html)
 
-[Material de lectura 5](https://vigilanciaenr.github.io/VigilanciaenR/Clase%202/Material_de_lectura_5.html)
+[Cápsula 6](https://vigilanciaenr.github.io/VigilanciaenR/Sesi%C3%B3n%202/C%C3%A1psula%206.html)
+
+[Cápsula 7](https://vigilanciaenr.github.io/VigilanciaenR/Sesi%C3%B3n%202/C%C3%A1psula%206.html)
 
 [Material funciones](https://vigilanciaenr.github.io/VigilanciaenR/Clase%202/Material_funciones.html)
 
-[Material de lectura 6](https://vigilanciaenr.github.io/VigilanciaenR/Clase%202/Material_de_lectura_6.html)
 
 
-# Clase 3 presencial: Gestión de datos. Creación de Tablas y gráficos
 
-[Clase 3 presencial](https://vigilanciaenr.github.io/VigilanciaenR/Clase%203/Clase_3.html) 
+# Sesión 3: 
+
+Dentro de este directorio encontraremos:
+- "Cápsula 8": Unión de datos. 
+- "Cápsula 9": Pivoteo de datos para gráficos. 
+- "Cápsula tablas": Formatos y visualización de tablas
+
+[Cápsula 8](https://vigilanciaenr.github.io/VigilanciaenR/Sesi%C3%B3n%203/C%C3%A1psula%208.html) 
+
+[Cápsula 9](https://vigilanciaenr.github.io/VigilanciaenR/Sesi%C3%B3n%203/C%C3%A1psula%209.html) 
+
+[Cápsula tablas](https://vigilanciaenr.github.io/VigilanciaenR/Sesi%C3%B3n%203/C%C3%A1psula%20tablas.html#tablas-con-gt) 
+
+
+
+
+# Sesión 4:
+
+Dentro de este directorio encontraremos:
+- "Mapas": Armado de mapas 
+- "PPT Visualización de datos": Material visualización de datos para buenas prácticas.
+- "Quarto presentación": Ejemplo para exportar archivo Quarto en formato presentación.
+
+[Mapas](https://vigilanciaenr.github.io/VigilanciaenR/Sesi%C3%B3n%204/mapas_neuquen.html)
 
 [PPT Visualización de datos](https://vigilanciaenr.github.io/VigilanciaenR/Clase%203/ppt_visualizaciones.html)
+
+[Quarto presentación](https://vigilanciaenr.github.io/VigilanciaenR/Sesi%C3%B3n%204/Quarto%20presentaci%C3%B3n.html#/title-slide)
+
+# Sesión Git
+
+Dentro de este directorio encontraremos:
+- Documento presentación y guía para la descarga y conexión de Git y Github con Rstudio
+
+[Presentación Git-Github](https://vigilanciaenr.github.io/VigilanciaenR/Sesi%C3%B3n%20Git-Github/ppt_git.html)
+
 
 # Enlaces de utilidad
 
