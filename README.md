@@ -152,7 +152,7 @@ Dentro de este directorio encontraremos:
 
 [Cápsula 7](https://vigilanciaenr.github.io/VigilanciaenR/Sesi%C3%B3n%202/C%C3%A1psula%207.html)
 
-[Material funciones](https://vigilanciaenr.github.io/VigilanciaenR/Clase%202/Material_funciones.html)
+[Material funciones](https://vigilanciaenr.github.io/VigilanciaenR/Sesi%C3%B3n%202/Material_funciones.html)
 
 
 
