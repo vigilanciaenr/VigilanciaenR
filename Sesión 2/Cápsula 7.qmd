@@ -1,5 +1,5 @@
 ---
-title: "Material de lectura 7"
+title: "<b>Cápsula 7</b>"
 title-block-banner: "#92aeea"
 format: 
   html:
@@ -182,7 +182,7 @@ También se puede utilizar la función `count()`, junto con `group_by()`, que es
 
 En nuestro ejemplo, podríamos contabilizar cuántos diagnósticos con neumonía, leves y graves se registran en la columna `Diagnostico`.
 
-:::aside
+::: aside
 La función **count()** de dplyr se utiliza para **contar el número de ocurrencias de un valor o conjunto de valores dentro de un conjunto de datos**, usualmente después de agrupar los datos con group_by().
 :::
 

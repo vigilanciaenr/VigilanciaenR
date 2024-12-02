@@ -1,5 +1,5 @@
 ---
-title: Material de lectura 5
+title: "<b>Cápsula 5</b>"
 title-block-banner: "#92aeea"
 format: 
   html:
@@ -8,6 +8,7 @@ format:
     toc-title: "Índice de Contenidos"  # Título del índice
     toc-depth: 3             # Nivel de profundidad del índice (hasta h3)
     toc-location: left       # Ubicación del índice (izquierda)
+    number-sections: true
 footnotes-hover: true # muestra notas al pie
 smooth-scroll: true # suaviza el scroll
 editor: visual
@@ -18,9 +19,9 @@ execute:
   echo: true  # Oculta el código en los chunks
 ---
 
-# **2. Limpieza de Datos**
+# **Limpieza de Datos**
 
-## **2.1. Identificación de datos faltantes**
+## **Identificación de datos faltantes**
 
 Para comenzar la limpieza de datos en primer lugar debemos ver si existen datos faltantes, y en este caso escribir un código que permita reemplazar la nomenclatura que trae por `NA` que es como R lee los datos faltantes.
 
@@ -82,11 +83,11 @@ Cuando usamos `across()` con `mutate()`, estamos diciendo que queremos aplicar u
 
 *"Para cada valor en las columnas, reemplaza `sin datos` por `NA`."*
 
-## **2.2. Trabajo con fechas**
+## **Trabajo con fechas**
 
 Como vimos anteriormente comprender la estructura de datos que tiene nuestro dataset es muy importante para poder manipularlos y administarlos. Por ello vamos a ver como trabajar específicamente con fechas.
 
-### 2.2.1. Conversión de estructuras
+### Conversión de estructuras
 
 En R, hay dos tipos de vectores diferentes que podemos usar para almacenar y trabajar con fechas:
 
@@ -121,7 +122,7 @@ ira2_fechas <- ira2_na %>%
 
 Este código toma las columnas **`"Fecha de toma de muestra"`** y **`"Fecha estudio"`** de un dataset, y las convierte en fechas reales a partir de números que representan días desde una fecha base (en este caso, **1 de enero de 1900**, como ocurre en Excel). Primero, las columnas son convertidas a **números** con **`as.numeric()`**, para asegurar que los valores sean tratados como datos numéricos y no como texto. Luego, **`as.Date()`** convierte esos números en fechas, utilizando la fecha de origen **"1899-12-30"**, que es el estándar para la conversión de fechas en Excel. De esta forma, los valores numéricos son transformados correctamente en fechas reconocidas por R.
 
-### 2.2.1. Conversión de POSIXct a date
+### Conversión de POSIXct a date
 
 Ahora veremos como covertir datos POSIXct a date para una majeor manipulación de los mismos.
 
@@ -158,7 +159,7 @@ Comprobamos que se realizó la modificación
 sapply(ira2_fechas, class)
 ```
 
-### 2.2.3. Conversión de formato de fecha
+### Conversión de formato de fecha
 
 Tambien puedo querer **cambiar el formato de fecha**, por ejemplo si tengo un valor de fecha como 21/10/2024
 
@@ -195,9 +196,9 @@ Sys.Date()
 class(Sys.Date())
 ```
 
-## **2.3. Normalización de caracteres**
+## **Normalización de caracteres**
 
-### 2.3.1. Modificación de minúsculas y mayúsculas
+### Modificación de minúsculas y mayúsculas
 
 ```{r, eval=FALSE}
 
@@ -218,7 +219,7 @@ ira <- ira %>%
 
 ```
 
-### 2.3.2. Quitar espacios en blanco
+### Quitar espacios en blanco
 
 ```{r, eval=FALSE}
 
@@ -229,7 +230,7 @@ ira <- ira %>%
 
 ```
 
-### 2.3.3. Quitar acentos
+### Quitar acentos
 
 ```{r, eval=FALSE}
 
@@ -262,7 +263,7 @@ print(palabra_limpia)
 Antes de guardar y cerrar nuestro archivo es necesario que guardemos nuestro nuevo marcos de datos con el que estuvimos trabajando para que no se pierdan los procesos anteriores con la función `write_xlsx()`
 :::
 
-# **3. Guardar el DataFrame**
+# **Guardar el DataFrame**
 
 Guardar los datos en formato `.xlsx` es una buena opción si lo que se busca es preservar la estructura de datos después de la limpieza y además no queremos repetir el proceso en un nuevo proyecto. Se puede guardar un dataframe en un archivo `.xlsx` usando el paquete `writexl.`
 

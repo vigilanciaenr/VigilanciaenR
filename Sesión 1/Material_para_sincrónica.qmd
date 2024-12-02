@@ -1,5 +1,6 @@
 ---
-title: "Clase 1.2 virtual"
+title: "<b>Material para clase sincrónica</b>"
+title-block-banner: "#92aeea"
 format: 
   html:
     embed-resources: true
@@ -7,10 +8,15 @@ format:
     toc-title: "Índice de Contenidos"  # Título del índice
     toc-depth: 3             # Nivel de profundidad del índice (hasta h3)
     toc-location: left       # Ubicación del índice (izquierda)
+    number-sections: true
 footnotes-hover: true # muestra notas al pie
 smooth-scroll: true # suaviza el scroll
 editor: visual
 code-copy: true            # Permite copiar el código desde el documento
+execute:
+  warning: false
+  message: false
+  echo: true  # Oculta el código en los chunks
 ---
 
 ## **Ejercicio N°1**

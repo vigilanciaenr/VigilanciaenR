@@ -1,5 +1,5 @@
 ---
-title: Material de lectura 4
+title: "<b>Cápsula 4</b>"
 title-block-banner: "#92aeea"
 format: 
   html:
@@ -8,6 +8,7 @@ format:
     toc-title: "Índice de Contenidos"  # Título del índice
     toc-depth: 3             # Nivel de profundidad del índice (hasta h3)
     toc-location: left       # Ubicación del índice (izquierda)
+    number-sections: true
 footnotes-hover: true # muestra notas al pie
 smooth-scroll: true # suaviza el scroll
 editor: visual
@@ -18,7 +19,7 @@ execute:
   echo: true  # Oculta el código en los chunks
 ---
 
-## **1.Importación datos**
+# **Importación datos**
 
 Cuando importamos un “conjunto de datos” a R, se está creando un nuevo objeto *de marco de datos* en el entorno R y se define como un archivo importado (por ejemplo, Excel, CSV, TSV, RDS) que se encuentra en sus directorios de carpetas en una determinada ruta/dirección de archivo.
 
@@ -30,7 +31,7 @@ R incluso tiene sus propios formatos de datos:
 
 -   Se puede utilizar un archivo RData (.Rdata) para almacenar varios objetos o incluso un espacio de trabajo R completo. Esto es útil para guardar los valores y objetos creados en nuestro entorno global.
 
-### **1.1. Datos .xlsx**
+## **Datos .xlsx**
 
 Primero veremos como importar datos de Excel. Esto se puede realizar de varias maneras aquí veremos la librería "readxl" para ello.
 
@@ -112,7 +113,7 @@ datos <- read_excel("reportes/Reporte dengue & chiku marzo 2024.xlsx", range = c
 
 ```
 
-### **1.2 Paquete de Rio**
+## **Paquete de Rio**
 
 El nombre “rio” es una abreviatura de “R I/O” (Imput/Output).
 
@@ -130,7 +131,7 @@ data <- import("data/datos.csv")
 
 ```
 
-### **1.3 Paquete here**
+## **Paquete here**
 
 El paquete **here** y su función `here()`hacen que sea fácil indicarle a R dónde encontrar y guardar sus archivos: es decir crea rutas de archivos.
 
@@ -159,7 +160,7 @@ excel_ejemplo <- read_excel(archivo)
 
 ```
 
-### **1.4 Visualización de características del dataset**
+## **Visualización de características del dataset**
 
 Aplicando algunas funciones tendremos un detalle de los dataset cargados
 
@@ -209,7 +210,7 @@ colnames(excel_ejemplo)
 unique(excel_ejemplo$columna_de_interes)
 ```
 
-### **1.5. Datos .csv**
+## **Datos .csv**
 
 Importación de archivos con valores separados por comas o **.csv (comma separated value).**
 
@@ -223,7 +224,7 @@ data_csv <- read_csv("reportes/Reporte dengue & chiku copia.csv")
 
 ```
 
-### **1.6 Google sheet**
+## **Google sheet**
 
 Para cargar una tabla que tenemos en google drive debemos importarla desde el paquete `googlesheet4`
 
@@ -300,14 +301,13 @@ datos <- read_sheet(sheet_url, sheet = 1)
 
 ```
 
-### **1.7. Herramienta de importación de datos de RStudio**
+## **Herramienta de importación de datos de RStudio**
 
 Para abrir la herramienta de importación de datos de RStudio, haga clic en el **Import Dataset** (menú desplegable cerca de la parte superior del panel del entorno). Allí se elige el tipo de archivo que se quiere importar.
 
-::::: {.columns}
-
+::::: columns
 ::: {.column width="50%"}
-**Paso 1**: Ir a la pestaña de "Import Dataset" 
+**Paso 1**: Ir a la pestaña de "Import Dataset"
 
 ![](capturas/capturas_Mesa%20de%20trabajo%201.png){fig-align="center" width="526"}
 :::
@@ -317,9 +317,7 @@ Para abrir la herramienta de importación de datos de RStudio, haga clic en el *
 
 ![](capturas/capturas_Mesa%20de%20trabajo%201%20copia.png){fig-align="center" width="541"}
 :::
-
-:::::  
-
+:::::
 
 **Paso 3**: Buscar nuestro archivo mediante el Browser. En la ventana inferior derecha se mostrará el código de importación para que podamos copiar y pegar en nuestro script
 

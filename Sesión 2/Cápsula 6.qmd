@@ -1,5 +1,5 @@
 ---
-title: Material de lectura 6
+title: "<b>Cápsula 6</b>"
 title-block-banner: "#92aeea"
 format: 
   html:
@@ -19,7 +19,7 @@ execute:
   echo: true  # Oculta el código en los chunks
 ---
 
-# Procesamiento de datos
+# **Procesamiento de datos**
 
 **Funciones principales**
 
@@ -136,7 +136,7 @@ DT::datatable(ira_filtrado, options = list(pageLength = 5))
 
 Las condiciones dentro de `filter()` separadas por coma correponden a diferentes argumentos, `filter(data, condicion1, condicion2)` pero no conecta condiciones lógicas.
 
-**Filtrado con operadores lógicos**
+### Filtrado con operadores lógicos
 
 Si queremos filtrar por condiciones lógicas podemos utilizar los operadores que se encuentran en el [**Material funciones**](https://vigilanciaenr.github.io/VigilanciaenR/Clase%202/Material_funciones.html). Por ejemplo, si para utilizar **OR**, usa el operador `|` (por ejemplo, `Zona == "Zona Oeste" | Zona == "Zona Este"`). En este caso se seleccionará las filas que cumplan cualquiera de las condiciones indicadas. Si en lugar de solo filtrar por año, necesitas comparar fechas exactas o rangos, puedes usar operadores como `<`, `>` o `between()`.
 
@@ -245,6 +245,8 @@ ira_sin_duplicados <- ira_dupli_3 %>%
 DT::datatable(ira_sin_duplicados, options = list(pageLength = 5))
 ```
 
+<br><br>
+
 **En este caso `.keep_all = TRUE`**: permite conservar todas las columnas del data frame, no solo las columnas usadas para eliminar duplicados. Si ademas queremos elilminar duplicados teniendo en cuenta combinaciones de columnas, es posibles sumarlas en la función separando los nombres de las columnas con coma:
 
 ```{r}
@@ -292,5 +294,7 @@ DT::datatable(ira_priorizado, options = list(pageLength =5))
 
            
 ```
+
+<br><br>
 
 La función **`recode()`** de `dplyr` se utiliza para reemplazar valores específicos en una columna de un dataframe de acuerdo con un mapeo definido por nosotros. Esto es útil cuando deseas modificar datos categóricos, como cambiar nombres de categorías o asignar valores numéricos a textos. Por ejemplo, se puede convertir los valores `"Positivo"` y `"Negativo"` en valores `1` y `0`, respectivamente. **`mutate()`**, también de `dplyr`, permite agregar nuevas columnas a un dataframe o modificar las existentes aplicando una función a las columnas.

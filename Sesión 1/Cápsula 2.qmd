@@ -1,4 +1,6 @@
 ---
+title: "<b>Cápsula 2</b>"
+title-block-banner: "#92aeea"
 format: 
   html:
     embed-resources: true
@@ -6,15 +8,20 @@ format:
     toc-title: "Índice de Contenidos"  # Título del índice
     toc-depth: 3             # Nivel de profundidad del índice (hasta h3)
     toc-location: left       # Ubicación del índice (izquierda)
+    number-sections: true
 footnotes-hover: true # muestra notas al pie
 smooth-scroll: true # suaviza el scroll
 editor: visual
 code-copy: true            # Permite copiar el código desde el documento
+execute:
+  warning: false
+  message: false
+  echo: true  # Oculta el código en los chunks
 ---
 
 # **Objetos y funciones en R**
 
-## Data Frames o Marco de datos
+## **Data Frames o Marco de datos**
 
 Un Data Frame es un objeto similar a las matrices ya que almacena los datos en formato de filas y columnas, y puede almacenar diferentes clases de valores. Por ejemplo, en una columna podemos almacenar números, en otra caracteres, en otra fechas.
 

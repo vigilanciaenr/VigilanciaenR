@@ -1,5 +1,5 @@
 ---
-title: "Tablas formato y visualización"
+title: "<b>Cápsula tablas</b>"
 title-block-banner: "#92aeea"
 format: 
   html:
@@ -88,14 +88,11 @@ datos_con_totales <- bind_rows(datos_tabla, totales)
 
 ```
 
-         
 Vamos a **explorar ejemplos prácticos que muestran cómo personalizar tablas utilizando las distintas funciones del paquete**. Es importante identificar las secciones clave del código que nos permiten editar elementos específicos de la tabla, como la apariencia del encabezado, el estilo de las filas de datos y los detalles visuales generales. Esto nos permitirá crear tablas bien diseñadas y adaptadas a nuestras necesidades.
 
-Cada ejemplo presenta la sintaxis los distintos paquetes que se pueden utilizar. 
-
+Cada ejemplo presenta la sintaxis los distintos paquetes que se pueden utilizar.
 
 ## **Tablas con gt()**
-
 
 ### Tabla gt 1
 
@@ -248,11 +245,7 @@ gt_tabla
 
 ```
 
-
-
-
 ## **Tablas flextable()**
-
 
 ### Tabla 1 flextable()
 
@@ -263,7 +256,6 @@ datos_ordenados <-  datos_con_totales %>%
          Casos_Chikungunya, Tasa_Chikungunya)
 
 ```
-
 
 ```{r}
 
@@ -327,10 +319,7 @@ flextable(datos_ordenados) %>%
 
 ```
 
-
-
 ## **Tablas reactable()**
-
 
 ### Tabla 1 reactable()
 
@@ -396,7 +385,6 @@ reactable(
 
 
 ```
-
 
 ### Tabla 2 reactable()
 
@@ -492,15 +480,11 @@ reactable(
 
 ```
 
-
-
-
 ## **Automatización de formatos()**
 
-Las funciones en R permiten **encapsular estilos, configuraciones y opciones visuales dentro de una estructura reutilizable**, lo que facilita la consistencia en el diseño y ahorra tiempo al aplicar los mismos formatos en diferentes tablas o conjuntos de datos. 
+Las funciones en R permiten **encapsular estilos, configuraciones y opciones visuales dentro de una estructura reutilizable**, lo que facilita la consistencia en el diseño y ahorra tiempo al aplicar los mismos formatos en diferentes tablas o conjuntos de datos.
 
-Por ejemplo, en paquetes como reactable o gt, es posible definir funciones que apliquen colores, bordes, alineaciones, tamaños de texto y otras características estéticas a las tablas con solo una línea de código. 
-
+Por ejemplo, en paquetes como reactable o gt, es posible definir funciones que apliquen colores, bordes, alineaciones, tamaños de texto y otras características estéticas a las tablas con solo una línea de código.
 
 ### Función 1 reactable()
 
@@ -532,7 +516,6 @@ mi_tema <- function(data) {
 
 ```
 
-
 #### Ejemplo Función 1 reactable()
 
 ```{r}
@@ -547,7 +530,6 @@ datos <- data.frame(
 # Usar la función `mi_tema` para aplicar el formato
 mi_tema(datos)
 ```
-
 
 ### Función 1 gt()
 
@@ -579,7 +561,6 @@ funcion2 <- function(gt_tbl) {
 
 ```
 
-
 #### Ejemplo Fución 1 gt()
 
 ```{r}
@@ -595,4 +576,3 @@ tabla <- gt(datos)
 funcion2(tabla)
 
 ```
-

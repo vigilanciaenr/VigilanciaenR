@@ -1,5 +1,5 @@
 ---
-title: "Material de lectura 8"
+title: "<b>Cápsula 8</b>"
 title-block-banner: "#92aeea"
 format: 
   html:

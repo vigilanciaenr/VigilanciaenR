@@ -1,11 +1,14 @@
 ---
+title: "<b>Cápsula 1</b>"
+title-block-banner: "#92aeea"
 format: 
   html:
     embed-resources: true
     toc: true                # Habilita la tabla de contenidos
     toc-title: "Índice de Contenidos"  # Título del índice
     toc-depth: 3             # Nivel de profundidad del índice (hasta h3)
-    toc-location: right       # Ubicación del índice (izquierda)
+    toc-location: left       # Ubicación del índice (izquierda)
+    number-sections: true
 footnotes-hover: true # muestra notas al pie
 smooth-scroll: true # suaviza el scroll
 editor: visual
@@ -16,7 +19,7 @@ execute:
   echo: true  # Oculta el código en los chunks
 ---
 
-# **Introducción a R y Rstudio** 
+# **Introducción a R y Rstudio**
 
 R es un lenguaje de programación estadístico de código abierto que se creó en la década de 1990 específicamente para el análisis de datos. R es un lenguaje y entorno de software para estadísticas y gráficos. R Studio proporciona una interfaz amigable para trabajar con R, facilitando la escritura, depuración y ejecución de código, además de ofrecer herramientas adicionales para la visualización de datos y la generación de informes.
 
@@ -282,5 +285,3 @@ sd(a)       #nos dice el desvío
 
 median(a)   #...la mediana
 ```
-
-### 

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Material de lectura 4</title>
+<title>Cápsula 4</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -3087,7 +3087,7 @@ background: #92aeea;
 <header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Material de lectura 4</h1>
+      <h1 class="title"><b>Cápsula 4</b></h1>
                       </div>
   </div>
     
@@ -3106,15 +3106,15 @@ background: #92aeea;
     <h2 id="toc-title">Índice de Contenidos</h2>
    
   <ul>
-  <li><a href="#importación-datos" id="toc-importación-datos" class="nav-link active" data-scroll-target="#importación-datos"><strong>1.Importación datos</strong></a>
+  <li><a href="#importación-datos" id="toc-importación-datos" class="nav-link active" data-scroll-target="#importación-datos"><span class="header-section-number">1</span> <strong>Importación datos</strong></a>
   <ul class="collapse">
-  <li><a href="#datos-.xlsx" id="toc-datos-.xlsx" class="nav-link" data-scroll-target="#datos-.xlsx"><strong>1.1. Datos .xlsx</strong></a></li>
-  <li><a href="#paquete-de-rio" id="toc-paquete-de-rio" class="nav-link" data-scroll-target="#paquete-de-rio"><strong>1.2 Paquete de Rio</strong></a></li>
-  <li><a href="#paquete-here" id="toc-paquete-here" class="nav-link" data-scroll-target="#paquete-here"><strong>1.3 Paquete here</strong></a></li>
-  <li><a href="#visualización-de-características-del-dataset" id="toc-visualización-de-características-del-dataset" class="nav-link" data-scroll-target="#visualización-de-características-del-dataset"><strong>1.4 Visualización de características del dataset</strong></a></li>
-  <li><a href="#datos-.csv" id="toc-datos-.csv" class="nav-link" data-scroll-target="#datos-.csv"><strong>1.5. Datos .csv</strong></a></li>
-  <li><a href="#google-sheet" id="toc-google-sheet" class="nav-link" data-scroll-target="#google-sheet"><strong>1.6 Google sheet</strong></a></li>
-  <li><a href="#herramienta-de-importación-de-datos-de-rstudio" id="toc-herramienta-de-importación-de-datos-de-rstudio" class="nav-link" data-scroll-target="#herramienta-de-importación-de-datos-de-rstudio"><strong>1.7. Herramienta de importación de datos de RStudio</strong></a></li>
+  <li><a href="#datos-.xlsx" id="toc-datos-.xlsx" class="nav-link" data-scroll-target="#datos-.xlsx"><span class="header-section-number">1.1</span> <strong>Datos .xlsx</strong></a></li>
+  <li><a href="#paquete-de-rio" id="toc-paquete-de-rio" class="nav-link" data-scroll-target="#paquete-de-rio"><span class="header-section-number">1.2</span> <strong>Paquete de Rio</strong></a></li>
+  <li><a href="#paquete-here" id="toc-paquete-here" class="nav-link" data-scroll-target="#paquete-here"><span class="header-section-number">1.3</span> <strong>Paquete here</strong></a></li>
+  <li><a href="#visualización-de-características-del-dataset" id="toc-visualización-de-características-del-dataset" class="nav-link" data-scroll-target="#visualización-de-características-del-dataset"><span class="header-section-number">1.4</span> <strong>Visualización de características del dataset</strong></a></li>
+  <li><a href="#datos-.csv" id="toc-datos-.csv" class="nav-link" data-scroll-target="#datos-.csv"><span class="header-section-number">1.5</span> <strong>Datos .csv</strong></a></li>
+  <li><a href="#google-sheet" id="toc-google-sheet" class="nav-link" data-scroll-target="#google-sheet"><span class="header-section-number">1.6</span> <strong>Google sheet</strong></a></li>
+  <li><a href="#herramienta-de-importación-de-datos-de-rstudio" id="toc-herramienta-de-importación-de-datos-de-rstudio" class="nav-link" data-scroll-target="#herramienta-de-importación-de-datos-de-rstudio"><span class="header-section-number">1.7</span> <strong>Herramienta de importación de datos de RStudio</strong></a></li>
   </ul></li>
   </ul>
 </nav>
@@ -3127,8 +3127,8 @@ background: #92aeea;
 
 
 
-<section id="importación-datos" class="level2">
-<h2 class="anchored" data-anchor-id="importación-datos"><strong>1.Importación datos</strong></h2>
+<section id="importación-datos" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> <strong>Importación datos</strong></h1>
 <p>Cuando importamos un “conjunto de datos” a R, se está creando un nuevo objeto <em>de marco de datos</em> en el entorno R y se define como un archivo importado (por ejemplo, Excel, CSV, TSV, RDS) que se encuentra en sus directorios de carpetas en una determinada ruta/dirección de archivo.</p>
 <p>Se puede importar y exportar muchos tipos de archivos, incluidos los creados por otros programas estadísticos (SAS, STATA, SPSS).</p>
 <p>R incluso tiene sus propios formatos de datos:</p>
@@ -3136,8 +3136,8 @@ background: #92aeea;
 <li><p>Un archivo RDS (.rds) almacena un único objeto R, como un marco de datos. Son útiles para almacenar datos limpios, ya que mantienen las clases de columnas R.</p></li>
 <li><p>Se puede utilizar un archivo RData (.Rdata) para almacenar varios objetos o incluso un espacio de trabajo R completo. Esto es útil para guardar los valores y objetos creados en nuestro entorno global.</p></li>
 </ul>
-<section id="datos-.xlsx" class="level3">
-<h3 class="anchored" data-anchor-id="datos-.xlsx"><strong>1.1. Datos .xlsx</strong></h3>
+<section id="datos-.xlsx" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="datos-.xlsx"><span class="header-section-number">1.1</span> <strong>Datos .xlsx</strong></h2>
 <p>Primero veremos como importar datos de Excel. Esto se puede realizar de varias maneras aquí veremos la librería “readxl” para ello.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a> <span class="co"># Cargamos la librerías (si aún no las instalamos este es el momento de hacerlo)}</span></span>
@@ -3190,8 +3190,8 @@ background: #92aeea;
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;reportes/Reporte dengue &amp; chiku marzo 2024.xlsx&quot;</span>, <span class="at">range =</span> <span class="fu">cell_cols</span>(<span class="st">&quot;B:E&quot;</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="paquete-de-rio" class="level3">
-<h3 class="anchored" data-anchor-id="paquete-de-rio"><strong>1.2 Paquete de Rio</strong></h3>
+<section id="paquete-de-rio" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="paquete-de-rio"><span class="header-section-number">1.2</span> <strong>Paquete de Rio</strong></h2>
 <p>El nombre “rio” es una abreviatura de “R I/O” (Imput/Output).</p>
 <p>Sus funciones <code>import()</code>permiten <code>export()</code>gestionar distintos tipos de archivos (por ejemplo, .xlsx, .csv, .rds, .tsv). Cuando se proporciona una ruta de archivo a cualquiera de estas funciones (incluida la extensión del archivo, como “.csv”), <strong>rio</strong> leerá la extensión y utilizará la herramienta correcta para importar o exportar el archivo.</p>
 <p>Recordar antes instalarlo si aún no lo tenemos instalado.</p>
@@ -3203,8 +3203,8 @@ background: #92aeea;
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">&quot;data/datos.csv&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="paquete-here" class="level3">
-<h3 class="anchored" data-anchor-id="paquete-here"><strong>1.3 Paquete here</strong></h3>
+<section id="paquete-here" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="paquete-here"><span class="header-section-number">1.3</span> <strong>Paquete here</strong></h2>
 <p>El paquete <strong>here</strong> y su función <code>here()</code>hacen que sea fácil indicarle a R dónde encontrar y guardar sus archivos: es decir crea rutas de archivos.</p>
 <p>Es importante para este paquete crear antes un proyecto de R donde estaran contenidos nuestros datos.</p>
 <p>Así es como <code>here()</code>funciona dentro de un proyecto R:</p>
@@ -3225,8 +3225,8 @@ background: #92aeea;
 <span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>excel_ejemplo <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(archivo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="visualización-de-características-del-dataset" class="level3">
-<h3 class="anchored" data-anchor-id="visualización-de-características-del-dataset"><strong>1.4 Visualización de características del dataset</strong></h3>
+<section id="visualización-de-características-del-dataset" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="visualización-de-características-del-dataset"><span class="header-section-number">1.4</span> <strong>Visualización de características del dataset</strong></h2>
 <p>Aplicando algunas funciones tendremos un detalle de los dataset cargados</p>
 <p><strong>Estructura del Dataset:</strong></p>
 <div class="cell">
@@ -3258,8 +3258,8 @@ background: #92aeea;
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(excel_ejemplo<span class="sc">$</span>columna_de_interes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="datos-.csv" class="level3">
-<h3 class="anchored" data-anchor-id="datos-.csv"><strong>1.5. Datos .csv</strong></h3>
+<section id="datos-.csv" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="datos-.csv"><span class="header-section-number">1.5</span> <strong>Datos .csv</strong></h2>
 <p>Importación de archivos con valores separados por comas o <strong>.csv (comma separated value).</strong></p>
 <p>Para ello usamos la función <code>readr</code>de <code>read_csv(),</code>esta es para importar un conjunto de datos con valores delimitados por comas. Esos valores se importaron como un marco de datos y asignamos ese marco de datos al objeto R llamado <code>csv</code>.</p>
 <div class="cell">
@@ -3268,8 +3268,8 @@ background: #92aeea;
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>data_csv <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;reportes/Reporte dengue &amp; chiku copia.csv&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="google-sheet" class="level3">
-<h3 class="anchored" data-anchor-id="google-sheet"><strong>1.6 Google sheet</strong></h3>
+<section id="google-sheet" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="google-sheet"><span class="header-section-number">1.6</span> <strong>Google sheet</strong></h2>
 <p>Para cargar una tabla que tenemos en google drive debemos importarla desde el paquete <code>googlesheet4</code></p>
 <p><a href="https://googlesheets4.tidyverse.org/" class="uri">https://googlesheets4.tidyverse.org/</a></p>
 <p>Para ello primero instalamos el paquete necesario. Además necesitaremos utilizar para la autenticación el paquete <code>httpuv</code>, ya que es necesario que la cuenta que utlicemos de google se concete con R para realizar la transferencia de datos.</p>
@@ -3319,8 +3319,8 @@ background: #92aeea;
 <span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> <span class="fu">read_sheet</span>(sheet_url, <span class="at">sheet =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="herramienta-de-importación-de-datos-de-rstudio" class="level3">
-<h3 class="anchored" data-anchor-id="herramienta-de-importación-de-datos-de-rstudio"><strong>1.7. Herramienta de importación de datos de RStudio</strong></h3>
+<section id="herramienta-de-importación-de-datos-de-rstudio" class="level2" data-number="1.7">
+<h2 data-number="1.7" class="anchored" data-anchor-id="herramienta-de-importación-de-datos-de-rstudio"><span class="header-section-number">1.7</span> <strong>Herramienta de importación de datos de RStudio</strong></h2>
 <p>Para abrir la herramienta de importación de datos de RStudio, haga clic en el <strong>Import Dataset</strong> (menú desplegable cerca de la parte superior del panel del entorno). Allí se elige el tipo de archivo que se quiere importar.</p>
 <div class="columns">
 <div class="column" style="width:50%;">
