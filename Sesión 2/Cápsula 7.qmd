@@ -1,0 +1,201 @@
+---
+title: "Material de lectura 7"
+title-block-banner: "#92aeea"
+format: 
+  html:
+    embed-resources: true
+    toc: true                # Habilita la tabla de contenidos
+    toc-title: "Índice de Contenidos"  # Título del índice
+    toc-depth: 3             # Nivel de profundidad del índice (hasta h3)
+    toc-location: left       # Ubicación del índice (izquierda)
+    number-sections: true
+footnotes-hover: true # muestra notas al pie
+smooth-scroll: true # suaviza el scroll
+editor: visual
+code-copy: true            # Permite copiar el código desde el documento
+execute:
+  warning: false
+  message: false
+  echo: true  # Oculta el código en los chunks
+---
+
+# **Creación de columnas**
+
+a función `mutate()` de `dplyr` se utiliza para modificar o crear columnas dentro de un data frame. Si se quiere modificar una columna existente, simplemente se debe especificar el nombre de la columna que se desea cambiar y definir cómo debe transformarse. El valor de la columna se sobrescribe con el nuevo cálculo o modificación que se especifique. También se pueden crear columnas basadas en nuevos valores o cálculos específicos.
+
+Supongamos que continuamos trabajando con el data frame del material anterior llamado `ira` y queremos agregar una columna que indique la semana epidemiológica en base a la columna `Fecha_Sitnomas`.
+
+```{r, echo=FALSE}
+
+load("data_ira.RData")
+```
+
+```{r}
+
+library(dplyr)
+library(lubridate)
+
+ira_semana_epi <- ira %>% 
+  mutate(semana_epi = epiweek(Fecha_Sintomas)) %>% 
+  select(semana_epi, everything())
+
+```
+
+```{r,echo=FALSE}
+
+DT::datatable(ira_semana_epi, options = list(pageLength = 5 ))
+```
+
+<br><br>
+
+La función `epiweek()` del paquete `lubridate` en R se utiliza para calcular la semana epidemiológica a partir de una fecha. Este cálculo está basado en el estándar ISO 8601, donde la semana comienza el lunes. En este código, al aplicar `epiweek()` a la columna `Fecha_Sintomas`, se crea una nueva columna `semana_epi` que asigna el número de la semana epidemiológica a cada observación, según este estándar.
+
+En este caso, `epiweek()` calculará la semana epidemiológica para cada fecha de la columna `Fecha_Sintomas`.
+
+## **Creación de columnas en base a variables condicionales**
+
+También podemos crear columnas condicionales. Por ejemplo, si quieres clasificar las zonas según regiones sanitarias. Para crear columnas condicionales en un data frame usando `mutate()` de `dplyr`, se puede utilizar funciones como `case_when()`. Esta función permite crear nuevas columnas basadas en condiciones específicas, lo que es útil para clasificar datos.
+
+El operador `%in%` en R se utiliza para verificar si un valor o un conjunto de valores se encuentra dentro de un vector o conjunto. Es una forma conveniente de realizar una búsqueda de pertenencia.
+
+En este caso utilizamos el `select` para que nos muestre primero la columna que acabamos de crear y luego todo el resto con `everything()`
+
+```{r}
+
+ira_regiones <- ira_semana_epi %>%
+  mutate(
+    Region_Sanitaria = case_when(
+      Zona %in% c("Zona Oeste") ~ "Región 1",      
+      Zona %in% c("Zona Este") ~ "Región 2",     
+      TRUE ~ "Otra Región"               
+    )
+  ) %>% 
+  
+  select(Region_Sanitaria, everything())
+
+```
+
+```{r, echo=FALSE}
+
+DT::datatable(ira_regiones, options = list(pageLength =5))
+```
+
+<br><br>
+
+## **Creación de columnas en base a rangos**
+
+La función **`cut()`** es una forma de categorizar rangos de valores, en este caso, las edades. La función **`cut()`** en R es una función muy útil para dividir un conjunto de datos numéricos en **intervalos** o **categorías**. Básicamente, esta función toma un vector de datos y lo **divide en intervalos definidos** y asigna una categoría a cada valor en el vector según el intervalo al que pertenece.
+
+**`right`**: Si es `TRUE`, los intervalos serán **cerrados por la derecha** (es decir, el límite superior se incluye en el intervalo). Si es `FALSE`, los intervalos serán **cerrados por la izquierda**.
+
+#### Resumen de los intervalos:
+
+-   **`right = TRUE`** (cerrado por la derecha):
+
+    -   El límite superior está incluido, pero el límite inferior no.
+
+    -   Los intervalos se verían como: `[0, 10]`, `[10, 20]`, etc.
+
+-   **`right = FALSE`** (cerrado por la izquierda):
+
+    -   El límite inferior está incluido, pero el límite superior no.
+
+    -   Los intervalos se verían como: `[0, 10)`, `[10, 20)`, etc.
+
+#### Representación gráfica con paréntesis o corchetes:
+
+Para representar estos intervalos con paréntesis o corchetes:
+
+-   **Corchetes (`[ ]`)** indican que el valor está **incluido** en el intervalo.
+
+-   **Paréntesis (`( )`)** indican que el valor está **excluido** en el intervalo.
+
+Por ejemplo:
+
+-   **`[0, 10]`**: 0 y 10 están **incluidos**.
+
+-   **`[0, 10)`**: 0 está **incluido**, pero 10 no lo está.
+
+-   **`(0, 10]`**: 0 no está incluido, pero 10 sí lo está.
+
+-   **`(0, 10)`**: Ni 0 ni 10 están incluidos en el intervalo.
+
+```{r}
+
+# Clasificar en rangos de edad con `cut()`
+
+ira_rangos <- ira %>%
+  mutate(
+    Rango_Edad = cut(Edad, 
+                     breaks = c(0, 17, 35, 50, Inf),  
+                     labels = c("Menor de 18", "18-35", "36-50", "51+"),
+                     right = TRUE)) %>% 
+   select(Rango_Edad, everything())
+
+```
+
+```{r, echo=FALSE}
+
+DT::datatable(ira_rangos, options = list(pageLength =5))
+```
+
+<br><br>
+
+## **Agrupamiento de datos**
+
+La función `group_by()`de **dplyr** agrupa las filas según los valores únicos en la columna que se le especifica. Si se especifican varias columnas, las filas se agrupan según las combinaciones únicas de valores en las columnas. Cada valor único (o combinación de valores) constituye un grupo. Los cambios posteriores en el conjunto de datos o los cálculos se pueden realizar dentro del contexto de cada grupo.
+
+:::: mb-5
+::: {style="background-color:  #edf28a; padding: 10px; border: 1px solid #ccc; border-radius: 5px"}
+Es importante tener en cuenta que **los datos que se hayan agrupado permanecerán agrupados hasta que se desagrupen específicamente mediante `ungroup()`**. Si no se desagrupan, puede generar cálculos incorrectos o error en los comandos posteriores.
+:::
+::::
+
+Supongamos que queremos agrupar los datos por `Rango_Edad` y calcular la cantidad de hospitalizaciones.
+
+En este caso, los datos se dividirán en grupos según los diferentes rangos de edad. Luego, dentro de cada grupo, se utiliza `summarise()` para calcular el número total de hospitalizaciones, sumando los valores de la columna `Hospitalizado` donde el valor es "Sí" (es decir, cuenta cuántos pacientes fueron hospitalizados en cada rango de edad).
+
+::: aside
+**La función summarise()** o summarize() del paquete dplyr se utiliza para crear resúmenes o agregados de un conjunto de datos, usualmente dentro de un grupo específico cuando se usa junto con group_by(). **La función reduce un conjunto de datos a una o varias estadísticas resumen, como la suma, el promedio, la media, el mínimo, el máximo, entre otros**.
+:::
+
+```{r}
+
+# Agrupar por paciente y calcular el número de hospitalizaciones 
+
+ira_agrupado <- ira_rangos %>%
+  group_by(Rango_Edad) %>%
+  summarise(
+    hospitalizaciones = sum(Hospitalizado == "Sí")) %>%
+  ungroup()  
+
+```
+
+```{r, echo=FALSE}
+
+DT::datatable(ira_agrupado, options = list(pageLength =5))
+```
+
+<br><br>
+
+También se puede utilizar la función `count()`, junto con `group_by()`, que es una forma muy eficiente de contar el número de observaciones por grupo en un `data.frame`.
+
+En nuestro ejemplo, podríamos contabilizar cuántos diagnósticos con neumonía, leves y graves se registran en la columna `Diagnostico`.
+
+:::aside
+La función **count()** de dplyr se utiliza para **contar el número de ocurrencias de un valor o conjunto de valores dentro de un conjunto de datos**, usualmente después de agrupar los datos con group_by().
+:::
+
+```{r}
+
+ira_neumonia <- ira %>%
+  group_by(Diagnostico) %>%
+  count() %>% 
+  ungroup()
+
+```
+
+```{r, echo=FALSE}
+
+DT::datatable(ira_neumonia, options = list(pageLenght = 5 ))
+```

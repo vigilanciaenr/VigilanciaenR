@@ -1,0 +1,598 @@
+---
+title: "Tablas formato y visualización"
+title-block-banner: "#92aeea"
+format: 
+  html:
+    embed-resources: true
+    toc: true                # Habilita la tabla de contenidos
+    toc-title: "Índice de Contenidos"  # Título del índice
+    toc-depth: 3             # Nivel de profundidad del índice (hasta h3)
+    toc-location: left       # Ubicación del índice (izquierda)
+    number-sections: true
+footnotes-hover: true # muestra notas al pie
+smooth-scroll: true # suaviza el scroll
+editor: visual
+code-copy: true            # Permite copiar el código desde el documento
+execute:
+  warning: false
+  message: false
+  echo: true  # Oculta el código en los chunks
+---
+
+# **Tablas**
+
+```{r, echo=FALSE}
+
+load("data_ira.RData")
+```
+
+Cuando trabajamos con datos en R, una de las tareas más comunes es la **visualización y presentación de los resultados** en formato de tabla. R ofrece varios paquetes que permiten crear y personalizar tablas de diferentes formas y estilos, cada uno con características que se adaptan a necesidades específicas.
+
+En esta sección, exploraremos algunos de los paquetes más utilizados para formatear y presentar tablas en R, como **`gt`**, **`reactable`** y **`flextable`**. Cada uno de estos paquetes tiene sus ventajas, y su elección depende de los requisitos del análisis o la presentación:
+
+1.  **`gt`**: Es un paquete diseñado para crear tablas estéticamente atractivas y fáciles de leer. Permite agregar formatos como colores, alineación de texto, bordes y más, lo que facilita la presentación de resultados en informes o documentos.
+
+2.  **`flextable`**: Es otro paquete que se destaca por su capacidad para personalizar tablas, permitiendo aplicar estilos detallados a celdas, columnas, filas y texto. Es especialmente útil cuando se necesita un control preciso sobre el diseño de las tablas en documentos interactivos o exportados.
+
+3.  **`reactable`**: Este paquete es perfecto para crear tablas interactivas y dinámicas. Permite la búsqueda, ordenamiento y filtrado, pero también ofrece una mayor flexibilidad para personalizar el diseño, la apariencia y la interacción con las tablas. `reactable` se utiliza especialmente en aplicaciones web y dashboards.
+
+```{r, echo=FALSE}
+
+library(dplyr)
+# Cálculos previos
+# Cálculo de las tasas con redondeo a un decimal
+tasa_dengue <- round(c(
+  120 / 50000 * 100000,
+  45 / 35000 * 100000,
+  80 / 40000 * 100000,
+  60 / 45000 * 100000
+), 1)
+
+tasa_chikungunya <- round(c(
+  30 / 50000 * 100000,
+  12 / 35000 * 100000,
+  25 / 40000 * 100000,
+  18 / 45000 * 100000
+), 1)
+
+datos_tabla <- data.frame(
+  Localidad = c("Zona Oeste", "Zona Este", "Zona Norte", "Zona Sur"),
+  Casos_Dengue = c(120, 45, 80, 60),
+  Poblacion = c(50000, 35000, 40000, 45000),
+  Casos_Chikungunya = c(30, 12, 25, 18),
+  Tasa_Dengue = as.numeric(tasa_dengue),
+  Tasa_Chikungunya = as.numeric(tasa_chikungunya)
+)
+
+# Calcular los totales de casos de Dengue y Chikungunya
+total_dengue <- sum(datos_tabla$Casos_Dengue)
+total_chikungunya <- sum(datos_tabla$Casos_Chikungunya)
+total_poblacion <- sum(datos_tabla$Poblacion)
+
+# Calcular las tasas totales
+tasa_dengue_total <- round((total_dengue / total_poblacion) * 100000, 1)
+tasa_chikungunya_total <- round((total_chikungunya / total_poblacion) * 100000, 1)
+
+# Crear la fila de totales
+totales <- data.frame(
+  Localidad = "Total",
+  Casos_Dengue = total_dengue,
+  Poblacion = total_poblacion,
+  Casos_Chikungunya = total_chikungunya,
+  Tasa_Dengue = tasa_dengue_total,
+  Tasa_Chikungunya = tasa_chikungunya_total
+)
+
+# Agregar la fila de totales al data frame original
+datos_con_totales <- bind_rows(datos_tabla, totales)
+
+```
+
+         
+Vamos a **explorar ejemplos prácticos que muestran cómo personalizar tablas utilizando las distintas funciones del paquete**. Es importante identificar las secciones clave del código que nos permiten editar elementos específicos de la tabla, como la apariencia del encabezado, el estilo de las filas de datos y los detalles visuales generales. Esto nos permitirá crear tablas bien diseñadas y adaptadas a nuestras necesidades.
+
+Cada ejemplo presenta la sintaxis los distintos paquetes que se pueden utilizar. 
+
+
+## **Tablas con gt()**
+
+
+### Tabla gt 1
+
+```{r, echo=TRUE, increment = TRUE}
+
+library(gt)
+
+# Armar tabla con gt
+datos_con_totales %>%
+  gt(rowname_col = "Localidad") %>%  # Especificamos que la columna 'Localidad' será la primera columna de la tabla
+  
+  # Títulos y subtítulos
+  tab_header(
+    title = md("**Casos Epidemiológicos**"),  # Título en negrita
+    subtitle = md("Casos *confirmados* de dengue y chikungunya según zona y población, provincia, año 2024")  # Subtítulo en cursiva
+  ) %>%
+  
+  # Personalizar nombres de las columnas
+  cols_label(
+    Localidad = md("Zona"),  # Renombrar columna 'Localidad' a 'Zona'
+    Casos_Dengue = md("Casos <br>Dengue"),  # Renombrar con salto de línea en el nombre
+    Casos_Chikungunya = md("Casos <br>Chikungunya"),  # Lo mismo para la columna 'Casos_Chikungunya'
+    Tasa_Dengue = md("Tasa <br>Dengue"),
+    Tasa_Chikungunya = md("Tasa <br>Chikungunya")
+  ) %>%
+  
+  # Alineación de las cabeceras de las columnas
+  opt_align_table_header(align = "left") %>%
+  # Definir el ancho de las columnas en píxeles
+  cols_width(
+    Localidad ~ px(200),
+    Casos_Dengue ~ px(150),
+    Casos_Chikungunya ~ px(150),
+    Tasa_Dengue ~ px(200),
+    Tasa_Chikungunya ~ px(200)
+  ) %>%
+  
+  # Nota al pie de la tabla
+  tab_source_note(
+    source_note = md("Fuente de datos: Sistema de Información Sanitaria de la Provincia.")
+  ) %>%
+  
+  # Agregar una nota al pie para las columnas de tasas
+  tab_footnote(
+    footnote = "Tasas calculadas por cada 100,000 habitantes",
+    locations = cells_column_labels(columns = c(Tasa_Dengue, Tasa_Chikungunya))  # Aplica solo a las cabeceras de columnas de tasas
+  ) %>%
+  
+  # Aplicar colores a las celdas de los casos, utilizando una paleta de colores
+  data_color(
+    columns = c(Casos_Dengue, Casos_Chikungunya),  # Seleccionamos las columnas a colorear
+    colors = scales::col_numeric(  # Usamos col_numeric para aplicar una paleta
+      palette = c("#f7fcf5", "#bd0026"),  # Color desde un amarillo claro hasta un rojo
+      domain = c(0, 200)  # Establecemos el rango de valores de la paleta
+    ),
+    rows = 1:(nrow(datos_con_totales) - 1)  # Excluimos la última fila (Total) de la coloración
+  ) %>%
+  
+  # Establecer la fuente a Helvetica y evitar la negrita en todo el texto
+  opt_table_font(
+    font = "Helvetica", 
+    weight = "normal"
+  ) %>%
+  
+  # Alineación de las cabeceras de las columnas: columnas 1, 2, 3 alineadas a la izquierda
+  tab_style(
+    style = cell_text(align = "left"), 
+    locations = cells_column_labels(columns = c(1, 2, 3, 4, 5, 6))  # Localidad, Casos_Dengue, Casos_Chikungunya
+  ) %>%
+  
+  # Aplicar negrita a la última fila (Total)
+  tab_style(
+    style = cell_text(weight = "bold"),  # Aplicar negrita
+    locations = cells_body(
+      rows = nrow(datos_con_totales),  # Seleccionamos la última fila (Total)
+      columns = everything()  # Aplicamos a todas las columnas de la fila
+    )
+  ) %>% 
+  
+  # Aplicar color de fondo gris claro a la última fila (Total)
+  tab_style(
+    style = cell_fill(color = "#f2f2f2"),  # Color de fondo gris claro para la fila de totales
+    locations = cells_body(
+      rows = nrow(datos_con_totales),  # Seleccionamos la última fila (Total)
+      columns = everything()  # Aplicamos a todas las columnas
+    )
+  )
+
+```
+
+### Tabla gt 2
+
+```{r}
+
+
+# Crear una tabla 'gt' con los datos
+gt_tabla <- gt(datos_con_totales) %>%
+  
+  # Agregar un título y un subtítulo a la tabla
+  tab_header(
+    title = md("**Casos Epidemiológicos**"),  # Título en negrita usando Markdown
+    subtitle = md("Casos *confirmados* de dengue y chikungunya según zona y población, provincia, año 2024")  # Subtítulo con formato Markdown
+  ) %>%
+  
+  # Etiquetas de las columnas para mejorar la legibilidad
+  cols_label(
+    Localidad = md("Zona"),  # Cambiar la etiqueta de la columna 'Localidad' a 'Zona' con formato Markdown
+    Casos_Dengue = md("Casos <br>Dengue"),
+    Casos_Chikungunya = md("Casos <br>Chikungunya"),
+    Tasa_Dengue = md("Tasa <br>Dengue"),
+    Tasa_Chikungunya = md("Tasa <br>Chikungunya")
+  ) %>%
+  
+  # Personalizar opciones generales de la tabla
+  tab_options(
+    data_row.padding = px(6),  # Define el relleno (padding) de las filas de datos en 6 píxeles
+    heading.align = "left",  # Alinear los encabezados (títulos) de la tabla a la izquierda
+    column_labels.background.color = "dodgerblue",  # Color de fondo azul (dodgerblue) para las etiquetas de las columnas
+    heading.title.font.size = px(26),  # Tamaño de la fuente del título en 26 píxeles
+    heading.subtitle.font.size = px(14),  # Tamaño de la fuente del subtítulo en 14 píxeles
+    table_body.hlines.width = px(1)  # Establecer el grosor de las líneas horizontales en el cuerpo de la tabla a 1 píxel
+  ) %>%
+  
+  # Alinear columnas específicas a la izquierda
+  cols_align(align = "left", columns = c(1, 2)) %>%
+  
+  # Alinear otras columnas específicas al centro
+  cols_align(align = "center", columns = c(3, 4, 5)) %>%
+  
+  # Aplicar estilo al título de la tabla
+  tab_style(
+    style = cell_text(
+      color = "dodgerblue",  # Color del texto del título en azul (dodgerblue)
+      weight = "bold",  # Establecer el texto del título en negrita
+      font = "helvetica"  # Usar la fuente 'Helvetica'
+    ),
+    location = cells_title(groups = "title")  # Aplicar este estilo al grupo de títulos de la tabla
+  ) %>%
+  
+  # Aplicar color de fondo gris claro a las filas impares de la tabla
+  tab_style(
+    style = cell_fill(color = "grey90"),  # Color de fondo gris claro (grey90)
+    locations = cells_body(rows = seq(1, nrow(datos_con_totales), 2))  # Aplica este estilo solo a las filas impares usando la secuencia de 1 a 'n_rows'
+  ) 
+  
+
+# Mostrar la tabla con los estilos aplicados
+gt_tabla
+
+
+```
+
+
+
+
+## **Tablas flextable()**
+
+
+### Tabla 1 flextable()
+
+```{r}
+
+datos_ordenados <-  datos_con_totales %>%
+  select(Localidad, Casos_Dengue, Tasa_Dengue, 
+         Casos_Chikungunya, Tasa_Chikungunya)
+
+```
+
+
+```{r}
+
+library(flextable)
+library(dplyr)
+
+# Definir el estilo de borde para las líneas verticales
+border_style <- officer::fp_border(color = "black", width = 1)
+
+# Crear la flextable con el formato solicitado
+flextable(datos_ordenados) %>%
+  
+# Añadir una fila adicional de encabezado
+  add_header_row(
+    top = TRUE, 
+    values = c("Localidad", "Dengue", "", "Chikungunya", "") 
+  ) %>%
+  
+  # Renombrar las columnas para mejorar la legibilidad en la tabla
+  set_header_labels(
+    Localidad = "",               
+    Casos_Dengue = "Caso",        
+    Tasa_Dengue = "Tasa",         
+    Casos_Chikungunya = "Casos",  
+    Tasa_Chikungunya = "Tasas"   
+  ) %>%
+  
+# Fusionar celdas en las secciones de encabezado para agrupar columnas
+  merge_at(i = 1, j = 2:3, part = "header") %>%  
+  merge_at(i = 1, j = 4:5, part = "header") %>%  
+  
+# Configurar estilos generales para el encabezado y contenido
+  border_remove() %>%    # Eliminar bordes predeterminados
+  theme_booktabs() %>%   # Aplicar un estilo de tabla "booktabs"
+  
+# Añadir líneas verticales para separar secciones
+  vline(part = "all", j = 1, border = border_style) %>%  
+  vline(part = "all", j = 3, border = border_style) %>%  
+  
+# Alinear columnas
+  flextable::align(align = "left", j = 1, part = "all") %>%   
+  flextable::align(align = "center", j = 2:5, part = "all") %>% 
+  
+  # Ajustar el ancho de las columnas
+  width(j = 1, width = 2.7) %>%          
+  width(j = 2, width = 1.5) %>%          
+  width(j = c(4, 5), width = 1.5) %>%     
+  
+  # Estilizar las filas del cuerpo
+  bg(., part = "body", bg = "gray95") %>%                
+  bg(., j = c(1:5), i = ~ Localidad == "Zona Sur", part = "body", bg = "#91c293") %>% 
+  bg(j = 5, i = ~ Tasa_Chikungunya >= 55, part = "body", bg = "#f14d4d") %>%       
+  
+  # Aplicar negrita en encabezados y filas específicas
+  bold(i = 1, bold = TRUE, part = "header") %>%  
+  bold(i = 5, bold = TRUE, part = "body") %>%    
+  
+  # Redondear números con formato adicional para columnas específicas
+  colformat_num(j = c("Tasa_Dengue", "Tasa_Chikungunya"), digits = 1)  
+
+
+```
+
+
+
+## **Tablas reactable()**
+
+
+### Tabla 1 reactable()
+
+```{r}
+
+library(reactable)
+
+# Función para colorear el valor máximo
+color_max <- function(value, max_value) {
+  if (value == max_value) {
+    return("#f14d4d")  # Rojo para el valor máximo
+  } else {
+    return(NA)         # Sin color para otros valores
+  }
+}
+
+# Calcular los valores máximos
+max_tasa_dengue <- max(datos_ordenados$Tasa_Dengue)
+max_tasa_chikungunya <- max(datos_ordenados$Tasa_Chikungunya)
+
+# Crear tabla con reactable
+reactable(
+  datos_ordenados,
+  columns = list(
+    Localidad = colDef(name = "Localidad", align = "left"),
+    Casos_Dengue = colDef(name = "Caso", align = "center"),
+    Tasa_Dengue = colDef(
+      name = "Tasa",
+      align = "center",
+      style = function(value) {
+        list(background = color_max(value, max_tasa_dengue), fontWeight = "bold")
+      }
+    ),
+    Casos_Chikungunya = colDef(name = "Casos", align = "center"),
+    Tasa_Chikungunya = colDef(
+      name = "Tasas",
+      align = "center",
+      style = function(value) {
+        list(background = color_max(value, max_tasa_chikungunya), fontWeight = "bold")
+      }
+    )
+  ),
+  columnGroups = list(
+    colGroup(name = "Dengue", columns = c("Casos_Dengue", "Tasa_Dengue")),
+    colGroup(name = "Chikungunya", columns = c("Casos_Chikungunya", "Tasa_Chikungunya"))
+  ),
+  bordered = TRUE,
+  striped = TRUE,
+  highlight = TRUE,
+  defaultColDef = colDef(
+    align = "center"
+  ),
+  theme = reactableTheme(
+    borderColor = "#cccccc",       # Color de los bordes
+    stripedColor = "#f9f9f9",      # Color de filas alternadas
+    highlightColor = "#e5f2ff",    # Color al pasar el cursor
+    headerStyle = list(
+      background = "#f7f7f7",      # Fondo del encabezado
+      fontWeight = "bold"          # Negrita en el encabezado
+    )
+  )
+)
+
+
+```
+
+
+### Tabla 2 reactable()
+
+```{r}
+
+
+# Función para colorear el valor máximo
+color_max <- function(value, max_value) {
+  # Si el valor es igual al valor máximo, asignar color rojo al fondo
+  if (value == max_value) {
+    return("#f14d4d")  # Fondo rojo para el valor máximo
+  } else {
+    return(NA)         # Sin color para otros valores
+  }
+}
+
+# Calcular los valores máximos de las tasas
+max_tasa_dengue <- max(datos_ordenados$Tasa_Dengue)            # Valor máximo de Tasa_Dengue
+max_tasa_chikungunya <- max(datos_ordenados$Tasa_Chikungunya)  # Valor máximo de Tasa_Chikungunya
+
+# Crear tabla con reactable
+reactable(
+  datos_ordenados,
+  
+  # Opciones interactivas
+  filterable = TRUE,               # Habilitar cuadros de filtro en las columnas
+  pagination = TRUE,               # Habilitar paginación para mostrar un número limitado de filas
+  defaultPageSize = 5,             # Mostrar 5 filas por página
+  highlight = TRUE,                # Resaltar filas al pasar el cursor
+  groupBy = "Localidad",           # Agrupar las filas según la columna 'Localidad'
+  
+  # Personalización de columnas
+  columns = list(
+    Localidad = colDef(
+      name = "Localidad",          # Nombre visible de la columna
+      align = "left"               # Alinear contenido a la izquierda
+    ),
+    Casos_Dengue = colDef(
+      name = "Caso",               # Renombrar la columna 'Casos_Dengue' como 'Caso'
+      align = "center"             # Alinear contenido al centro
+    ),
+    Tasa_Dengue = colDef(
+      name = "Tasa Dengue",        # Renombrar la columna 'Tasa_Dengue'
+      align = "center",            # Alinear contenido al centro
+      style = function(value) {    # Aplicar estilo condicional a las celdas
+        list(
+          background = color_max(value, max_tasa_dengue),  # Fondo rojo para el valor máximo
+          fontWeight = "bold"                              # Texto en negrita
+        )
+      }
+    ),
+    Casos_Chikungunya = colDef(
+      name = "Casos",              # Renombrar la columna 'Casos_Chikungunya' como 'Casos'
+      align = "center"             # Alinear contenido al centro
+    ),
+    Tasa_Chikungunya = colDef(
+      name = "Tasa Chikungunya",   # Renombrar la columna 'Tasa_Chikungunya'
+      align = "center",            # Alinear contenido al centro
+      style = function(value) {    # Aplicar estilo condicional a las celdas
+        if (value > 50) {          # Si el valor es mayor a 50:
+          list(
+            color = "red",         # Texto en rojo
+            fontWeight = "bold"    # Texto en negrita
+          )
+        }
+      }
+    )
+  ),
+  
+  # Agrupación de columnas en el encabezado
+  columnGroups = list(
+    colGroup(
+      name = "Dengue",            # Grupo llamado 'Dengue'
+      columns = c("Casos_Dengue", "Tasa_Dengue")  # Columnas del grupo
+    ),
+    colGroup(
+      name = "Chikungunya",       # Grupo llamado 'Chikungunya'
+      columns = c("Casos_Chikungunya", "Tasa_Chikungunya")  # Columnas del grupo
+    )
+  ),
+  
+  # Estilo personalizado de la tabla
+  theme = reactableTheme(
+    borderColor = "#cccccc",       # Color de los bordes
+    stripedColor = "#f9f9f9",      # Color de las filas alternadas
+    highlightColor = "#e0f7fa",    # Color de las filas resaltadas al pasar el cursor
+    headerStyle = list(
+      background = "#f0f0f0",      # Fondo del encabezado
+      fontWeight = "bold"          # Texto en negrita en el encabezado
+    )
+  )
+)
+
+```
+
+
+
+
+## **Automatización de formatos()**
+
+Las funciones en R permiten **encapsular estilos, configuraciones y opciones visuales dentro de una estructura reutilizable**, lo que facilita la consistencia en el diseño y ahorra tiempo al aplicar los mismos formatos en diferentes tablas o conjuntos de datos. 
+
+Por ejemplo, en paquetes como reactable o gt, es posible definir funciones que apliquen colores, bordes, alineaciones, tamaños de texto y otras características estéticas a las tablas con solo una línea de código. 
+
+
+### Función 1 reactable()
+
+```{r}
+
+# Definir la función `mi_tema` para automatizar el formato
+mi_tema <- function(data) {
+  reactable(
+    data,
+    bordered = TRUE,               # Agregar bordes a la tabla
+    striped = TRUE,                # Filas alternadas con color
+    highlight = TRUE,              # Resaltar filas al pasar el cursor
+    defaultPageSize = 5,           # Mostrar 5 filas por página
+    defaultColDef = colDef(
+      align = "center"             # Alinear columnas al centro
+    ),
+    theme = reactableTheme(
+      stripedColor = "#f7f7f7",    # Color de filas alternadas
+      highlightColor = "#e0f7fa",  # Color al pasar el cursor
+      borderColor = "#cccccc",     # Color de los bordes
+      headerStyle = list(
+        background = "#f0f0f0",    # Fondo gris claro para encabezados
+        fontWeight = "bold"        # Texto en negrita en el encabezado
+      )
+    )
+  )
+}
+
+
+```
+
+
+#### Ejemplo Función 1 reactable()
+
+```{r}
+
+# Datos de ejemplo
+datos <- data.frame(
+  Localidad = c("Zona Oeste", "Zona Este", "Zona Norte", "Zona Sur"),
+  Casos = c(120, 45, 80, 60),
+  Tasa = c(240.0, 128.6, 200.0, 133.3)
+)
+
+# Usar la función `mi_tema` para aplicar el formato
+mi_tema(datos)
+```
+
+
+### Función 1 gt()
+
+```{r}
+
+
+# Cargar la librería gt
+library(gt)
+
+# Definir una función simplificada llamada 'funcion2'
+funcion2 <- function(gt_tbl) {
+  gt_tbl %>%
+    # Opciones generales para la tabla
+    tab_options(
+      column_labels.background.color = "lightblue",  # Fondo azul claro para las etiquetas de columnas
+      table.border.top.color = "gray",              # Borde superior de la tabla en gris
+      table.border.bottom.color = "gray",           # Borde inferior de la tabla en gris
+      data_row.padding = px(5)                      # Relleno de las filas de datos en 5 píxeles
+    ) %>%
+    
+    # Estilo del encabezado de la tabla
+    tab_style(
+      style = cell_text(
+        weight = "bold"                              # Texto del encabezado en negrita
+      ),
+      location = cells_column_labels()              # Aplicar a los encabezados de columna
+    )
+}
+
+```
+
+
+#### Ejemplo Fución 1 gt()
+
+```{r}
+
+datos <- data.frame(
+  Localidad = c("Zona Oeste", "Zona Este", "Zona Norte", "Zona Sur"),
+  Casos = c(120, 45, 80, 60),
+  Tasa = c(240.0, 128.6, 200.0, 133.3)
+)
+
+# Generar la tabla gt y aplicar 'funcion2'
+tabla <- gt(datos)
+funcion2(tabla)
+
+```
+

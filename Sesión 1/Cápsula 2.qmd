@@ -1,0 +1,229 @@
+---
+format: 
+  html:
+    embed-resources: true
+    toc: true                # Habilita la tabla de contenidos
+    toc-title: "Índice de Contenidos"  # Título del índice
+    toc-depth: 3             # Nivel de profundidad del índice (hasta h3)
+    toc-location: left       # Ubicación del índice (izquierda)
+footnotes-hover: true # muestra notas al pie
+smooth-scroll: true # suaviza el scroll
+editor: visual
+code-copy: true            # Permite copiar el código desde el documento
+---
+
+# **Objetos y funciones en R**
+
+## Data Frames o Marco de datos
+
+Un Data Frame es un objeto similar a las matrices ya que almacena los datos en formato de filas y columnas, y puede almacenar diferentes clases de valores. Por ejemplo, en una columna podemos almacenar números, en otra caracteres, en otra fechas.
+
+Para crear un data frame podemos emplear la función **`data.frame().`**
+
+```{r}
+
+#crear un DF a partir de vectores   
+
+x <- c(1, 2, 3, 4, 5)  # Vector de números  
+y <- c("A", "B", "C", "D", "E")  # Vector de letras  
+
+df <- data.frame(numeros = x, letras = y)
+
+df
+```
+
+Cuando corremos este código el marco de datos aparece en su **entorno global.** Aqui se brinda información adicional sobre este marco de datos a la derecha de su nombre.
+
+Si hacemos clic en la pequeña flecha azul a la izquierda del nombre del marco de datos, verá información sobre los vectores individuales que componen el marco de datos.
+
+**Advertencia:** todas las **columnas de un marco de datos deben tener la misma longitud** (es decir, la misma cantidad de filas). Eso significa que cada vector que crees al crear tu marco de datos debe tener la misma cantidad de valores.
+
+Información que puedo tomar de mi data frame:
+
+```{r}
+
+nrow(df) # nos dice el numero de filas del DF    
+
+ncol(df) # nos dice la cantidad de columnas de DF    
+
+colnames(df) #nos dice los nombres de las columnas del DF    
+
+rownames(df) #nos dice los nombres de las filas de DF  names(df)
+```
+
+# **Funciones**
+
+### Funciones simples
+
+Una función en R es un bloque de código reutilizable que realiza una tarea específica. Es como una máquina que recibe datos, realiza alguna acción con esos datos y produce un resultado.
+
+Muchas funciones vienen instaladas con R, hay muchas más disponibles para descargar en paquetes (lo explicamos más adelante ) e incluso puedes escribir sus propias funciones personalizadas.
+
+**Las funciones suelen operar sobre algún objeto colocado dentro de los paréntesis de la función** y siguen esta sintaxis: código-texto con paréntesis abiertos, como por ejemplo: **`sum()`**
+
+El objeto proporcionado a una función también puede ser una **columna** en un conjunto de datos. Debido a que R puede almacenar múltiples conjuntos de datos, se deberá especificar tanto el conjunto de datos como la columna. **Una forma de hacerlo es usar la `$`notación para vincular el nombre del conjunto de datos y el nombre de la columna (`dataset$column`).**
+
+```{r}
+
+# la función suma toma la columna numeros del data frame df. 
+
+sum(df$numeros)
+
+```
+
+### Funciones con múltiples argumentos
+
+Las funciones a menudo solicitan varias entradas, llamadas **argumentos** , ubicados dentro de los paréntesis de la función, generalmente separados por comas.
+
+-   Algunos **argumentos son necesarios** para que la función funcione correctamente, otros son opcionales.
+
+-   Los **argumentos opcionales** tienen configuraciones predeterminadas
+
+-   Los argumentos pueden aceptar caracteres, números, valores lógicos (VERDADERO/FALSO) y otras entradas.
+
+Vemos entonces un ejemplo de función que utiliza varios argumentos, en este caso nos creará una secuencia de números:
+
+```{r}
+
+#función para genererar una secuencia
+
+b <- seq(from=1,to=10, by=2) 
+
+b
+```
+
+Por ejemplo la función seq() que genera una secuencia contiene tres argumentos:
+
+-   **from:** le indicamos a R desde que valor iniciar la secuencia
+
+-   **to:** es el valor máximo que puede tomar la secuncia
+
+-   **by**: indica la longitud del intervalo entre los elementos
+
+Ahora veremos otra función que se utiliza para la creación de gráficos y vamos a utilizar los datos de mi data frame anterior:
+
+```{r}
+
+# Cargar la librería ggplot2 para gráficos
+library(ggplot2)
+
+# Crear el gráfico de barras
+
+ggplot(df, aes(x = letras, y = numeros)) + # Creación de gráfico
+  geom_bar(stat = "identity", fill = "blue")  # especifica gráfico de barras.
+
+
+
+```
+
+**En este ejemplo podemos identificar funciones y argumentos:** **`ggplot()`** organiza la estructura del gráfico y establece la fuente de datos, mientras que **`aes()`** y **`geom_bar()`** son funciones que definen cómo se visualizan esos datos en el gráfico.
+
+La función **`ggplot( )`** utiliza los argumentos: **`data`** el data frame que contiene los datos a graficar, **`aes()`**una función que especifica los **mapeos estéticos**, es decir, qué variables se asignan a **los ejes x** **e y**, así como a otras características visuales como el color o el tamaño que son opcionales.
+
+Dentro de **`ggplot( )`** se utilizan **funciones adicionales** como **`geom_bar()`** que define el tipo de gráfico a crear (en este caso, un gráfico de barras). **Los argumentos de `geom_bar()`** incluyen **`stat`**: especifica cómo se calculan los valores en el **eje y**. En el caos de **`fill`**`:` define el color de las barras.
+
+#### Consejos de escritura para funciones:
+
+::: {style="border: 2px solid #f4e791; /* Grosor y color del borde */   background-color: #f4e791; /* Color de fondo */   padding: 10px; /* Espacio interior */   margin: 20px; /* Espacio exterior */   border-radius: 5px; /* Esquinas redondeadas (opcional) */"}
+-   **Sumar comentarios dentro de las funciones con el numeral**`#` se puede explicar cada parte (comentar extensamente es una buena práctica).
+
+-   Para ejecutar este comando más largo, puede resaltar el comando completo y hacer clic en "Ejecutar", o simplemente **colocar el cursor en la primera línea y luego presionar las teclas Ctrl y Enter** simultáneamente.
+
+-   Con **Ctrl + Shift + A** para acomodar visualmente el código de forma automática.
+:::
+
+# **Paquetes y librerías**
+
+Un paquete en R es una colección de funciones, datos, y documentación que extiende las capacidades básicas de R. Para utilizar un paquete en R, primero debes instalarlo y luego cargarlo en tu sesión de R.
+
+**Las funciones** están contenidas en **paquetes** que se pueden descargar (“instalar”) en sus computadora desde Internet. Una vez que se descarga un paquete, se almacena en la “biblioteca”. Esto se realiza una sola vez. Luego, puede acceder a las funciones que contiene durante su sesión actual de R **“cargando” el paquete**.
+
+-   **Se instala una sola vez**
+
+-   **Se carga el paquete cada vez que se inicia una nueva sesión** de Rstudio (es decir cada vez que abro el programa)
+
+### **Instalar y cargar**
+
+**Instalar** un paquete desde CRAN (Comprehensive R Archive Network) usando la función `install.packages()`
+
+```{r}
+
+# Para probar el código quitar el hashtag    
+
+#install.packages("ggplot2")
+
+```
+
+La función base de R para **cargar** un paquete para su uso (después de que se haya instalado) es `library()`. Se puede proporcionar el nombre del paquete con o sin comillas.
+
+```{r,echo = TRUE, warning = FALSE}
+
+# Cargo el paquete que usaremos
+
+library(ggplot2)
+
+```
+
+### **Algunos paquetes que usaremos para los informes**
+
+#### Tidyverse
+
+Descripción: Una colección de paquetes que comparten una filosofía de diseño, gramática de datos y estructuras de datos subyacentes. Incluye paquetes como ggplot2, dplyr, tidyr, readr, purrr, y tibble.
+
+Funcionalidades: Manipulación de datos (dplyr), visualización (ggplot2), limpieza de datos (tidyr), importación de datos (readr), entre otros.
+
+Instalación: install.packages("tidyverse")
+
+#### Lubridate
+
+Descripción: Facilita la manipulación y operación de datos de tipo fecha y hora. Funcionalidades: Parsing de fechas, ajuste de zonas horarias, operaciones aritméticas con fechas.
+
+Instalación: install.packages("lubridate")
+
+#### Stringr
+
+Descripción: Parte del tidyverse, facilita la manipulación y análisis de cadenas de caracteres (strings).
+
+Funcionalidades: Operaciones como concatenar, separar, buscar y reemplazar dentro de strings.
+
+Instalación: install.packages("stringr")
+
+#### Readxl y Writexl
+
+Descripción: Paquetes para leer y escribir archivos Excel.
+
+Funcionalidades: readxl permite leer datos de hojas de cálculo de Excel (.xls y .xlsx), y writexl permite escribir data frames de R a archivos Excel.
+
+Instalación: install.packages("readxl") install.packages("writexl")
+
+#### Googlesheets4
+
+Este paquete en R es una herramienta que facilita la interacción con Google Sheets desde R. Está diseñado para leer, escribir y modificar hojas de cálculo almacenadas en Google Drive, usando la API de Google Sheets.
+
+Instalación: install.packages("googlesheet4")
+
+#### ggplot2
+
+Descripción: Paquete de visualización de datos parte del tidyverse.
+
+Funcionalidades: Creación de gráficos de alta calidad basados en una gramática de gráficos.
+
+Instalación: install.packages("ggplot2") (aunque ya viene incluido con tidyverse).
+
+### **Sintaxis del código**
+
+Las funciones a veces están precedidas por el nombre de su paquete utilizando el `::`símbolo de la siguiente manera:`nombre_del paquete::nombre_de_función()`
+
+Una vez que se carga un paquete para una sesión, este estilo explícito no es necesario. Se puede usar simplemente `nombre_de_función()`. Sin embargo, escribir el nombre del paquete es útil cuando el nombre de una función es común y puede existir en varios paquetes.
+
+### **Ayuda de funciones**
+
+Para leer más sobre una función, puede buscarla en la pestaña Ayuda de RStudio, en la parte inferior derecha. También puede ejecutar un comando como `?nombre_de_funcion`(coloque el nombre de la función después de un signo de interrogación) y la página de Ayuda aparecerá en el panel de Ayuda.
+
+```{r,echo = TRUE, results = "hide"}
+
+# Buscar ayuda para el paquete ggplot
+
+?ggplot2
+
+```

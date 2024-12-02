@@ -1,0 +1,286 @@
+---
+format: 
+  html:
+    embed-resources: true
+    toc: true                # Habilita la tabla de contenidos
+    toc-title: "Índice de Contenidos"  # Título del índice
+    toc-depth: 3             # Nivel de profundidad del índice (hasta h3)
+    toc-location: right       # Ubicación del índice (izquierda)
+footnotes-hover: true # muestra notas al pie
+smooth-scroll: true # suaviza el scroll
+editor: visual
+code-copy: true            # Permite copiar el código desde el documento
+execute:
+  warning: false
+  message: false
+  echo: true  # Oculta el código en los chunks
+---
+
+# **Introducción a R y Rstudio** 
+
+R es un lenguaje de programación estadístico de código abierto que se creó en la década de 1990 específicamente para el análisis de datos. R es un lenguaje y entorno de software para estadísticas y gráficos. R Studio proporciona una interfaz amigable para trabajar con R, facilitando la escritura, depuración y ejecución de código, además de ofrecer herramientas adicionales para la visualización de datos y la generación de informes.
+
+### Beneficios de R Studio:
+
+**Interfaz gráfica amigable**: R Studio tiene una interfaz de usuario intuitiva que facilita la escritura y ejecución de código R.
+
+**Herramientas integradas**: Ofrece herramientas integradas para la visualización de datos, depuración de código, y la creación de informes reproducibles.
+
+**Soporte para Shiny**: Permite desarrollar aplicaciones interactivas basadas en R con Shiny.
+
+**Integración con Git**: Facilita el control de versiones y colaboración en proyectos.
+
+### Atajos de teclado que pueden ser útiles:
+
+![](atajos.png){fig-align="center" width="701"}
+
+Para más atajos se puede acceder a su página web:
+
+[Atajos de teclado en Rstudio](https://docs.posit.co/ide/user/ide/reference/shortcuts.html)
+
+# **Operaciones básicas en R**
+
+Operadores Matemáticos en R Se puede usar R como una calculadora
+
+-   Suma: +
+-   Resta: -
+-   Multiplicación: \*
+-   División: /
+-   Módulo (Residuo): %%(En R, el operador de resto o módulo se utiliza para obtener el residuo de una división entre dos números)
+
+```{r}
+
+
+3+5  #Sumamos 
+
+3-2   #restamos 
+
+3/2   #dividimos 
+
+3*2   #multiplicamos
+
+3^2   #elevamos al cuadrado 
+
+3**2  #elevamos al cuadrado 
+
+9%%4  #operador resto
+
+```
+
+#### Precedencia de los opeadores
+
+Como toda operación matemática, existe una precedencia de los operadores, esto quiere decir que en una ecuación que involucra muchos operadores unos tienen prioridad de resolución.
+
+El orden de resolución esta definido por
+
+-   () primero se resuelven los paréntesis
+-   \*\* luego se resuelven la potencias
+-   (\* o /) después las multiplicaciones o divisiones
+-   (+ o -) por último las sumas y restas
+
+```{r}
+
+# Ejemplo de como funciona la precedencia de los operadores:
+
+
+3+2*5  
+
+(3+2)*5  
+
+2/8**2
+
+```
+
+# **Objetos en R**
+
+Todos los lenguajes de programación necesitan almacenar información para poder luego usarla. En R toda información se guarda en objetos y disponemos de varios tipos, los más empleados son:
+
+-   Variables
+-   Vectores
+-   Listas
+-   Factores
+-   Matrices
+-   Data frames
+
+Veremos sobre todo algunos de ellos para pasar a ver como se utilizan en las funciones.
+
+## **Variables**
+
+Una variable en programación es un espacio de almacenamiento con un nombre simbólico (un identificador) que se refiere o está asociado a un valor o información almacenada.
+
+Se pueden pensar como cajas que tiene una etiqueta que es el nombre de la variable. Dentro de la caja podemos guardar diferentes tipos de datos, como números, texto entre otros.
+
+```{r}
+
+# Ejercicio 1: Crear una variable llamada 'edad' y asignarle el valor 25 
+
+edad <- 25 
+
+# Imprimir el valor de la variable 'edad' 
+
+print(edad)
+
+```
+
+**`edad <- 25 :`** aquí el simbolo **`<-`** se utiliza para asigna un valor a la nueva variable que estoy creando.
+
+**`print(edad):`** Esto se utiliza para imprimir el resultado de la acción de asignación
+
+También si queremos acceder al valor de esa variable podemos hacerlo simplemente escribiendo el nombre de esa variable.
+
+```{r}
+
+edad
+
+```
+
+### Tipos de variables
+
+-   **Numeric:** incluyen números
+
+-   **Character:** son variables que almacenan cadena de texto
+
+-   **Logical**: almacenan un valor Verdadero (TRUE) o falso (FALSE). Es a menudo el resultado de operaciones lógicas
+
+-   **Date:** guardan una cadena de texto que R interpreta como una fecha
+
+```{r}
+
+# Vemos ejemplos de Tipos de variables  
+
+a <- 10 #creamos una variable numérica
+
+A <- "meses" #Creamos una variable de caracteres
+
+b <- TRUE #Creamos una variable lógica (FALSE)
+
+c <- Sys.Date() #Creamos una variable Fecha (tomamos la fecha del ordenador con la función Sys.Date()) 
+
+a
+A
+b
+c
+
+```
+
+Para observar la estructura de los datos que tengo puedo utilizar la función **`srt()`** o **`class()`** para que R me indique que tipo de variables tengo:
+
+```{r}
+
+ #Investigamos la estructura de los objetos creados con la función
+
+str(a) 
+str(A) 
+str(b) 
+str(c)  #Investigamos el tipo de variable los objetos creados con la función class() 
+
+class(a) 
+class(A)
+
+```
+
+Las variables pueden utilizarse en operaciones matemáticas y lógicas en R.
+
+```{r}
+
+# Por ejemplo para calcular el área de un rectánguloa utilizando las variable
+
+longitud <- 5 
+
+ancho <- 3  
+
+area <- longitud * ancho  # Imprimir el resultado 
+
+print(paste("El área del rectángulo es:",area))
+
+```
+
+Aquí arriba el **`paste()`** concatena la linea de caracteres **`"El área del rectángulo es:"`** con el valor del cálculo del área. Y `print()` lo impirme para que podamos verlo.
+
+## **Vectores**
+
+### Vectores numéricos
+
+Un vector es un grupo elementos ordenados, todos deben ser del mismo tipo (todos números o todos caracteres por ejemplo). La forma más simple de crear un vector es usando la función **`c()`** y separando por comas a los elementos que lo forman:
+
+```{r}
+
+# Ejercicio n°3 crear un vector. El objeto vector  
+
+a <- c(1,2,3,4) #creamos un vector de 4 elementos  
+
+c <- c(a, 7,8,9)#creamos un vector uniendo uno que ya existe 
+
+a 
+c
+```
+
+También se puede pegar vectores:
+
+```{r}
+#Concatenar dos vectores  
+
+a<-c(1,2,6) #creamos un vector 
+
+b<-c(4,5) #creamos otro vector 
+
+c <- c(a,b)#concatenamos ambos vectores  
+
+c
+```
+
+Tambien se puede armar un vector de la siguiente manera:
+
+```{r}
+
+a<-c(1:4) #Es lo mismo que escribir 
+
+c(1,2,3,4)
+
+```
+
+### Vectores de caracteres
+
+Se pueden crear vectores de carcateres. Deberían notar que los nombres de los vectores que se crean aparecen en el **entorno global**.
+
+También se puede notar que en el panel de entorno global muestra información adicional sobre este vector, a la derecha de su nombre. Específicamente, debería ver chr \[1:4\] "Carlos","Luisa","Bruno","Ana"
+
+```{r}
+
+ # Ejemplo de vector con nombres 
+
+nombres <- c("Carlos","Luisa","Bruno","Ana")  
+
+# Imprimir resultado 
+nombres
+
+```
+
+### Operaciones básicas con vectores
+
+Dado un vector podemos estar interesados en obtener datos sobre su contenido y que de algún modo lo resuma. Si queremos conocer medidas estadísticas de los elementos del vector tenemos las siguientes funciones:
+
+-   **length**: nos retorna un valor que indica la longitud (cantidad de elementos) del vector
+-   **sum**: nos devuelve un valor con la suma de los elementos
+-   **mean**: nos dice la media de los elementos del vector
+-   **sd**: retorna un valor indicando el desvío estandar
+-   **median**: no devuelve la mediana
+
+```{r}
+
+# Ejercicio n°4: genere un vector y conozca sus medidas estadísticas
+
+a<-c(1:5)   #creamos un vector para analizar estadísticas  
+
+length(a)   #Nos dice la longitud (cantidad de elementos) de un vector 
+
+sum(a)      #suma todos los elementos del vector 
+
+mean(a)     #nos dice la media de los elementos del vector 
+
+sd(a)       #nos dice el desvío 
+
+median(a)   #...la mediana
+```
+
+### 

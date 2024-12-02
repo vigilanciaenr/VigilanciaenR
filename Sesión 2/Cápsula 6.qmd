@@ -1,0 +1,296 @@
+---
+title: Material de lectura 6
+title-block-banner: "#92aeea"
+format: 
+  html:
+    embed-resources: true
+    toc: true                # Habilita la tabla de contenidos
+    toc-title: "Índice de Contenidos"  # Título del índice
+    toc-depth: 3             # Nivel de profundidad del índice (hasta h3)
+    toc-location: left       # Ubicación del índice (izquierda)
+    number-sections: true
+footnotes-hover: true # muestra notas al pie
+smooth-scroll: true # suaviza el scroll
+editor: visual
+code-copy: true            # Permite copiar el código desde el documento
+execute:
+  warning: false
+  message: false
+  echo: true  # Oculta el código en los chunks
+---
+
+# Procesamiento de datos
+
+**Funciones principales**
+
+Para trabajar con los marcos de datos o data frame (estructura de datos que se organiza en filas y columnas) usaremos muy frecuentemente las funciones de la familia de paquetes R [**tidyverse**](https://www.tidyverse.org/) . Muchas de estas funciones pertenecen al paquete R [**dplyr**](https://dplyr.tidyverse.org/) , que es muy útil a la hora de realizar la manipulación de datos.
+
+Este paquete "**dplyr"** es parte de la familia "**tidyverse"** de paquetes R (que también incluye **ggplot2** , **tidyr** , **stringr** , **tibble** , **purrr** , **magrittr** y **forcats** entre otros).
+
+**Elaboramos un material para tener a mano la sintaxis de las funiones más utilizadas de este paquete, que las pueden encontrar aquí:** [**Material funciones**](https://vigilanciaenr.github.io/VigilanciaenR/Clase%202/Material_funciones.html)**.**
+
+A continuación, describiremos las actividades comúnmente empleadas en el procesamiento de datos.
+
+## **Simulación de marco de datos**
+
+Lo primero que haremos será **simular un marco de datos** para poder observar las modificaciones realizadas con los ejemplos. Es importante que, si ya están trabajando con un dataset propio, adapten los códigos a sus variables, como los nombres del marco de datos, las columnas, los valores, etc.
+
+Para ello, crearemos un marco de datos inventado exclusivamente con fines ilustrativos. Utilizaremos un **ID que se repetirá**, simulando un **dataset de laboratorio** donde cada fila representa una muestra y no a una persona.
+
+```{r}
+
+library(dplyr)
+
+
+# Crear un marco de datos con IDs repetidos, fechas distintas y una columna de zona
+ira <- data.frame(
+  Paciente_ID = c(1, 1, 2, 2, 3, 4, 4, 5),
+  Edad = c(3, 3, 15, 15, 32, 70, 70, 45),
+  Diagnostico = c(
+    "IRA leve",
+    "IRA leve",
+    "IRA grave",
+    "IRA grave",
+    "Neumonía",
+    "Neumonía",
+    "Neumonía",
+    "IRA leve"
+  ),
+  Hospitalizado = c("No", "No", "Sí", "Sí", "Sí", "Sí", "Sí", "No"),
+  Fecha_Sintomas = as.Date(
+    c(
+      "2023-10-28",
+      "2024-10-29",
+      "2024-10-30",
+      "2024-10-31",
+      "2024-11-01",
+      "2024-11-02",
+      "2024-11-03",
+      "2024-11-04"
+    )
+  ),
+  Determinacion = c(
+    "PCR",
+    "Cultivo",
+    "PCR",
+    "Cultivo",
+    "PCR",
+    "PCR",
+    "Cultivo",
+    "PCR"
+  ),
+  Resultado = c(
+    "Negativo",
+    "Negativo",
+    "Positivo",
+    "Negativo",
+    "Positivo",
+    "Positivo",
+    "Negativo",
+    "Negativo"
+  ),
+  Zona = c(
+    "Zona Oeste",
+    "Zona Oeste",
+    "Zona Oeste",
+    "Zona Oeste",
+    "Zona Oeste",
+    "Zona Oeste",
+    "Zona Este",
+    "Zona Este"
+  )
+)
+
+```
+
+```{r, echo = FALSE}
+library(DT)
+DT::datatable(ira, options = list(pageLength = 5))
+```
+
+<br><br>
+
+## **Filtrar datos**
+
+Con la función `filter()` del paquete `dplyr`podemos seleccionar de nuestro conjunto de datos un subconjunto con el que queramos trabajar. Esta función permite seleccionar filas de un data frame que cumplen ciertas condiciones. Por ejemplo en este caso si quisieramos filtrar por **Zona** y **Año** (por ejemplo, "Zona Oeste" y el año 2024).
+
+```{r}
+
+library(dplyr)
+library(lubridate)
+
+
+ira_filtrado <- ira %>%
+  filter(Zona == "Zona Oeste",
+           year(Fecha_Sintomas) == 2024) 
+
+
+```
+
+```{r, echo = FALSE}
+
+DT::datatable(ira_filtrado, options = list(pageLength = 5))
+```
+
+<br><br>
+
+Las condiciones dentro de `filter()` separadas por coma correponden a diferentes argumentos, `filter(data, condicion1, condicion2)` pero no conecta condiciones lógicas.
+
+**Filtrado con operadores lógicos**
+
+Si queremos filtrar por condiciones lógicas podemos utilizar los operadores que se encuentran en el [**Material funciones**](https://vigilanciaenr.github.io/VigilanciaenR/Clase%202/Material_funciones.html). Por ejemplo, si para utilizar **OR**, usa el operador `|` (por ejemplo, `Zona == "Zona Oeste" | Zona == "Zona Este"`). En este caso se seleccionará las filas que cumplan cualquiera de las condiciones indicadas. Si en lugar de solo filtrar por año, necesitas comparar fechas exactas o rangos, puedes usar operadores como `<`, `>` o `between()`.
+
+En este caso obtendremos todos los registros excepto aquellos que no se encuentran en el rango de fechas, es decir el único registro del 2023.
+
+```{r}
+
+ira_filtrado <- ira %>%
+  filter(Zona == "Zona Oeste" | Zona == "Zona Este",
+         Fecha_Sintomas >= as.Date("2024-10-01"), Fecha_Sintomas <= as.Date("2024-12-31"))
+
+```
+
+```{r, echo = FALSE}
+
+DT::datatable(ira_filtrado, options = list(pageLength = 5))
+```
+
+<br><br>
+
+## **Trabajo con duplicados**
+
+Dado que nuestros datos simulados corresponden a resultados de laboratorios, es necesario verificar **cuántos datos duplicados** existen. Debemos tener en cuenta que **una persona puede aportar más de un caso durante el período y por evento, ya que se le pueden tomar múltiples muestras.**
+
+Para ello existen varias formas de identificar duplicados, eliminarlos o trabajar con ellos depende lo que necesitemos. Veremos algunas de ellas.
+
+### Duplicados con janitor
+
+Para examinar filas duplicadas se puede utilizar la función `get_dupes()` del paquete **`janitor`** **basándose en las columnas que especifiques**. Se puede utilizar para encontrar duplicados en columnas clave (por ejemplo, `Paciente_ID` y `Determinacion`).
+
+```{r}
+
+library(janitor)
+
+ira_duplicados <- ira_filtrado %>%
+  get_dupes(Paciente_ID)
+
+```
+
+```{r, echo = FALSE}
+
+DT::datatable(ira_duplicados, options = list(pageLength = 5))
+```
+
+<br><br>
+
+:::: mb-5
+::: {style="background-color:  #edf28a; padding: 10px; border: 1px solid #ccc; border-radius: 5px"}
+Es bueno saber que si a la función **gut_dupes()** no le colocamos como argumento una columna clave, buscará los duplicados que tengan valores iguales en todas las columnas. Es decir las filas devueltas por **la función por defecto son 100 % duplicadas considerando los valores en todas las columnas.**
+:::
+::::
+
+### Duplicados con duplicated()
+
+Teniendo en cuenta las funciones básicas de R, también se pueden ver qué filas son 100% duplicadas en un marco de datos con el comando `duplicated()`.
+
+**Esta función devuelve un vector lógico (`TRUE` o `FALSE`) que indica si cada fila o valor es un duplicado de una fila anterior.** Esto significa que para un conjunto de datos, `duplicated()` marca como `TRUE` todas las ocurrencias duplicadas de una fila, excepto la primera, que siempre será considerada única.
+
+Cuando se usa en data frames, puedes detectar duplicados en todas las columnas o en columnas específicas. Si deseas identificar duplicados exactos (todas las columnas iguales), simplemente aplicas `duplicated(data)`. Para identificar duplicados basados solo en ciertas columnas, puedes usar `duplicated(data[, c("columna1", "columna2")])`.
+
+**Por defecto, `duplicated()` no incluye la primera ocurrencia de un duplicado.** Si necesitas obtener todas las filas duplicadas, incluidas las primeras ocurrencias, puedes combinarlo con `duplicated()` y `duplicated(fromLast = TRUE)`.
+
+```{r}
+
+ira_dupli_2 <- duplicated(ira[, "Paciente_ID"])
+
+ira_dupli_2
+```
+
+### Duplicados con dplyr
+
+Para examinar duplicadostambien se puede utilizar `dplyr`, para ello **se combinan las funciones `group_by()` y `filter()`**. Estas herramientas permiten agrupar filas según una o varias columnas clave y luego filtrar los grupos que tienen más de una fila. Por ejemplo, con el marco de datos `ira`, si queremos identificar duplicados en la columna `Paciente_ID` podriamos realizarlo de la siguiente forma
+
+```{r}
+
+ira_dupli_3 <- ira_filtrado %>%
+  group_by(Paciente_ID) %>%
+  filter(n() > 1)
+
+```
+
+```{r, echo = FALSE}
+
+DT::datatable(ira_dupli_3, options = list(pageLength = 5))
+```
+
+<br><br>
+
+El resultado será un subconjunto del marco de datos original que contiene solo las filas duplicadas basadas en `Paciente_ID`. **Este método tiene la ventaja de ser flexible, ya que se puede extender para incluir más columnas en `group_by()`** si se desea buscar duplicados en combinaciones de variables (por ejemplo, `Paciente_ID` y `Determinacion`).
+
+<br><br>
+
+### Eliminar duplicados
+
+Para conservar solo las filas únicas de un marco de datos, se puede utilizar la **función `distinct()`** dedplyr. Con esta función las filas duplicadas se eliminan de modo que solo se conserva la primera de ellas. De **manera predeterminada, “primero” significa la más alta** `rownumber`(orden de filas de arriba a abajo). Solo quedan las filas únicas.
+
+```{r}
+
+ira_sin_duplicados <- ira_dupli_3 %>%
+  distinct(Paciente_ID, .keep_all = TRUE)
+
+```
+
+```{r, echo = FALSE}
+
+DT::datatable(ira_sin_duplicados, options = list(pageLength = 5))
+```
+
+**En este caso `.keep_all = TRUE`**: permite conservar todas las columnas del data frame, no solo las columnas usadas para eliminar duplicados. Si ademas queremos elilminar duplicados teniendo en cuenta combinaciones de columnas, es posibles sumarlas en la función separando los nombres de las columnas con coma:
+
+```{r}
+
+ira_sin_dupli_2 <- ira_dupli_3 %>%
+  distinct(Paciente_ID, Zona, .keep_all = TRUE)
+
+```
+
+```{r, echo = FALSE}
+
+DT::datatable(ira_sin_dupli_2, options = list(pageLength = 5))
+```
+
+### Eliminar duplicados con condicional
+
+Si supongamos queremos eliminar duplicados, pero teniendo en cuenta algún valor en epecífico, es decir, que se priorice una condición frente a otras. En nuestro ejemplo pordríamos tomar el casi de la determinación y presentar un orden de prioridad para el valor que me guarde, en este ejemplo, un PCR positivo, Cultivo positivo, PCR negativo y por útlimo un cultivo negativo.
+
+Para ello podemos usar el paquete `dplyr` de R y ordenar los datos según la prioridad de los valores en la columna `Determinacion`. Luego, podemos usar `distinct()` para eliminar duplicados, manteniendo la fila que cumpla con la condición de prioridad más alta.
+
+```{r}
+
+
+# Definir la jerarquía de la columna "Determinacion" utilizando recode
+ira_priorizado <- ira %>%
+  mutate(Prioridad = recode(Resultado, 
+                            "Positivo" = 1,   # "Positivo" tiene la más alta prioridad
+                            "Negativo" = 2),  # "Negativo" tiene la prioridad más baja
+         Prioridad = case_when(
+           Determinacion == "PCR" & Resultado == "Positivo" ~ 1,   # PCR Positivo
+           Determinacion == "Cultivo" & Resultado == "Positivo" ~ 2,   # Cultivo Positivo
+           Determinacion == "PCR" & Resultado == "Negativo" ~ 3,  # PCR Negativo
+           Determinacion == "Cultivo" & Resultado == "Negativo" ~ 4,  # Cultivo Negativo
+           TRUE ~ 5  # Cualquier otro caso tendrá la menor prioridad
+         )) %>%
+  arrange(Paciente_ID, Prioridad) %>%
+  distinct(Paciente_ID, .keep_all = TRUE) %>%  # Eliminar duplicados manteniendo la prioridad
+  select(-Prioridad)  # Eliminar la columna de prioridad (opcional)
+
+```
+
+```{r, echo=FALSE}
+
+DT::datatable(ira_priorizado, options = list(pageLength =5))
+
+           
+```
+
+La función **`recode()`** de `dplyr` se utiliza para reemplazar valores específicos en una columna de un dataframe de acuerdo con un mapeo definido por nosotros. Esto es útil cuando deseas modificar datos categóricos, como cambiar nombres de categorías o asignar valores numéricos a textos. Por ejemplo, se puede convertir los valores `"Positivo"` y `"Negativo"` en valores `1` y `0`, respectivamente. **`mutate()`**, también de `dplyr`, permite agregar nuevas columnas a un dataframe o modificar las existentes aplicando una función a las columnas.

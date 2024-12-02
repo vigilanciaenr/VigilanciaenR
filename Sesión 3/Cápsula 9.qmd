@@ -1,0 +1,116 @@
+---
+title: "Gráficos"
+title-block-banner: "#92aeea"
+format: 
+  html:
+    embed-resources: true
+    toc: true                # Habilita la tabla de contenidos
+    toc-title: "Índice de Contenidos"  # Título del índice
+    toc-depth: 3             # Nivel de profundidad del índice (hasta h3)
+    toc-location: left       # Ubicación del índice (izquierda)
+    number-sections: true
+footnotes-hover: true # muestra notas al pie
+smooth-scroll: true # suaviza el scroll
+editor: visual
+code-copy: true            # Permite copiar el código desde el documento
+execute:
+  warning: false
+  message: false
+  echo: true  # Oculta el código en los chunks
+---
+
+# **Pivoteo de datos**
+
+## **Formato ancho y formato largo**
+
+Los datos suelen introducirse y almacenarse en un **formato “ancho”**, en el que las características o respuestas de un sujeto se almacenan en una sola fila. Si bien esto puede resultar útil para la presentación, no es ideal para algunos tipos de análisis.
+
+Por otro lado, el **formato "largo" organiza los datos de manera que cada observación ocupa una fila, con columnas separadas para los nombres de las variables y sus valores.**
+
+La función `pivot_longer()` del paquete `tidyr` transforma datos de formato ancho a largo seleccionando columnas específicas, agrupando los nombres en una nueva columna y los valores asociados en otra.
+
+Inversamente, para pasar de formato largo a ancho, se utiliza la función `pivot_wider()`, que expande los nombres de una columna en varias columnas nuevas, con sus valores correspondientes. Estas herramientas permiten alternar entre estructuras según las necesidades del análisis, facilitando tareas como modelado, visualización y limpieza de datos.
+
+Aquí vemos una representación gráfica de ambas opciones:
+
+![](tidyr-longer-wider.gif){fig-align="center"}
+
+### Pivot_longer()
+
+`pivot_longer()` cuando necesites reorganizar datos para análisis o **visualizaciones que requieren que las variables estén representadas como filas en lugar de columnas**. Esto permite trabajar de manera más eficiente con herramientas analíticas y de visualización como `ggplot2`, `dplyr`, o modelos estadísticos en R.
+
+```{r}
+
+# Cargar las librerías necesarias
+library(tidyr)
+library(ggplot2)
+
+# Datos en formato ancho (wide)
+datos_ancho <- data.frame(
+  Persona = c("Ana", "Juan", "Luis"),
+  Edad = c(25, 30, 35),
+  Altura = c(160, 175, 180),
+  Peso = c(55, 70, 80)
+)
+
+# Transformar de formato ancho a largo (wide a long)
+datos_largo <- datos_ancho %>%
+  pivot_longer(
+    cols = c(Edad, Altura, Peso),  # Seleccionar columnas que queremos "aplanar"
+    names_to = "Variable",         # Nombre de la nueva columna que contendrá los nombres originales de las columnas
+    values_to = "Valor"            # Nombre de la nueva columna que contendrá los valores
+  )
+
+# Crear un gráfico usando los datos en formato largo
+ggplot(datos_largo, aes(x = Persona, y = Valor, fill = Variable)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(
+    title = "Gráfico de variables en formato largo",
+    x = "Persona",
+    y = "Valor",
+    fill = "Variable"
+  ) +
+  theme_minimal()
+
+
+```
+
+### Pivot_wider()
+
+`pivot_wider()` se utiliza para transformar datos de formato "largo" a "ancho", puede ser útil para un **gráfico de líneas donde cada categoría se represente como una serie diferente**, por ejemplo, evolución temporal, comparaciones entre grupos
+
+```{r}
+
+# Cargar las librerías necesarias
+library(tidyr)
+library(ggplot2)
+
+# Datos en formato largo (long)
+datos_largo <- data.frame(
+  Persona = rep(c("Ana", "Juan", "Luis"), each = 3),
+  Variable = rep(c("Edad", "Altura", "Peso"), times = 3),
+  Valor = c(25, 160, 55, 30, 175, 70, 35, 180, 80)
+)
+
+# Transformar de formato largo a ancho (long a wide)
+datos_ancho <- datos_largo %>%
+  pivot_wider(
+    names_from = Variable,  # La columna que será expandida a múltiples columnas
+    values_from = Valor     # La columna cuyos valores se asignarán a las nuevas columnas
+  )
+
+# Crear un gráfico usando los datos en formato ancho
+ggplot(datos_ancho, aes(x = Persona)) +
+  geom_line(aes(y = Edad, color = "Edad"), group = 1) +
+  geom_line(aes(y = Altura, color = "Altura"), group = 1) +
+  geom_line(aes(y = Peso, color = "Peso"), group = 1) +
+  labs(
+    title = "Evolución de variables por persona",
+    x = "Persona",
+    y = "Valor",
+    color = "Variable"
+  ) +
+  theme_minimal()
+
+
+```

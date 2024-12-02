@@ -1,0 +1,95 @@
+---
+format: 
+  html:
+    embed-resources: true
+    toc: true                # Habilita la tabla de contenidos
+    toc-title: "Índice de Contenidos"  # Título del índice
+    toc-depth: 3             # Nivel de profundidad del índice (hasta h3)
+    toc-location: left       # Ubicación del índice (izquierda)
+footnotes-hover: true # muestra notas al pie
+smooth-scroll: true # suaviza el scroll
+editor: visual
+code-copy: true            # Permite copiar el código desde el documento
+---
+
+# **Ayuda visual de Funciones útiles**
+
+## Conteo de datos
+
+![](imagenes/f2.png){fig-align="center"}
+
+## Agrupamiento de datos
+
+![](imagenes/f12.png){fig-align="center"}
+
+## Filtrado de datos
+
+![](imagenes/f1.png){fig-align="center"}
+
+## Búsqueda de duplicados con la función group_by()
+
+![](imagenes/f4.png){fig-align="center"}
+
+## Búsqueda de duplicados con duplicated()
+
+![](imagenes/f6.png){fig-align="center"}
+
+## Ordenar Datos
+
+![](imagenes/f9.png){fig-align="center"}
+
+## Seleccionar columnas específicas
+
+![](imagenes/f3.png){fig-align="center"}
+
+## Renombrar columnas
+
+![](imagenes/f5.png)
+
+## Convertir valores a fecha
+
+![](imagenes/f8.png){fig-align="center"}
+
+## Convertir valores a caracter
+
+![](imagenes/f7.png){fig-align="center"}
+
+## Aplicar función de conversión a varias columnas
+
+![](imagenes/f10.png){fig-align="center"}
+
+## Creación de condicionales
+
+![](imagenes/f9%20(2).png){fig-align="center"}
+
+## Creación de condicionales
+
+![](imagenes/f11.png){fig-align="center"}
+
+## **Operadores de comparación**
+
+![](imagenes/o1.png){fig-align="center"}
+
+# **Unión de marcos de datos**
+
+## ![](imagenes/u_u.png)
+
+## left_join
+
+![](imagenes/u1.png){fig-align="center"}
+
+## right_join
+
+![](imagenes/u2.png)
+
+## full_join
+
+![](imagenes/u3.png){fig-align="center"}
+
+## inner_join
+
+![](imagenes/u4.png)
+
+## anti_join
+
+![](imagenes/u5.png){fig-align="center"}
