@@ -109,12 +109,12 @@ Se realizará seguimiento de la implementación del proyecto y relevamiento de o
 
 ## D -Estrategia de evaluación
 
-La evaluación será una instancia continua que permita presentar y resumir los resultados alcanzados con las actividades propuestas en cada módulo. El resultado principal a alcanzar con la capacitación es un resultado colectivo, que permita el fortalecimiento de los equipos de vigilancia epidemiológica a nivel jurisdiccional. En este sentido si bien habrá actividades realizadas de forma individual y que serán resultados de las actividades desarrolladas en los distintos módulos, el acento está colocado en el proyecto grupal de elaboración de reportes automatizados. Se propone también como parte de la estrategia de evaluación de esta capacitación el monitoreo y seguimiento en el proceso de implementación del proyecto en la jurisdicción.
+La evaluación será una instancia continua que permita presentar y resumir los resultados alcanzados con las actividades propuestas en cada módulo. El resultado principal a alcanzar con la capacitación es un resultado colectivo, que permita el fortalecimiento de los equipos de vigilancia epidemiológica a nivel jurisdiccional. En este sentido si bien habrá actividades realizadas de forma individual y que serán resultados de las actividades desarrolladas en las distintas sesiones, el acento está colocado en el proyecto grupal de elaboración de reportes automatizados. Se propone también como parte de la estrategia de evaluación de esta capacitación el monitoreo y seguimiento en el proceso de implementación del proyecto en la jurisdicción.
 
 
 ## E- Productos esperados:
 
-Se espera que los/as alumnos/as elaboren un plan de análisis para sus datos y con el mismo puedan diseñar y programar un reporte automatizado en R y Quarto. Se espera que estos reportes sean un importante insumo para los equipos que trabajan en vigilancia a nivel provincial.
+Se espera que los/as alumnos/as elaboren un plan de análisis para sus datos y con el mismo puedan diseñar y programar un reporte automatizado en RStudio, en un archivo formato Quarto. Se espera que estos reportes sean un importante insumo para los equipos que trabajan en vigilancia a nivel provincial.
 
 ------------
 
