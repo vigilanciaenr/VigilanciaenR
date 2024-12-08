@@ -105,7 +105,7 @@ Elaboración del modelo y esquema de reporte a elaborar de manera automatizada. 
 
 #### C.6. Módulo 6: Seguimiento y Monitoreo
 
-Se realizará seguimiento de la implementación del proyecto y relevamiento de obstáculos en la puesta en práctica en el marco de las actividades de vigilancia epidemiológica a nivel jurisdiccional.
+Se realizará seguimiento de la implementación del proyecto y relevamiento de obstáculos en la puesta en práctica en el marco de las actividades de vigilancia epidemiológica a nivel jurisdiccional. Se propone como instancia final la creación de repositorio en GitHub para que los proyectos puedan ser accesibles y permitir una dinámica de trabajo colaborativo, permitiendo que otros equipos puedan acceder de los proyectos desarrollados.
 
 ## D -Estrategia de evaluación
 
@@ -188,13 +188,16 @@ Dentro de este directorio encontraremos:
 
 [Quarto presentación](https://vigilanciaenr.github.io/VigilanciaenR/Sesi%C3%B3n%204/Quarto%20presentaci%C3%B3n.html#/title-slide)
 
-# Sesión Git
+# Sesión Git y GitHub
 
 Dentro de este directorio encontraremos:
 - Documento presentación y guía para la descarga y conexión de Git y Github con Rstudio
 
 [Presentación Git-Github](https://vigilanciaenr.github.io/VigilanciaenR/Sesi%C3%B3n%20Git-Github/ppt_git.html)
 
+# Sesiones de seguimiento
+
+Se proponen al menos 3 sesiones de seguimiento de los proyectos desarrollados a lo largo de la capacitación por los equipos de trabajo. La propuesta es lograr exportaciones y productos de complejidad creciente.
 
 # Enlaces de utilidad
 
