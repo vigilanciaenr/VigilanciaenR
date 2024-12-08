@@ -20,9 +20,9 @@
 ## A- Introducción y fundamentación de la propuesta formativa:
 
 <p>
-La necesidad de formación continua es una de los elementos característicos comunes para el trabajo de los equipos de salud. En específico, en lo relativo a la vigilancia epidemiológica, la necesidad de fortalecer las competencias y capacidades de los equipos de epidemiología locales y jurisdiccionales de la provincias en Argentina está en relación no sólo con la incorporación de nuevas herramientas informáticas para el análisis de datos, visualizaciones y generación de reportes automatizados. A su vez el contexto desafiante que presenta el avance de las enfermedades virales a nivel nacional (ETMa, IRAG, entre otras), en conjunto con la ampliación de la estrategia de vigilancia centinela de IRAG, se presenta con un escenario que resalta la importancia del uso de  herramientas avanzadas y métodos eficientes para la gestión de datos epidemiológicos. 
+La necesidad de formación continua es una de los elementos característicos comunes para el trabajo de los equipos de salud. En específico, en lo relativo a la vigilancia epidemiológica, la necesidad de fortalecer las competencias y capacidades de los equipos de epidemiología locales y jurisdiccionales de la provincias en Argentina está en relación no sólo con la incorporación de nuevas herramientas informáticas para el análisis de datos, visualizaciones y generación de reportes automatizados. A su vez, el contexto actual presenta desafios como por ejemplo el avance de las enfermedades virales a nivel nacional (ETMa, IRAG, entre otras), en conjunto con la ampliación de la estrategia de vigilancia centinela de IRAG. De esta forma, este escenario resalta la importancia del uso de nuevas herramientas y métodos eficientes para la gestión de datos epidemiológicos. 
 
-La presente capacitación está orientada a profesionales de distintas disciplinas o integrantes de los equipos de salud y de gestión de la salud que desempeñen tareas de vigilancia epidemiológica. 
+La presente capacitación se propone en formato semi presencial y está orientada a profesionales de distintas disciplinas o integrantes de los equipos de salud y de gestión de la salud que desempeñen tareas de vigilancia epidemiológica. Los modulos agrupan los contenidos y habilidades de manera encadenada para el desarrollo de proyectos de automatización de reportes. A su vez, el dictado de la capacitación en términos operativos esta planificado en sesiones presencial y virtuales, que agrupan capsulas como unidades mínimas para el desarrollo de habilidades y el abordaje de contenidos. Esta dinámica permite un mejor aprovechamiento de la capacitación por usuarios con distintos niveles de familiarización con R y RStudio.
 
 Como requerimiento mínimos para poder realizar la capacitación se necesita la disponibilidad de computadora con la instalación del programa R y RStudio con permisos para instalar paquetes nuevos. Es valorado el conocimiento básico de manejo de bases de datos y la lectocomprensión del idioma inglés.
 
@@ -34,7 +34,7 @@ Como requerimiento mínimos para poder realizar la capacitación se necesita la 
   
 **General**:
  <p>
-  Fortalecer las habilidades y competencias para el procesamiento, visualización y elaboración de reportes automáticos en R.
+  Fortalecer las habilidades y competencias para el procesamiento, visualización y elaboración de reportes automáticos en R y RStudio.
 </p>
 
 *Específicos*:
@@ -43,18 +43,18 @@ Como requerimiento mínimos para poder realizar la capacitación se necesita la 
 
 - Caracterizar e identificar los circuitos de los datos producidos por la vigilancia epidemiológica a nivel jurisdiccional 
 
-- Incorporar herramientas de procesamiento y visualización de los datos en R
+- Incorporar herramientas de procesamiento y visualización de los datos en R y RStudio
 
-- Elaborar un proyecto de automatización de reportes en R a nivel jurisdiccional
+- Elaborar un proyecto de automatización de reportes a nivel jurisdiccional
 
-- Desarrollar autonomía en el uso de R aplicado al análisis de datos epidemiologicos
+- Desarrollar autonomía en el uso de R y RStudio aplicado al análisis de datos epidemiologicos
 
 </p>
 
 ## C- Contenidos
 
 <p>
-Se propone una capacitación en el uso del programa R con un formato de taller práctico que incluya el uso de RMarkdown y Quarto para la creación de informes automatizados y diversos paquetes de R para análisis y visualizaciones. La propuesta es que al finalizar la capacitación el equipo de vigilancia epidemiológica tenga armado un proyecto para la generación automática de reportes con los datos producidos por la vigilancia epidemiológica. 
+Se propone una capacitación en el uso del programa R con un formato de taller práctico que incluya el uso de RMarkdown y Quarto para la creación de informes automatizados y diversos paquetes de R para procesamiento, análisis y visualizaciones. La propuesta es que al finalizar la capacitación el equipo de vigilancia epidemiológica tenga armado un proyecto para la generación automática de reportes con los datos producidos por la vigilancia epidemiológica. 
 </p>
   
 #### C. 1. Módulo 1: Presentación de las herramientas de trabajo
@@ -75,7 +75,7 @@ Este primer módulo tiene algunos contenidos de carácter de optativo para aquel
 En este módulo se trabajará colaborativamente con la estrategia de vigilancia epidemiológica seleccionada por la jurisdicción. De acuerdo a esta elección se trabajará en el armado de los circuitos de los datos producidos localmente por los diferentes niveles y efectores de salud intervinientes. Se diseñará un plan de análisis de los datos producidos en el marco de las actividades de vigilancia
 
 - Construcción del circuito de datos de la vigilancia epidemiológica local. Transferencia de datos. Lectura de dataset. 
-- Búsqueda y transferencia de archivos de bases de datos epidemiológicos para su utilización en Rstudio.
+- Importación de distintos formatos de archivos de bases de datos epidemiológicos para su utilización en Rstudio.
 - Paquetes de datos y uso de marcos de data frames compartidos
 - Diseño colaborativo de un plan de análisis
 
