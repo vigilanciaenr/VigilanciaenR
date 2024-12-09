@@ -118,7 +118,7 @@ Se espera que los/as alumnos/as elaboren un plan de análisis para sus datos y c
 
 ------------
 
-# **Mtaerial de consulta dividido por sesiones**
+# **Material de consulta dividido por sesiones**
 
 # Sesión 1 
 
