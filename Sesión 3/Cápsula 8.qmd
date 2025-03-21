@@ -119,7 +119,7 @@ df_unido <- ira %>%
 
 ```{r, echo=FALSE}
 
-DT::datatable(vacunacion, options = list(pageLenght =5))
+DT::datatable(df_unido, options = list(pageLenght =5))
 
 ```
 
