@@ -4,7 +4,7 @@
 - [Programa](#programa)
 - [Sesión 1: Introducción a R y Rstudio, Objetos, Funciones y sintaxis básica](#Sesión-1)
 - [Sesión 2: Importación, limpieza de datos y funciones de procesamiento básicas](#Sesión-2)
-- [Sesión 3: Unión de datos, pivoteos de datos, vicualización de tablas](#Sesión-3)
+- [Sesión 3: Unión de datos, pivoteos de datos, vizualización de tablas](#Sesión-3)
 - [Sesión 4: Visualización de datos, mapas y exportación de Quarto presentación](#Sesión-4)
 - [Sesión Git-Github](#Sesión-Git)
 - [Enlaces de utilidad](#enlaces-de-utilidad)
@@ -20,9 +20,9 @@
 ## A- Introducción y fundamentación de la propuesta formativa:
 
 <p>
-La necesidad de formación continua es una de los elementos característicos comunes para el trabajo de los equipos de salud. En específico, en lo relativo a la vigilancia epidemiológica, la necesidad de fortalecer las competencias y capacidades de los equipos de epidemiología locales y jurisdiccionales de la provincias en Argentina está en relación no sólo con la incorporación de nuevas herramientas informáticas para el análisis de datos, visualizaciones y generación de reportes automatizados. A su vez el contexto desafiante que presenta el avance de las enfermedades virales a nivel nacional (ETMa, IRAG, entre otras), en conjunto con la ampliación de la estrategia de vigilancia centinela de IRAG, se presenta con un escenario que resalta la importancia del uso de  herramientas avanzadas y métodos eficientes para la gestión de datos epidemiológicos. 
+La necesidad de formación continua es una de los elementos característicos comunes para el trabajo de los equipos de salud. En específico, en lo relativo a la vigilancia epidemiológica, la necesidad de fortalecer las competencias y capacidades de los equipos de epidemiología locales y jurisdiccionales de la provincias en Argentina está en relación no sólo con la incorporación de nuevas herramientas informáticas para el análisis de datos, visualizaciones y generación de reportes automatizados. A su vez, el contexto actual presenta desafios como por ejemplo el avance de las enfermedades virales a nivel nacional (ETMa, IRAG, entre otras), en conjunto con la ampliación de la estrategia de vigilancia centinela de IRAG. De esta forma, este escenario resalta la importancia del uso de nuevas herramientas y métodos eficientes para la gestión de datos epidemiológicos. 
 
-La presente capacitación está orientada a profesionales de distintas disciplinas o integrantes de los equipos de salud y de gestión de la salud que desempeñen tareas de vigilancia epidemiológica. 
+La presente capacitación se propone en formato semi presencial y está orientada a profesionales de distintas disciplinas o integrantes de los equipos de salud y de gestión de la salud que desempeñen tareas de vigilancia epidemiológica. Los modulos agrupan los contenidos y habilidades de manera encadenada para el desarrollo de proyectos de automatización de reportes. A su vez, el dictado de la capacitación en términos operativos esta planificado en sesiones presenciales y virtuales, que agrupan capsulas como unidades mínimas para el desarrollo de habilidades y el abordaje de contenidos. Esta dinámica permite un mejor aprovechamiento de la capacitación por usuarios con distintos niveles de familiarización con R y RStudio.
 
 Como requerimiento mínimos para poder realizar la capacitación se necesita la disponibilidad de computadora con la instalación del programa R y RStudio con permisos para instalar paquetes nuevos. Es valorado el conocimiento básico de manejo de bases de datos y la lectocomprensión del idioma inglés.
 
@@ -34,7 +34,7 @@ Como requerimiento mínimos para poder realizar la capacitación se necesita la 
   
 **General**:
  <p>
-  Fortalecer las habilidades y competencias para el procesamiento, visualización y elaboración de reportes automáticos en R.
+  Fortalecer las habilidades y competencias para el procesamiento, visualización y elaboración de reportes automáticos en R y RStudio.
 </p>
 
 *Específicos*:
@@ -43,18 +43,18 @@ Como requerimiento mínimos para poder realizar la capacitación se necesita la 
 
 - Caracterizar e identificar los circuitos de los datos producidos por la vigilancia epidemiológica a nivel jurisdiccional 
 
-- Incorporar herramientas de procesamiento y visualización de los datos en R
+- Incorporar herramientas de procesamiento y visualización de los datos en R y RStudio
 
-- Elaborar un proyecto de automatización de reportes en R a nivel jurisdiccional
+- Elaborar un proyecto de automatización de reportes a nivel jurisdiccional
 
-- Desarrollar autonomía en el uso de R aplicado al análisis de datos epidemiologicos
+- Desarrollar autonomía en el uso de R y RStudio aplicado al análisis de datos epidemiologicos
 
 </p>
 
 ## C- Contenidos
 
 <p>
-Se propone una capacitación en el uso del programa R con un formato de taller práctico que incluya el uso de RMarkdown y Quarto para la creación de informes automatizados y diversos paquetes de R para análisis y visualizaciones. La propuesta es que al finalizar la capacitación el equipo de vigilancia epidemiológica tenga armado un proyecto para la generación automática de reportes con los datos producidos por la vigilancia epidemiológica. 
+Se propone una capacitación en el uso del programa R con un formato de taller práctico que incluya el uso de RMarkdown y Quarto para la creación de informes automatizados y diversos paquetes de R para procesamiento, análisis y visualizaciones. La propuesta es que al finalizar la capacitación el equipo de vigilancia epidemiológica tenga armado un proyecto para la generación automática de reportes con los datos producidos por la vigilancia epidemiológica. 
 </p>
   
 #### C. 1. Módulo 1: Presentación de las herramientas de trabajo
@@ -75,7 +75,7 @@ Este primer módulo tiene algunos contenidos de carácter de optativo para aquel
 En este módulo se trabajará colaborativamente con la estrategia de vigilancia epidemiológica seleccionada por la jurisdicción. De acuerdo a esta elección se trabajará en el armado de los circuitos de los datos producidos localmente por los diferentes niveles y efectores de salud intervinientes. Se diseñará un plan de análisis de los datos producidos en el marco de las actividades de vigilancia
 
 - Construcción del circuito de datos de la vigilancia epidemiológica local. Transferencia de datos. Lectura de dataset. 
-- Búsqueda y transferencia de archivos de bases de datos epidemiológicos para su utilización en Rstudio.
+- Importación de distintos formatos de archivos de bases de datos epidemiológicos para su utilización en Rstudio.
 - Paquetes de datos y uso de marcos de data frames compartidos
 - Diseño colaborativo de un plan de análisis
 
@@ -105,27 +105,29 @@ Elaboración del modelo y esquema de reporte a elaborar de manera automatizada. 
 
 #### C.6. Módulo 6: Seguimiento y Monitoreo
 
-Se realizará seguimiento de la implementación del proyecto y relevamiento de obstáculos en la puesta en práctica en el marco de las actividades de vigilancia epidemiológica a nivel jurisdiccional.
+Se realizará seguimiento de la implementación del proyecto y relevamiento de obstáculos en la puesta en práctica en el marco de las actividades de vigilancia epidemiológica a nivel jurisdiccional. Se propone como instancia final la creación de repositorio en GitHub para que los proyectos puedan ser accesibles y permitir una dinámica de trabajo colaborativo, permitiendo que otros equipos puedan acceder de los proyectos desarrollados.
 
 ## D -Estrategia de evaluación
 
-La evaluación será una instancia continua que permita presentar y resumir los resultados alcanzados con las actividades propuestas en cada módulo. El resultado principal a alcanzar con la capacitación es un resultado colectivo, que permita el fortalecimiento de los equipos de vigilancia epidemiológica a nivel jurisdiccional. En este sentido si bien habrá actividades realizadas de forma individual y que serán resultados de las actividades desarrolladas en los distintos módulos, el acento está colocado en el proyecto grupal de elaboración de reportes automatizados. Se propone también como parte de la estrategia de evaluación de esta capacitación el monitoreo y seguimiento en el proceso de implementación del proyecto en la jurisdicción.
+La evaluación será una instancia continua que permita presentar y resumir los resultados alcanzados con las actividades propuestas en cada módulo. El resultado principal a alcanzar con la capacitación es un resultado colectivo, que permita el fortalecimiento de los equipos de vigilancia epidemiológica a nivel jurisdiccional. En este sentido si bien habrá actividades realizadas de forma individual y que serán resultados de las actividades desarrolladas en las distintas sesiones, el acento está colocado en el proyecto grupal de elaboración de reportes automatizados. Se propone también como parte de la estrategia de evaluación de esta capacitación el monitoreo y seguimiento en el proceso de implementación del proyecto en la jurisdicción.
 
 
 ## E- Productos esperados:
 
-Se espera que los/as alumnos/as elaboren un plan de análisis para sus datos y con el mismo puedan diseñar y programar un reporte automatizado en R y Quarto. Se espera que estos reportes sean un importante insumo para los equipos que trabajan en vigilancia a nivel provincial.
+Se espera que los/as alumnos/as elaboren un plan de análisis para sus datos y con el mismo puedan diseñar y programar un reporte automatizado en RStudio, en un archivo formato Quarto. Se espera que estos reportes sean un importante insumo para los equipos que trabajan en vigilancia a nivel provincial.
 
 ------------
+
+# **Material de consulta dividido por sesiones**
 
 # Sesión 1 
 
 Dentro de este directorio encontraremos:
 - "Cápsula 1": Introducción básica a R y Rstudio.
-- "Cápsula 2": Objetos, funciones, principales paquetes ylibrerías.
-- "Cápsula 3": Factores, datos faltantes, Pipe (tuberías). Creación de proyecto en R y rutas de directorios de trabajo. 
+- "Cápsula 2": Objetos, funciones, principales paquetes y librerías.
+- "Cápsula 3": Factores, datos faltantes, Pipe (tuberías), creación de proyecto en R y rutas de directorios de trabajo. 
 
-Estos archivos se encuentran en el repositorio en la "Sesión 1", desde donde se lo podrán descargar o acceder desde los siguientes links:
+Estos archivos se encuentran en el repositorio en la "Sesión 1", desde donde se pueden descargar o acceder a través de los siguientes enlaces:
 
 [Cápsula 1](https://vigilanciaenr.github.io/VigilanciaenR/Sesi%C3%B3n%201/C%C3%A1psula%201.html)
 
@@ -138,11 +140,11 @@ Estos archivos se encuentran en el repositorio en la "Sesión 1", desde donde se
 # Sesión 2
 
 Dentro de este directorio encontraremos:
-- "Cápsula 4": Importación de datos con diferntes paquetes y formatos. 
-- "Cápsula 5": Limpieza y normalización de datos. Datos faltantes, trabajo con caracteres y fechas. Exportación de dataframe.
-- "Cápsula 6": Procesamiento de datos. Filtrado, y trabajo con duplicados.
-- "Cápsula 7": Procesamiento de datos. Modificación de columnas, variables condiconales, creación de rangos, agrupamientos.
-- "Material funciones": Ayuda visual para la sintaxis de principales funciones de porcesamiento de datos. 
+- "Cápsula 4": Importación de datos con diferentes paquetes y formatos.
+- "Cápsula 5": Limpieza y normalización de datos: manejo de datos faltantes, trabajo con caracteres y fechas, y exportación de dataframes.
+- "Cápsula 6": Procesamiento de datos: filtrado y manejo de duplicados.
+- "Cápsula 7": Procesamiento de datos: modificación de columnas, creación de variables condicionales, rangos y agrupamientos.
+- "Material funciones": Guía visual para la sintaxis de las principales funciones de procesamiento de datos.
 
 [Cápsula 4](https://vigilanciaenr.github.io/VigilanciaenR/Sesi%C3%B3n%202/C%C3%A1psula%204.html)
 
@@ -161,14 +163,14 @@ Dentro de este directorio encontraremos:
 
 Dentro de este directorio encontraremos:
 - "Cápsula 8": Unión de datos. 
-- "Cápsula 9": Pivoteo de datos para gráficos. 
+- "Cápsula 9": Pivoteo de datos para la creación de gráficos.
 - "Cápsula tablas": Formatos y visualización de tablas
 
 [Cápsula 8](https://vigilanciaenr.github.io/VigilanciaenR/Sesi%C3%B3n%203/C%C3%A1psula%208.html) 
 
 [Cápsula 9](https://vigilanciaenr.github.io/VigilanciaenR/Sesi%C3%B3n%203/C%C3%A1psula%209.html) 
 
-[Cápsula tablas](https://vigilanciaenr.github.io/VigilanciaenR/Sesi%C3%B3n%203/C%C3%A1psula%20tablas.html#tablas-con-gt) 
+[Cápsula tablas](https://vigilanciaenr.github.io/VigilanciaenR/Sesi%C3%B3n%203/C%C3%A1psula%20tablas.html) 
 
 
 
@@ -176,9 +178,9 @@ Dentro de este directorio encontraremos:
 # Sesión 4:
 
 Dentro de este directorio encontraremos:
-- "Mapas": Armado de mapas 
-- "PPT Visualización de datos": Material visualización de datos para buenas prácticas.
-- "Quarto presentación": Ejemplo para exportar archivo Quarto en formato presentación.
+- "Mapas": Creación y diseño de mapas. 
+- "PPT Visualización de datos": Material sobre visualización de datos enfocado en buenas prácticas.
+- "Quarto Presentación": Ejemplo de exportación de archivos Quarto en formato de presentación.
 
 [Mapas](https://vigilanciaenr.github.io/VigilanciaenR/Sesi%C3%B3n%204/mapas_neuquen.html)
 
@@ -186,13 +188,16 @@ Dentro de este directorio encontraremos:
 
 [Quarto presentación](https://vigilanciaenr.github.io/VigilanciaenR/Sesi%C3%B3n%204/Quarto%20presentaci%C3%B3n.html#/title-slide)
 
-# Sesión Git
+# Sesión Git y GitHub
 
 Dentro de este directorio encontraremos:
 - Documento presentación y guía para la descarga y conexión de Git y Github con Rstudio
 
 [Presentación Git-Github](https://vigilanciaenr.github.io/VigilanciaenR/Sesi%C3%B3n%20Git-Github/ppt_git.html)
 
+# Sesiones de seguimiento
+
+Se proponen al menos 3 sesiones de seguimiento de los proyectos desarrollados a lo largo de la capacitación por los equipos de trabajo. La propuesta es lograr exportaciones y productos de complejidad creciente.
 
 # Enlaces de utilidad
 
