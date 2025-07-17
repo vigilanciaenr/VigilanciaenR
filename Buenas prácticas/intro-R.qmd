@@ -1,0 +1,88 @@
+---
+format: revealjs
+theme: default
+logo: img/posit-logo.png
+slide-number: true
+center: true
+---
+
+## Introducción a
+
+### **R, RStudio, Quarto y Posit**
+
+------------------------------------------------------------------------
+
+## ¿Qué es **R**?
+
+-   Lenguaje de programación
+-   Especializado en análisis estadístico y visualización de datos
+-   Gratuito, de código abierto y con una gran comunidad
+-   Utilizado ampliamente en epidemiología, salud pública, ciencia de datos, investigación
+
+<img src="img/Rlogo.png" width="150"/>
+
+------------------------------------------------------------------------
+
+## ¿Qué es **RStudio**?
+
+-   Un entorno de desarrollo integrado (IDE) para usar R
+-   Organiza el trabajo en proyectos
+-   Permite escribir código, ver resultados, explorar archivos, ver objetos
+
+![](img/rstudio-og.png){width="278"}
+
+------------------------------------------------------------------------
+
+## ¿Qué son los paquetes en R?
+
+-   Extensiones que agregan funciones y herramientas
+-   Se instalan con `install.packages("nombre")`
+-   Se activan con `library(nombre)`
+
+| Paquete     | ¿Para qué sirve?             |
+|-------------|------------------------------|
+| `dplyr`     | Manipular y resumir datos    |
+| `ggplot2`   | Crear gráficos profesionales |
+| `readr`     | Leer archivos CSV            |
+| `lubridate` | Trabajar con fechas          |
+
+------------------------------------------------------------------------
+
+## ¿Qué es **Quarto**?
+
+-   Herramienta para crear documentos, reportes, presentaciones o dashboards
+-   Integra texto + código + resultados
+-   Salida en HTML, PDF, Word o diapositivas como esta
+
+![](img/quarto-bg.jpeg){width="301"}
+
+------------------------------------------------------------------------
+
+## ¿Qué es **Posit**?
+
+-   La empresa detrás de RStudio, Quarto y muchas otras herramientas de ciencia de datos
+-   Antes se llamaba **RStudio Inc.**
+-   Desarrolladores del **tidyverse** (ggplot2, dplyr, tidyr, etc.)
+
+![](img/posit-logo.png){width="240"}
+
+------------------------------------------------------------------------
+
+| Herramienta | ¿Qué es? | ¿Para qué sirve? |
+|------------------|---------------------|---------------------------------|
+| **R** | Lenguaje | Análisis, estadísticas, visualizaciones |
+| **RStudio** | Entorno de desarrollo (IDE) | Ejecutar código de forma organizada |
+| **Quarto** | Herramienta de documentación | Crear informes, dashboards, presentaciones |
+
+------------------------------------------------------------------------
+
+## Primeros pasos
+
+1.  **Instalá R**:\
+    <https://cran.r-project.org>
+
+2.  **Instalá RStudio**:\
+    <https://posit.co/download/rstudio-desktop/>
+
+3.  **Instalá Quarto**:\
+    <https://quarto.org>

@@ -1,0 +1,116 @@
+/* ----- GOOGLE FONTS ----- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+/* ----- FONDO GENERAL ----- */
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(to bottom, #f8faff, #ffffff);
+  color: #2b2e3a;
+  margin: 0;
+  padding: 2rem;
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+/* ----- TÍTULOS ----- */
+h1, h2, h3, h4 {
+  font-weight: 600;
+  color: #375a9e;
+  margin-top: 2rem;
+  letter-spacing: 0.5px;
+}
+
+h1 {
+  font-size: 2.4rem;
+  border-bottom: 3px solid #8AADEB;
+  color: #241e7b;
+  padding-bottom: 0.3rem;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-size: 1.8rem;
+  border-left: 5px solid #8AADEB;
+  padding-left: 0.6rem;
+  color: #4667c5;
+}
+
+h3 {
+  font-size: 1.3rem;
+  color: #5a6faf;
+}
+
+/* ----- TABLAS ----- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+  border: 1px solid #dbe5f5;
+  box-shadow: 0 2px 6px rgba(138, 173, 235, 0.15);
+}
+
+th, td {
+  padding: 0.75rem 1rem;
+  border: 1px solid #e2e8f4;
+}
+
+th {
+  background-color: #eaf0fb;
+  color: #2b2e3a;
+  text-align: left;
+  font-weight: 600;
+}
+
+/* ----- CÓDIGO ----- */
+pre, code {
+  font-family: 'Courier New', monospace;
+  background-color: #f3f7ff;
+  color: #2c2c2c;
+  font-size: 0.95rem;
+  border-left: 4px solid #8AADEB;
+  padding: 1rem;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+/* ----- BLOQUES DE CÓDIGO ----- */
+div.sourceCode {
+  background-color: #f9fbff;
+  border: 1px solid #d8e4f7;
+  border-radius: 6px;
+  padding: 0.8rem;
+  margin-bottom: 2rem;
+}
+
+/* ----- TOC (Tabla de Contenido) ----- */
+nav#TOC {
+  background-color: #f0f5ff;
+  border-left: 4px solid #8AADEB;
+  padding: 1rem;
+  font-size: 0.95rem;
+  margin-bottom: 2rem;
+  border-radius: 8px;
+}
+
+nav#TOC a {
+  color: #3a5bb7;
+  text-decoration: none;
+}
+
+nav#TOC a:hover {
+  text-decoration: underline;
+  color: #203d8f;
+}
+
+/* ----- ENLACES ----- */
+a {
+  color: #3865d2;
+  text-decoration: none;
+  border-bottom: 1px dotted #8AADEB;
+}
+
+a:hover {
+  color: #1e3f8a;
+  border-bottom: 1px solid #3865d2;
+}
+

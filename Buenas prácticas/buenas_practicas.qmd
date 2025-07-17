@@ -1,0 +1,167 @@
+---
+format:
+  html:
+    theme: cosmo
+    toc: true
+    toc-depth: 2
+    code-tools: false
+    df-print: paged
+    smooth-scroll: true
+    css: estilo.css
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+# Buenas prácticas en la documentación de análisis
+
+## Documentar el análisis a realizar permite:
+
+-   Asegurar **reproducibilidad** del análisis
+
+-   Justificar las decisiones metodológicas tomadas
+
+-   Facilitar la comunicación entre equipos
+
+## Objetivo del análisis
+
+-   ¿Qué utilidad tendrá el informe generado?
+
+-   ¿Quién va a usar el resultado?
+
+## Fuente y características de los datos
+
+-   Nombre del archivo, fecha de descarga, fuente, etc.
+
+-   Variables incluidas y cambios realizados en ellas
+
+-   Observaciones por ejemplo: información importante de los datos, como aparecen los datos faltantes, etc.
+
+## Decisiones metodológicas
+
+-   Criterios de inclusión/exclusión
+
+-   Agrupamientos realizados (por edad, semanas epidemiológicas, etc.)
+
+-   Correcciones o transformaciones aplicadas
+
+-   Justificación de cada paso
+
+| Paso del análisis | Documentar... |
+|----|----|
+| Importación de datos | Fuente, fecha, quién los generó |
+| Limpieza | Qué columnas se corrigieron, qué se eliminó y por qué |
+| Categorizaciones | Qué grupos de edad se usaron, cómo se definió 'caso' |
+| Análisis estadístico | Qué medidas se usaron (tasa, razón, proporción) |
+| Visualización | Qué muestra cada gráfico y por qué se eligió ese tipo |
+
+## Ejemplo de orden para documentación
+
+-   Objetivo del análisis
+
+-   Descripción de los datos
+
+-   Pasos del procesamiento (limpieza, filtrado)
+
+-   Análisis realizado (medidas, gráficos)
+
+-   Resultados principales
+
+-   Conclusiones o recomendaciones
+
+---
+
+# Buenas prácticas para el uso de Rstudio y Quarto
+
+## 1. Crear un entorno de trabajo ordenado
+
+-   **Usar proyectos** `.Rproj` ABRIR SIEMPRE DESDE PROYECTOS NO RSTUDIO
+
+-   **Crear carpetas:** `datos/`, `scripts/`, `salidas/`\
+
+-   **Usar rutas relativas:** Una ruta relativa parte desde la carpeta del proyecto actual (donde está el `.Rproj` o `.qmd`).
+
+```{r, eval = FALSE}
+
+# Ruta absoluta (depende de tu máquina)
+read.csv("C:/Usuarios/Documentos/proyectoR/datos/casos.csv")
+
+# Ruta relativa (recomendado)
+read.csv("datos/casos.csv")
+
+```
+
+------------------------------------------------------------------------
+
+## 2. Escribir código limpio y legible
+
+-   **Usar nombres descriptivos**: `casos_covid`, `datos_pacientes`
+
+    Importancia de mayúsculas, minúsculas y acentos
+
+-   **Comentar el código y su función**
+
+    Utilizar numeral para comentar fragmentos de código
+
+-   **Sangrías y espaciado**: atajo de teclado para organizar código `Ctrl + Shift + A`
+
+``` r
+# Calcular edad promedio de pacientes
+edad_promedio <- mean(pacientes$edad, na.rm = TRUE)
+```
+
+------------------------------------------------------------------------
+
+## 3. Diferenciar `.R` y `.qmd`
+
+-   `.R` → **para procesamiento, análisis, limpieza**
+
+-   `.qmd` → **para exportar y editar reportes con trabajo de visualización**
+
+------------------------------------------------------------------------
+
+## 4. Flujo de trabajo recomendado
+
+![](flujo_Mesa%20de%20trabajo%201.png){fig-align="center"}
+
+------------------------------------------------------------------------
+
+## 5. Atender a los errores
+
+```{r}
+
+# Error in filter(datos, edad > 30): could not find function "filter"
+```
+
+> La función `filter()` que pertenece al paquete `dplyr` no está cargada, en ese caso se deben cargar primeros las librerías.
+>
+> En caso de error el documento no se renderiza
+
+``` r
+Library(dplyr)
+```
+
+------------------------------------------------------------------------
+
+## 6. Escritura de código
+
+-   Nombres claros
+-   Código ordenado por secciones
+-   Comentarios explicativos
+-   Probar en bloques pequeños
+-   Guardar versiones con nombres
+
+------------------------------------------------------------------------
+
+## 7. Exportar documentos
+
+-   Exportar documentos en HTML, PDF, Word con archivos Quarto `.qmd`
+
+------------------------------------------------------------------------
+
+## 8. Ayuda
+
+-   Usar `help()` y `?función`
+-   Buscar ejemplos en [quarto.org](https://quarto.org)
+-   Utilizar IA
