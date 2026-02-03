@@ -23,9 +23,9 @@ execute:
 
 ## **Identificación de datos faltantes**
 
-Para comenzar la limpieza de datos en primer lugar debemos ver si existen datos faltantes, y en este caso escribir un código que permita reemplazar la nomenclatura que trae por `NA` que es como R lee los datos faltantes.
+Para comenzar la limpieza de datos, en primer lugar debemos ver si existen datos faltantes, y en este caso escribir un código que permita reemplazar la nomenclatura que trae por `NA` que es como R lee los datos faltantes.
 
-Esto puede realizarse cuando importamos el dataset o podemos hacerlo una vez que ya lo tenemos importado. Vemos las dos formas.
+Esto puede realizarse cuando importamos el dataset o podemos hacerlo una vez que ya lo tenemos importado. Veamos las dos formas.
 
 **Primera forma (es mucho más simple)**
 
@@ -50,7 +50,7 @@ ira <- read_excel("IRA.xlsx", na = "*sin dato*")
 
 **Segunda forma (una vez importado el dataset)**
 
-Otra forma de realizarlo es una vez que tenemos el dataset incorporado realizarlo con la función `mutate()` del paquete `dplyr`
+Otra forma de realizarlo es una vez que tenemos el dataset incorporando la función `mutate()` del paquete `dplyr`
 
 ::: {style="background-color:  #FFFFCC; padding: 20px; border: 1px solid #ccc; border-radius: 5px"}
 **Importante:** Hay que tener en cuenta que en nuestro dataset tendremos columnas con distintas estructuras de datos como: caracter, número o fechas. Pero como R no soporta más de una estructura por columna para importar nuestro archivo nos convirtió las fechas y números en formato caracter, ya que en ellas se encontraba el valor: *sin dato*.
@@ -101,9 +101,9 @@ En R, hay dos tipos de vectores diferentes que podemos usar para almacenar y tra
 
 En los dataset importados las columnas de "Fecha de toma de muestra" y "Fecha de estudio" se importaron con una estructura de caracter (ya que la información "sin dato" provocó que R leyera como caracter toda la columna).
 
--   **Como Excel guarda las fechas**: Cuando importamos datos de Excel a R y las fechas están en formato de texto con valores como "sin datos", R puede interpretar esas fechas como números, especialmente si Excel las guarda como números seriales (que es un formato común para fechas en Excel). El número que aperece con este corresponde a la cantidad de días transcurridos desde el **1** **de enero de 1900 (formato predeterminado de Excel para las fechas).**
+-   **Como Excel guarda las fechas**: Cuando importamos datos de Excel a R y las fechas están en formato de texto con valores como "sin datos", R puede interpretar esas fechas como números, especialmente si Excel las guarda como números seriales (que es un formato común para fechas en Excel). El número que aparece corresponde a la cantidad de días transcurridos desde el **1** **de enero de 1900 (formato predeterminado de Excel para las fechas).**
 
-    Para convertir estos números de serie de Excel a fechas en R, se puede utilizar `as.Date()` con la opción `origin = "1899-12-30".` Este "origen" se debe a que Excel considera el día 1 como el 1 de enero de 1900, pero hay un ajuste de 1 día debido a un error histórico en Excel.
+Para convertir estos números de serie de Excel a fechas en R, se puede utilizar `as.Date()` con la opción `origin = "1899-12-30".` Este "origen" se debe a que Excel considera el día 1 como el 1 de enero de 1900, pero hay un ajuste de 1 día debido a un error histórico en Excel.
 
 -   **Como R guarda las fechas**: R almacena las fechas como números. En concreto, la cantidad de días antes o después del **1 de enero de 1970 a las 00:00:00 UTC.**
 
@@ -161,7 +161,7 @@ sapply(ira2_fechas, class)
 
 ### Conversión de formato de fecha
 
-Tambien puedo querer **cambiar el formato de fecha**, por ejemplo si tengo un valor de fecha como 21/10/2024
+También puedo querer **cambiar el formato de fecha**, por ejemplo si tengo un valor de fecha como 21/10/2024
 
 ```{r}
 
@@ -288,4 +288,4 @@ write_xlsx(ira, path = "IRA.xlsx")
 
 El código guarda los datos del objeto `ira` (es decir el data frame con el que venimos trabajando) en un archivo Excel llamado `ira.xlsx` (aquí podemos colocar el nombre que queramos agregando siempre el tipo de formato en que queremos exportarlo ".xlsx" en este caso).
 
-Este archivo se crea en el lugar indicado por la ruta especificada en el argumento `path`. En este caso como estamos trabajando **dentro de un proyecto de R** no es necesario especificar ruta de archivo, ya que con el nombre que queremos ponerle a nuestro documento y agregando el **".xlsx**" es sufuciente para R nos guarde nuestro dataset en el directorio de trabajo donde esta alojado el proyecto.
+Este archivo se crea en el lugar indicado por la ruta especificada en el argumento `path`. En este caso como estamos trabajando **dentro de un proyecto de R** no es necesario especificar ruta de archivo, ya que con el nombre que queremos ponerle a nuestro documento y agregando el **".xlsx**" es sufuciente para R nos guarde nuestro dataset en el directorio de trabajo donde está alojado el proyecto.
