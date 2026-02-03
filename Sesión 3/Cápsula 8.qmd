@@ -55,14 +55,14 @@ Las uniones izquierda o derecha se utilizan comúnmente para agregar informació
 
 Al utilizar estas uniones, el orden escrito de los marcos de datos en el comando es importante\*.
 
--   En una **unión izquierda** , el **primer marco** de datos escrito es el de referencia
--   En una **unión derecha** , el **segundo marco** de datos escrito es el de referencia
+-   En una **unión izquierda** , el **primer marco** de datos escrito es el de referencia.
+-   En una **unión derecha** , el **segundo marco** de datos escrito es el de referencia.
 
 **Se conservan todas las filas del marco de datos de referencia**. La información del otro marco de datos (secundario) se une al marco de datos de referencia solo si existe una coincidencia a través de las columnas de identificador.
 
 Hay que tener en cuenta que:
 
--   las **filas del marco de datos secundario que no coinciden se eliminan**.
+-   Las **filas del marco de datos secundario que no coinciden se eliminan**.
 -   Si una fila de base coincide con varias filas en el marco de datos secundario (**uno a muchos**), se dan todas las combinaciones, lo que significa que se pueden agregar nuevas filas al marco de datos devuelto.
 -   Si hay muchas filas de línea base que coinciden con una fila en el marco de datos secundario **(muchos a uno)**, la información secundaria se agrega a cada fila de línea base coincidente.
 
@@ -76,9 +76,9 @@ Hay que tener en cuenta que:
 
 ### Ejemplo con left_join()
 
-Una de las funciones más utilizadas es left_join(). Vamos a ver un ejemplo, continuando con nuestro marco de datos.
+Una de las funciones más utilizadas es `left_join()`. Vamos a ver un ejemplo, continuando con nuestro marco de datos.
 
-Si queremos unir nuestro marco de datos ira con otro marco de datos que contiene información sobre vacunación (teniendo en cuenta que el ID del paciente se corresponde con el de ira), podemos realizar un left_join(). Pero primero, crearemos el segundo marco de datos.
+Si queremos unir nuestro marco de datos `ira` con otro marco de datos que contiene información sobre vacunación (teniendo en cuenta que el ID del paciente se corresponde con el de ira), podemos realizar un left_join(). Pero primero, crearemos el segundo marco de datos.
 
 ```{r}
 
@@ -105,9 +105,9 @@ DT::datatable(vacunacion, options = list(pageLenght =5))
 
 <br><br>
 
-**Unión por `Paciente_ID`:** Usamos la función left_join() para unir los data frames ira y vacunacion basándonos en la columna Paciente_ID, que es común a ambos data frames.
+**Unión por `Paciente_ID`:** Usamos la función left_join() para unir los data frames `ira` y `vacunacion` basándonos en la columna Paciente_ID, que es común a ambos data frames.
 
-Esto asegura que cada fila en ira se combine con la información correspondiente en vacunacion, siempre que exista una coincidencia en el Paciente_ID.
+Esto asegura que cada fila en `ira` se combine con la información correspondiente en `vacunacion`, siempre que exista una coincidencia en el Paciente_ID.
 
 ```{r}
 library(dplyr)
@@ -159,23 +159,23 @@ Esto significa que la **cantidad de filas en el marco de datos de referencia pue
 
 A veces necesitamos identificar registros que no están presentes en otro marco de datos, la solución de problemas ortográficos en una unión (revisar registros que deberían haber coincidido) y examinar registros que fueron excluidos después de otra unión.
 
-Al igual que con right_join()y left_join(), el marco de datos de referencia (que aparece primero) es importante. **Las filas devueltas son solo del marco de datos de referencia.**
+Al igual que con `right_join()` y `left_join()`, el marco de datos de referencia (que aparece primero) es importante. **Las filas devueltas son solo del marco de datos de referencia.**
 
 ::: aside
-En el gif a continuación que la fila del marco de datos secundario (fila violeta 4) no se devuelve a pesar de que no coincide con la línea base.
+En el gif a continuación se observa que la fila del marco de datos secundario (fila violeta 4) no se devuelve a pesar de que no coincide con la línea base.
 :::
 
 ![Fig-4 anti join()](anti-join.gif){#anti_join}
 
 # **Añadir Filas**
 
-Para **vincular filas de un marco de datos a la parte inferior de otro marco de datos**, se puede utilizar bind_rows() del paquete dplyr.
+Para **vincular filas de un marco de datos a la parte inferior de otro marco de datos**, se puede utilizar `bind_rows()` del paquete `dplyr`.
 
-Puede utilizar **`bind_rows()`** debemos tener estructuras similares en nuestro marco de datos para combinarlos en un solo marco de datos.
+Para utilizar **`bind_rows()`** debemos tener estructuras similares en nuestro marco de datos para combinarlos en un solo marco de datos.
 
-Un ejemplo común de vinculación de filas es **vincular una fila de “total” a una tabla descriptiva** creada con la función dplyr summarise().
+Un ejemplo común de vinculación de filas es **vincular una fila de “total” a una tabla descriptiva** creada con la función dplyr `summarise()`.
 
-Veamos un ejemplo ai quisieramos preparar una tabla resumen con totales de los datos agrupados que tenemos en **`ira_agrupado.`**
+Veamos un ejemplo, si quisiéramos preparar una tabla resumen con totales de los datos agrupados que tenemos en **`ira_agrupado.`**
 
 ```{r}
 
