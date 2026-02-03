@@ -33,17 +33,17 @@ R incluso tiene sus propios formatos de datos:
 
 ## **Datos .xlsx**
 
-Primero veremos como importar datos de Excel. Esto se puede realizar de varias maneras aquí veremos la librería "readxl" para ello.
+Primero veremos como importar datos de Excel. Esto se puede realizar de varias maneras, aquí veremos la librería `readxl` para ello.
 
 ```{r, echo=TRUE, results='hide'}
 
- # Cargamos la librerías (si aún no las instalamos este es el momento de hacerlo)}
+ # Cargamos la librerías (si aún no las instalamos este es el momento de hacerlo)
 
  library(readr) 
  library (readxl) 
 ```
 
-Lo que tenemos que hacer para importar esta hoja de cálculo a R como un marco de datos es pasar la ruta al archivo Excel al argumento de la `read_excel()` función.
+Lo que tenemos que hacer para importar esta hoja de cálculo a R como un marco de datos es pasar la ruta al archivo Excel al argumento de la función `read_excel()`.
 
 Es impotante tambien poner el "`.xlsx`" que indica el formato del archivo en la ruta de acceso. Esta ruta se puede tomar como atajo apretando **Shift + click** **derecho** en el archivo deseado y seleccionar la opción "**copiar como ruta de acceso**".
 
@@ -51,7 +51,7 @@ Es impotante tambien poner el "`.xlsx`" que indica el formato del archivo en la 
 Mac y Linux usan barras diagonales en las rutas de archivo ( `/`) de forma predeterminada. Windows usa barras diagonales inversas ( `\`) en las rutas de archivo de forma predeterminada. Sin embargo, sin importar qué sistema operativo estemos usando, R solo toma las barras diagonales de esta manera /. Si estas **usando Windows** **modificá por barra diagonal** **/ o en su defecto por doble barra diagonal**  **`\\`** **.**
 :::
 
-Es importante poner la ruta relativa y no la ruta del archivo completa si se va a compartir el código de R, y que la ruta relativa este en la carpeta del proyecto de R.
+Si se va a compartir el código de R, es importante poner la ruta relativa y no la ruta del archivo completa y que la ruta relativa esté en la carpeta del proyecto de R.
 
 ```{r, eval=FALSE}
 
@@ -61,7 +61,7 @@ excel_1 <- read_excel("reportes/Reporte dengue.xlsx")
 
 ```
 
-Si queremos **importar solo una hoja** de nuestro data set tendríamos que escribir de esta manera. Este código es solo un ejemplo, no correrá ya que no es adecuado el nombre de ruta, en ese caso tendrían que colocar la ruta de sus respectivos dataset.
+Si queremos **importar solo una hoja** de nuestro data set tendríamos que escribir la función de esta manera. Este código es solo un ejemplo, no correrá ya que no es adecuado el nombre de ruta, en ese caso tendrían que colocar la ruta de sus respectivos dataset.
 
 ```{r, eval=FALSE}
 
@@ -74,11 +74,11 @@ data <- read_excel("ruta/a/tu/archivo.xlsx", sheet = 1)
 data <- read_excel("ruta/a/tu/archivo.xlsx", sheet = 2)
 ```
 
-Si no estamos seguros de que nombre tienen las hojas podemos comporbarlo de esta manera.
+Si no estamos seguros de que nombre tienen las hojas, podemos comporbarlo de esta manera.
 
 ```{r, eval=FALSE}
 
-# Listar todos los nombres de las hojas en el archivo
+# Lista todos los nombres de las hojas en el archivo
 
 hojas <- excel_sheets("reportes/Reporte dengue & chiku marzo 2024.xlsx")
 
@@ -113,11 +113,11 @@ datos <- read_excel("reportes/Reporte dengue & chiku marzo 2024.xlsx", range = c
 
 ```
 
-## **Paquete de Rio**
+## **Paquete Rio**
 
 El nombre “rio” es una abreviatura de “R I/O” (Imput/Output).
 
-Sus funciones `import()`permiten `export()`gestionar distintos tipos de archivos (por ejemplo, .xlsx, .csv, .rds, .tsv). Cuando se proporciona una ruta de archivo a cualquiera de estas funciones (incluida la extensión del archivo, como ".csv"), **rio** leerá la extensión y utilizará la herramienta correcta para importar o exportar el archivo.
+Sus funciones `import()` y `export()` permiten gestionar distintos tipos de archivos (por ejemplo, .xlsx, .csv, .rds, .tsv). Cuando se proporciona una ruta de archivo a cualquiera de estas funciones (incluida la extensión del archivo, como ".csv"), **rio** leerá la extensión y utilizará la herramienta correcta para importar o exportar el archivo.
 
 Recordar antes instalarlo si aún no lo tenemos instalado.
 
@@ -133,9 +133,9 @@ data <- import("data/datos.csv")
 
 ## **Paquete here**
 
-El paquete **here** y su función `here()`hacen que sea fácil indicarle a R dónde encontrar y guardar sus archivos: es decir crea rutas de archivos.
+El paquete **here** y su función `here()` hacen que sea fácil indicarle a R dónde encontrar y guardar sus archivos: es decir crea rutas de archivos.
 
-Es importante para este paquete crear antes un proyecto de R donde estaran contenidos nuestros datos.
+Es importante para este paquete crear antes un proyecto de R donde estarán contenidos nuestros datos.
 
 Así es como `here()`funciona dentro de un proyecto R:
 
@@ -162,7 +162,7 @@ excel_ejemplo <- read_excel(archivo)
 
 ## **Visualización de características del dataset**
 
-Aplicando algunas funciones tendremos un detalle de los dataset cargados
+Aplicando algunas funciones tendremos un detalle de los dataset cargados.
 
 **Estructura del Dataset:**
 
@@ -214,7 +214,7 @@ unique(excel_ejemplo$columna_de_interes)
 
 Importación de archivos con valores separados por comas o **.csv (comma separated value).**
 
-Para ello usamos la función `readr`de `read_csv(),`esta es para importar un conjunto de datos con valores delimitados por comas. Esos valores se importaron como un marco de datos y asignamos ese marco de datos al objeto R llamado `csv`.
+Para ello usamos la función `read_csv()` del paquete `readr` para importar un conjunto de datos con valores delimitados por comas. Esos valores se importarán como un marco de datos y asignamos ese marco de datos al objeto R llamado `data_csv`.
 
 ```{r, eval=FALSE}
 
@@ -226,11 +226,9 @@ data_csv <- read_csv("reportes/Reporte dengue & chiku copia.csv")
 
 ## **Google sheet**
 
-Para cargar una tabla que tenemos en google drive debemos importarla desde el paquete `googlesheet4`
+Para cargar una tabla que tenemos en Google Drive debemos importarla desde el paquete `googlesheet4`. En el siguiente [enlace](https://googlesheets4.tidyverse.org/) puede consultarse más información sobre el paquete. 
 
-<https://googlesheets4.tidyverse.org/>
-
-Para ello primero instalamos el paquete necesario. Además necesitaremos utilizar para la autenticación el paquete `httpuv`, ya que es necesario que la cuenta que utlicemos de google se concete con R para realizar la transferencia de datos.
+Primero instalamos el paquete necesario. Además necesitaremos utilizar para la autenticación el paquete `httpuv`, ya que es necesario que la cuenta que utlicemos de Google se concete con R para realizar la transferencia de datos.
 
 ```{r, eval=FALSE}
 
@@ -247,7 +245,7 @@ library(googlesheets4)
 library(httpuv)
 ```
 
-El `"gs4_auth()"` abrira una ventana emergente que nos pedirá permiso para conectarse a nuestra cuenta google. Una vez aceptado esto se procede a importar los datos del drive.
+El `"gs4_auth()"` abrirá una ventana emergente que nos pedirá permiso para conectarse a nuestra cuenta Google. Una vez aceptado esto, se procede a importar los datos del drive.
 
 ```{r,eval=FALSE}
 
@@ -303,7 +301,7 @@ datos <- read_sheet(sheet_url, sheet = 1)
 
 ## **Herramienta de importación de datos de RStudio**
 
-Para abrir la herramienta de importación de datos de RStudio, haga clic en el **Import Dataset** (menú desplegable cerca de la parte superior del panel del entorno). Allí se elige el tipo de archivo que se quiere importar.
+Para abrir la herramienta de importación de datos de RStudio, haga click en el **Import Dataset** (menú desplegable cerca de la parte superior del panel del entorno). Allí se elige el tipo de archivo que se quiere importar.
 
 ::::: columns
 ::: {.column width="50%"}
