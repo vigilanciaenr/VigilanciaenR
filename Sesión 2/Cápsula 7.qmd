@@ -21,7 +21,7 @@ execute:
 
 # **Creación de columnas**
 
-a función `mutate()` de `dplyr` se utiliza para modificar o crear columnas dentro de un data frame. Si se quiere modificar una columna existente, simplemente se debe especificar el nombre de la columna que se desea cambiar y definir cómo debe transformarse. El valor de la columna se sobrescribe con el nuevo cálculo o modificación que se especifique. También se pueden crear columnas basadas en nuevos valores o cálculos específicos.
+La función `mutate()` de `dplyr` se utiliza para modificar o crear columnas dentro de un data frame. Si se quiere modificar una columna existente, simplemente se debe especificar el nombre de la columna que se desea cambiar y definir cómo debe transformarse. El valor de la columna se sobrescribe con el nuevo cálculo o modificación que se especifique. También se pueden crear columnas basadas en nuevos valores o cálculos específicos.
 
 Supongamos que continuamos trabajando con el data frame del material anterior llamado `ira` y queremos agregar una columna que indique la semana epidemiológica en base a la columna `Fecha_Sitnomas`.
 
@@ -54,7 +54,7 @@ En este caso, `epiweek()` calculará la semana epidemiológica para cada fecha d
 
 ## **Creación de columnas en base a variables condicionales**
 
-También podemos crear columnas condicionales. Por ejemplo, si quieres clasificar las zonas según regiones sanitarias. Para crear columnas condicionales en un data frame usando `mutate()` de `dplyr`, se puede utilizar funciones como `case_when()`. Esta función permite crear nuevas columnas basadas en condiciones específicas, lo que es útil para clasificar datos.
+También podemos crear columnas condicionales. Por ejemplo, si quieres clasificar las zonas según regiones sanitarias. Para crear columnas condicionales en un data frame usando `mutate()` de `dplyr`, se pueden utilizar funciones como `case_when()`. Esta función permite crear nuevas columnas basadas en condiciones específicas, lo que es útil para clasificar datos.
 
 El operador `%in%` en R se utiliza para verificar si un valor o un conjunto de valores se encuentra dentro de un vector o conjunto. Es una forma conveniente de realizar una búsqueda de pertenencia.
 
@@ -94,7 +94,7 @@ La función **`cut()`** es una forma de categorizar rangos de valores, en este c
 
     -   El límite superior está incluido, pero el límite inferior no.
 
-    -   Los intervalos se verían como: `[0, 10]`, `[10, 20]`, etc.
+    -   Los intervalos se verían como: `(0, 10]`, `(10, 20]`, etc.
 
 -   **`right = FALSE`** (cerrado por la izquierda):
 
