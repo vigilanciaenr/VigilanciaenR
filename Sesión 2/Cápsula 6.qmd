@@ -25,7 +25,7 @@ execute:
 
 Para trabajar con los marcos de datos o data frame (estructura de datos que se organiza en filas y columnas) usaremos muy frecuentemente las funciones de la familia de paquetes R [**tidyverse**](https://www.tidyverse.org/) . Muchas de estas funciones pertenecen al paquete R [**dplyr**](https://dplyr.tidyverse.org/) , que es muy útil a la hora de realizar la manipulación de datos.
 
-Este paquete "**dplyr"** es parte de la familia "**tidyverse"** de paquetes R (que también incluye **ggplot2** , **tidyr** , **stringr** , **tibble** , **purrr** , **magrittr** y **forcats** entre otros).
+Este paquete **"dplyr"** es parte de la familia **"tidyverse"** de paquetes R (que también incluye **ggplot2** , **tidyr** , **stringr** , **tibble** , **purrr** , **magrittr** y **forcats** entre otros).
 
 **Elaboramos un material para tener a mano la sintaxis de las funiones más utilizadas de este paquete, que las pueden encontrar aquí:** [**Material funciones**](https://vigilanciaenr.github.io/VigilanciaenR/Clase%202/Material_funciones.html)**.**
 
@@ -138,7 +138,9 @@ Las condiciones dentro de `filter()` separadas por coma correponden a diferentes
 
 ### Filtrado con operadores lógicos
 
-Si queremos filtrar por condiciones lógicas podemos utilizar los operadores que se encuentran en el [**Material funciones**](https://vigilanciaenr.github.io/VigilanciaenR/Clase%202/Material_funciones.html). Por ejemplo, si para utilizar **OR**, usa el operador `|` (por ejemplo, `Zona == "Zona Oeste" | Zona == "Zona Este"`). En este caso se seleccionará las filas que cumplan cualquiera de las condiciones indicadas. Si en lugar de solo filtrar por año, necesitas comparar fechas exactas o rangos, puedes usar operadores como `<`, `>` o `between()`.
+Si queremos filtrar por condiciones lógicas podemos utilizar los operadores que se encuentran en el [**Material funciones**](https://vigilanciaenr.github.io/VigilanciaenR/Clase%202/Material_funciones.html). 
+
+Por ejemplo, para utilizar **OR**, se usa el operador `|` (por ejemplo, `Zona == "Zona Oeste" | Zona == "Zona Este"`). En este caso se seleccionará las filas que cumplan cualquiera de las condiciones indicadas. Si en lugar de solo filtrar por año, necesitas comparar fechas exactas o rangos, puedes usar operadores como `<`, `>` o `between()`.
 
 En este caso obtendremos todos los registros excepto aquellos que no se encuentran en el rango de fechas, es decir el único registro del 2023.
 
@@ -185,7 +187,7 @@ DT::datatable(ira_duplicados, options = list(pageLength = 5))
 
 :::: mb-5
 ::: {style="background-color:  #edf28a; padding: 10px; border: 1px solid #ccc; border-radius: 5px"}
-Es bueno saber que si a la función **gut_dupes()** no le colocamos como argumento una columna clave, buscará los duplicados que tengan valores iguales en todas las columnas. Es decir las filas devueltas por **la función por defecto son 100 % duplicadas considerando los valores en todas las columnas.**
+Es bueno saber que si a la función **get_dupes()** no le colocamos como argumento una columna clave, buscará los duplicados que tengan valores iguales en todas las columnas. Es decir las filas devueltas por **la función por defecto son 100 % duplicadas considerando los valores en todas las columnas.**
 :::
 ::::
 
@@ -208,7 +210,7 @@ ira_dupli_2
 
 ### Duplicados con dplyr
 
-Para examinar duplicadostambien se puede utilizar `dplyr`, para ello **se combinan las funciones `group_by()` y `filter()`**. Estas herramientas permiten agrupar filas según una o varias columnas clave y luego filtrar los grupos que tienen más de una fila. Por ejemplo, con el marco de datos `ira`, si queremos identificar duplicados en la columna `Paciente_ID` podriamos realizarlo de la siguiente forma
+Para examinar duplicados tambien se puede utilizar `dplyr`, para ello **se combinan las funciones `group_by()` y `filter()`**. Estas herramientas permiten agrupar filas según una o varias columnas clave y luego filtrar los grupos que tienen más de una fila. Por ejemplo, con el marco de datos `ira`, si queremos identificar duplicados en la columna `Paciente_ID` podriamos realizarlo de la siguiente forma:
 
 ```{r}
 
@@ -231,7 +233,7 @@ El resultado será un subconjunto del marco de datos original que contiene solo 
 
 ### Eliminar duplicados
 
-Para conservar solo las filas únicas de un marco de datos, se puede utilizar la **función `distinct()`** dedplyr. Con esta función las filas duplicadas se eliminan de modo que solo se conserva la primera de ellas. De **manera predeterminada, “primero” significa la más alta** `rownumber`(orden de filas de arriba a abajo). Solo quedan las filas únicas.
+Para conservar solo las filas únicas de un marco de datos, se puede utilizar la **función `distinct()`** de `dplyr`. Con esta función las filas duplicadas se eliminan de modo que solo se conserva la primera de ellas. De **manera predeterminada, “primero” significa la más alta** `rownumber`(orden de filas de arriba a abajo). Solo quedan las filas únicas.
 
 ```{r}
 
@@ -247,7 +249,7 @@ DT::datatable(ira_sin_duplicados, options = list(pageLength = 5))
 
 <br><br>
 
-**En este caso `.keep_all = TRUE`**: permite conservar todas las columnas del data frame, no solo las columnas usadas para eliminar duplicados. Si ademas queremos elilminar duplicados teniendo en cuenta combinaciones de columnas, es posibles sumarlas en la función separando los nombres de las columnas con coma:
+**En este caso `.keep_all = TRUE`**: permite conservar todas las columnas del data frame, no solo las columnas usadas para eliminar duplicados. Si además queremos eliminar duplicados teniendo en cuenta combinaciones de columnas, es posible sumarlas en la función separando los nombres de las columnas con coma:
 
 ```{r}
 
@@ -263,7 +265,7 @@ DT::datatable(ira_sin_dupli_2, options = list(pageLength = 5))
 
 ### Eliminar duplicados con condicional
 
-Si supongamos queremos eliminar duplicados, pero teniendo en cuenta algún valor en epecífico, es decir, que se priorice una condición frente a otras. En nuestro ejemplo pordríamos tomar el casi de la determinación y presentar un orden de prioridad para el valor que me guarde, en este ejemplo, un PCR positivo, Cultivo positivo, PCR negativo y por útlimo un cultivo negativo.
+Supongamos que queremos eliminar duplicados, pero teniendo en cuenta algún valor en epecífico, es decir, que se priorice una condición frente a otras. En nuestro ejemplo podríamos tomar el caso de la determinación y presentar un orden de prioridades, en este ejemplo, un PCR positivo, cultivo positivo, PCR negativo y por útlimo un cultivo negativo.
 
 Para ello podemos usar el paquete `dplyr` de R y ordenar los datos según la prioridad de los valores en la columna `Determinacion`. Luego, podemos usar `distinct()` para eliminar duplicados, manteniendo la fila que cumpla con la condición de prioridad más alta.
 
