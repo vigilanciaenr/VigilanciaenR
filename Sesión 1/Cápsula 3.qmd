@@ -45,16 +45,17 @@ Por ejemplo, supongamos que nos interesa registrar el nivel más alto de educaci
 
 4 = Graduado universitario
 
-Normalmente, no creamos factores desde cero. En su lugar, normalmente convertimos (o "forzamos") un vector numérico o de caracteres existente en un factor. Por ejemplo, podemos forzar education_numun factor de la siguiente manera:
+Normalmente, no creamos factores desde cero. En su lugar, normalmente convertimos (o "forzamos") un vector numérico o de caracteres existente en un factor. Por ejemplo, podemos forzar `education_numun` factor de la siguiente manera:
 
 ```{r}
 
 # Creo un vector con los numeros correspondientes a las categorias de educación
 
-
 educacion_num <- c(3, 1, 4, 1)
 
-educacion_num  # Convierto el vector en factor
+educacion_num  
+
+# Convierto el vector en factor
 
 educacion_num_f <- factor(
   x = educacion_num,
@@ -135,7 +136,7 @@ Identificamos si existen NA en nuestro data frame:
 is.na(df)
 ```
 
-Contamos cuantos NA tenemos en nuestro data frame
+Contamos cuántos NA tenemos en nuestro data frame
 
 ```{r}
 
@@ -157,7 +158,7 @@ El operador más común para las tuberías es `%>%`, proporcionado por el paquet
 
 **El operador `%>%` se utiliza para pasar el resultado de una operación como la entrada de la siguiente**. De esta forma, podemos encadenar varias operaciones de forma clara y concisa. Las tuberías nos permiten conservar los beneficios de anidar funciones sin hacer que nuestro código sea realmente difícil de leer.
 
-Lo vemos con un ejemplo
+Lo vemos con un ejemplo:
 
 ```{r}
 
@@ -181,7 +182,7 @@ print(df_limpio)
 
 -   Utilizar tuberías de tal manera que cada línea de código hace una, y sólo una, cosa.
 
--   Si una línea de código contiene un operador de tubería, este generalmente debe ser lo último que se escriba en la línea.
+-   Si una línea de código contiene un operador de tubería, éste generalmente debe ser lo último que se escriba en la línea.
 
 -   El operador de la tubería siempre debe tener un espacio delante de la misma.
 
@@ -190,7 +191,7 @@ print(df_limpio)
 
 # **Rutas de archivos en R**
 
-El **directorio de trabajo** es la ubicación de la carpeta raíz que R utiliza para su trabajo, donde R busca y guarda archivos de manera predeterminada. De manera predeterminada, guardará los archivos y resultados nuevos en esta ubicación y también buscará archivos para importar (por ejemplo, conjuntos de datos) aquí.
+El **directorio de trabajo** es la ubicación de la carpeta raíz que R utiliza para su trabajo, donde R busca y guarda archivos de manera predeterminada. También, guardará los archivos y resultados nuevos en esta ubicación y buscará archivos para importar (por ejemplo, conjuntos de datos) aquí.
 
 El directorio de trabajo aparece en **texto gris en la parte superior del panel de la consola RStudio**. También puede imprimir el directorio de trabajo actual ejecutando `getwd()`(deje los paréntesis vacíos).
 
