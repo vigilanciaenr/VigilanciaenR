@@ -130,7 +130,7 @@ datos_con_totales %>%
     Tasa_Chikungunya ~ px(200)
   ) %>%
   
-  # Nota al pie de la tabla
+  # Nota para incluir fuente de datos
   tab_source_note(
     source_note = md("Fuente de datos: Sistema de Información Sanitaria de la Provincia.")
   ) %>%
@@ -484,7 +484,7 @@ reactable(
 
 Las funciones en R permiten **encapsular estilos, configuraciones y opciones visuales dentro de una estructura reutilizable**, lo que facilita la consistencia en el diseño y ahorra tiempo al aplicar los mismos formatos en diferentes tablas o conjuntos de datos.
 
-Por ejemplo, en paquetes como reactable o gt, es posible definir funciones que apliquen colores, bordes, alineaciones, tamaños de texto y otras características estéticas a las tablas con solo una línea de código.
+Por ejemplo, en paquetes como `reactable` o `gt`, es posible definir funciones que apliquen colores, bordes, alineaciones, tamaños de texto y otras características estéticas a las tablas con solo una línea de código.
 
 ### Función 1 reactable()
 
