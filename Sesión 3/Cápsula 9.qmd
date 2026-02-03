@@ -37,7 +37,7 @@ Aquí vemos una representación gráfica de ambas opciones:
 
 ### Pivot_longer()
 
-`pivot_longer()` cuando necesites reorganizar datos para análisis o **visualizaciones que requieren que las variables estén representadas como filas en lugar de columnas**. Esto permite trabajar de manera más eficiente con herramientas analíticas y de visualización como `ggplot2`, `dplyr`, o modelos estadísticos en R.
+`pivot_longer()` se utiliza cuando se necesita reorganizar datos para el análisis o **visualizaciones que requieren que las variables estén representadas como filas en lugar de columnas**. Esto permite trabajar de manera más eficiente con herramientas analíticas y de visualización como `ggplot2`, `dplyr`, o modelos estadísticos en R.
 
 ```{r}
 
@@ -77,7 +77,7 @@ ggplot(datos_largo, aes(x = Persona, y = Valor, fill = Variable)) +
 
 ### Pivot_wider()
 
-`pivot_wider()` se utiliza para transformar datos de formato "largo" a "ancho", puede ser útil para un **gráfico de líneas donde cada categoría se represente como una serie diferente**, por ejemplo, evolución temporal, comparaciones entre grupos
+`pivot_wider()` se utiliza para transformar datos de formato "largo" a "ancho", puede ser útil para un **gráfico de líneas donde cada categoría se represente como una serie diferente**, por ejemplo, evolución temporal, comparaciones entre grupos.
 
 ```{r}
 
