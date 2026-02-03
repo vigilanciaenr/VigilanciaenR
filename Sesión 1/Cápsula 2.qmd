@@ -41,9 +41,9 @@ df
 
 Cuando corremos este código el marco de datos aparece en su **entorno global.** Aqui se brinda información adicional sobre este marco de datos a la derecha de su nombre.
 
-Si hacemos clic en la pequeña flecha azul a la izquierda del nombre del marco de datos, verá información sobre los vectores individuales que componen el marco de datos.
+Si hacemos click en la pequeña flecha azul a la izquierda del nombre del marco de datos, verá información sobre los vectores individuales que componen el marco de datos.
 
-**Advertencia:** todas las **columnas de un marco de datos deben tener la misma longitud** (es decir, la misma cantidad de filas). Eso significa que cada vector que crees al crear tu marco de datos debe tener la misma cantidad de valores.
+**Advertencia:** todas las **columnas de un marco de datos deben tener la misma longitud** (es decir, la misma cantidad de filas). Esto significa que cada vector que crees al crear tu marco de datos, debe tener la misma cantidad de valores.
 
 Información que puedo tomar de mi data frame:
 
@@ -72,7 +72,7 @@ El objeto proporcionado a una función también puede ser una **columna** en un 
 
 ```{r}
 
-# la función suma toma la columna numeros del data frame df. 
+# la función sum toma la columna numeros del data frame df. 
 
 sum(df$numeros)
 
@@ -84,7 +84,7 @@ Las funciones a menudo solicitan varias entradas, llamadas **argumentos** , ubic
 
 -   Algunos **argumentos son necesarios** para que la función funcione correctamente, otros son opcionales.
 
--   Los **argumentos opcionales** tienen configuraciones predeterminadas
+-   Los **argumentos opcionales** tienen configuraciones predeterminadas.
 
 -   Los argumentos pueden aceptar caracteres, números, valores lógicos (VERDADERO/FALSO) y otras entradas.
 
@@ -101,11 +101,11 @@ b
 
 Por ejemplo la función seq() que genera una secuencia contiene tres argumentos:
 
--   **from:** le indicamos a R desde que valor iniciar la secuencia
+-   **from:** le indicamos a R desde que valor iniciar la secuencia.
 
--   **to:** es el valor máximo que puede tomar la secuncia
+-   **to:** es el valor máximo que puede tomar la secuencia.
 
--   **by**: indica la longitud del intervalo entre los elementos
+-   **by**: indica la longitud del intervalo entre los elementos.
 
 Ahora veremos otra función que se utiliza para la creación de gráficos y vamos a utilizar los datos de mi data frame anterior:
 
@@ -125,7 +125,7 @@ ggplot(df, aes(x = letras, y = numeros)) + # Creación de gráfico
 
 **En este ejemplo podemos identificar funciones y argumentos:** **`ggplot()`** organiza la estructura del gráfico y establece la fuente de datos, mientras que **`aes()`** y **`geom_bar()`** son funciones que definen cómo se visualizan esos datos en el gráfico.
 
-La función **`ggplot( )`** utiliza los argumentos: **`data`** el data frame que contiene los datos a graficar, **`aes()`**una función que especifica los **mapeos estéticos**, es decir, qué variables se asignan a **los ejes x** **e y**, así como a otras características visuales como el color o el tamaño que son opcionales.
+La función **`ggplot( )`** utiliza los argumentos: **`data`** el data frame que contiene los datos a graficar, **`aes()`** una función que especifica los **mapeos estéticos**, es decir, qué variables se asignan a **los ejes x** **e y**, así como a otras características visuales como el color o el tamaño que son opcionales.
 
 Dentro de **`ggplot( )`** se utilizan **funciones adicionales** como **`geom_bar()`** que define el tipo de gráfico a crear (en este caso, un gráfico de barras). **Los argumentos de `geom_bar()`** incluyen **`stat`**: especifica cómo se calculan los valores en el **eje y**. En el caos de **`fill`**`:` define el color de las barras.
 
@@ -134,9 +134,9 @@ Dentro de **`ggplot( )`** se utilizan **funciones adicionales** como **`geom_bar
 ::: {style="border: 2px solid #f4e791; /* Grosor y color del borde */   background-color: #f4e791; /* Color de fondo */   padding: 10px; /* Espacio interior */   margin: 20px; /* Espacio exterior */   border-radius: 5px; /* Esquinas redondeadas (opcional) */"}
 -   **Sumar comentarios dentro de las funciones con el numeral**`#` se puede explicar cada parte (comentar extensamente es una buena práctica).
 
--   Para ejecutar este comando más largo, puede resaltar el comando completo y hacer clic en "Ejecutar", o simplemente **colocar el cursor en la primera línea y luego presionar las teclas Ctrl y Enter** simultáneamente.
+-   Para ejecutar un comando más largo, puede resaltar el comando completo y hacer click en "Ejecutar", o simplemente **colocar el cursor en la primera línea y luego presionar las teclas Ctrl y Enter** simultáneamente.
 
--   Con **Ctrl + Shift + A** para acomodar visualmente el código de forma automática.
+-   Usar  **Ctrl + Shift + A** para acomodar visualmente el código de forma automática.
 :::
 
 # **Paquetes y librerías**
@@ -197,7 +197,7 @@ Instalación: install.packages("stringr")
 
 #### Readxl y Writexl
 
-Descripción: Paquetes para leer y escribir archivos Excel.
+Descripción: Paquetes para leer y escribir (guardar) archivos Excel.
 
 Funcionalidades: readxl permite leer datos de hojas de cálculo de Excel (.xls y .xlsx), y writexl permite escribir data frames de R a archivos Excel.
 
@@ -213,7 +213,7 @@ Instalación: install.packages("googlesheet4")
 
 Descripción: Paquete de visualización de datos parte del tidyverse.
 
-Funcionalidades: Creación de gráficos de alta calidad basados en una gramática de gráficos.
+Funcionalidades: Creación de gráficos de alta calidad basados en una gramática de capas.
 
 Instalación: install.packages("ggplot2") (aunque ya viene incluido con tidyverse).
 
