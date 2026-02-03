@@ -43,7 +43,7 @@ Para más atajos se puede acceder a su página web:
 
 # **Operaciones básicas en R**
 
-Operadores Matemáticos en R Se puede usar R como una calculadora
+Operadores Matemáticos en R :R se puede usar como una calculador.
 
 -   Suma: +
 -   Resta: -
@@ -96,7 +96,7 @@ El orden de resolución esta definido por
 
 # **Objetos en R**
 
-Todos los lenguajes de programación necesitan almacenar información para poder luego usarla. En R toda información se guarda en objetos y disponemos de varios tipos, los más empleados son:
+Todos los lenguajes de programación necesitan almacenar información para poder luego usarla. En R, toda información se guarda en objetos y disponemos de varios tipos, los más empleados son:
 
 -   Variables
 -   Vectores
@@ -105,13 +105,13 @@ Todos los lenguajes de programación necesitan almacenar información para pod
 -   Matrices
 -   Data frames
 
-Veremos sobre todo algunos de ellos para pasar a ver como se utilizan en las funciones.
+Veremos sobre todo algunos de ellos para luego ver cómo se utilizan en las funciones.
 
 ## **Variables**
 
 Una variable en programación es un espacio de almacenamiento con un nombre simbólico (un identificador) que se refiere o está asociado a un valor o información almacenada.
 
-Se pueden pensar como cajas que tiene una etiqueta que es el nombre de la variable. Dentro de la caja podemos guardar diferentes tipos de datos, como números, texto entre otros.
+Se pueden pensar como cajas que tiene una etiqueta que es el nombre de la variable. Dentro de la caja, podemos guardar diferentes tipos de datos como números, texto entre otros.
 
 ```{r}
 
@@ -125,11 +125,11 @@ print(edad)
 
 ```
 
-**`edad <- 25 :`** aquí el simbolo **`<-`** se utiliza para asigna un valor a la nueva variable que estoy creando.
+**`edad <- 25 :`** aquí el simbolo **`<-`** se utiliza para asignar un valor a la nueva variable que estoy creando.
 
-**`print(edad):`** Esto se utiliza para imprimir el resultado de la acción de asignación
+**`print(edad):`** Esto se utiliza para imprimir el resultado de la acción de asignación en la consola.
 
-También si queremos acceder al valor de esa variable podemos hacerlo simplemente escribiendo el nombre de esa variable.
+También si queremos acceder al valor de esa variable, podemos hacerlo simplemente escribiendo el nombre de esa variable.
 
 ```{r}
 
@@ -166,7 +166,7 @@ c
 
 ```
 
-Para observar la estructura de los datos que tengo puedo utilizar la función **`srt()`** o **`class()`** para que R me indique que tipo de variables tengo:
+Para observar la estructura de los datos que tengo, puedo utilizar la función **`str()`** o **`class()`** para que R me indique que tipo de variables tengo:
 
 ```{r}
 
@@ -186,7 +186,7 @@ Las variables pueden utilizarse en operaciones matemáticas y lógicas en R.
 
 ```{r}
 
-# Por ejemplo para calcular el área de un rectánguloa utilizando las variable
+# Por ejemplo para calcular el área de un rectángulo utilizando las variables
 
 longitud <- 5 
 
@@ -261,13 +261,15 @@ nombres
 
 ### Operaciones básicas con vectores
 
-Dado un vector podemos estar interesados en obtener datos sobre su contenido y que de algún modo lo resuma. Si queremos conocer medidas estadísticas de los elementos del vector tenemos las siguientes funciones:
+Dado un vector podemos estar interesados en obtener datos sobre su contenido y que de algún modo lo resuma. 
+
+Si queremos conocer medidas estadísticas de los elementos del vector tenemos las siguientes funciones:
 
 -   **length**: nos retorna un valor que indica la longitud (cantidad de elementos) del vector
--   **sum**: nos devuelve un valor con la suma de los elementos
--   **mean**: nos dice la media de los elementos del vector
--   **sd**: retorna un valor indicando el desvío estandar
--   **median**: no devuelve la mediana
+-   **sum**: nos devuelve un valor con la suma de los elementos.
+-   **mean**: nos dice la media de los elementos del vector.
+-   **sd**: retorna un valor indicando el desvío estandar.
+-   **median**: nos devuelve la mediana de los elementos del vector.
 
 ```{r}
 
