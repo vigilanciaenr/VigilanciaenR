@@ -112,7 +112,7 @@ DT::datatable(ira, options = list(pageLength = 5))
 
 ## **Filtrar datos**
 
-Con la función `filter()` del paquete `dplyr`podemos seleccionar de nuestro conjunto de datos un subconjunto con el que queramos trabajar. Esta función permite seleccionar filas de un data frame que cumplen ciertas condiciones. Por ejemplo en este caso si quisieramos filtrar por **Zona** y **Año** (por ejemplo, "Zona Oeste" y el año 2024).
+Con la función `filter()` del paquete `dplyr` podemos seleccionar de nuestro conjunto de datos un subconjunto con el que queramos trabajar. Esta función permite seleccionar filas de un data frame que cumplen ciertas condiciones. Por ejemplo en este caso si quisiéramos filtrar por **Zona** y **Año** (por ejemplo, "Zona Oeste" y el año 2024).
 
 ```{r}
 
@@ -138,7 +138,7 @@ Las condiciones dentro de `filter()` separadas por coma correponden a diferentes
 
 ### Filtrado con operadores lógicos
 
-Si queremos filtrar por condiciones lógicas podemos utilizar los operadores que se encuentran en el [**Material funciones**](https://vigilanciaenr.github.io/VigilanciaenR/Clase%202/Material_funciones.html). 
+Si queremos filtrar por condiciones lógicas podemos utilizar los operadores que se encuentran en el [**Material funciones**](https://vigilanciaenr.github.io/VigilanciaenR/Clase%202/Material_funciones.html).
 
 Por ejemplo, para utilizar **OR**, se usa el operador `|` (por ejemplo, `Zona == "Zona Oeste" | Zona == "Zona Este"`). En este caso se seleccionará las filas que cumplan cualquiera de las condiciones indicadas. Si en lugar de solo filtrar por año, necesitas comparar fechas exactas o rangos, puedes usar operadores como `<`, `>` o `between()`.
 
@@ -163,11 +163,11 @@ DT::datatable(ira_filtrado, options = list(pageLength = 5))
 
 Dado que nuestros datos simulados corresponden a resultados de laboratorios, es necesario verificar **cuántos datos duplicados** existen. Debemos tener en cuenta que **una persona puede aportar más de un caso durante el período y por evento, ya que se le pueden tomar múltiples muestras.**
 
-Para ello existen varias formas de identificar duplicados, eliminarlos o trabajar con ellos depende lo que necesitemos. Veremos algunas de ellas.
+Existen varias formas de identificar duplicados, eliminarlos o trabajar con ellos dependiendo de lo que necesitemos. Veremos algunas de ellas.
 
 ### Duplicados con janitor
 
-Para examinar filas duplicadas se puede utilizar la función `get_dupes()` del paquete **`janitor`** **basándose en las columnas que especifiques**. Se puede utilizar para encontrar duplicados en columnas clave (por ejemplo, `Paciente_ID` y `Determinacion`).
+Para examinar filas duplicadas **basándose en las columnas que especifiques**, se puede utilizar la función `get_dupes()` del paquete **`janitor`** . Esta función permite encontrar duplicados en columnas clave (por ejemplo, `Paciente_ID` y `Determinacion`).
 
 ```{r}
 
@@ -187,13 +187,13 @@ DT::datatable(ira_duplicados, options = list(pageLength = 5))
 
 :::: mb-5
 ::: {style="background-color:  #edf28a; padding: 10px; border: 1px solid #ccc; border-radius: 5px"}
-Es bueno saber que si a la función **get_dupes()** no le colocamos como argumento una columna clave, buscará los duplicados que tengan valores iguales en todas las columnas. Es decir las filas devueltas por **la función por defecto son 100 % duplicadas considerando los valores en todas las columnas.**
+Es bueno saber que si a la función **get_dupes()** no le colocamos como argumento una columna clave, buscará los duplicados que tengan valores iguales en todas las columnas. Es decir, las filas devueltas por **la función por defecto son 100% duplicadas considerando los valores en todas las columnas.**
 :::
 ::::
 
 ### Duplicados con duplicated()
 
-Teniendo en cuenta las funciones básicas de R, también se pueden ver qué filas son 100% duplicadas en un marco de datos con el comando `duplicated()`.
+Teniendo en cuenta las funciones básicas de R, también se pueden ver qué filas son 100% duplicadas en un marco de datos utilizando el comando `duplicated()`.
 
 **Esta función devuelve un vector lógico (`TRUE` o `FALSE`) que indica si cada fila o valor es un duplicado de una fila anterior.** Esto significa que para un conjunto de datos, `duplicated()` marca como `TRUE` todas las ocurrencias duplicadas de una fila, excepto la primera, que siempre será considerada única.
 
@@ -265,7 +265,7 @@ DT::datatable(ira_sin_dupli_2, options = list(pageLength = 5))
 
 ### Eliminar duplicados con condicional
 
-Supongamos que queremos eliminar duplicados, pero teniendo en cuenta algún valor en epecífico, es decir, que se priorice una condición frente a otras. En nuestro ejemplo podríamos tomar el caso de la determinación y presentar un orden de prioridades, en este ejemplo, un PCR positivo, cultivo positivo, PCR negativo y por útlimo un cultivo negativo.
+Supongamos que queremos eliminar duplicados, pero teniendo en cuenta algún valor en epecífico, es decir, que se priorice una condición frente a otra/s. En nuestro ejemplo podríamos tomar el caso de la variable determinación y presentar un orden de prioridades, en este ejemplo, un PCR positivo, cultivo positivo, PCR negativo y por útlimo un cultivo negativo.
 
 Para ello podemos usar el paquete `dplyr` de R y ordenar los datos según la prioridad de los valores en la columna `Determinacion`. Luego, podemos usar `distinct()` para eliminar duplicados, manteniendo la fila que cumpla con la condición de prioridad más alta.
 
@@ -299,4 +299,4 @@ DT::datatable(ira_priorizado, options = list(pageLength =5))
 
 <br><br>
 
-La función **`recode()`** de `dplyr` se utiliza para reemplazar valores específicos en una columna de un dataframe de acuerdo con un mapeo definido por nosotros. Esto es útil cuando deseas modificar datos categóricos, como cambiar nombres de categorías o asignar valores numéricos a textos. Por ejemplo, se puede convertir los valores `"Positivo"` y `"Negativo"` en valores `1` y `0`, respectivamente. **`mutate()`**, también de `dplyr`, permite agregar nuevas columnas a un dataframe o modificar las existentes aplicando una función a las columnas.
+La función **`recode()`** de `dplyr` se utiliza para reemplazar valores específicos en una columna de un dataframe de acuerdo con un mapeo definido por nosotros. Esto es útil cuando se desea modificar datos categóricos por ejemplo, cambiar nombres de categorías o asignar valores numéricos a textos. En el bloque de código anterior, se convirtieron los valores `"Positivo"` y `"Negativo"` en valores `1` y `0`, respectivamente. **`mutate()`**, también de `dplyr`, permite agregar nuevas columnas a un dataframe o modificar las existentes aplicando una función a las columnas especificadas.
