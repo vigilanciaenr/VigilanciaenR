@@ -61,7 +61,7 @@ educacion_num_f <- factor(
   x = educacion_num,
   levels = 1:4,
   labels = c(
-    "secundaria incompleta",
+    "Secundaria incompleta",
     "Graduado de secundaria",
     "Universitario incompleto",
     "Graduado universitario"
@@ -72,7 +72,7 @@ educacion_num_f
   
 ```
 
-**Importante**: El orden de las etiquetas en el vector de caracteres que pasamos al `labels` argumento debe coincidir con el orden de los valores que se pasan al levels argumento. Por ejemplo, el orden de `levels y labels` superior indica a R que 1 debe etiquetarse con “Menor que la escuela secundaria”, 2 debe etiquetarse con “Graduado de la escuela secundaria”, etc.
+**Importante**: El orden de las etiquetas en el vector de caracteres que pasamos al argumento `labels` debe coincidir con el orden de los valores que se pasan al argumento `levels`. Por ejemplo, el orden de `levels y labels` superior indica a R que 1 debe etiquetarse con “Menor que la escuela secundaria”, 2 debe etiquetarse con “Graduado de la escuela secundaria”, etc.
 
 #### **Tambien podemos convertir los factores a otro tipo de datos:**
 
