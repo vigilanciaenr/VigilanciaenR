@@ -53,7 +53,7 @@ Estas funciones estan descriptas en el material de lectura [Material Funciones](
 
 Las uniones izquierda o derecha se utilizan comúnmente para agregar información a un marco de datos: la información nueva se agrega solo a las filas que ya existían en el marco de datos de referencia.
 
-Al utilizar estas uniones, el orden escrito de los marcos de datos en el comando es importante\*.
+Al utilizar estas uniones, el **orden** escrito de los **marcos de datos** en el comando es **importante**.
 
 -   En una **unión izquierda** , el **primer marco** de datos escrito es el de referencia.
 -   En una **unión derecha** , el **segundo marco** de datos escrito es el de referencia.
@@ -78,7 +78,7 @@ Hay que tener en cuenta que:
 
 Una de las funciones más utilizadas es `left_join()`. Vamos a ver un ejemplo, continuando con nuestro marco de datos.
 
-Si queremos unir nuestro marco de datos `ira` con otro marco de datos que contiene información sobre vacunación (teniendo en cuenta que el ID del paciente se corresponde con el de ira), podemos realizar un left_join(). Pero primero, crearemos el segundo marco de datos.
+Si queremos unir nuestro marco de datos `ira` con otro marco de datos que contiene información sobre vacunación (teniendo en cuenta que el ID del paciente se corresponde con el de ira), podemos realizar un `left_join()`. Pero primero, crearemos el segundo marco de datos.
 
 ```{r}
 
@@ -137,7 +137,7 @@ DT::datatable(df_unido, options = list(pageLenght =5))
 ::: {.column width="50%"}
 **Unión completa**: devuelve todas las filas de ambos marcos de datos.
 
-Si hay filas presentes en una y no en la otra (donde no se encontró ninguna coincidencia), el **marco de datos** las incluirá y **se alargará** el marco de datos, se rellenerá con `NA` los valores faltantes.
+Si hay filas presentes en uno y no en el otro (donde no se encontró ninguna coincidencia), el **marco de datos** incluirá las filas  y **se alargará** , rellenando con `NA` los valores faltantes.
 :::
 
 ::: {.column width="50%"}
@@ -171,7 +171,7 @@ En el gif a continuación se observa que la fila del marco de datos secundario (
 
 Para **vincular filas de un marco de datos a la parte inferior de otro marco de datos**, se puede utilizar `bind_rows()` del paquete `dplyr`.
 
-Para utilizar **`bind_rows()`** debemos tener estructuras similares en nuestro marco de datos para combinarlos en un solo marco de datos.
+Para utilizar **`bind_rows()`** debemos tener estructuras similares en nuestro marco de datos para combinarlos luego en uno solo.
 
 Un ejemplo común de vinculación de filas es **vincular una fila de “total” a una tabla descriptiva** creada con la función dplyr `summarise()`.
 
