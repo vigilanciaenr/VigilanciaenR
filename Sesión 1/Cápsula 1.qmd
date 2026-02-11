@@ -43,7 +43,7 @@ Para más atajos se puede acceder a su página web:
 
 # **Operaciones básicas en R**
 
-Operadores Matemáticos en R :R se puede usar como una calculador.
+Operadores Matemáticos en R: R se puede usar como una calculador.
 
 -   Suma: +
 -   Resta: -
@@ -261,7 +261,7 @@ nombres
 
 ### Operaciones básicas con vectores
 
-Dado un vector podemos estar interesados en obtener datos sobre su contenido y que de algún modo lo resuma. 
+Dado un vector podemos estar interesados en obtener datos sobre su contenido y que de algún modo lo resuma.
 
 Si queremos conocer medidas estadísticas de los elementos del vector tenemos las siguientes funciones:
 
