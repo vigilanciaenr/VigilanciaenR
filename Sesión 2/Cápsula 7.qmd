@@ -23,7 +23,7 @@ execute:
 
 La función `mutate()` de `dplyr` se utiliza para modificar o crear columnas dentro de un data frame. Si se quiere modificar una columna existente, simplemente se debe especificar el nombre de la columna que se desea cambiar y definir cómo debe transformarse. El valor de la columna se sobrescribe con el nuevo cálculo o modificación que se especifique. También se pueden crear columnas basadas en nuevos valores o cálculos específicos.
 
-Supongamos que continuamos trabajando con el data frame del material anterior llamado `ira` y queremos agregar una columna que indique la semana epidemiológica en base a la columna `Fecha_Sitnomas`.
+Supongamos que continuamos trabajando con el data frame del material anterior llamado `ira` y queremos agregar una columna que indique la semana epidemiológica en base a la columna `Fecha_Sintomas`.
 
 ```{r, echo=FALSE}
 
@@ -58,7 +58,7 @@ También podemos crear columnas condicionales. Por ejemplo, si quieres clasifica
 
 El operador `%in%` en R se utiliza para verificar si un valor o un conjunto de valores se encuentra dentro de un vector o conjunto. Es una forma conveniente de realizar una búsqueda de pertenencia.
 
-En este caso utilizamos el `select` para que nos muestre primero la columna que acabamos de crear y luego todo el resto con `everything()`
+En este caso, además, utilizamos la función `select` para que nos muestre primero la columna que acabamos de crear y luego todas las demás con `everything()`.
 
 ```{r}
 
@@ -86,7 +86,7 @@ DT::datatable(ira_regiones, options = list(pageLength =5))
 
 La función **`cut()`** es una forma de categorizar rangos de valores, en este caso, las edades. La función **`cut()`** en R es una función muy útil para dividir un conjunto de datos numéricos en **intervalos** o **categorías**. Básicamente, esta función toma un vector de datos y lo **divide en intervalos definidos** y asigna una categoría a cada valor en el vector según el intervalo al que pertenece.
 
-**`right`**: Si es `TRUE`, los intervalos serán **cerrados por la derecha** (es decir, el límite superior se incluye en el intervalo). Si es `FALSE`, los intervalos serán **cerrados por la izquierda**.
+Si el argumento **`right`** es `TRUE`, los intervalos serán **cerrados por la derecha** (es decir, el límite superior se incluye en el intervalo). Por el contrario, si **`right`** es  `FALSE`, los intervalos serán **cerrados por la izquierda**.
 
 #### Resumen de los intervalos:
 
