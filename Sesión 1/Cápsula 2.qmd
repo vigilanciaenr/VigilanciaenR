@@ -136,7 +136,7 @@ Dentro de **`ggplot( )`** se utilizan **funciones adicionales** como **`geom_bar
 
 -   Para ejecutar un comando más largo, puede resaltar el comando completo y hacer click en "Ejecutar", o simplemente **colocar el cursor en la primera línea y luego presionar las teclas Ctrl y Enter** simultáneamente.
 
--   Usar  **Ctrl + Shift + A** para acomodar visualmente el código de forma automática.
+-   Usar **Ctrl + Shift + A** para acomodar visualmente el código de forma automática.
 :::
 
 # **Paquetes y librerías**
