@@ -29,15 +29,15 @@ Por otro lado, el **formato "largo" organiza los datos de manera que cada observ
 
 La función `pivot_longer()` del paquete `tidyr` transforma datos de formato ancho a largo seleccionando columnas específicas, agrupando los nombres en una nueva columna y los valores asociados en otra.
 
-Inversamente, para pasar de formato largo a ancho, se utiliza la función `pivot_wider()`, que expande los nombres de una columna en varias columnas nuevas, con sus valores correspondientes. Estas herramientas permiten alternar entre estructuras según las necesidades del análisis, facilitando tareas como modelado, visualización y limpieza de datos.
+Inversamente, para pasar de formato largo a ancho, se utiliza la función `pivot_wider()`, que expande los nombres de una columna en varias columnas nuevas, con sus valores correspondientes. 
 
-Aquí vemos una representación gráfica de ambas opciones:
+Estas herramientas permiten alternar entre estructuras según las necesidades del análisis, facilitando tareas como modelado, visualización y limpieza de datos. A continuación, se observa una representación gráfica de ambas opciones:
 
 ![](tidyr-longer-wider.gif){fig-align="center"}
 
 ### Pivot_longer()
 
-`pivot_longer()` se utiliza cuando se necesita reorganizar datos para el análisis o **visualizaciones que requieren que las variables estén representadas como filas en lugar de columnas**. Esto permite trabajar de manera más eficiente con herramientas analíticas y de visualización como `ggplot2`, `dplyr`, o modelos estadísticos en R.
+La función `pivot_longer()` se utiliza cuando se necesita reorganizar datos para el análisis o **visualizaciones que requieren que las variables estén representadas como filas en lugar de columnas**. Esto permite trabajar de manera más eficiente con herramientas analíticas y de visualización como `ggplot2`, `dplyr`, o modelos estadísticos en R.
 
 ```{r}
 
@@ -77,7 +77,7 @@ ggplot(datos_largo, aes(x = Persona, y = Valor, fill = Variable)) +
 
 ### Pivot_wider()
 
-`pivot_wider()` se utiliza para transformar datos de formato "largo" a "ancho", puede ser útil para un **gráfico de líneas donde cada categoría se represente como una serie diferente**, por ejemplo, evolución temporal, comparaciones entre grupos.
+La función `pivot_wider()` se utiliza para transformar datos de formato "largo" a "ancho", puede ser útil para un **gráfico de líneas donde cada categoría se represente como una serie diferente**, por ejemplo, evolución temporal, comparaciones entre grupos.
 
 ```{r}
 
