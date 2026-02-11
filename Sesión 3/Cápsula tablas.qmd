@@ -90,7 +90,7 @@ datos_con_totales <- bind_rows(datos_tabla, totales)
 
 Vamos a **explorar ejemplos prácticos que muestran cómo personalizar tablas utilizando las distintas funciones del paquete**. Es importante identificar las secciones clave del código que nos permiten editar elementos específicos de la tabla, como la apariencia del encabezado, el estilo de las filas de datos y los detalles visuales generales. Esto nos permitirá crear tablas bien diseñadas y adaptadas a nuestras necesidades.
 
-Cada ejemplo presenta la sintaxis los distintos paquetes que se pueden utilizar.
+Cada ejemplo, presenta la sintaxis los distintos paquetes que se pueden utilizar.
 
 ## **Tablas con gt()**
 
@@ -561,7 +561,7 @@ funcion2 <- function(gt_tbl) {
 
 ```
 
-#### Ejemplo Fución 1 gt()
+#### Ejemplo Función 1 gt()
 
 ```{r}
 
